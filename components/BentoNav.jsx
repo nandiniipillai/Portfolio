@@ -7,9 +7,9 @@ import { RollingWordProvider, RollingWordBand, useRollingWord, hoverProps } from
 import RollLabel from './RollLabel';
 import { SITE, TOOLS } from '@/lib/site';
 
-function Arrow({ size = 'text-lg' }) {
+function Arrow({ size = 'text-base' }) {
   return (
-    <span className={`card-arrow text-silver ${size} leading-none`} aria-hidden="true">↗</span>
+    <span className={`card-arrow text-silver ${size} leading-none opacity-80`} aria-hidden="true">↗</span>
   );
 }
 

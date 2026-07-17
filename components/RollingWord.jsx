@@ -8,17 +8,32 @@ const RollingWordContext = createContext(null);
 export function RollingWordProvider({ defaultWord = SITE.name, children }) {
   const [word, setWord] = useState(defaultWord);
   const [prev, setPrev] = useState(defaultWord);
-  const timerRef = useRef(null);
+  const clearTimerRef = useRef(null);
+
+  const cancelPending = () => {
+    if (clearTimerRef.current) {
+      clearTimeout(clearTimerRef.current);
+      clearTimerRef.current = null;
+    }
+  };
 
   const setNext = (w) => {
+    cancelPending();
     if (!w || w === word) return;
     setPrev(word);
     setWord(w);
   };
 
+  // On card leave: keep the last hovered word visible; only revert to the default
+  // if the pointer stays outside any card for a long moment. This kills the
+  // "About → Nandini → Portfolio" flash when moving between cards.
   const clear = () => {
-    if (timerRef.current) clearTimeout(timerRef.current);
-    setNext(defaultWord);
+    cancelPending();
+    clearTimerRef.current = setTimeout(() => {
+      setPrev((p) => word);
+      setWord(defaultWord);
+      clearTimerRef.current = null;
+    }, 1200);
   };
 
   return (
