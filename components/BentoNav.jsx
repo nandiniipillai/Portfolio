@@ -1,14 +1,14 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { RollingWordProvider, RollingWordBand, useRollingWord, hoverProps } from './RollingWord';
 import RollLabel from './RollLabel';
 import StackMarquee from './StackMarquee';
 import { SITE } from '@/lib/site';
 
-function Arrow({ size = 'clamp(24px, 2.4vw, 34px)' }) {
+function Arrow({ size = 'clamp(24px, 2.4vw, 32px)' }) {
   return (
     <span
       className="card-arrow text-silver leading-none absolute bottom-4 right-5 md:bottom-5 md:right-6 pointer-events-none"
@@ -20,8 +20,7 @@ function Arrow({ size = 'clamp(24px, 2.4vw, 34px)' }) {
   );
 }
 
-function CardShell({ to, word, ariaLabel, className = '', external = false, download = false, children }) {
-  const rw = useRollingWord();
+function CardShell({ to, ariaLabel, className = '', external = false, download = false, children }) {
   const router = useRouter();
   const onClick = (e) => {
     if (external) return;
@@ -29,8 +28,7 @@ function CardShell({ to, word, ariaLabel, className = '', external = false, down
     router.push(to);
   };
   const commonProps = {
-    ...hoverProps(rw, word),
-    'aria-label': ariaLabel || word,
+    'aria-label': ariaLabel,
     className: `card-tex block relative w-full h-full ${className}`,
   };
 
@@ -55,12 +53,12 @@ function CardShell({ to, word, ariaLabel, className = '', external = false, down
   );
 }
 
-function StandardCard({ to, word, label, external = false, className = '' }) {
+function StandardCard({ to, label, external = false, className = '' }) {
   return (
-    <CardShell to={to} word={word} className={className} external={external}>
+    <CardShell to={to} ariaLabel={label} className={className} external={external}>
       <span
         className="absolute bottom-4 left-5 md:bottom-5 md:left-6 text-silver font-heading tracking-tightest leading-none"
-        style={{ fontSize: 'clamp(28px, 3.2vw, 46px)' }}
+        style={{ fontSize: 'clamp(26px, 3vw, 42px)' }}
       >
         <RollLabel>{label}</RollLabel>
       </span>
@@ -69,25 +67,80 @@ function StandardCard({ to, word, label, external = false, className = '' }) {
   );
 }
 
+function ContactCard() {
+  const [copied, setCopied] = useState(false);
+
+  const copy = async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    try {
+      await navigator.clipboard.writeText(SITE.email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1600);
+    } catch {
+      // fall back to mailto if clipboard is blocked
+      window.location.href = `mailto:${SITE.email}`;
+    }
+  };
+
+  return (
+    <a
+      href={`mailto:${SITE.email}`}
+      className="card-tex block relative w-full h-full"
+      aria-label={`Email ${SITE.email}`}
+    >
+      <div className="absolute inset-0 flex flex-col justify-end px-5 md:px-6 pb-4 md:pb-5">
+        <div
+          className="text-fog text-[11px] tracking-[0.24em] uppercase mb-2"
+        >
+          Contact
+        </div>
+        <div
+          className="text-silver font-heading tracking-tightest leading-none truncate"
+          style={{ fontSize: 'clamp(20px, 2.4vw, 34px)' }}
+        >
+          {SITE.email}
+        </div>
+      </div>
+      <button
+        type="button"
+        onClick={copy}
+        aria-label="Copy email to clipboard"
+        className="absolute bottom-4 right-4 md:bottom-5 md:right-5 z-10 inline-flex items-center gap-1.5 rounded-full border border-white/[0.1] bg-white/[0.03] hover:bg-white/[0.08] transition-colors px-3 py-1.5 text-[10px] tracking-[0.22em] uppercase text-silver"
+      >
+        {copied ? (
+          <>
+            <span aria-hidden="true">✓</span>
+            <span>Copied</span>
+          </>
+        ) : (
+          <>
+            <span aria-hidden="true">⧉</span>
+            <span>Copy</span>
+          </>
+        )}
+      </button>
+    </a>
+  );
+}
+
 function ResumeCard() {
   return (
-    <CardShell to={SITE.resume} word="Résumé" external download ariaLabel="Open résumé (PDF)">
+    <CardShell to={SITE.resume} external download ariaLabel="Open résumé (PDF)">
       <span
         className="absolute bottom-4 left-5 md:bottom-4 md:left-6 text-silver font-heading tracking-tightest leading-none"
-        style={{ fontSize: 'clamp(22px, 2.2vw, 32px)' }}
+        style={{ fontSize: 'clamp(20px, 2vw, 30px)' }}
       >
         <RollLabel>Résumé</RollLabel>
       </span>
-      <Arrow size="clamp(20px, 2vw, 28px)" />
+      <Arrow size="clamp(18px, 1.8vw, 26px)" />
     </CardShell>
   );
 }
 
 function StackCard() {
-  const rw = useRollingWord();
   return (
     <div
-      {...hoverProps(rw, 'Stack')}
       className="card-tex relative w-full h-full !p-0 flex items-center overflow-hidden"
       aria-label="Tools stack"
     >
@@ -97,10 +150,8 @@ function StackCard() {
 }
 
 function PortraitCard() {
-  const rw = useRollingWord();
   return (
     <div
-      {...hoverProps(rw, 'Hey')}
       className="card-tex relative w-full h-full !p-0 items-stretch overflow-hidden"
       aria-label="Portrait"
     >
@@ -117,46 +168,60 @@ function PortraitCard() {
   );
 }
 
+function PositioningLine() {
+  return (
+    <p
+      className="font-heading text-silver tracking-tightest leading-[1.15] max-w-4xl"
+      style={{ fontSize: 'clamp(22px, 2.4vw, 40px)' }}
+    >
+      Product designer shipping real products for founders.{' '}
+      <span className="text-fog">
+        Currently building{' '}
+        <Link href="/work/baari" className="text-silver hover:text-lime transition-colors underline decoration-white/20 underline-offset-4">
+          Baari
+        </Link>
+        .
+      </span>
+    </p>
+  );
+}
+
 export default function BentoNav() {
   return (
-    <RollingWordProvider defaultWord={SITE.name}>
-      <div className="relative w-full h-[calc(100svh-3.5rem)] mt-14 px-4 md:px-5 pt-3 md:pt-4 pb-3 md:pb-4 overflow-hidden">
-        {/* Rolling hover-word — sits above the cards, cropped by the card tops below. */}
-        <div className="pointer-events-none absolute inset-x-0 top-0 z-30 flex items-start justify-center overflow-hidden">
-          <RollingWordBand />
+    <div className="relative w-full h-[calc(100svh-3.5rem)] mt-14 px-4 md:px-6 py-4 md:py-6 flex flex-col gap-4 md:gap-6 overflow-hidden">
+      <PositioningLine />
+
+      <div
+        className="grid gap-3 md:gap-3 flex-1 min-h-0 w-full"
+        style={{
+          gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',
+          gridTemplateRows: '1fr 1fr',
+          maxHeight: '560px',
+        }}
+      >
+        {/* Row 1 */}
+        <div className="col-span-2 md:col-span-1">
+          <StandardCard to="/about" label="About" />
+        </div>
+        <div className="col-span-2 md:col-span-3">
+          <StandardCard to="/portfolio" label="Portfolio" />
         </div>
 
+        {/* Row 2 */}
+        <div className="col-span-4 md:col-span-2">
+          <ContactCard />
+        </div>
+        <div className="col-span-2 md:col-span-1">
+          <PortraitCard />
+        </div>
         <div
-          className="relative grid gap-3 md:gap-3 h-full"
-          style={{
-            gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',
-            gridTemplateRows: '1fr 1fr',
-          }}
+          className="col-span-2 md:col-span-1 grid gap-3 md:gap-3"
+          style={{ gridTemplateRows: '2fr 1fr' }}
         >
-          {/* Row 1 */}
-          <div className="col-span-2 md:col-span-1">
-            <StandardCard to="/about" word="About" label="About" />
-          </div>
-          <div className="col-span-2 md:col-span-3">
-            <StandardCard to="/portfolio" word="Portfolio" label="Portfolio" />
-          </div>
-
-          {/* Row 2 */}
-          <div className="col-span-4 md:col-span-2">
-            <StandardCard to="/contact" word="Contact" label="Contact" />
-          </div>
-          <div className="col-span-2 md:col-span-1">
-            <PortraitCard />
-          </div>
-          <div
-            className="col-span-2 md:col-span-1 grid gap-3 md:gap-3"
-            style={{ gridTemplateRows: '2fr 1fr' }}
-          >
-            <StackCard />
-            <ResumeCard />
-          </div>
+          <StackCard />
+          <ResumeCard />
         </div>
       </div>
-    </RollingWordProvider>
+    </div>
   );
 }
