@@ -5,12 +5,11 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { RollingWordProvider, RollingWordBand, useRollingWord, hoverProps } from './RollingWord';
 import RollLabel from './RollLabel';
-import StackMarquee from './StackMarquee';
-import { SITE } from '@/lib/site';
+import { SITE, TOOLS } from '@/lib/site';
 
-function Arrow() {
+function Arrow({ size = 'text-lg' }) {
   return (
-    <span className="card-arrow text-silver text-lg leading-none" aria-hidden="true">↗</span>
+    <span className={`card-arrow text-silver ${size} leading-none`} aria-hidden="true">↗</span>
   );
 }
 
@@ -37,14 +36,14 @@ function CardShell({ to, word, ariaLabel, className = '', external = false, down
         rel="noreferrer noopener"
         {...(download ? { download: 'Nandini-Pillai-Resume.pdf' } : {})}
       >
-        <div className={contentClass || 'flex flex-col justify-between h-full'}>{children}</div>
+        <div className={contentClass || 'flex flex-col justify-end h-full'}>{children}</div>
       </a>
     );
   }
 
   return (
     <Link {...commonProps} href={to} onClick={onClick}>
-      <div className={contentClass || 'flex flex-col justify-between h-full'}>{children}</div>
+      <div className={contentClass || 'flex flex-col justify-end h-full'}>{children}</div>
     </Link>
   );
 }
@@ -52,11 +51,11 @@ function CardShell({ to, word, ariaLabel, className = '', external = false, down
 function StandardCard({ to, word, label, external = false, className = '' }) {
   return (
     <CardShell to={to} word={word} className={className} external={external}>
-      <div className="flex items-start justify-end">
+      <div className="flex items-end justify-between gap-4">
+        <div className="text-silver font-heading tracking-tightest" style={{ fontSize: 'clamp(22px, 2.6vw, 34px)' }}>
+          <RollLabel>{label}</RollLabel>
+        </div>
         <Arrow />
-      </div>
-      <div className="text-silver font-heading tracking-tightest" style={{ fontSize: 'clamp(28px, 3.8vw, 48px)' }}>
-        <RollLabel>{label}</RollLabel>
       </div>
     </CardShell>
   );
@@ -65,8 +64,8 @@ function StandardCard({ to, word, label, external = false, className = '' }) {
 function ResumeCard() {
   return (
     <CardShell to={SITE.resume} word="Resume" external download className="min-h-[90px]" ariaLabel="Open résumé (PDF)">
-      <div className="flex items-center justify-between h-full">
-        <div className="text-silver font-heading tracking-tightest" style={{ fontSize: 'clamp(22px, 2.2vw, 34px)' }}>
+      <div className="flex items-end justify-between h-full">
+        <div className="text-silver font-heading tracking-tightest" style={{ fontSize: 'clamp(22px, 2.6vw, 34px)' }}>
           <RollLabel>Résumé</RollLabel>
         </div>
         <Arrow />
@@ -77,13 +76,27 @@ function ResumeCard() {
 
 function StackCard() {
   const rw = useRollingWord();
+  const featured = TOOLS.slice(0, 3);
   return (
     <div
       {...hoverProps(rw, 'Stack')}
-      className="card-tex relative w-full h-full !p-0 flex items-center overflow-hidden"
-      aria-label="Tools: Figma, Claude, Adobe XD, Illustrator, Miro, FigJam, Framer, Notion"
+      className="card-tex relative w-full h-full flex items-center justify-center gap-3 md:gap-4"
+      aria-label={`Tools: ${TOOLS.map((t) => t.name).join(', ')}`}
     >
-      <StackMarquee />
+      {featured.map((tool) => (
+        <div
+          key={tool.name}
+          className="w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center text-xl font-heading font-semibold shadow-inner"
+          style={{
+            background: tool.bg,
+            color: tool.fg,
+            border: '1px solid rgba(255,255,255,0.08)',
+          }}
+          title={tool.name}
+        >
+          {tool.glyph}
+        </div>
+      ))}
     </div>
   );
 }
@@ -107,13 +120,7 @@ function PortraitCard() {
           style={{ objectPosition: 'center 32%' }}
         />
       </div>
-      <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent" />
-      <div className="absolute inset-x-0 bottom-0 p-5 flex items-end justify-between">
-        <div className="flex items-center gap-2 text-[12px] text-silver">
-          <span className="inline-block w-1.5 h-1.5 rounded-full pulse-dot" style={{ background: '#7CFF9B' }} />
-          <span>{SITE.availability}</span>
-        </div>
-      </div>
+      <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent" />
     </div>
   );
 }
@@ -122,8 +129,8 @@ export default function BentoNav() {
   return (
     <RollingWordProvider defaultWord={SITE.firstName}>
       <div className="relative w-full min-h-[calc(100vh-3.5rem)] mt-14 px-5 md:px-8 pt-6 md:pt-8 pb-8">
-        {/* blurred background wordmark */}
-        <div className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden">
+        {/* Rolling wordmark — sits above the top row, blurs into the cards */}
+        <div className="pointer-events-none absolute left-0 right-0 top-[3.5rem] flex items-start justify-center overflow-hidden">
           <RollingWordBand />
         </div>
 
