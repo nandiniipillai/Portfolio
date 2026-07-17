@@ -15,7 +15,7 @@ export default function LiveClock({ timeOnly = false, className = '' }) {
     });
     const tick = () => setTime(fmt.format(new Date()));
     tick();
-    const id = setInterval(tick, 15000);
+    const id = setInterval(tick, 1000);
     return () => clearInterval(id);
   }, []);
 

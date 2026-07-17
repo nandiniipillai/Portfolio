@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { SITE, TOOLS } from '@/lib/site';
 
-const CARD = 'group relative block w-full h-full rounded-[13px] bg-[#171717] hover:bg-[#1f1f1f] transition-colors duration-200 overflow-hidden';
+const CARD = 'group relative block w-full h-full rounded-[13px] bg-[#171717] hover:bg-[#1f1f1f] hover:-translate-y-0.5 cursor-pointer transition-all duration-200 ease-out overflow-hidden will-change-transform';
 
 // Subtle top highlight — 1px inset border rgba(255,255,255,0.04) via ::before pseudo
 const cardStyle = { boxShadow: 'inset 0 1px 0 0 rgba(255,255,255,0.04)' };
@@ -180,7 +180,7 @@ function HeroName() {
       aria-hidden="true"
       style={{
         position: 'absolute',
-        top: '60px',
+        top: '20px',
         left: 0,
         width: '100%',
         textAlign: 'center',
