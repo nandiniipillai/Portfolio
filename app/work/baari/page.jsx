@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import CaseStudyShell from '@/components/CaseStudyShell';
-import OutcomeSpine from '@/components/OutcomeSpine';
 import { Section, Prose, SubList, PullQuote, MetricCard, MetricGrid, HandNote, AssetPlaceholder } from '@/components/CaseBits';
 import { DashboardQueue, TokenCard, LiveStatus, Analytics } from '@/components/BaariMocks';
 
@@ -15,134 +14,118 @@ export default function BaariPage() {
         slug="baari"
         index="01"
         accent={ACCENT}
-        title={'Baari means "your turn" — a live queue for India’s clinics and salons.'}
+        title="Baari replaces the paper register at small-business front desks with a live queue."
         oneLiner="A live queue for India’s clinics and salons, shipped to production."
         meta={[
-          ['Role', 'Co-founder · Entire product team'],
-          ['Team', 'Two co-founders — product + infrastructure'],
-          ['Build', 'AI coding agents as the engineering team'],
+          ['Role', 'Co-founder · Product Designer'],
+          ['Team', 'Two co-founders — product + infra'],
+          ['Build', 'AI coding agents as engineering'],
           ['Status', 'Live · getbaari.in'],
         ]}
       >
-        <OutcomeSpine
-          outcome="Two production products, shipped by two people — the receptionist dashboard live at getbaari.in, and a bilingual Android app in closed testing."
-          problem="Front desks run on a paper register and the receptionist's memory. Existing software serves the owner who buys it, not the receptionist who uses it — and one lost booking destroys trust."
-          decisions="Receptionist first in every decision. Screens written as numbered specs with acceptance criteria. Offline states treated as launch blockers. A v1 defined by what we said no to, recorded in writing."
-          change="A live product validated through user testing and owner conversations, with pilot metrics defined — anchored on the number of days the paper register never comes back out."
-        />
-
-        {/* Paired hero mockups */}
         <Section>
-          <div className="text-center mb-8">
-            <HandNote rotate={-2}>same token, both surfaces ↘</HandNote>
-          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <DashboardQueue />
             <TokenCard />
           </div>
+          <div className="mt-4 text-center">
+            <HandNote rotate={-2}>same booking, both surfaces ↘</HandNote>
+          </div>
         </Section>
 
-        <Section title="It started with a four-hour wait at a doctor’s visit">
+        <Section title="Clinics and salons still run their day on paper, a landline and WhatsApp screenshots" tone="sunken">
           <Prose>
-            I was accompanying a family member to a doctor’s appointment and we spent nearly four hours waiting. Friends told me the same story. We jokingly said &quot;why not build a solution for this,&quot; and the joke refused to die. My co-founder took infrastructure and deployments; I took everything else. The name was sitting inside the problem the whole time — queue in Hindi is &quot;baari,&quot; and baari means &quot;your turn.&quot;
+            Baari began as a simple observation — customers routinely lose hours waiting for sequential services because the front desk has no system beyond a notebook. Around 90% of small Indian clinics, salons, spas and vets track nothing: no-shows go uncounted, quiet regulars are forgotten, and yesterday’s revenue is a guess. The alternatives are Practo-style suites that push paid listings and take per-consultation cuts, or tools like Calendly built for solo consultants rather than walk-in-heavy desks.
           </Prose>
+          <AssetPlaceholder label="Problem visual — paper register beside three failed alternatives, positioning Baari as the middle path" />
         </Section>
 
-        <Section title="The real competitor was a paper notebook that has worked for forty years" tone="sunken">
+        <Section title="Three roles, one booking">
           <Prose>
-            Indian clinics, salons and spas run their front desk on a paper register and the receptionist’s memory. Existing software is English-first, billing-suite heavy, and built for the owner who buys it rather than the receptionist who uses it. The register is fast, trusted, and never crashes. One vanished booking and it comes back out of the drawer. The central risk was never features. It was trust.
+            The receptionist runs the product all day. The owner signs up, pays, and reads the reports. The customer just wants to know when their turn comes. Each role got its own surface and language, but every booking is one shared record on one backend — created at the desk or in the app, visible everywhere within a 15-second poll.
           </Prose>
+          <AssetPlaceholder label="Role diagram — receptionist, owner, customer around a single booking record, each seeing their own view" aspect="16/8" />
         </Section>
 
-        <Section title="One designer, no engineers, and a market that punishes assumptions">
+        <Section title="The queue board puts the receptionist’s whole day on one screen" tone="sunken">
           <Prose>
-            I was the entire product team — research, positioning, IA, interaction design, UI copy, QA and go-to-market. There was no engineering hire at any point.
+            The core design decision was refusing navigation. Waiting and in-consult panels sit side by side with live timers, a stats bar on top, and the three actions that cover a front desk — walk-in, new booking, close day — always visible. A walk-in takes one tap and joins the same queue as app bookings.
           </Prose>
-          <p className="text-silver font-medium">Constraints I designed within:</p>
-          <SubList items={[
-            'Database transactions disabled on the free-tier stack, so atomic flows had to be redesigned around database constraints',
-            'Live updates via 15-second polling, not websockets',
-            'Patchy clinic wifi and power cuts, making offline states a launch blocker rather than polish',
-            'Shared family phones, dual SIMs and recycled numbers, making "identity = phone number" dangerous',
-            'SMS legally gated behind TRAI DLT registration, forcing a push-only launch',
-          ]} />
+          <div className="mt-6">
+            <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-3">Language that matches the business</div>
+            <Prose>
+              A dental receptionist sees “in chair,” a clinic sees “in consult,” a spa sees “in session.” Labels adapt to business type instead of forcing generic software vocabulary onto the desk.
+            </Prose>
+          </div>
+          <div className="mt-8">
+            <DashboardQueue />
+          </div>
         </Section>
 
-        <Section title="Receptionist first, owner second, customer third" tone="sunken">
+        <Section title="For customers, every screen answers one question — when is my turn?">
           <Prose>
-            The receptionist is the linchpin — the one person holding the chaos between a doctor who cannot see the line and customers stuck inside it. Every decision was tested against her reality first: speed, zero ambiguity, works during a power cut.
+            The token is the app’s core object, rendered as the biggest text on screen. Live status is gated into four states so the app never lies: a calm “your booking is tomorrow” for future bookings, position and rough wait for today, the loudest treatment only when three tokens remain, and a quiet close after. An active booking pins to the opening screen, so the answer costs zero taps.
           </Prose>
-          <p className="text-silver font-medium">What I said no to in v1:</p>
-          <SubList items={[
-            'In-app payments, since Indian counters run on cash and UPI',
-            'Loyalty programs, reviews and ratings',
-            'WhatsApp as a booking channel',
-            'A manual language switcher',
-          ]} />
-          <Prose>
-            Every cut was recorded in writing with its reasoning, which stopped scope from being relitigated later.
-          </Prose>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+            <TokenCard />
+            <LiveStatus />
+          </div>
         </Section>
 
-        <Section title="The decisions were mine, the labor was AI’s">
+        <Section title="I designed in specifications, and AI agents built both codebases" tone="sunken">
           <Prose>
-            AI coding agents were my engineering team. I designed screens as numbered specs with exact layout order, verbatim UI copy and acceptance criteria, written so an agent could implement them without interpretation drift. AI also ran my market research, regulatory homework (DLT, DPDP, Play Console) and sales deck drafts. My leverage came from writing better inputs.
+            There was no engineering team. Screens were defined as numbered specs with exact layout order, verbatim UI copy, state gates and acceptance criteria, then implemented by AI coding agents. The UI was built against theme tokens — one primary color, one radius, one type scale — so the eventual rebrand is a token swap, not a repaint.
           </Prose>
           <PullQuote>
             When AI builds, the spec is the design. My highest-leverage artifact was the written specification, not the mockup.
           </PullQuote>
         </Section>
 
-        <Section title="I audited my own product like an outsider and found 20+ issues" tone="sunken">
+        <Section title="Screen-recording audits surfaced 20+ issues, ranked by trust damage">
           <Prose>
-            With no QA team, I walked through both surfaces from screen recordings and produced prioritised findings. The worst one: a just-created booking not appearing in My Bookings, silently breaking the app’s core loop. Another: a silent double-booking where the second booking vanished with no error. The first drafts looked rough, requirements collided, and we genuinely doubted whether people would use it. We figured it out along the way.
+            Acting as my own QA, I walked both surfaces from recordings and triaged every finding by one question — can this make a booking wrong, lost, or dishonest? A vanished booking and a silent double-booking ranked P0; a missing skeleton screen ranked P2. Ten must-fix items came out, each specified to acceptance criteria, including a timezone bug where one diagnosis collapsed four reports into a single root cause.
           </Prose>
-          <AssetPlaceholder label="Audit board — P0–P3 findings triaged, trust-breaking bugs highlighted" />
+          <AssetPlaceholder label="Audit board — P0–P3 findings as a triage board, trust-breaking bugs on top" />
         </Section>
 
-        <Section title="Moving to the UK accidentally exposed the app’s worst bug class">
+        <Section title="What I traded away, on purpose" tone="sunken">
+          <SubList items={[
+            'Payment integration, until real signups show which market converts',
+            'WhatsApp reminders and broadcasts, pending a Meta BSP contract',
+            'Multi-location support, deferred until chains ask',
+            'Reviews, loyalty and granular notification settings',
+          ]} />
           <Prose>
-            I built Baari entirely in India, then relocated to the UK during testing. Suddenly the app showed clinics opening at 4:30 AM. The exact 4-hour-30-minute gap was the fingerprint of my device re-interpreting IST times, and that one diagnosis collapsed four separate bug reports into a single root cause. Indian users on IST devices would never see it, but my move made me the product’s accidental edge-case tester.
+            Every cut is recorded with its reasoning, which kept scope from being relitigated and made the product’s restraint deliberate.
           </Prose>
         </Section>
 
-        <Section title="I triaged fixes by trust damage, not by effort" tone="sunken">
+        <Section title="Live in production with a real clinic on the queue">
           <Prose>
-            The release-blocking list ranked issues by one question: can this make a booking wrong, lost, or dishonest? A missing skeleton screen ranked P2. An app telling a customer with a booking tomorrow &quot;You’re next, be at the location now&quot; ranked P0. Ten must-fix items came out of that lens, each specified to acceptance-criteria level.
-          </Prose>
-          <LiveStatus />
-        </Section>
-
-        <Section title="Two production products shipped, zero engineering hires">
-          <Prose>
-            Baari is live: the receptionist dashboard at getbaari.in and a bilingual native Android app in closed testing, honest status pre-first-customer. We have validated through user testing and owner conversations, not sales yet. The pilot metrics are defined and waiting:
+            Baari runs at getbaari.in on Railway with Cloudflare serving 90% of anonymous traffic from the edge, on infrastructure under $50/month. Billing works end-to-end: Free, Growth (₹999/mo) and Pro (₹1,999/mo) tiers with a 60-day Pro trial, no card required, and automatic INR/USD regional pricing. One real clinic runs live bookings; the Android app is in internal testing.
           </Prose>
           <MetricGrid>
-            <MetricCard value="Bookings / day" label="At the first clinic" />
-            <MetricCard value="% via app" label="Of bookings, vs desk and walk-in" />
-            <MetricCard value="0 days" label="Days the paper register comes back out — target: zero" />
+            <MetricCard value="1 pilot" label="Live clinic on the queue with real bookings" />
+            <MetricCard value="3 tiers" label="Billing live with feature gates and quotas" />
+            <MetricCard value="< $50/mo" label="Total infrastructure across web + edge" />
           </MetricGrid>
           <div className="text-center mt-4">
-            <HandNote rotate={2}>the one that actually matters ✦</HandNote>
+            <HandNote rotate={2}>the number the notebook decides ✦</HandNote>
           </div>
           <div className="mt-8">
             <Analytics />
           </div>
         </Section>
 
-        <Section title="What I learned and what comes next" tone="sunken">
-          <Prose>
-            Building something from nothing with two people taught me more than any brief could.
-          </Prose>
+        <Section title="What I learned and where it goes next" tone="sunken">
           <SubList items={[
-            'When AI builds, the spec is the design. My highest-leverage artifact was the written specification, not the mockup.',
+            'When AI builds, the spec is the design. The written specification was my highest-leverage artifact, not the mockup.',
             'Audit like an outsider. Screen recordings on real devices caught what design tools never showed.',
-            'Triage by trust. "Can this lie to a user?" beats "is this ugly?" every time.',
-            'Cut in writing. Recorded reasoning made the product’s restraint a feature.',
-            'Next time I would involve real stakeholders at more checkpoints. Two brains figured it out along the way, but customer input earlier would have prevented failures we had to live through.',
+            'Triage by trust. “Can this lie to a user?” outranks “is this ugly?”',
+            'Involve real customers at more checkpoints — earlier input would have prevented failures we had to live through.',
           ]} />
           <Prose>
-            Next: the first pilot clinic, a 15-minute receptionist training test, and the number that matters most — how many days the notebook stays in the drawer.
+            Next: outreach to 20–30 clinics and salons, 30–50 trial workspaces, Play Store release, and payments for whichever market shows real intent.
           </Prose>
         </Section>
       </CaseStudyShell>

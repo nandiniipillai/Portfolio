@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import CaseStudyShell from '@/components/CaseStudyShell';
-import { Section, Prose, SubList, PullQuote, MetricCard, MetricGrid } from '@/components/CaseBits';
+import { Section, Prose, SubList, PullQuote, MetricCard, MetricGrid, AssetPlaceholder } from '@/components/CaseBits';
 import SlideFigure from '@/components/SlideFigure';
 
 const ACCENT = '#F6C7A0';
@@ -23,11 +23,10 @@ export default function WobblePage() {
           ['Outcome', 'Client-adopted · in development'],
         ]}
       >
-        {/* No outcome spine on Wobble — opens straight into the hero image */}
         <Section>
           <SlideFigure
-            src="/assets/wobble/1.jpg"
-            alt="Cutaway of the Wobble floor plan showing zones for different types of play."
+            src="/assets/wobble/v2-3.jpg"
+            alt="Isometric cutaway of the full Wobble floor plan"
             caption="One indoor space designed to do the developmental job of the outdoors — zoned by type of play."
           />
         </Section>
@@ -37,9 +36,9 @@ export default function WobblePage() {
             The client was starting a business and came to our five-person studio with a reference point: the large-scale indoor play centres of China, like Meland Club in Shenzhen. The brief was to design a revolutionary indoor soft play centre in Lancaster. I owned the strategic side of the project — user research and synthesis, business strategy, and marketing — while my teammates carried the spatial and brand execution.
           </Prose>
           <SlideFigure
-            src="/assets/wobble/2.jpg"
-            alt="Reference: Chinese indoor play centres."
-            caption="Starting point — the brief’s reference point, and the market study that questioned it."
+            src="/assets/wobble/v2-4.jpg"
+            alt="Design brief paired with Chinese play centre reference"
+            caption="Starting point — the brief’s reference paired with the market study that questioned it."
           />
         </Section>
 
@@ -59,9 +58,9 @@ export default function WobblePage() {
             I ran a thematic analysis on interviews with 15 parents and synthesised eight themes. Parents wanted quieter, calmer environments over loud colours and noise, worried constantly about hygiene, and needed to supervise from a comfortable place. Competitor research across national and local players showed most venues offered either physical play or education, rarely both.
           </Prose>
           <SlideFigure
-            src="/assets/wobble/4.jpg"
-            alt="Eight themes from fifteen parent interviews."
-            caption="Eight themes from fifteen parent interviews — each one later became a design decision."
+            src="/assets/wobble/v2-5.jpg"
+            alt="Radial thematic analysis diagram — 8 themes around 15 participants"
+            caption="Radial thematic analysis — eight themes drawn from fifteen parent interviews."
           />
         </Section>
 
@@ -83,25 +82,31 @@ export default function WobblePage() {
             'Safe risk-taking put the ball pool at the foot of the climbing wall',
             'Cost sensitivity shaped tiered pricing and membership models',
           ]} />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+            <SlideFigure src="/assets/wobble/v2-6.jpg" alt="Climbing wall landing in the ball pool" caption="Climbing wall landing in the ball pool — safe risk-taking made spatial." />
+            <SlideFigure src="/assets/wobble/v2-7.jpg" alt="Light-up musical sensory seating render" caption="Quiet + sensory zones — a direct answer to the noise theme from research." />
+          </div>
+        </Section>
+
+        <Section title="A child-scale UK high street made the localisation tangible" tone="sunken">
+          <Prose>
+            The pretend-play zone recreates a typical UK street — bakery, bookstore, pharmacy — modelled on real London shopfronts and scaled to a child’s height. Children imitate adults when they role-play, so the street lets them act out the daily life they actually see, not a borrowed fantasy.
+          </Prose>
           <SlideFigure
-            src="/assets/wobble/5.jpg"
-            alt="Quiet and sensory zones render."
-            caption="Quiet and sensory zones — a direct answer to the noise theme from research."
+            src="/assets/wobble/v2-8.jpg"
+            alt="London shopfront references beside the child-scale street render"
+            caption="London shopfront references translated to a child-scale UK street."
           />
         </Section>
 
-        <Section title="The business model had to work as hard as the space" tone="sunken">
+        <Section title="The business model had to work as hard as the space">
           <Prose>
             I built the full Business Model Canvas and presented it through five strategic lenses, from services to partnerships. Revenue spreads across entry fees, memberships, parties and school trips, the café, and merchandise. On the brand side, we positioned Wobble’s clean pastel identity directly against competitors’ cluttered, clip-art websites, borrowing Neumeier’s argument that a charismatic brand leaves no substitute.
           </Prose>
-          <SlideFigure
-            src="/assets/wobble/6.jpg"
-            alt="Clean pastel identity positioned against cluttered competitors."
-            caption="A clean pastel identity positioned deliberately against cluttered, clip-art competitors."
-          />
+          <AssetPlaceholder label="Business Model Canvas — services / customers / channels / partnerships / cost + revenue" />
         </Section>
 
-        <Section title="The client accepted the entire proposal and is building the startup">
+        <Section title="The client accepted the entire proposal and is building the startup" tone="sunken">
           <Prose>
             The concept moved beyond the module. The client took the full proposal forward and the venture is now in motion, currently seeking funding.
           </Prose>
@@ -111,12 +116,13 @@ export default function WobblePage() {
           </MetricGrid>
         </Section>
 
-        <Section title="What eight weeks of strategic design taught me" tone="sunken">
+        <Section title="What eight weeks of strategic design taught me">
+          <Prose>This project settled how I think about adapting ideas across markets.</Prose>
           <SubList items={[
-            'Adaptation is about function, not geography — keep the benefit, rebuild the form for the local context.',
-            'Research earns client buy-in when every finding maps visibly to a decision.',
-            'Working at the strategy step of the Design Ladder means the business case and the floor plan argue for each other.',
-            'Next time I would define measurable success criteria with the client up front, so impact can be tracked past handover.',
+            'Adaptation is about function, not geography — keep the benefit, rebuild the form for the local context',
+            'Research earns client buy-in when every finding maps visibly to a decision',
+            'Working at the strategy step of the Design Ladder means the business case and the floor plan argue for each other',
+            'Next time I would define measurable success criteria with the client up front, so impact can be tracked past handover',
           ]} />
         </Section>
       </CaseStudyShell>
