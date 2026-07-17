@@ -98,13 +98,14 @@
     to   { transform: translateY(0) skewY(0); }
   }
 
-  /* Marquee */
+  /* Marquee — content is duplicated 2x, so we translate by 50% for a seamless loop */
   .slide-track {
-    animation: slideTrack 20s linear infinite;
+    animation: slideTrack 40s linear infinite;
+    will-change: transform;
   }
   @keyframes slideTrack {
     from { transform: translateX(0); }
-    to   { transform: translateX(-100%); }
+    to   { transform: translateX(-50%); }
   }
 
   /* Availability pulse */

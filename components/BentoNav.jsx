@@ -5,15 +5,21 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { RollingWordProvider, RollingWordBand, useRollingWord, hoverProps } from './RollingWord';
 import RollLabel from './RollLabel';
-import { SITE, TOOLS } from '@/lib/site';
+import StackMarquee from './StackMarquee';
+import { SITE } from '@/lib/site';
 
-function Arrow({ size = 'text-base' }) {
+function Arrow() {
   return (
-    <span className={`card-arrow text-silver ${size} leading-none opacity-80`} aria-hidden="true">↗</span>
+    <span
+      className="card-arrow text-silver text-base leading-none opacity-80 absolute bottom-5 right-5 md:bottom-6 md:right-6 pointer-events-none"
+      aria-hidden="true"
+    >
+      ↗
+    </span>
   );
 }
 
-function CardShell({ to, word, ariaLabel, className = '', external = false, download = false, children, contentClass = '' }) {
+function CardShell({ to, word, ariaLabel, className = '', external = false, download = false, children }) {
   const rw = useRollingWord();
   const router = useRouter();
   const onClick = (e) => {
@@ -24,7 +30,7 @@ function CardShell({ to, word, ariaLabel, className = '', external = false, down
   const commonProps = {
     ...hoverProps(rw, word),
     'aria-label': ariaLabel || word,
-    className: `card-tex block relative w-full h-full p-6 md:p-7 ${className}`,
+    className: `card-tex block relative w-full h-full ${className}`,
   };
 
   if (external) {
@@ -36,14 +42,14 @@ function CardShell({ to, word, ariaLabel, className = '', external = false, down
         rel="noreferrer noopener"
         {...(download ? { download: 'Nandini-Pillai-Resume.pdf' } : {})}
       >
-        <div className={contentClass || 'flex flex-col justify-end h-full'}>{children}</div>
+        {children}
       </a>
     );
   }
 
   return (
     <Link {...commonProps} href={to} onClick={onClick}>
-      <div className={contentClass || 'flex flex-col justify-end h-full'}>{children}</div>
+      {children}
     </Link>
   );
 }
@@ -51,52 +57,40 @@ function CardShell({ to, word, ariaLabel, className = '', external = false, down
 function StandardCard({ to, word, label, external = false, className = '' }) {
   return (
     <CardShell to={to} word={word} className={className} external={external}>
-      <div className="flex items-end justify-between gap-4">
-        <div className="text-silver font-heading tracking-tightest" style={{ fontSize: 'clamp(22px, 2.6vw, 34px)' }}>
-          <RollLabel>{label}</RollLabel>
-        </div>
-        <Arrow />
-      </div>
+      <span
+        className="absolute bottom-5 left-5 md:bottom-6 md:left-6 text-silver font-heading tracking-tightest"
+        style={{ fontSize: 'clamp(20px, 2.2vw, 30px)' }}
+      >
+        <RollLabel>{label}</RollLabel>
+      </span>
+      <Arrow />
     </CardShell>
   );
 }
 
 function ResumeCard() {
   return (
-    <CardShell to={SITE.resume} word="Resume" external download className="min-h-[90px]" ariaLabel="Open résumé (PDF)">
-      <div className="flex items-end justify-between h-full">
-        <div className="text-silver font-heading tracking-tightest" style={{ fontSize: 'clamp(22px, 2.6vw, 34px)' }}>
-          <RollLabel>Résumé</RollLabel>
-        </div>
-        <Arrow />
-      </div>
+    <CardShell to={SITE.resume} word="Resume" external download ariaLabel="Open résumé (PDF)">
+      <span
+        className="absolute bottom-4 left-5 md:bottom-5 md:left-6 text-silver font-heading tracking-tightest"
+        style={{ fontSize: 'clamp(18px, 1.8vw, 26px)' }}
+      >
+        <RollLabel>Résumé</RollLabel>
+      </span>
+      <Arrow />
     </CardShell>
   );
 }
 
 function StackCard() {
   const rw = useRollingWord();
-  const featured = TOOLS.slice(0, 3);
   return (
     <div
       {...hoverProps(rw, 'Stack')}
-      className="card-tex relative w-full h-full flex items-center justify-center gap-3 md:gap-4"
-      aria-label={`Tools: ${TOOLS.map((t) => t.name).join(', ')}`}
+      className="card-tex relative w-full h-full !p-0 flex items-center overflow-hidden"
+      aria-label={`Tools stack`}
     >
-      {featured.map((tool) => (
-        <div
-          key={tool.name}
-          className="w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center text-xl font-heading font-semibold shadow-inner"
-          style={{
-            background: tool.bg,
-            color: tool.fg,
-            border: '1px solid rgba(255,255,255,0.08)',
-          }}
-          title={tool.name}
-        >
-          {tool.glyph}
-        </div>
-      ))}
+      <StackMarquee />
     </div>
   );
 }
@@ -109,18 +103,15 @@ function PortraitCard() {
       className="card-tex relative w-full h-full !p-0 items-stretch overflow-hidden"
       aria-label="Portrait"
     >
-      <div className="absolute inset-0">
-        <Image
-          src={SITE.portrait}
-          alt="Nandini Pillai"
-          fill
-          priority
-          sizes="(max-width: 768px) 100vw, 25vw"
-          className="object-cover"
-          style={{ objectPosition: 'center 32%' }}
-        />
-      </div>
-      <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent" />
+      <Image
+        src={SITE.portraitColor || SITE.portrait}
+        alt="Nandini Pillai"
+        fill
+        priority
+        sizes="(max-width: 768px) 100vw, 25vw"
+        className="object-cover"
+        style={{ objectPosition: 'center 30%', filter: 'contrast(1.08) saturate(1.05)' }}
+      />
     </div>
   );
 }
@@ -128,42 +119,38 @@ function PortraitCard() {
 export default function BentoNav() {
   return (
     <RollingWordProvider defaultWord={SITE.firstName}>
-      <div className="relative w-full min-h-[calc(100vh-3.5rem)] mt-14 px-5 md:px-8 pt-6 md:pt-8 pb-8">
-        {/* Rolling wordmark — sits above the top row, blurs into the cards */}
-        <div className="pointer-events-none absolute left-0 right-0 top-[3.5rem] flex items-start justify-center overflow-hidden">
-          <RollingWordBand />
-        </div>
-
+      <div className="relative w-full h-[calc(100svh-3.5rem)] mt-14 px-4 md:px-6 pt-4 md:pt-6 pb-4 md:pb-6 overflow-hidden">
         <div
-          className="relative grid gap-4 md:gap-5 min-h-[calc(100vh-6rem)]"
+          className="relative grid gap-3 md:gap-4 h-full"
           style={{
             gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',
             gridTemplateRows: '1fr 1fr',
           }}
         >
           {/* Row 1 */}
-          <div className="col-span-4 md:col-span-1 min-h-[220px]">
+          <div className="col-span-2 md:col-span-1">
             <StandardCard to="/about" word="About" label="About" />
           </div>
-          <div className="col-span-4 md:col-span-3 min-h-[220px]">
+          <div className="col-span-2 md:col-span-3">
             <StandardCard to="/portfolio" word="Portfolio" label="Portfolio" />
           </div>
 
           {/* Row 2 */}
-          <div className="col-span-4 md:col-span-2 min-h-[220px]">
+          <div className="col-span-4 md:col-span-2">
             <StandardCard to="/contact" word="Contact" label="Contact" />
           </div>
-          <div className="col-span-4 md:col-span-1 min-h-[220px]">
+          <div className="col-span-2 md:col-span-1">
             <PortraitCard />
           </div>
-          <div className="col-span-4 md:col-span-1 min-h-[220px] flex flex-col gap-4 md:gap-5">
-            <div className="flex-1 min-h-[110px]">
-              <StackCard />
-            </div>
-            <div>
-              <ResumeCard />
-            </div>
+          <div className="col-span-2 md:col-span-1 grid grid-rows-[1fr_auto] gap-3 md:gap-4">
+            <StackCard />
+            <ResumeCard />
           </div>
+        </div>
+
+        {/* Rolling hover-word — sits ON TOP of the cards, cropped by the outer viewport. */}
+        <div className="pointer-events-none absolute inset-x-0 top-14 md:top-16 z-20 flex items-start justify-center">
+          <RollingWordBand />
         </div>
       </div>
     </RollingWordProvider>
