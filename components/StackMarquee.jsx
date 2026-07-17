@@ -3,15 +3,23 @@
 import { TOOLS } from '@/lib/site';
 
 function Tile({ tool }) {
+  const isGradient = tool.bg.startsWith('linear-gradient');
   return (
-    <div className="shrink-0 flex items-center gap-3 mx-5 py-2 pl-2 pr-4 rounded-full border border-cream/10 bg-cream/[0.02]" title={tool.name}>
-      <span
-        className="w-8 h-8 rounded-full flex items-center justify-center text-[13px] font-heading font-semibold"
-        style={{ background: tool.bg, color: tool.fg, border: '1px solid rgba(255,255,255,0.06)' }}
+    <div
+      className="shrink-0 flex flex-col items-center gap-1.5 mx-3"
+      title={tool.name}
+    >
+      <div
+        className="w-[58px] h-[58px] md:w-[64px] md:h-[64px] rounded-[18px] flex items-center justify-center text-xl font-heading font-semibold shadow-inner"
+        style={{
+          background: tool.bg,
+          color: tool.fg,
+          border: '1px solid rgba(255,255,255,0.08)',
+        }}
       >
         {tool.glyph}
-      </span>
-      <span className="text-[11px] tracking-[0.14em] uppercase text-cream/75 whitespace-nowrap">{tool.name}</span>
+      </div>
+      <span className="text-[10px] text-fog/70 tracking-wide uppercase">{tool.name}</span>
     </div>
   );
 }
