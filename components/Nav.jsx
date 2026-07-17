@@ -34,8 +34,10 @@ export default function Nav() {
         <Link
           href="/contact"
           aria-label="Contact"
-          className="ml-1 inline-block w-1.5 h-1.5 rounded-full bg-[#7CFF9B] pulse-dot"
-        />
+          className="ml-1 inline-flex items-center justify-center w-6 h-6 rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/80 focus-visible:outline-offset-2"
+        >
+          <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#7CFF9B] pulse-dot" aria-hidden="true" />
+        </Link>
       </div>
     </motion.nav>
   );
