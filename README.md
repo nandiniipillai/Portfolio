@@ -11,10 +11,19 @@ npm run build # production build
 npm run lint
 ```
 
-## Deploy on Vercel
+## Deploy directly to Vercel (CLI)
 
-1. Push this repo to GitHub.
-2. Go to https://vercel.com/new → Import Git Repository → pick this repo.
-3. Framework Preset: Next.js. Root Directory: `./` (leave defaults).
-4. No environment variables required.
-5. Click Deploy. First deploy takes ~90s.
+One-time setup (interactive, run it in a terminal):
+
+```bash
+npx vercel login
+```
+
+Then, from the repo root:
+
+```bash
+npm run deploy         # production deploy
+npm run deploy:preview # preview deploy on a throwaway URL
+```
+
+The first `npm run deploy` prompts once to link this folder to a Vercel project (accept the defaults — name = `portfolio` or your choice, framework = Next.js, no env vars). Every subsequent run redeploys with no prompts.
