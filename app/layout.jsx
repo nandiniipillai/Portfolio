@@ -21,7 +21,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${geist.variable} ${caveat.variable}`}>
-      <body className="bg-ink text-silver antialiased">
+      <body className="bg-[#0a0a0a] text-silver antialiased">
         <MotionProvider>
           <Nav />
           <ChromeShell>{children}</ChromeShell>

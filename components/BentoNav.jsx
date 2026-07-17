@@ -4,15 +4,29 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import RollLabel from './RollLabel';
-import StackMarquee from './StackMarquee';
-import { SITE } from '@/lib/site';
+import { SITE, TOOLS } from '@/lib/site';
 
-function Arrow({ size = 'clamp(24px, 2.4vw, 32px)' }) {
+const CARD = 'group relative block w-full h-full rounded-[13px] bg-[#161616] hover:bg-[#1f1f1f] transition-colors duration-200 overflow-hidden';
+
+// Subtle top highlight — 1px inset border rgba(255,255,255,0.04) via ::before pseudo
+const cardStyle = { boxShadow: 'inset 0 1px 0 0 rgba(255,255,255,0.04)' };
+
+function Label({ children, size = 15 }) {
   return (
     <span
-      className="card-arrow text-silver leading-none absolute bottom-4 right-5 md:bottom-5 md:right-6 pointer-events-none"
-      style={{ fontSize: size }}
+      className="absolute bottom-5 left-6 font-heading tracking-tight text-[#e8e8e8] leading-none"
+      style={{ fontSize: `${size}px`, fontWeight: 500 }}
+    >
+      {children}
+    </span>
+  );
+}
+
+function Arrow({ size = 14 }) {
+  return (
+    <span
+      className="absolute bottom-5 right-6 leading-none text-[#888] group-hover:text-white transition-colors pointer-events-none"
+      style={{ fontSize: `${size}px` }}
       aria-hidden="true"
     >
       ↗
@@ -20,18 +34,15 @@ function Arrow({ size = 'clamp(24px, 2.4vw, 32px)' }) {
   );
 }
 
-function CardShell({ to, ariaLabel, className = '', external = false, download = false, children }) {
+function StandardCard({ to, label, external = false, download = false }) {
   const router = useRouter();
-  const onClick = (e) => {
-    if (external) return;
-    e.preventDefault();
-    router.push(to);
-  };
-  const commonProps = {
-    'aria-label': ariaLabel,
-    className: `card-tex block relative w-full h-full ${className}`,
-  };
-
+  const onClick = external
+    ? undefined
+    : (e) => {
+        e.preventDefault();
+        router.push(to);
+      };
+  const commonProps = { className: CARD, style: cardStyle, 'aria-label': label };
   if (external) {
     return (
       <a
@@ -41,35 +52,21 @@ function CardShell({ to, ariaLabel, className = '', external = false, download =
         rel="noreferrer noopener"
         {...(download ? { download: 'Nandini-Pillai-Resume.pdf' } : {})}
       >
-        {children}
+        <Label>{label}</Label>
+        <Arrow />
       </a>
     );
   }
-
   return (
     <Link {...commonProps} href={to} onClick={onClick}>
-      {children}
-    </Link>
-  );
-}
-
-function StandardCard({ to, label, external = false, className = '' }) {
-  return (
-    <CardShell to={to} ariaLabel={label} className={className} external={external}>
-      <span
-        className="absolute bottom-4 left-5 md:bottom-5 md:left-6 text-silver font-heading tracking-tightest leading-none"
-        style={{ fontSize: 'clamp(26px, 3vw, 42px)' }}
-      >
-        <RollLabel>{label}</RollLabel>
-      </span>
+      <Label>{label}</Label>
       <Arrow />
-    </CardShell>
+    </Link>
   );
 }
 
 function ContactCard() {
   const [copied, setCopied] = useState(false);
-
   const copy = async (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -78,45 +75,38 @@ function ContactCard() {
       setCopied(true);
       setTimeout(() => setCopied(false), 1600);
     } catch {
-      // fall back to mailto if clipboard is blocked
       window.location.href = `mailto:${SITE.email}`;
     }
   };
-
   return (
     <a
       href={`mailto:${SITE.email}`}
-      className="card-tex block relative w-full h-full"
+      className={CARD}
+      style={cardStyle}
       aria-label={`Email ${SITE.email}`}
     >
-      <div className="absolute inset-0 flex flex-col justify-end px-5 md:px-6 pb-4 md:pb-5">
+      <div className="absolute inset-0 flex items-center px-8">
         <div
-          className="text-fog text-[11px] tracking-[0.24em] uppercase mb-2"
-        >
-          Contact
-        </div>
-        <div
-          className="text-silver font-heading tracking-tightest leading-none truncate"
-          style={{ fontSize: 'clamp(20px, 2.4vw, 34px)' }}
+          className="font-heading text-[#f0f0f0] tracking-tight leading-tight"
+          style={{ fontSize: 'clamp(18px, 1.8vw, 26px)', fontWeight: 500 }}
         >
           {SITE.email}
         </div>
       </div>
+      <Label>Contact</Label>
       <button
         type="button"
         onClick={copy}
         aria-label="Copy email to clipboard"
-        className="absolute bottom-4 right-4 md:bottom-5 md:right-5 z-10 inline-flex items-center gap-1.5 rounded-full border border-white/[0.1] bg-white/[0.03] hover:bg-white/[0.08] transition-colors px-3 py-1.5 text-[10px] tracking-[0.22em] uppercase text-silver"
+        className="absolute bottom-4 right-5 z-10 inline-flex items-center gap-1.5 rounded-full border border-white/[0.08] bg-white/[0.02] hover:bg-white/[0.06] transition-colors px-2.5 py-1 text-[10px] tracking-[0.2em] uppercase text-[#e8e8e8]"
       >
         {copied ? (
           <>
-            <span aria-hidden="true">✓</span>
-            <span>Copied</span>
+            <span aria-hidden="true">✓</span><span>Copied</span>
           </>
         ) : (
           <>
-            <span aria-hidden="true">⧉</span>
-            <span>Copy</span>
+            <span aria-hidden="true">⧉</span><span>Copy</span>
           </>
         )}
       </button>
@@ -124,27 +114,29 @@ function ContactCard() {
   );
 }
 
-function ResumeCard() {
+function ToolsCard() {
+  // Exactly 3 icons — pick Framer, Notion, Figma.
+  const picks = ['Framer', 'Notion', 'Figma']
+    .map((name) => TOOLS.find((t) => t.name === name))
+    .filter(Boolean);
   return (
-    <CardShell to={SITE.resume} external download ariaLabel="Open résumé (PDF)">
-      <span
-        className="absolute bottom-4 left-5 md:bottom-4 md:left-6 text-silver font-heading tracking-tightest leading-none"
-        style={{ fontSize: 'clamp(20px, 2vw, 30px)' }}
-      >
-        <RollLabel>Résumé</RollLabel>
-      </span>
-      <Arrow size="clamp(18px, 1.8vw, 26px)" />
-    </CardShell>
-  );
-}
-
-function StackCard() {
-  return (
-    <div
-      className="card-tex relative w-full h-full !p-0 flex items-center overflow-hidden"
-      aria-label="Tools stack"
-    >
-      <StackMarquee />
+    <div className={CARD} style={cardStyle} aria-label={`Tools: ${picks.map((p) => p.name).join(', ')}`}>
+      <div className="absolute inset-0 flex items-center justify-center gap-3">
+        {picks.map((tool) => (
+          <span
+            key={tool.name}
+            title={tool.name}
+            className="w-[52px] h-[52px] rounded-[12px] flex items-center justify-center text-[22px] font-heading font-semibold"
+            style={{
+              background: tool.bg,
+              color: tool.fg,
+              border: '1px solid rgba(255,255,255,0.05)',
+            }}
+          >
+            {tool.glyph}
+          </span>
+        ))}
+      </div>
     </div>
   );
 }
@@ -152,7 +144,8 @@ function StackCard() {
 function PortraitCard() {
   return (
     <div
-      className="card-tex relative w-full h-full !p-0 items-stretch overflow-hidden"
+      className="relative block w-full h-full rounded-[13px] overflow-hidden bg-[#161616]"
+      style={cardStyle}
       aria-label="Portrait"
     >
       <Image
@@ -162,64 +155,62 @@ function PortraitCard() {
         priority
         sizes="(max-width: 768px) 100vw, 25vw"
         className="object-cover"
-        style={{ objectPosition: 'center 30%', filter: 'contrast(1.1)' }}
+        style={{
+          objectPosition: 'center 30%',
+          filter: 'grayscale(1) brightness(0.85) contrast(1.05)',
+        }}
       />
     </div>
   );
 }
 
-function PositioningLine() {
+function HeroName() {
   return (
-    <p
-      className="font-heading text-silver tracking-tightest leading-[1.15] max-w-4xl"
-      style={{ fontSize: 'clamp(22px, 2.4vw, 40px)' }}
+    <div
+      className="pointer-events-none absolute inset-x-0 top-4 md:top-6 z-0 flex justify-center overflow-hidden select-none"
+      aria-hidden="true"
     >
-      Product designer shipping real products for founders.{' '}
-      <span className="text-fog">
-        Currently building{' '}
-        <Link href="/work/baari" className="text-silver hover:text-lime transition-colors underline decoration-white/20 underline-offset-4">
-          Baari
-        </Link>
-        .
+      <span
+        className="whitespace-nowrap font-heading"
+        style={{
+          fontSize: 'clamp(120px, 14vw, 200px)',
+          fontWeight: 600,
+          filter: 'blur(7px)',
+          letterSpacing: '-0.02em',
+          color: '#f5f5f5',
+          lineHeight: 0.9,
+        }}
+      >
+        Nandini Pillai
       </span>
-    </p>
+    </div>
   );
 }
 
 export default function BentoNav() {
   return (
-    <div className="relative w-full h-[calc(100svh-3.5rem)] mt-14 px-4 md:px-6 py-4 md:py-6 flex flex-col gap-4 md:gap-6 overflow-hidden">
-      <PositioningLine />
+    <div className="relative w-full min-h-[calc(100svh-52px)] mt-[52px] px-4 md:px-5">
+      <HeroName />
 
-      <div
-        className="grid gap-3 md:gap-3 flex-1 min-h-0 w-full"
-        style={{
-          gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',
-          gridTemplateRows: '1fr 1fr',
-          maxHeight: '560px',
-        }}
-      >
+      <div className="bento-grid relative z-10 mx-auto pt-[80px] lg:pt-[100px]">
         {/* Row 1 */}
-        <div className="col-span-2 md:col-span-1">
+        <div className="col-span-12 lg:col-span-3 min-h-[160px]">
           <StandardCard to="/about" label="About" />
         </div>
-        <div className="col-span-2 md:col-span-3">
+        <div className="col-span-12 lg:col-span-9 min-h-[160px]">
           <StandardCard to="/portfolio" label="Portfolio" />
         </div>
 
         {/* Row 2 */}
-        <div className="col-span-4 md:col-span-2">
+        <div className="col-span-12 lg:col-span-6 min-h-[160px]">
           <ContactCard />
         </div>
-        <div className="col-span-2 md:col-span-1">
+        <div className="col-span-12 lg:col-span-3 min-h-[160px]">
           <PortraitCard />
         </div>
-        <div
-          className="col-span-2 md:col-span-1 grid gap-3 md:gap-3"
-          style={{ gridTemplateRows: '2fr 1fr' }}
-        >
-          <StackCard />
-          <ResumeCard />
+        <div className="col-span-12 lg:col-span-3 min-h-[160px] bento-split">
+          <ToolsCard />
+          <StandardCard to={SITE.resume} label="Resume" external download />
         </div>
       </div>
     </div>

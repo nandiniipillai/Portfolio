@@ -98,6 +98,26 @@
     to   { transform: translateY(0) skewY(0); }
   }
 
+  /* Bento grid: fixed 2-row layout at ≥1024px, natural flow below */
+  .bento-grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 16px;
+    width: 100%;
+  }
+  @media (min-width: 1024px) {
+    .bento-grid {
+      grid-template-rows: 1fr 1fr;
+      height: min(calc(100svh - 11rem), 620px);
+      padding-bottom: 16px;
+    }
+  }
+  .bento-split {
+    display: grid;
+    gap: 16px;
+    grid-template-rows: 45fr 55fr;
+  }
+
   /* Marquee — content is duplicated 2x, so we translate by 50% for a seamless loop */
   .slide-track {
     animation: slideTrack 40s linear infinite;

@@ -15,26 +15,26 @@ export default function Nav() {
       initial={{ y: -18, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-      className="fixed top-0 left-0 right-0 z-50 h-14 flex items-center justify-between px-5 md:px-8 backdrop-blur-md bg-ink/40 border-b border-white/[0.04]"
+      className="fixed top-0 left-0 right-0 z-50 h-[52px] flex items-center justify-between px-4 md:px-5 backdrop-blur-md bg-[#0a0a0a]/70"
       aria-label="Primary"
     >
-      <div className="flex items-baseline gap-4 text-[13px]">
+      <div className="flex items-baseline gap-3 text-[14px]">
         <Link
           href="/"
-          className="group text-silver hover:text-lime transition-colors font-medium tracking-tight"
+          className="text-white font-semibold tracking-tight leading-none"
         >
-          {onRoot ? SITE.name : (<span>← Home</span>)}
+          {onRoot ? SITE.name : <span>← Home</span>}
         </Link>
-        <span className="hidden md:inline text-fog/70 tracking-tight">{SITE.title}</span>
+        <span className="hidden md:inline text-[#999] font-normal tracking-tight leading-none">
+          {SITE.title}
+        </span>
       </div>
-      <div className="flex items-center gap-3 text-[13px] text-fog">
-        <span className="hidden sm:inline">{SITE.location}</span>
-        <span className="hidden sm:inline text-ash">·</span>
+      <div className="flex items-center gap-3 text-[14px] text-[#999]">
         <LiveClock />
         <Link
           href="/contact"
           aria-label="Contact"
-          className="ml-2 inline-block w-1.5 h-1.5 rounded-full bg-silver hover:bg-lime transition-colors"
+          className="ml-1 inline-block w-1.5 h-1.5 rounded-full bg-[#7CFF9B] pulse-dot"
         />
       </div>
     </motion.nav>
