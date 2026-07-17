@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { SITE, TOOLS } from '@/lib/site';
 
-const CARD = 'group relative block w-full h-full rounded-[13px] bg-[#161616] hover:bg-[#1f1f1f] transition-colors duration-200 overflow-hidden';
+const CARD = 'group relative block w-full h-full rounded-[13px] bg-[#171717] hover:bg-[#1f1f1f] transition-colors duration-200 overflow-hidden';
 
 // Subtle top highlight — 1px inset border rgba(255,255,255,0.04) via ::before pseudo
 const cardStyle = { boxShadow: 'inset 0 1px 0 0 rgba(255,255,255,0.04)' };
@@ -144,7 +144,7 @@ function ToolsCard() {
 function PortraitCard() {
   return (
     <div
-      className="relative block w-full h-full rounded-[13px] overflow-hidden bg-[#161616]"
+      className="relative block w-full h-full rounded-[13px] overflow-hidden bg-[#171717]"
       style={cardStyle}
       aria-label="Portrait"
     >
@@ -167,32 +167,35 @@ function PortraitCard() {
 function HeroName() {
   return (
     <div
-      className="pointer-events-none absolute inset-x-0 top-4 md:top-6 z-0 flex justify-center overflow-hidden select-none"
+      className="hero-name pointer-events-none select-none"
       aria-hidden="true"
+      style={{
+        position: 'absolute',
+        top: '60px',
+        left: 0,
+        width: '100%',
+        textAlign: 'center',
+        fontSize: 'clamp(120px, 15vw, 210px)',
+        fontWeight: 550,
+        color: '#f5f5f5',
+        letterSpacing: '-0.02em',
+        filter: 'blur(7px)',
+        zIndex: 1,
+        whiteSpace: 'nowrap',
+        lineHeight: 0.9,
+      }}
     >
-      <span
-        className="whitespace-nowrap font-heading"
-        style={{
-          fontSize: 'clamp(120px, 14vw, 200px)',
-          fontWeight: 600,
-          filter: 'blur(7px)',
-          letterSpacing: '-0.02em',
-          color: '#f5f5f5',
-          lineHeight: 0.9,
-        }}
-      >
-        Nandini Pillai
-      </span>
+      Nandini
     </div>
   );
 }
 
 export default function BentoNav() {
   return (
-    <div className="relative w-full min-h-[calc(100svh-52px)] mt-[52px] px-4 md:px-5">
+    <div className="relative w-full min-h-[calc(100svh-52px)] mt-[52px] pt-[150px] px-4 md:px-5">
       <HeroName />
 
-      <div className="bento-grid relative z-10 mx-auto pt-[80px] lg:pt-[100px]">
+      <div className="bento-grid relative z-[2] mx-auto">
         {/* Row 1 */}
         <div className="col-span-12 lg:col-span-3 min-h-[160px]">
           <StandardCard to="/about" label="About" />

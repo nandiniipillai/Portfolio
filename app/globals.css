@@ -108,8 +108,8 @@
   @media (min-width: 1024px) {
     .bento-grid {
       grid-template-rows: 1fr 1fr;
-      height: min(calc(100svh - 11rem), 620px);
-      padding-bottom: 16px;
+      height: min(calc(100svh - 220px), 540px);
+      padding-bottom: 0;
     }
   }
   .bento-split {
