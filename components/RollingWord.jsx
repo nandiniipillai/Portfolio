@@ -77,12 +77,13 @@ export function RollingWordBand({ className = '' }) {
     <div
       className={`relative select-none pointer-events-none ${className}`}
       style={{
-        fontSize: 'clamp(90px, 15vw, 220px)',
+        fontSize: 'clamp(110px, 17vw, 260px)',
         lineHeight: 0.9,
         letterSpacing: '-0.05em',
         color: '#F4F4F2',
-        filter: 'blur(10px)',
-        opacity: 0.7,
+        filter: 'blur(6px)',
+        opacity: 0.72,
+        marginTop: 'clamp(20px, 3vh, 40px)',
       }}
       aria-hidden="true"
     >
