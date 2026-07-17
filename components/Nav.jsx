@@ -15,7 +15,7 @@ export default function Nav() {
       initial={{ y: -18, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-      className="fixed top-0 left-0 right-0 z-50 h-[52px] flex items-center justify-between px-4 md:px-5 backdrop-blur-md bg-[#0a0a0a]/70"
+      className="fixed top-0 left-0 right-0 z-50 h-[52px] flex items-center justify-between px-4 md:px-5 bg-[#0a0a0a]"
       aria-label="Primary"
     >
       <div className="flex items-baseline gap-3 text-[14px]">

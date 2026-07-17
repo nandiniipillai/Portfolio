@@ -11,22 +11,22 @@ const CARD = 'group relative block w-full h-full rounded-[13px] bg-[#171717] hov
 // Subtle top highlight — 1px inset border rgba(255,255,255,0.04) via ::before pseudo
 const cardStyle = { boxShadow: 'inset 0 1px 0 0 rgba(255,255,255,0.04)' };
 
-function Label({ children, size = 15 }) {
+function Label({ children }) {
   return (
     <span
-      className="absolute bottom-5 left-6 font-heading tracking-tight text-[#e8e8e8] leading-none"
-      style={{ fontSize: `${size}px`, fontWeight: 500 }}
+      className="absolute bottom-6 left-6 font-heading tracking-tight text-[#e8e8e8] leading-none"
+      style={{ fontSize: '15px', fontWeight: 500 }}
     >
       {children}
     </span>
   );
 }
 
-function Arrow({ size = 14 }) {
+function Arrow() {
   return (
     <span
-      className="absolute bottom-5 right-6 leading-none text-[#888] group-hover:text-white transition-colors pointer-events-none"
-      style={{ fontSize: `${size}px` }}
+      className="absolute bottom-6 right-6 leading-none text-[#888] group-hover:text-white transition-colors pointer-events-none"
+      style={{ fontSize: '14px' }}
       aria-hidden="true"
     >
       ↗
@@ -85,52 +85,61 @@ function ContactCard() {
       style={cardStyle}
       aria-label={`Email ${SITE.email}`}
     >
-      <div className="absolute inset-0 flex items-center px-8">
-        <div
-          className="font-heading text-[#f0f0f0] tracking-tight leading-tight"
-          style={{ fontSize: 'clamp(18px, 1.8vw, 26px)', fontWeight: 500 }}
+      <div className="absolute inset-0 flex items-center justify-center gap-3 px-8">
+        <span
+          className="text-[#888] font-heading tracking-tight leading-none"
+          style={{ fontSize: '15px', fontWeight: 500 }}
         >
           {SITE.email}
-        </div>
+        </span>
+        <button
+          type="button"
+          onClick={copy}
+          aria-label="Copy email to clipboard"
+          className="inline-flex items-center gap-1 rounded-full border border-white/[0.08] bg-white/[0.02] hover:bg-white/[0.06] transition-colors px-2 py-0.5 text-[10px] tracking-[0.18em] uppercase text-[#888] hover:text-[#e8e8e8]"
+        >
+          {copied ? (
+            <>
+              <span aria-hidden="true">✓</span><span>Copied</span>
+            </>
+          ) : (
+            <>
+              <span aria-hidden="true">⧉</span><span>Copy</span>
+            </>
+          )}
+        </button>
       </div>
       <Label>Contact</Label>
-      <button
-        type="button"
-        onClick={copy}
-        aria-label="Copy email to clipboard"
-        className="absolute bottom-4 right-5 z-10 inline-flex items-center gap-1.5 rounded-full border border-white/[0.08] bg-white/[0.02] hover:bg-white/[0.06] transition-colors px-2.5 py-1 text-[10px] tracking-[0.2em] uppercase text-[#e8e8e8]"
-      >
-        {copied ? (
-          <>
-            <span aria-hidden="true">✓</span><span>Copied</span>
-          </>
-        ) : (
-          <>
-            <span aria-hidden="true">⧉</span><span>Copy</span>
-          </>
-        )}
-      </button>
+      <Arrow />
     </a>
   );
 }
 
 function ToolsCard() {
-  // Exactly 3 icons — pick Framer, Notion, Figma.
-  const picks = ['Framer', 'Notion', 'Figma']
+  // Exactly 3 icons — Photoshop, Illustrator, Adobe XD. No text labels.
+  const picks = ['Photoshop', 'Illustrator', 'Adobe XD']
     .map((name) => TOOLS.find((t) => t.name === name))
     .filter(Boolean);
   return (
-    <div className={CARD} style={cardStyle} aria-label={`Tools: ${picks.map((p) => p.name).join(', ')}`}>
-      <div className="absolute inset-0 flex items-center justify-center gap-3">
+    <div
+      className={`${CARD} flex items-center justify-center`}
+      style={cardStyle}
+      aria-label={`Tools: ${picks.map((p) => p.name).join(', ')}`}
+    >
+      <div className="flex items-center justify-center" style={{ gap: '12px' }}>
         {picks.map((tool) => (
           <span
             key={tool.name}
             title={tool.name}
-            className="w-[52px] h-[52px] rounded-[12px] flex items-center justify-center text-[22px] font-heading font-semibold"
+            className="flex items-center justify-center font-heading font-semibold shrink-0"
             style={{
-              background: tool.bg,
+              width: '52px',
+              height: '52px',
+              borderRadius: '12px',
+              background: '#222',
               color: tool.fg,
-              border: '1px solid rgba(255,255,255,0.05)',
+              fontSize: '28px',
+              lineHeight: 1,
             }}
           >
             {tool.glyph}

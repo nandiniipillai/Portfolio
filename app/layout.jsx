@@ -11,11 +11,17 @@ const caveat = Caveat({ subsets: ['latin'], variable: '--font-caveat', display: 
 export const metadata = {
   title: 'Nandini Pillai — Product & Experience Designer',
   description: SITE.positioning,
+  themeColor: '#0a0a0a',
   openGraph: {
     title: 'Nandini Pillai — Product & Experience Designer',
     description: SITE.positioning,
     type: 'website',
   },
+};
+
+export const viewport = {
+  themeColor: '#0a0a0a',
+  colorScheme: 'dark',
 };
 
 export default function RootLayout({ children }) {
