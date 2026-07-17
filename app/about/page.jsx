@@ -48,7 +48,7 @@ export default function AboutPage() {
                 href={SITE.resume}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="mt-8 inline-flex items-center gap-2 text-silver hover:text-lime transition-colors group"
+                className="mt-8 inline-flex items-center gap-2 text-cream hover:text-amber transition-colors group"
               >
                 View résumé <span className="card-arrow" aria-hidden="true">↗</span>
               </a>

@@ -78,7 +78,7 @@ export default function CaseStudyShell({ slug, index, title, oneLiner, meta = []
             <span className="text-[11px] tracking-[0.24em] uppercase text-ash">Next case study</span>
             <Link
               href={next.path}
-              className="group flex items-center gap-3 text-silver font-heading tracking-tightest text-2xl md:text-3xl hover:text-lime transition-colors"
+              className="group flex items-center gap-3 text-cream font-heading tracking-tightest text-2xl md:text-3xl hover:text-amber transition-colors"
               style={{ ['--accent']: next.accent }}
             >
               {next.title}
