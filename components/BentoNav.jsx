@@ -21,7 +21,7 @@ function CardLabel({ children }) {
   return (
     <span
       className="text-silver font-heading tracking-tight leading-none"
-      style={{ fontSize: '15px', fontWeight: 500 }}
+      style={{ fontSize: '17px', fontWeight: 500 }}
     >
       <RollLabel>{children}</RollLabel>
     </span>
@@ -121,7 +121,7 @@ function PortraitCard() {
 
 export default function BentoNav() {
   return (
-    <RollingWordProvider defaultWord={SITE.name}>
+    <RollingWordProvider defaultWord={SITE.firstName}>
       <div className="relative w-full min-h-[calc(100svh-56px)] mt-14 pt-[140px] px-4 md:px-5 pb-4 overflow-hidden">
         {/* Wordmark — sits BEHIND the cards; top ~40–50% visible, bottom hidden by row 1 */}
         <div

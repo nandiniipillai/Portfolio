@@ -77,7 +77,7 @@ export function RollingWordBand({ className = '' }) {
     <div
       className={`relative select-none pointer-events-none ${className}`}
       style={{
-        fontSize: 'clamp(100px, 20vw, 320px)',
+        fontSize: 'clamp(80px, 13vw, 180px)',
         lineHeight: 0.9,
         letterSpacing: '-0.04em',
         color: '#F4F4F2',
