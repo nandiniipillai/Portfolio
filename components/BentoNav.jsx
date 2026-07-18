@@ -10,12 +10,13 @@ import { SITE } from '@/lib/site';
 
 // Reference card: translucent white overlay, 32px radius, generous padding.
 const CARD =
-  'group relative block w-full h-full rounded-[32px] bg-white/[0.08] hover:bg-white/[0.04] cursor-pointer transition-colors duration-[400ms] overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/80 focus-visible:outline-offset-2';
+  'group relative block w-full h-full rounded-[32px] bg-white/[0.08] hover:bg-white/[0.04] hover:-translate-y-0.5 cursor-pointer transition-all duration-[400ms] ease-out overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/80 focus-visible:outline-offset-2';
 
 // Static (non-link) tiles use the same visual but without the cursor / focus ring.
 const CARD_STATIC = 'relative block w-full h-full rounded-[32px] bg-white/[0.08] overflow-hidden';
 
-const cardStyle = { boxShadow: 'inset 0 1px 0 1px rgba(255,255,255,0.06)' };
+// Brighter top-edge highlight so the card reads as a raised surface, not a flat panel.
+const cardStyle = { boxShadow: 'inset 0 1px 0 0 rgba(255,255,255,0.12), inset 0 0 0 1px rgba(255,255,255,0.03)' };
 
 function CardLabel({ children }) {
   return (
@@ -164,6 +165,12 @@ export default function BentoNav() {
             <StandardCard to={SITE.resume} label="Resume" external download />
           </div>
         </div>
+
+        {/* Bottom pill — subtle scroll/handle affordance under the grid */}
+        <div
+          className="pointer-events-none absolute left-1/2 -translate-x-1/2 bottom-3 w-10 h-[3px] rounded-full bg-white/25"
+          aria-hidden="true"
+        />
       </div>
     </RollingWordProvider>
   );

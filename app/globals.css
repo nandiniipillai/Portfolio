@@ -86,18 +86,19 @@
     transform: translateY(-100%);
   }
 
-  /* Rolling wordmark (per-character skew slot) */
+  /* Rolling wordmark — softer rise (less skew, longer, opacity crossfade) */
   .ch { display: inline-block; }
   .ch.sp { width: 0.28em; }
-  .ch.out { animation: chOut 450ms cubic-bezier(0.76,0,0.24,1) both; }
-  .ch.in  { animation: chIn  500ms cubic-bezier(0.76,0,0.24,1) both; }
+  .ch.out { animation: chOut 550ms cubic-bezier(0.4, 0, 0.2, 1) both; }
+  .ch.in  { animation: chIn  700ms cubic-bezier(0.22, 1, 0.36, 1) both; }
   @keyframes chOut {
-    from { transform: translateY(0) skewY(0); }
-    to   { transform: translateY(-140%) skewY(-12deg); }
+    0%   { transform: translateY(0) skewY(0);       opacity: 1; }
+    100% { transform: translateY(-110%) skewY(-4deg); opacity: 0; }
   }
   @keyframes chIn {
-    from { transform: translateY(140%) skewY(12deg); }
-    to   { transform: translateY(0) skewY(0); }
+    0%   { transform: translateY(110%) skewY(4deg);  opacity: 0; }
+    60%  { opacity: 1; }
+    100% { transform: translateY(0) skewY(0);        opacity: 1; }
   }
 
   /* Bento grid: fixed 2-row layout at ≥1024px, natural flow below */
