@@ -13,17 +13,18 @@ function WordByWord({ text, baseDelay = 0 }) {
   return (
     <p className="text-fog text-xl md:text-2xl leading-relaxed">
       {words.map((w, i) => (
-        <motion.span
-          key={i}
-          initial={{ opacity: 0.16 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, margin: '-40px' }}
-          transition={{ duration: 0.5, delay: baseDelay + i * 0.015, ease: 'easeOut' }}
-          className="inline-block"
-        >
-          {w}
+        <span key={i}>
+          <motion.span
+            initial={{ opacity: 0.16 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.5, delay: baseDelay + i * 0.015, ease: 'easeOut' }}
+            className="inline-block"
+          >
+            {w}
+          </motion.span>
           {i < words.length - 1 ? ' ' : ''}
-        </motion.span>
+        </span>
       ))}
     </p>
   );
@@ -63,11 +64,10 @@ export default function AboutPage() {
                 href={SITE.resume}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="group mt-10 inline-flex items-center gap-3 rounded-full bg-white/[0.08] hover:bg-white/[0.14] border border-white/10 hover:border-white/20 px-6 py-3 text-silver hover:-translate-y-0.5 transition-all duration-300 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/80 focus-visible:outline-offset-2"
+                className="mt-10 inline-flex items-center justify-center rounded-full bg-white/[0.08] hover:bg-white/[0.14] border border-white/10 hover:border-white/20 px-7 py-3.5 text-silver hover:-translate-y-0.5 transition-all duration-300 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/80 focus-visible:outline-offset-2"
                 style={{ boxShadow: 'inset 0 1px 0 0 rgba(255,255,255,0.12)' }}
               >
-                <span className="text-[15px] font-medium tracking-tight">View Résumé</span>
-                <span className="text-lg leading-none transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true">↗</span>
+                <span className="text-[18px] font-medium tracking-tight leading-none">View Résumé</span>
               </a>
             </ScrollReveal>
           </div>
