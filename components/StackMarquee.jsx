@@ -19,7 +19,7 @@ function Tile({ tool }) {
       >
         {tool.glyph}
       </div>
-      <span className="text-[10px] text-fog/70 tracking-wide uppercase">{tool.name}</span>
+      <span className="text-[10px] text-fog/70 tracking-wide uppercase whitespace-nowrap leading-none">{tool.name}</span>
     </div>
   );
 }

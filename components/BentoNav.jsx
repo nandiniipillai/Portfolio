@@ -10,7 +10,7 @@ import { SITE } from '@/lib/site';
 
 // Reference card: translucent white overlay, 32px radius, generous padding.
 const CARD =
-  'group relative block w-full h-full rounded-[32px] bg-white/[0.08] hover:bg-white/[0.12] cursor-pointer transition-colors duration-[400ms] overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/80 focus-visible:outline-offset-2';
+  'group relative block w-full h-full rounded-[32px] bg-white/[0.08] hover:bg-white/[0.04] cursor-pointer transition-colors duration-[400ms] overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/80 focus-visible:outline-offset-2';
 
 // Static (non-link) tiles use the same visual but without the cursor / focus ring.
 const CARD_STATIC = 'relative block w-full h-full rounded-[32px] bg-white/[0.08] overflow-hidden';
