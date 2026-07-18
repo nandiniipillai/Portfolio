@@ -19,11 +19,28 @@ export default function ExperienceTimeline() {
                 ❛❛
               </span>
               <div className="pt-6">
-                <div className="font-heading tracking-tightest text-silver text-xl md:text-2xl">{e.degree}</div>
-                <div className="text-fog mt-1">{e.school}</div>
-                <div className="text-ash mt-4 text-sm leading-relaxed">
-                  <span className="text-fog">Coursework:</span> {e.coursework}
+                <div className="flex items-baseline justify-between gap-3">
+                  <div className="font-heading tracking-tightest text-silver text-xl md:text-2xl">
+                    {e.degree}
+                  </div>
+                  {e.years && (
+                    <div className="text-ash text-xs tracking-wider whitespace-nowrap">{e.years}</div>
+                  )}
                 </div>
+                <div className="text-fog mt-1">{e.school}</div>
+                {e.highlights && (
+                  <ul className="mt-5 space-y-2.5">
+                    {e.highlights.map((h, j) => (
+                      <li key={j} className="pl-4 relative text-fog text-sm leading-relaxed">
+                        <span
+                          className="absolute left-0 top-2 w-1.5 h-1.5 rounded-full bg-fog/40"
+                          aria-hidden="true"
+                        />
+                        {h}
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
             </div>
           </ScrollReveal>

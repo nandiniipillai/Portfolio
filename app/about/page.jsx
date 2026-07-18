@@ -22,7 +22,7 @@ function WordByWord({ text }) {
           className="inline-block"
         >
           {w}
-          {i < words.length - 1 ? ' ' : ''}
+          {i < words.length - 1 ? ' ' : ''}
         </motion.span>
       ))}
     </p>
@@ -48,9 +48,11 @@ export default function AboutPage() {
                 href={SITE.resume}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="mt-8 inline-flex items-center gap-2 text-silver hover:text-lime transition-colors group"
+                className="group mt-10 inline-flex items-center gap-3 rounded-full bg-white/[0.08] hover:bg-white/[0.14] border border-white/10 hover:border-white/20 px-6 py-3 text-silver hover:-translate-y-0.5 transition-all duration-300 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/80 focus-visible:outline-offset-2"
+                style={{ boxShadow: 'inset 0 1px 0 0 rgba(255,255,255,0.12)' }}
               >
-                View résumé <span className="card-arrow" aria-hidden="true">↗</span>
+                <span className="text-[15px] font-medium tracking-tight">View Résumé</span>
+                <span className="text-lg leading-none transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true">↗</span>
               </a>
             </ScrollReveal>
           </div>
@@ -60,12 +62,12 @@ export default function AboutPage() {
               style={{ aspectRatio: '546/685' }}
             >
               <Image
-                src={SITE.portrait}
+                src={SITE.portraitAbout}
                 alt="Nandini Pillai"
                 fill
                 sizes="(max-width: 768px) 100vw, 500px"
                 className="object-cover"
-                style={{ objectPosition: 'center 32%' }}
+                style={{ objectPosition: 'center 35%' }}
               />
             </div>
           </ScrollReveal>
