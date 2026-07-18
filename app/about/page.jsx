@@ -8,7 +8,7 @@ import Marquee from '@/components/Marquee';
 import ScrollReveal from '@/components/ScrollReveal';
 import { SITE } from '@/lib/site';
 
-function WordByWord({ text }) {
+function WordByWord({ text, baseDelay = 0 }) {
   const words = text.split(' ');
   return (
     <p className="text-fog text-xl md:text-2xl leading-relaxed">
@@ -18,7 +18,7 @@ function WordByWord({ text }) {
           initial={{ opacity: 0.16 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: '-40px' }}
-          transition={{ duration: 0.5, delay: i * 0.015, ease: 'easeOut' }}
+          transition={{ duration: 0.5, delay: baseDelay + i * 0.015, ease: 'easeOut' }}
           className="inline-block"
         >
           {w}
@@ -26,6 +26,21 @@ function WordByWord({ text }) {
         </motion.span>
       ))}
     </p>
+  );
+}
+
+function IntroParagraphs({ text }) {
+  // Split on sentence-ending punctuation, keep each full sentence intact.
+  const sentences = (text.match(/[^.!?]+[.!?]+/g) || [text]).map((s) => s.trim());
+  let runningWordCount = 0;
+  return (
+    <div className="space-y-6">
+      {sentences.map((sentence, i) => {
+        const delay = runningWordCount * 0.015;
+        runningWordCount += sentence.split(' ').length;
+        return <WordByWord key={i} text={sentence} baseDelay={delay} />;
+      })}
+    </div>
   );
 }
 
@@ -42,7 +57,7 @@ export default function AboutPage() {
 
         <div className="mt-14 grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-10 md:gap-16 items-start">
           <div className="md:pt-8">
-            <WordByWord text={SITE.aboutIntro} />
+            <IntroParagraphs text={SITE.aboutIntro} />
             <ScrollReveal>
               <a
                 href={SITE.resume}
@@ -62,12 +77,12 @@ export default function AboutPage() {
               style={{ aspectRatio: '546/685' }}
             >
               <Image
-                src={SITE.portraitAbout}
+                src={SITE.portrait}
                 alt="Nandini Pillai"
                 fill
                 sizes="(max-width: 768px) 100vw, 500px"
                 className="object-cover"
-                style={{ objectPosition: 'center 35%' }}
+                style={{ objectPosition: 'center 32%' }}
               />
             </div>
           </ScrollReveal>
