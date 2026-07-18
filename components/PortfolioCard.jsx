@@ -107,7 +107,13 @@ export default function PortfolioCard({ study, featured = false }) {
               {card.frame === 'phones' && <PhonesMock images={card.images} />}
               {card.frame === 'flat' && card.image && (
                 <div className="w-full h-full relative rounded-2xl overflow-hidden">
-                  <Image src={card.image} alt={title} fill sizes="600px" className="object-cover" />
+                  <Image
+                    src={card.image}
+                    alt={title}
+                    fill
+                    sizes="600px"
+                    className={card.fit === 'contain' ? 'object-contain' : 'object-cover'}
+                  />
                 </div>
               )}
             </div>
