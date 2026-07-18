@@ -97,7 +97,11 @@ export default function PortfolioCard({ study, featured = false }) {
               ))}
             </div>
           </div>
-          <div className="relative flex-1 min-h-[180px] md:min-h-0 p-4 md:p-6">
+          <div
+            className={`relative flex-1 min-h-[180px] md:min-h-0 ${
+              card.frame === 'flat' && card.fit === 'contain' ? 'p-0' : 'p-4 md:p-6'
+            }`}
+          >
             <div className="w-full h-full transition-transform duration-500 group-hover:scale-[1.03]">
               {card.frame === 'token' && <TokenMock accent={accent} />}
               {card.frame === 'browser' && (
