@@ -4,6 +4,46 @@ import Link from 'next/link';
 import { EDUCATION, EXPERIENCE } from '@/lib/site';
 import ScrollReveal from './ScrollReveal';
 
+function EducationFlipCard({ e }) {
+  return (
+    <div className="group h-full min-h-[280px] [perspective:1200px]">
+      <div className="relative h-full w-full transition-transform duration-700 ease-out [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+        {/* Front */}
+        <div className="absolute inset-0 rounded-2xl bg-carbon border border-white/[0.05] p-6 md:p-8 [backface-visibility:hidden] [-webkit-backface-visibility:hidden] flex flex-col justify-between">
+          <span className="text-4xl text-fog/40 font-serif leading-none" aria-hidden="true">
+            ❛❛
+          </span>
+          <div>
+            <div className="text-ash text-xs tracking-[0.2em] uppercase">{e.years}</div>
+            <div className="mt-2 font-heading tracking-tightest text-silver text-xl md:text-2xl leading-tight">
+              {e.degree}
+            </div>
+            <div className="text-fog mt-1 text-sm md:text-base">{e.school}</div>
+          </div>
+          <div className="text-ash text-[10px] tracking-[0.24em] uppercase">
+            Hover to see more
+          </div>
+        </div>
+        {/* Back */}
+        <div className="absolute inset-0 rounded-2xl bg-carbon border border-white/[0.05] p-6 md:p-8 [transform:rotateY(180deg)] [backface-visibility:hidden] [-webkit-backface-visibility:hidden] flex flex-col justify-center">
+          <div className="text-ash text-[10px] tracking-[0.24em] uppercase mb-4">Highlights</div>
+          <ul className="space-y-3">
+            {(e.highlights || []).map((h, j) => (
+              <li key={j} className="pl-4 relative text-fog text-sm leading-relaxed">
+                <span
+                  className="absolute left-0 top-2 w-1.5 h-1.5 rounded-full bg-fog/40"
+                  aria-hidden="true"
+                />
+                {h}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function ExperienceTimeline() {
   return (
     <div className="mt-20 md:mt-28">
@@ -11,38 +51,10 @@ export default function ExperienceTimeline() {
       <ScrollReveal>
         <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-6">Education</div>
       </ScrollReveal>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 mb-20">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 mb-20 items-stretch">
         {EDUCATION.map((e, i) => (
-          <ScrollReveal key={i} delay={i * 0.06}>
-            <div className="rounded-2xl bg-carbon border border-white/[0.05] p-6 md:p-8 relative">
-              <span className="absolute top-4 left-6 text-4xl text-fog/40 font-serif leading-none" aria-hidden="true">
-                ❛❛
-              </span>
-              <div className="pt-6">
-                <div className="flex items-baseline justify-between gap-3">
-                  <div className="font-heading tracking-tightest text-silver text-xl md:text-2xl">
-                    {e.degree}
-                  </div>
-                  {e.years && (
-                    <div className="text-ash text-xs tracking-wider whitespace-nowrap">{e.years}</div>
-                  )}
-                </div>
-                <div className="text-fog mt-1">{e.school}</div>
-                {e.highlights && (
-                  <ul className="mt-5 space-y-2.5">
-                    {e.highlights.map((h, j) => (
-                      <li key={j} className="pl-4 relative text-fog text-sm leading-relaxed">
-                        <span
-                          className="absolute left-0 top-2 w-1.5 h-1.5 rounded-full bg-fog/40"
-                          aria-hidden="true"
-                        />
-                        {h}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            </div>
+          <ScrollReveal key={i} delay={i * 0.06} className="h-full">
+            <EducationFlipCard e={e} />
           </ScrollReveal>
         ))}
       </div>
@@ -64,8 +76,24 @@ export default function ExperienceTimeline() {
                 <div className="text-fog text-sm">{row.org}</div>
               </div>
               <div className="text-fog text-sm md:text-base leading-relaxed">
-                {row.description}
-                {row.slug && <span className="ml-2 card-arrow text-silver" aria-hidden="true">↗</span>}
+                {row.bullets && row.bullets.length > 0 ? (
+                  <ul className="space-y-2">
+                    {row.bullets.map((b, j) => (
+                      <li key={j} className="pl-4 relative">
+                        <span
+                          className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-fog/40"
+                          aria-hidden="true"
+                        />
+                        {b}
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
+                {row.slug && (
+                  <span className="ml-2 card-arrow text-silver inline-block mt-2" aria-hidden="true">
+                    ↗
+                  </span>
+                )}
               </div>
             </div>
           );
