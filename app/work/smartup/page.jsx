@@ -1,145 +1,206 @@
 'use client';
 
+import Image from 'next/image';
+import Zoom from 'react-medium-image-zoom';
+import 'react-medium-image-zoom/dist/styles.css';
 import { motion } from 'framer-motion';
 import CaseStudyShell from '@/components/CaseStudyShell';
-import { Section, Prose, SubList, PullQuote, MetricCard, MetricGrid, AssetPlaceholder } from '@/components/CaseBits';
-import SlideFigure from '@/components/SlideFigure';
+import { Section, Prose, SubList, PullQuote } from '@/components/CaseBits';
+import SplitRow from '@/components/SplitRow';
 import PhoneFrame from '@/components/PhoneFrame';
+import ScrollReveal from '@/components/ScrollReveal';
 
 const ACCENT = '#7C5CFC';
 
+function Showcase({ src, alt, aspect = '16/9', tone = 'default' }) {
+  const bg = tone === 'sunken' ? 'bg-graphite' : '';
+  return (
+    <section className={`py-10 md:py-14 px-5 md:px-10 ${bg}`}>
+      <ScrollReveal>
+        <div className="mx-auto max-w-7xl">
+          <div
+            className="relative rounded-2xl overflow-hidden bg-carbon border border-white/[0.05]"
+            style={{ aspectRatio: aspect }}
+          >
+            <Zoom>
+              <Image
+                src={src}
+                alt={alt || ''}
+                fill
+                sizes="(max-width: 768px) 100vw, 90vw"
+                className="object-cover"
+              />
+            </Zoom>
+          </div>
+        </div>
+      </ScrollReveal>
+    </section>
+  );
+}
+
+function ThumbGrid({ items }) {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+      {items.map((it) => (
+        <ScrollReveal key={it.src}>
+          <figure>
+            <div
+              className="relative rounded-xl overflow-hidden bg-carbon border border-white/[0.05]"
+              style={{ aspectRatio: '16/9' }}
+            >
+              <Zoom>
+                <Image
+                  src={it.src}
+                  alt={it.label}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 340px"
+                  className="object-cover"
+                />
+              </Zoom>
+            </div>
+            <figcaption className="mt-3 text-[11px] tracking-[0.24em] uppercase text-ash">
+              {it.label}
+            </figcaption>
+          </figure>
+        </ScrollReveal>
+      ))}
+    </div>
+  );
+}
+
+function VideoTile({ video, poster, label }) {
+  return (
+    <ScrollReveal>
+      <figure className="flex flex-col items-center">
+        <PhoneFrame video={video} poster={poster} className="!max-w-[240px]" />
+        <figcaption className="mt-4 text-[11px] tracking-[0.24em] uppercase text-ash">
+          {label}
+        </figcaption>
+      </figure>
+    </ScrollReveal>
+  );
+}
+
 export default function SmartUpPage() {
   return (
-    <motion.div initial={{ opacity: 0, filter: 'blur(10px)' }} animate={{ opacity: 1, filter: 'blur(0px)' }} transition={{ duration: 0.5 }}>
+    <motion.div
+      initial={{ opacity: 0, filter: 'blur(10px)' }}
+      animate={{ opacity: 1, filter: 'blur(0px)' }}
+      transition={{ duration: 0.5 }}
+    >
       <CaseStudyShell
         slug="smartup"
         index="04"
         accent={ACCENT}
-        title="SmartUp puts stock, sales and staff management in a retailer’s pocket."
-        oneLiner="Stock, sales, and staff management in a retailer’s pocket."
+        title="SmartUp"
+        oneLiner="Inventory Management Retail SaaS App."
         meta={[
-          ['Role', 'Sole designer on a four-person team'],
-          ['Team', 'PM + front-end + back-end'],
-          ['Timeline', '~5 months'],
-          ['Outcome', 'Built & adopted post-handoff'],
+          ['Role', 'UX & Product Designer'],
+          ['Team', 'PM · 1 FE dev · 1 BE dev'],
+          ['Industry', 'Retail / SaaS'],
+          ['Company', 'Detosphere Ltd.'],
         ]}
       >
+        {/* 1. Hero showcase */}
+        <Showcase
+          src="/assets/smartup/v2-2.jpg"
+          alt="SmartUp mobile screens flatlay"
+          aspect="16/9"
+        />
+
+        {/* 2. About — her copy, centered prose */}
         <Section>
-          <div className="flex justify-center">
-            <PhoneFrame
+          <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-4">About</div>
+          <Prose>
+            SmartUp Storefront is a cloud-based retail management platform
+            designed to help businesses, both large chains and small
+            storefronts, to manage their operations on the go.
+          </Prose>
+        </Section>
+
+        {/* 3. Pull quote for a moment of drama */}
+        <PullQuote>
+          Access critical business data anytime, anywhere, without sacrificing
+          simplicity or usability.
+        </PullQuote>
+
+        {/* 4. The challenge — split */}
+        <SplitRow
+          src="/assets/smartup/v2-3.jpg"
+          alt="Desktop-only platform, redesigned for mobile"
+          imgSide="right"
+          tone="sunken"
+          label="The challenge"
+        >
+          Existing SmartUp Retail users could only access the system on
+          desktop, limiting flexibility and efficiency. My task was to design
+          a mobile solution that enabled users to access critical business
+          data anytime, anywhere, without sacrificing simplicity or usability.
+        </SplitRow>
+
+        {/* 5. The goal — centered prose + list */}
+        <Section>
+          <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-4">The goal</div>
+          <Prose>
+            To design a functional, intuitive mobile experience that allowed
+            retailers to:
+          </Prose>
+          <SubList
+            items={[
+              'Manage inventory and sales data',
+              'Oversee staff and performance',
+              'Track reports and analytics',
+              'Access point-of-sale functionality',
+            ]}
+          />
+        </Section>
+
+        {/* 6. Process artefacts — thumb grid, no prose */}
+        <Section title="Process" tone="sunken">
+          <ThumbGrid
+            items={[
+              { src: '/assets/smartup/v2-5.jpg', label: 'User flow' },
+              { src: '/assets/smartup/v2-6.jpg', label: 'Wireframes' },
+              { src: '/assets/smartup/v2-7.jpg', label: 'Mid-fidelity exploration' },
+            ]}
+          />
+        </Section>
+
+        {/* 7. Outcome — big showcase */}
+        <Section>
+          <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-6">Outcome</div>
+          <div className="relative rounded-2xl overflow-hidden bg-carbon border border-white/[0.05]" style={{ aspectRatio: '16/9' }}>
+            <Zoom>
+              <Image
+                src="/assets/smartup/v2-8.jpg"
+                alt="Final high-fidelity screens"
+                fill
+                sizes="(max-width: 768px) 100vw, 1024px"
+                className="object-cover"
+              />
+            </Zoom>
+          </div>
+        </Section>
+
+        {/* 8. Prototype walkthroughs — three phones in a row */}
+        <Section title="Prototype walkthrough" tone="sunken">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-end">
+            <VideoTile
               video="/assets/smartup/v2-onboarding-and-hompage.mp4"
               poster="/assets/smartup/onboarding-poster.jpg"
-              className="!max-w-[300px]"
+              label="Onboarding & home"
             />
-          </div>
-          <PullQuote>Retail happens on the shop floor — SmartUp’s job was to follow the people who run it.</PullQuote>
-        </Section>
-
-        <Section title="Retail happens on the shop floor, but the platform only worked at a desk">
-          <Prose>
-            SmartUp began as a simple observation — store teams manage operations on the move, and the web-only platform could not follow them. SmartUp is a cloud-based retail management platform for businesses from single storefronts to chains, and every stock check, sales report, or staff review required walking back to a computer. The client’s research showed this friction was losing them clients. I joined as the sole designer on a four-person team and designed the mobile product end to end over roughly five months, working entirely from the client’s research document since I had no direct user access.
-          </Prose>
-          <SlideFigure
-            src="/assets/smartup/v2-3.jpg"
-            alt="Dense desktop dashboard beside one clean mobile screen"
-            caption="Before / after — desktop density compressed into a shop-floor mobile screen."
-          />
-        </Section>
-
-        <Section title="Owners pay for SmartUp, but managers and floor staff use it daily — with opposite needs" tone="sunken">
-          <Prose>
-            Managers need oversight — sales performance, staff activity, reports. Floor staff need speed — record a sale, check stock, move on. The client initially scoped these as two separate products, a control panel for managers and a POS lite for employees. Understanding both roles shaped every decision that followed, including the biggest one.
-          </Prose>
-          <SlideFigure
-            src="/assets/smartup/v2-2.jpg"
-            alt="Value proposition map"
-            caption="Value proposition map — each user role mapped to the features that serve it."
-          />
-        </Section>
-
-        <Section title="The core design decision was refusing desktop parity">
-          <Prose>
-            The web platform exposed the full financial and logistics database — spend, budgets, supply data. I cut all of it from mobile. Someone standing in a store does not need the company’s spend breakdown; they need today’s numbers and the task in front of them. That single filter, what the shop floor needs right now, decided the information architecture and the hierarchy of every screen.
-          </Prose>
-          <PullQuote>
-            One sharp filter — what the shop floor needs right now — decided the IA and the hierarchy of every screen.
-          </PullQuote>
-          <SlideFigure
-            src="/assets/smartup/v2-4.jpg"
-            alt="A key mobile screen with callouts"
-            caption="A key mobile screen — what earned its place and what was removed."
-          />
-        </Section>
-
-        <Section title="Each core job became a short, closed flow" tone="sunken">
-          <Prose>
-            Recording a sale, updating inventory, and onboarding each work as focused flows — open, finish the task, get out. Mobile shows current state and immediate action; historical depth stayed on desktop. Hierarchy follows urgency on the floor rather than the desktop’s menu structure.
-          </Prose>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 items-end">
-            <PhoneFrame
+            <VideoTile
               video="/assets/smartup/v2-recording-sales.mp4"
               poster="/assets/smartup/recording-sales-poster.jpg"
-              className="!max-w-[260px]"
+              label="Recording a sale"
             />
-            <PhoneFrame
+            <VideoTile
               video="/assets/smartup/v2-mangaging-inventory.mp4"
               poster="/assets/smartup/updating-stock-poster.jpg"
-              className="!max-w-[260px]"
+              label="Managing inventory"
             />
           </div>
-        </Section>
-
-        <Section title="AI helped me read the research; every screen was designed by hand">
-          <Prose>
-            I used AI to synthesise the client’s research document and to draft the questions I wanted asked in usability sessions. The client explicitly wanted hand-crafted design work, so no generated assets. Specs and prototypes went to one front-end and one backend developer through the product manager.
-          </Prose>
-        </Section>
-
-        <Section title="We prototyped two products before committing to one" tone="sunken">
-          <Prose>
-            I iterated the control panel and the POS lite far enough to compare them honestly. The product manager chose to merge them into a single app, partly on development cost. With no user access, I attached my questions to every round of the client’s usability testing and fed the answers into the next iteration.
-          </Prose>
-          <SlideFigure
-            src="/assets/smartup/v2-5.jpg"
-            alt="Early screens from both concepts converging into the final unified design"
-            caption="Iteration collage — control panel + POS lite converged into one unified app."
-          />
-        </Section>
-
-        <Section title="What was deliberately cut">
-          <SubList items={[
-            'Financial and logistics dashboards — desktop-only, no shop-floor use case',
-            'Historical reporting archives — mobile shows today, desktop shows trends',
-            'Two specialised apps — one unified app cost less to build and maintain',
-            'Feature parity as a goal — context of use decided scope instead',
-          ]} />
-          <AssetPlaceholder label="Component closeup — dense desktop module beside its minimal mobile counterpart" />
-        </Section>
-
-        <Section title="Test users asked when they could start using it" tone="sunken">
-          <Prose>My deliverable was a validated functional prototype, and it earned its keep quickly.</Prose>
-          <MetricGrid>
-            <MetricCard value="Validated" label="Test users asked to adopt the app during validation sessions" />
-            <MetricCard value="Funding" label="Prototype used internally in partnership and funding discussions" />
-            <MetricCard value="Shipped" label="Later built and adopted by real businesses, confirmed post-handoff" />
-          </MetricGrid>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
-            <SlideFigure src="/assets/smartup/v2-6.jpg" alt="Home" caption="Home." aspect="9/16" />
-            <SlideFigure src="/assets/smartup/v2-7.jpg" alt="Sales" caption="Sales." aspect="9/16" />
-            <SlideFigure src="/assets/smartup/v2-8.jpg" alt="Inventory" caption="Inventory." aspect="9/16" />
-          </div>
-        </Section>
-
-        <Section title="What I learned and what comes next">
-          <SubList items={[
-            'The client makes the final call; my job is making every direction rigorous enough that the choice is informed.',
-            'Secondhand research works if you treat the document as a dataset and extract every signal from it.',
-            'One sharp filter beats a list of principles — context of use decided more than any guideline could.',
-            'Hand-crafted assets were a client constraint I would renegotiate; AI as a disposable prototyping assistant would have bought more iterations in the same time.',
-          ]} />
-          <Prose>
-            If I picked SmartUp up again, I would instrument the app for the behavioural metrics this project never had — task completion time and error rates on the shop floor.
-          </Prose>
         </Section>
       </CaseStudyShell>
     </motion.div>
