@@ -96,9 +96,9 @@ export default function SmartUpPage() {
         oneLiner="Inventory Management Retail SaaS App."
         meta={[
           ['Role', 'UX & Product Designer'],
-          ['Team', 'PM · 1 FE dev · 1 BE dev'],
+          ['Team', 'Product Manager · Front-end developer · Back-end developer'],
           ['Industry', 'Retail / SaaS'],
-          ['Company', 'Detosphere Ltd.'],
+          ['Company', 'Detosphere Ltd. - ISS Innovation Hub'],
         ]}
       >
         {/* 1. Hero showcase */}
