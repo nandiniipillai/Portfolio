@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import BlurReveal from '@/components/BlurReveal';
+import DisplayTitle from '@/components/DisplayTitle';
 import ContactForm from '@/components/ContactForm';
 
 export default function ContactPage() {
@@ -13,12 +14,13 @@ export default function ContactPage() {
       className="pt-28 md:pt-36 pb-20 px-5 md:px-10"
     >
       <div className="mx-auto max-w-6xl">
+        <DisplayTitle>Contact</DisplayTitle>
         <BlurReveal>
           <p
-            className="font-heading tracking-tightest text-silver max-w-4xl"
-            style={{ fontSize: 'clamp(28px, 4vw, 48px)', lineHeight: 1.1 }}
+            className="mt-8 md:mt-10 font-heading tracking-tightest text-silver max-w-4xl"
+            style={{ fontSize: 'clamp(24px, 3.2vw, 40px)', lineHeight: 1.15 }}
           >
-            Feel free to reach out for project inquiries, design consultations, or just to say hello!
+            Reach out for project inquiries, design consultations, or just to say hello.
           </p>
         </BlurReveal>
         <ContactForm />
