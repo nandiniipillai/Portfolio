@@ -10,6 +10,9 @@ import { SITE } from '@/lib/site';
 export default function Nav() {
   const pathname = usePathname();
   const onRoot = pathname === '/';
+  const onCaseStudy = pathname.startsWith('/work/');
+  const backHref = onCaseStudy ? '/portfolio' : '/';
+  const backLabel = onCaseStudy ? '← All projects' : '← Home';
 
   return (
     <motion.nav
@@ -21,10 +24,10 @@ export default function Nav() {
     >
       <div className="flex items-baseline gap-4 text-[15px]">
         <Link
-          href="/"
+          href={backHref}
           className="group text-silver font-medium tracking-tight leading-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/80 focus-visible:outline-offset-2 rounded-sm"
         >
-          {onRoot ? <RollLabel>{SITE.name}</RollLabel> : <span>← Home</span>}
+          {onRoot ? <RollLabel>{SITE.name}</RollLabel> : <span>{backLabel}</span>}
         </Link>
         <span className="hidden md:inline text-fog tracking-tight leading-none">
           {SITE.title}
