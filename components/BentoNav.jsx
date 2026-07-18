@@ -21,7 +21,7 @@ function CardLabel({ children }) {
   return (
     <span
       className="text-silver font-heading tracking-tight leading-none"
-      style={{ fontSize: '18px', fontWeight: 500 }}
+      style={{ fontSize: '15px', fontWeight: 500 }}
     >
       <RollLabel>{children}</RollLabel>
     </span>
@@ -32,7 +32,7 @@ function CardArrow() {
   return (
     <span
       className="card-arrow text-silver leading-none pointer-events-none"
-      style={{ fontSize: '20px' }}
+      style={{ fontSize: '16px' }}
       aria-hidden="true"
     >
       ↗
