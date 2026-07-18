@@ -27,13 +27,9 @@ function EducationFlipCard({ e }) {
         {/* Back */}
         <div className="absolute inset-0 rounded-2xl bg-carbon border border-white/[0.05] p-6 md:p-8 [transform:rotateY(180deg)] [backface-visibility:hidden] [-webkit-backface-visibility:hidden] flex flex-col justify-center">
           <div className="text-ash text-[10px] tracking-[0.24em] uppercase mb-4">Highlights</div>
-          <ul className="space-y-3">
+          <ul className="space-y-3 list-disc list-outside pl-5 marker:text-fog/60">
             {(e.highlights || []).map((h, j) => (
-              <li key={j} className="pl-4 relative text-fog text-sm leading-relaxed">
-                <span
-                  className="absolute left-0 top-2 w-1.5 h-1.5 rounded-full bg-fog/40"
-                  aria-hidden="true"
-                />
+              <li key={j} className="text-fog text-sm leading-relaxed pl-1">
                 {h}
               </li>
             ))}
@@ -77,13 +73,9 @@ export default function ExperienceTimeline() {
               </div>
               <div className="text-fog text-sm md:text-base leading-relaxed">
                 {row.bullets && row.bullets.length > 0 ? (
-                  <ul className="space-y-2">
+                  <ul className="space-y-2 list-disc list-outside pl-5 marker:text-fog/60">
                     {row.bullets.map((b, j) => (
-                      <li key={j} className="pl-4 relative">
-                        <span
-                          className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-fog/40"
-                          aria-hidden="true"
-                        />
+                      <li key={j} className="pl-1">
                         {b}
                       </li>
                     ))}
