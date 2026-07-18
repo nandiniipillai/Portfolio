@@ -4,17 +4,10 @@ import { useState } from 'react';
 import { SITE } from '@/lib/site';
 import ScrollReveal from './ScrollReveal';
 
-const TOPICS = ['Product Design', 'Experience Design', 'Design Consultation', 'Just Saying Hello'];
-
 export default function ContactForm() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [topics, setTopics] = useState([]);
   const [details, setDetails] = useState('');
-
-  const toggleTopic = (t) => {
-    setTopics((prev) => (prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t]));
-  };
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -22,7 +15,6 @@ export default function ContactForm() {
     const bodyLines = [
       name && `Name: ${name}`,
       email && `Email: ${email}`,
-      topics.length && `Topic: ${topics.join(', ')}`,
       details && '',
       details,
     ].filter(Boolean);
@@ -109,30 +101,6 @@ export default function ContactForm() {
               required
             />
           </div>
-
-          <fieldset>
-            <legend className="text-[11px] tracking-[0.24em] uppercase text-ash mb-3">What&apos;s it about?</legend>
-            <div className="flex flex-wrap gap-2">
-              {TOPICS.map((t) => {
-                const on = topics.includes(t);
-                return (
-                  <button
-                    key={t}
-                    type="button"
-                    onClick={() => toggleTopic(t)}
-                    aria-pressed={on}
-                    className={`text-sm rounded-full px-4 py-1.5 border transition-colors ${
-                      on
-                        ? 'bg-white/[0.14] border-white/25 text-silver'
-                        : 'border-white/[0.1] text-fog hover:border-white/[0.25] hover:text-silver'
-                    }`}
-                  >
-                    {t}
-                  </button>
-                );
-              })}
-            </div>
-          </fieldset>
 
           <div>
             <label className="block text-[11px] tracking-[0.24em] uppercase text-ash mb-2" htmlFor="cf-body">
