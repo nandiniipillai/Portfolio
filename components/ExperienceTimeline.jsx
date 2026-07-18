@@ -6,7 +6,7 @@ import ScrollReveal from './ScrollReveal';
 
 function EducationFlipCard({ e }) {
   return (
-    <div className="group h-full min-h-[280px] [perspective:1200px]">
+    <div className="group h-full min-h-[340px] [perspective:1200px]">
       <div className="relative h-full w-full transition-transform duration-700 ease-out [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
         {/* Front */}
         <div className="absolute inset-0 rounded-2xl bg-carbon border border-white/[0.05] p-6 md:p-8 [backface-visibility:hidden] [-webkit-backface-visibility:hidden] flex flex-col justify-between">
