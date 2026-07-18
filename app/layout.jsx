@@ -11,7 +11,7 @@ const caveat = Caveat({ subsets: ['latin'], variable: '--font-caveat', display: 
 export const metadata = {
   title: 'Nandini Pillai — Product & Experience Designer',
   description: SITE.positioning,
-  themeColor: '#0a0a0a',
+  themeColor: '#000000',
   openGraph: {
     title: 'Nandini Pillai — Product & Experience Designer',
     description: SITE.positioning,
@@ -20,14 +20,14 @@ export const metadata = {
 };
 
 export const viewport = {
-  themeColor: '#0a0a0a',
+  themeColor: '#000000',
   colorScheme: 'dark',
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${geist.variable} ${caveat.variable}`}>
-      <body className="bg-[#0a0a0a] text-silver antialiased">
+      <body className="bg-black text-silver antialiased">
         <MotionProvider>
           <Nav />
           <ChromeShell>{children}</ChromeShell>
