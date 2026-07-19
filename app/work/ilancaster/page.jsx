@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import CaseStudyShell from '@/components/CaseStudyShell';
 import { Section, Prose, SubList, PullQuote } from '@/components/CaseBits';
+import SlideFigure from '@/components/SlideFigure';
 import ScrollReveal from '@/components/ScrollReveal';
 
 const ACCENT = '#E4002B';
@@ -128,18 +129,21 @@ export default function ILancasterPage() {
               className="w-full h-auto rounded-xl mt-6"
             />
           </ScrollReveal>
+          <SlideFigure
+            src="/assets/ilancaster/wireframes-round-one.jpg"
+            alt="Round-one wireframes tiled together"
+            caption="Round one — the wireframes read cleanly on paper and still failed in testing."
+            aspect="16/9"
+          />
           <PullQuote>The failure was in the sitemap, not the wireframe.</PullQuote>
         </Section>
 
-        {/* 3. Home dashboard — two phone screens (day + night) on right */}
-        <Section>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-start py-6 md:py-8">
+        {/* 3. Home dashboard — day + night screens on right */}
+        <Section title="Home dashboard">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-start">
             <ScrollReveal>
               <div className="space-y-4">
                 <div className="text-[11px] tracking-[0.24em] uppercase text-ash">Design decision</div>
-                <h2 className="font-heading tracking-tightest text-silver text-2xl md:text-3xl leading-tight">
-                  Home dashboard
-                </h2>
                 <p className="text-fog text-sm md:text-base leading-relaxed">
                   <span className="text-silver font-medium">Decision. </span>
                   Surface only today&apos;s timetable, the check-in button and active
@@ -263,16 +267,33 @@ export default function ILancasterPage() {
           </Prose>
         </Section>
 
-        {/* 7. The result */}
+        {/* 7. Try it */}
+        <Section title="Try the prototype">
+          <Prose>
+            Click through the redesigned home dashboard and check-in flow.
+          </Prose>
+          <div className="mt-4">
+            <div className="w-full max-w-[220px] mx-auto rounded-2xl overflow-hidden border border-white/[0.08] shadow-lg" style={{ aspectRatio: '390/844' }}>
+              <iframe
+                src="https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/proto/IWEzxQ7Ft4T5yvHOUD3ax0/iLancaster-Master?node-id=1224-10316&starting-point-node-id=1224%3A10316&t=KIIay9VltCOsBZza-1&scaling=scale-down&hide-ui=1"
+                className="w-full h-full"
+                allowFullScreen
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </Section>
+
+        {/* 8. The result */}
         <Section title="The result" tone="sunken">
           <div className="space-y-0 divide-y divide-white/[0.06]">
             {[
               {
                 num: '01',
                 phase: 'Navigation',
-                headline: 'The top complaint stopped being the top complaint.',
+                headline: 'Students found what they needed, without thinking.',
                 support:
-                  'By round three of testing, navigation logic tested as resolved — down from the primary failure point at round one.',
+                  'By round three of testing, navigation tested as resolved — down from the primary failure point at round one.',
               },
               {
                 num: '02',
@@ -316,7 +337,7 @@ export default function ILancasterPage() {
           </div>
         </Section>
 
-        {/* 8. What I learned */}
+        {/* 9. What I learned */}
         <Section title="What I learned">
           <SubList
             items={[
