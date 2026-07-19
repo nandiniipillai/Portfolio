@@ -184,10 +184,10 @@ export default function SmartUpPage() {
           />
         </Section>
 
-        {/* 7. Outcome — big showcase */}
+        {/* 7. Outcome — big showcase, no frame */}
         <Section>
           <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-6">Outcome</div>
-          <div className="relative rounded-2xl overflow-hidden bg-carbon border border-white/[0.05]" style={{ aspectRatio: '16/6' }}>
+          <div className="relative" style={{ aspectRatio: '16/6' }}>
             <Zoom>
               <Image
                 src="/assets/smartup/outcome-screens.png"
