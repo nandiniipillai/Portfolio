@@ -83,67 +83,48 @@ export default function ILancasterPage() {
           ['Company', 'Lancaster University'],
         ]}
       >
-        {/* 1. Hero — three phones fanned */}
-        <section className="py-8 md:py-12 px-5 md:px-10">
-          <ScrollReveal>
-            <div className="mx-auto max-w-6xl">
-              <div className="relative w-full" style={{ aspectRatio: '691/361' }}>
-                <Zoom>
-                  <Image
-                    src="/assets/ilancaster/cover-hero.png"
-                    alt="Three iLancaster phones — Notifications, Home (Hello Naa), Event Details"
-                    fill
-                    sizes="(max-width: 768px) 100vw, 1100px"
-                    className="object-contain"
-                    priority
-                  />
-                </Zoom>
-              </div>
-            </div>
-          </ScrollReveal>
-        </section>
-
-        {/* 2. Problem context — real Before screen, no placeholder */}
+        {/* 1. Problem context — full-bleed before image, no hero redundancy */}
         <Section title="Every Lancaster student had the app, and most avoided opening it">
           <Prose>
             The app contained everything a student needed. It just presented all
             of it at the same visual weight, with no hierarchy to guide attention
             and no reliable pattern for where features lived between sessions.
           </Prose>
-          <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-8 md:gap-12 items-center mt-8">
-            <SlideFigure
-              src="/assets/ilancaster/before-tile-grid.png"
-              alt="The original iLancaster tile-grid home screen"
-              caption="Before — the tile-grid home screen. Every feature equal, no clear next step."
-              aspect="1/1"
-            />
-            <div className="space-y-4">
-              <div className="flex items-start gap-3">
-                <span className="mt-1.5 w-1.5 h-1.5 rounded-full shrink-0" style={{ background: ACCENT }} aria-hidden="true" />
-                <p className="text-fog text-base md:text-lg leading-relaxed">
-                  <span className="text-silver font-medium">No information hierarchy.</span>{' '}
-                  Critical and secondary features competed equally for attention.
-                </p>
-              </div>
-              <div className="flex items-start gap-3">
-                <span className="mt-1.5 w-1.5 h-1.5 rounded-full shrink-0" style={{ background: ACCENT }} aria-hidden="true" />
-                <p className="text-fog text-base md:text-lg leading-relaxed">
-                  <span className="text-silver font-medium">Clustered interfaces.</span>{' '}
-                  High information density with no visual breathing room.
-                </p>
-              </div>
-              <div className="flex items-start gap-3">
-                <span className="mt-1.5 w-1.5 h-1.5 rounded-full shrink-0" style={{ background: ACCENT }} aria-hidden="true" />
-                <p className="text-fog text-base md:text-lg leading-relaxed">
-                  <span className="text-silver font-medium">Unpredictable navigation.</span>{' '}
-                  Users couldn’t consistently locate features across sessions.
-                </p>
-              </div>
+          <ScrollReveal>
+            <div className="mt-8">
+              <Zoom>
+                <Image
+                  src="/assets/ilancaster/before-tile-grid-v2.png"
+                  alt="The original iLancaster tile-grid home screen"
+                  width={1600}
+                  height={1000}
+                  sizes="(max-width: 768px) 100vw, 900px"
+                  className="w-full h-auto rounded-2xl"
+                  priority
+                />
+              </Zoom>
             </div>
+          </ScrollReveal>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+            {[
+              { label: 'No information hierarchy', detail: 'Critical and secondary features competed equally for attention.' },
+              { label: 'Clustered interfaces', detail: 'High information density with no visual breathing room.' },
+              { label: 'Unpredictable navigation', detail: 'Users couldn\'t consistently locate features across sessions.' },
+            ].map((item) => (
+              <ScrollReveal key={item.label}>
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: ACCENT }} aria-hidden="true" />
+                    <span className="text-silver font-medium text-sm">{item.label}</span>
+                  </div>
+                  <p className="text-fog text-sm leading-relaxed pl-5">{item.detail}</p>
+                </div>
+              </ScrollReveal>
+            ))}
           </div>
         </Section>
 
-        {/* 3. The failure story — MOVED UP so it frames the decisions */}
+        {/* 2. The failure story */}
         <Section title="Round one testing failed, and the failure was architectural" tone="sunken">
           <Prose>
             The first wireframes clarified visual structure, but users still
