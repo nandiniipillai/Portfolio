@@ -7,38 +7,73 @@ import PhoneFrame from './PhoneFrame';
 import RollLabel from './RollLabel';
 import ScrollReveal from './ScrollReveal';
 
+function InsightCard({ label, value, sub, accent }) {
+  return (
+    <div className="rounded-xl bg-graphite/85 backdrop-blur-sm border border-white/[0.08] p-3 shadow-2xl">
+      <div className="text-ash text-[8px] tracking-[0.24em] uppercase mb-1.5">{label}</div>
+      <div
+        className="font-heading leading-none"
+        style={{ color: accent, letterSpacing: '-0.03em', fontSize: 'clamp(22px, 2vw, 30px)' }}
+      >
+        {value}
+      </div>
+      <div className="text-fog text-[9px] leading-tight mt-1.5">{sub}</div>
+    </div>
+  );
+}
+
 function TokenMock({ accent }) {
   return (
     <div className="relative w-full h-full flex items-center justify-center">
-      <PhoneFrame className="!max-w-[160px] md:!max-w-[190px]">
-        <div className="w-full h-full bg-white flex flex-col text-black">
-          <div className="px-2.5 pt-8 pb-2">
-            <div className="text-[7px] text-gray-500">getbaari.in / queue</div>
-            <div className="text-[11px] font-semibold">Today&apos;s queue</div>
-          </div>
-          <div className="px-2 space-y-1.5">
-            {[
-              { token: 'T12', name: 'Emma Wilson', tag: 'In consult', accent: true },
-              { token: 'T13', name: 'James Kumar', tag: 'Waiting · 4m' },
-              { token: 'T14', name: 'Priya Shah', tag: 'Waiting · 8m' },
-              { token: 'T15', name: 'Ade Adekunle', tag: 'Booked 11:30' },
-              { token: 'T16', name: 'Riya Menon', tag: 'Booked 11:45' },
-            ].map((row, i) => (
-              <div
-                key={i}
-                className={`rounded-md p-1.5 ${row.accent ? 'font-medium' : ''}`}
-                style={row.accent ? { background: accent, color: '#0a0a0a' } : { background: 'rgba(0,0,0,0.045)' }}
-              >
-                <div className="flex items-center justify-between">
-                  <span className="text-[9px]">{row.token}</span>
-                  <span className="text-[7px] uppercase tracking-wider opacity-80">{row.tag}</span>
+      <div className="w-[140px] md:w-[160px]">
+        <PhoneFrame>
+          <div className="w-full h-full bg-white flex flex-col text-black">
+            <div className="px-2.5 pt-8 pb-2">
+              <div className="text-[7px] text-gray-500">getbaari.in / queue</div>
+              <div className="text-[11px] font-semibold">Today&apos;s queue</div>
+            </div>
+            <div className="px-2 space-y-1.5">
+              {[
+                { token: 'T12', name: 'Emma Wilson', tag: 'In consult', accent: true },
+                { token: 'T13', name: 'James Kumar', tag: 'Waiting · 4m' },
+                { token: 'T14', name: 'Priya Shah', tag: 'Waiting · 8m' },
+                { token: 'T15', name: 'Ade Adekunle', tag: 'Booked 11:30' },
+                { token: 'T16', name: 'Riya Menon', tag: 'Booked 11:45' },
+              ].map((row, i) => (
+                <div
+                  key={i}
+                  className={`rounded-md p-1.5 ${row.accent ? 'font-medium' : ''}`}
+                  style={row.accent ? { background: accent, color: '#0a0a0a' } : { background: 'rgba(0,0,0,0.045)' }}
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="text-[9px]">{row.token}</span>
+                    <span className="text-[7px] uppercase tracking-wider opacity-80">{row.tag}</span>
+                  </div>
+                  <div className="text-[7px] opacity-70">{row.name}</div>
                 </div>
-                <div className="text-[7px] opacity-70">{row.name}</div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      </PhoneFrame>
+        </PhoneFrame>
+      </div>
+      {/* Floating insight card — top-right, overlaps phone */}
+      <div className="absolute top-[8%] right-[6%] w-[34%] md:w-[30%] z-10">
+        <InsightCard
+          label="Silent churn"
+          value="42"
+          sub="regulars stopped coming this quarter"
+          accent={accent}
+        />
+      </div>
+      {/* Floating insight card — bottom-left, overlaps phone */}
+      <div className="absolute bottom-[8%] left-[6%] w-[36%] md:w-[32%] z-10">
+        <InsightCard
+          label="Category revenue"
+          value="₹74,152"
+          sub="from consultations this month"
+          accent={accent}
+        />
+      </div>
     </div>
   );
 }
@@ -61,7 +96,7 @@ function ILancasterMock() {
         <PhoneFrame src="/assets/ilancaster/welfare-day.png" />
       </div>
       {/* Centre phone — upright, forward, largest */}
-      <div className="relative z-10 w-[130px] md:w-[160px] drop-shadow-2xl">
+      <div className="relative z-10 w-[120px] md:w-[140px] drop-shadow-2xl">
         <PhoneFrame src="/assets/ilancaster/home-day.png" />
       </div>
     </div>
@@ -93,23 +128,23 @@ function LucaWindow({ src, url, dotSize = 'w-1.5 h-1.5', urlSize = 'text-[8px]' 
 
 function LucaMock({ url }) {
   return (
-    <div className="relative w-full h-full">
+    <div className="relative w-full h-full py-3">
       {/* CV optimiser — behind, tilted left */}
       <div
-        className="absolute top-1/2 left-[4%] w-[42%] shadow-xl opacity-90"
-        style={{ transform: 'translateY(-50%) rotate(-8deg)' }}
+        className="absolute top-1/2 left-[6%] w-[40%] shadow-xl opacity-90"
+        style={{ transform: 'translateY(-50%) rotate(-6deg)' }}
       >
         <LucaWindow src="/assets/luca/cv-optimiser-2.png" />
       </div>
       {/* AI Interview — behind, tilted right */}
       <div
-        className="absolute top-1/2 right-[4%] w-[42%] shadow-xl opacity-90"
-        style={{ transform: 'translateY(-50%) rotate(8deg)' }}
+        className="absolute top-1/2 right-[6%] w-[40%] shadow-xl opacity-90"
+        style={{ transform: 'translateY(-50%) rotate(6deg)' }}
       >
         <LucaWindow src="/assets/luca/interview-setup.png" />
       </div>
       {/* Dashboard — front and centre, largest */}
-      <div className="absolute top-1/2 left-1/2 w-[58%] shadow-2xl z-10" style={{ transform: 'translate(-50%, -50%)' }}>
+      <div className="absolute top-1/2 left-1/2 w-[56%] shadow-2xl z-10" style={{ transform: 'translate(-50%, -50%)' }}>
         <LucaWindow src="/assets/luca/dashboard-existing.png" url={url} />
       </div>
     </div>
@@ -129,18 +164,23 @@ function PhonesMock({ images }) {
 }
 
 export default function PortfolioCard({ study, featured = false }) {
-  const { path, title, oneLiner, accent, category, card } = study;
+  const { path, title, oneLiner, accent, category, year, glowPosition, card } = study;
   const containerCls = featured ? 'md:col-span-2' : 'md:col-span-1';
   const aspect = featured ? 'md:aspect-[16/7]' : 'md:aspect-[16/9]';
+  const glowOrigin = glowPosition || '50% 50%';
 
   return (
     <ScrollReveal className={containerCls}>
       <Link
         href={path}
-        className={`group card-tex block relative w-full aspect-[16/10] ${aspect} overflow-hidden`}
+        className={`group block relative w-full aspect-[16/10] ${aspect} overflow-hidden rounded-[32px] bg-white/[0.03] border border-white/[0.05] transition-colors duration-500 hover:bg-white/[0.05]`}
+        style={{ boxShadow: 'inset 0 1px 0 0 rgba(255,255,255,0.05)' }}
       >
         <div className="absolute inset-0 flex flex-col md:flex-row">
           <div className="p-6 md:p-8 md:w-2/5 flex flex-col justify-center">
+            {year && (
+              <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-2">{year}</div>
+            )}
             <div className="text-[11px] tracking-[0.24em] uppercase mb-3" style={{ color: accent || '#B4B4B0' }}>
               {category}
             </div>
@@ -162,11 +202,11 @@ export default function PortfolioCard({ study, featured = false }) {
               }}
               aria-hidden="true"
             />
-            {/* Accent glow — always visible, intensifies on hover */}
+            {/* Accent glow — origin varies per card */}
             <div
               className="pointer-events-none absolute inset-0 opacity-25 group-hover:opacity-50 transition-opacity duration-500 blur-2xl"
               style={{
-                background: `radial-gradient(circle at 50% 50%, ${accent || '#B4B4B0'} 0%, transparent 62%)`,
+                background: `radial-gradient(circle at ${glowOrigin}, ${accent || '#B4B4B0'} 0%, transparent 62%)`,
               }}
               aria-hidden="true"
             />
@@ -192,7 +232,12 @@ export default function PortfolioCard({ study, featured = false }) {
             </div>
           </div>
         </div>
-        <span className="absolute top-6 right-6 card-arrow text-silver text-xl" aria-hidden="true">↗</span>
+        <span
+          className="absolute top-6 right-6 text-silver text-xl transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-x-[3px] group-hover:-translate-y-[3px]"
+          aria-hidden="true"
+        >
+          ↗
+        </span>
       </Link>
     </ScrollReveal>
   );
