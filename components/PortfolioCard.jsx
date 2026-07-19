@@ -275,6 +275,7 @@ export default function PortfolioCard({ study, featured = false }) {
   const containerCls = featured ? 'md:col-span-2' : 'md:col-span-1';
   const aspect = featured ? 'md:aspect-[16/7]' : 'md:aspect-[16/9]';
   const glowOrigin = glowPosition || '50% 50%';
+  const flatScale = card.scale || '80%';
 
   return (
     <ScrollReveal className={containerCls}>
@@ -327,7 +328,7 @@ export default function PortfolioCard({ study, featured = false }) {
               {card.frame === 'phones' && <PhonesMock images={card.images} />}
               {card.frame === 'flat' && card.image && (
                 <div className="w-full h-full flex items-center justify-center">
-                  <div className="relative w-4/5 h-4/5">
+                  <div className="relative" style={{ width: flatScale, height: flatScale }}>
                     <Image
                       src={card.image}
                       alt={title}
