@@ -39,39 +39,39 @@ function Showcase({ src, alt, aspect = '16/9', tone = 'default' }) {
 
 function BeforeAfter({ before, after, beforeLabel, afterLabel }) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+    <div className="grid grid-cols-1 md:grid-cols-[1.5fr_1fr] gap-6 md:gap-10 items-end">
       <ScrollReveal>
-        <figure className="flex flex-col items-center">
-          <div className="relative w-full max-w-md" style={{ aspectRatio: '4/3' }}>
+        <figure className="flex flex-col items-center md:items-start">
+          <div className="relative w-full max-w-xl" style={{ aspectRatio: '2272/1888' }}>
             <Zoom>
               <Image
                 src={before}
                 alt={beforeLabel}
                 fill
-                sizes="(max-width: 768px) 100vw, 500px"
+                sizes="(max-width: 768px) 100vw, 560px"
                 className="object-contain"
               />
             </Zoom>
           </div>
-          <figcaption className="mt-4 text-[11px] tracking-[0.24em] uppercase text-ash">
+          <figcaption className="mt-3 text-[11px] tracking-[0.24em] uppercase text-ash">
             {beforeLabel}
           </figcaption>
         </figure>
       </ScrollReveal>
       <ScrollReveal>
-        <figure className="flex flex-col items-center">
-          <div className="relative w-full max-w-[240px]" style={{ aspectRatio: '1170/2532' }}>
+        <figure className="flex flex-col items-center md:items-start">
+          <div className="relative w-full max-w-[220px]" style={{ aspectRatio: '1440/2932' }}>
             <Zoom>
               <Image
                 src={after}
                 alt={afterLabel}
                 fill
-                sizes="(max-width: 768px) 100vw, 240px"
+                sizes="(max-width: 768px) 100vw, 220px"
                 className="object-contain"
               />
             </Zoom>
           </div>
-          <figcaption className="mt-4 text-[11px] tracking-[0.24em] uppercase text-ash">
+          <figcaption className="mt-3 text-[11px] tracking-[0.24em] uppercase text-ash">
             {afterLabel}
           </figcaption>
         </figure>
