@@ -200,8 +200,7 @@ export default function ILancasterPage() {
               alt="Check-in card on the home screen"
               imgSide="right"
               notes={[
-                { text: 'Check-in ↗', top: '42%', left: '62%', rotate: -5 },
-                { text: 'one tap', top: '54%', left: '64%', rotate: 2 },
+                { text: 'one-tap check-in →', top: '55%', left: '56%', rotate: -4 },
               ]}
             />
             <DecisionRow
@@ -212,7 +211,7 @@ export default function ILancasterPage() {
               alt="Raise Enquiry — search-first ASK flow"
               imgSide="left"
               notes={[
-                { text: 'guided flow →', top: '38%', left: '58%', rotate: -3 },
+                { text: 'step by step ↙', top: '32%', left: '56%', rotate: -5 },
               ]}
             />
             <DecisionRow
@@ -223,7 +222,7 @@ export default function ILancasterPage() {
               alt="Prioritised notification feed"
               imgSide="right"
               notes={[
-                { text: 'urgent first ↖', top: '18%', left: '60%', rotate: -4 },
+                { text: 'urgent ↑', top: '14%', left: '60%', rotate: -6 },
               ]}
             />
             <DecisionRow
@@ -234,7 +233,7 @@ export default function ILancasterPage() {
               alt="Home dashboard — night mode"
               imgSide="left"
               notes={[
-                { text: 'dark mode ↙', top: '6%', left: '58%', rotate: -3 },
+                { text: 'dark ↙', top: '8%', left: '60%', rotate: -4 },
               ]}
             />
           </div>
