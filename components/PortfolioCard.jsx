@@ -10,39 +10,44 @@ import ScrollReveal from './ScrollReveal';
 function TokenMock({ accent }) {
   return (
     <div className="relative w-full h-full flex items-center justify-between gap-4 md:gap-6 px-4 md:px-6">
-      <div className="flex-1 text-center">
-        <div className="text-ash text-[10px] tracking-[0.24em] uppercase mb-1">Now serving</div>
+      <div className="flex-1 min-w-0">
+        <div className="text-ash text-[10px] tracking-[0.24em] uppercase mb-2">In consult</div>
         <div
-          className="font-heading text-5xl md:text-7xl leading-none"
+          className="font-heading text-5xl md:text-6xl leading-none"
           style={{ color: accent, letterSpacing: '-0.04em' }}
         >
-          A–044
+          T12
         </div>
-        <div className="mt-2 flex items-center justify-center gap-1.5 text-[10px] text-silver">
+        <div className="mt-2 text-silver text-xs md:text-sm">Emma Wilson</div>
+        <div className="text-fog text-[10px] md:text-[11px]">cold, sore throat</div>
+        <div className="mt-2 flex items-center gap-1.5 text-[10px] text-silver">
           <span className="inline-block w-1.5 h-1.5 rounded-full pulse-dot" style={{ background: '#7CFF9B' }} />
-          <span>Live · 15s</span>
+          <span>27 min in</span>
         </div>
       </div>
       <PhoneFrame className="!max-w-[130px] md:!max-w-[150px]">
         <div className="w-full h-full bg-white flex flex-col text-black">
           <div className="px-2 pt-7 pb-1.5">
-            <div className="text-[6px] text-gray-500">Aayush Clinic · East Legon</div>
+            <div className="text-[6px] text-gray-500">getbaari.in/queue</div>
             <div className="text-[9px] font-medium">Today&apos;s queue</div>
           </div>
           <div className="px-1.5 space-y-1">
             {[
-              { label: 'A–044', tag: 'Now', accent: true },
-              { label: 'A–045', tag: 'Next' },
-              { label: 'A–046', tag: 'In 5' },
-              { label: 'A–047', tag: 'In 8' },
+              { token: 'T12', name: 'Emma Wilson', tag: 'In consult', accent: true },
+              { token: 'T13', name: 'James Kumar', tag: 'Waiting · 4m' },
+              { token: 'T14', name: 'Priya Shah', tag: 'Waiting · 8m' },
+              { token: 'T15', name: 'Ade Adekunle', tag: 'Booked 11:30' },
             ].map((row, i) => (
               <div
                 key={i}
-                className={`flex items-center justify-between rounded p-1 ${row.accent ? 'font-medium' : ''}`}
+                className={`rounded p-1 ${row.accent ? 'font-medium' : ''}`}
                 style={row.accent ? { background: accent, color: '#0a0a0a' } : { background: 'rgba(0,0,0,0.04)' }}
               >
-                <span className="text-[8px]">{row.label}</span>
-                <span className="text-[6px] uppercase tracking-wider">{row.tag}</span>
+                <div className="flex items-center justify-between">
+                  <span className="text-[8px]">{row.token}</span>
+                  <span className="text-[6px] uppercase tracking-wider">{row.tag}</span>
+                </div>
+                <div className="text-[6px] opacity-70">{row.name}</div>
               </div>
             ))}
           </div>
@@ -166,14 +171,9 @@ export default function PortfolioCard({ study, featured = false }) {
               <p className="mt-3 text-fog text-sm md:text-base max-w-xs">{oneLiner}</p>
             </div>
             {whyHere && (
-              <div className="mt-6 flex items-center gap-3 text-fog text-xs md:text-sm max-w-xs">
-                <span
-                  className="inline-block w-6 h-px shrink-0"
-                  style={{ background: accent, opacity: 0.75 }}
-                  aria-hidden="true"
-                />
-                <span className="leading-snug">{whyHere}</span>
-              </div>
+              <p className="mt-6 font-heading tracking-tight text-silver text-sm md:text-base leading-snug max-w-xs">
+                {whyHere}
+              </p>
             )}
           </div>
           <div className="relative flex-1 min-h-[180px] md:min-h-0 p-4 md:p-6">
