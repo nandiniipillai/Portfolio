@@ -5,7 +5,8 @@ import Zoom from 'react-medium-image-zoom';
 import 'react-medium-image-zoom/dist/styles.css';
 import { motion } from 'framer-motion';
 import CaseStudyShell from '@/components/CaseStudyShell';
-import { Section, Prose, SubList, PullQuote } from '@/components/CaseBits';
+import { Section, Prose, SubList, PullQuote, MetricCard, MetricGrid } from '@/components/CaseBits';
+import SplitRow from '@/components/SplitRow';
 import PhoneFrame from '@/components/PhoneFrame';
 import ScrollReveal from '@/components/ScrollReveal';
 
@@ -42,7 +43,7 @@ function BeforeAfter({ before, after, beforeLabel, afterLabel }) {
     <div className="grid grid-cols-1 md:grid-cols-[1.5fr_1fr] gap-6 md:gap-10 items-end">
       <ScrollReveal>
         <figure className="flex flex-col items-center md:items-start">
-          <div className="relative w-full max-w-xl" style={{ aspectRatio: '2272/1180' }}>
+          <div className="relative w-full max-w-xl" style={{ aspectRatio: '2272/1888' }}>
             <Zoom>
               <Image
                 src={before}
@@ -130,13 +131,7 @@ export default function SmartUpPage() {
           </Prose>
         </Section>
 
-        {/* 3. Pull quote */}
-        <PullQuote>
-          Access critical business data anytime, anywhere, without sacrificing
-          simplicity or usability.
-        </PullQuote>
-
-        {/* 4. The challenge — before / after */}
+        {/* 3. Challenge — before / after */}
         <Section tone="sunken">
           <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-4">The challenge</div>
           <Prose>
@@ -155,24 +150,69 @@ export default function SmartUpPage() {
           </div>
         </Section>
 
-        {/* 5. The goal */}
+        {/* 4. Pull quote — the design insight, not the brief */}
+        <PullQuote>
+          One sharp filter — what the shop floor needs right now — decided the
+          IA and the hierarchy of every screen.
+        </PullQuote>
+
+        {/* 5. The bet (was Goal) — designer's framing */}
         <Section>
-          <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-4">The goal</div>
+          <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-4">The bet</div>
           <Prose>
-            To design a functional, intuitive mobile experience that allowed
-            retailers to:
+            What does the shop floor need <em>right now</em>? Everything else
+            could stay on desktop. That single question decided the scope, and
+            it kept mobile from becoming a smaller copy of the web platform.
           </Prose>
-          <SubList
-            items={[
-              'Manage inventory and sales data',
-              'Oversee staff and performance',
-              'Track reports and analytics',
-              'Access point-of-sale functionality',
-            ]}
-          />
+          <div className="mt-6">
+            <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-3">
+              What earned its place on mobile
+            </div>
+            <SubList
+              items={[
+                'Inventory and sales data at a glance',
+                'Staff and performance oversight',
+                'Reports and analytics for the day',
+                'Point-of-sale — record a sale, close it, move on',
+              ]}
+            />
+          </div>
         </Section>
 
-        {/* 6. What was deliberately cut — the interesting design decisions */}
+        {/* 6. Working from research, without users — the constraint story */}
+        <Section title="Working from research, without users" tone="sunken">
+          <Prose>
+            I joined as the sole designer on a four-person team and had no
+            direct access to SmartUp&apos;s retail users. The client&apos;s
+            existing research document became the dataset. I treated it that
+            way — extracting every signal from it, then attaching my questions
+            to every round of the client&apos;s usability testing so the
+            answers flowed back into the next iteration.
+          </Prose>
+          <Prose>
+            AI helped me synthesise the research faster and draft the
+            questions I wanted asked. The client explicitly wanted hand-crafted
+            design work, so every screen was designed by hand.
+          </Prose>
+        </Section>
+
+        {/* 7. Two products into one — the merge decision */}
+        <SplitRow
+          src="/assets/smartup/v2-7.jpg"
+          alt="Mid-fidelity exploration — Control Panel and POS Lite converging"
+          imgSide="right"
+          label="Two products into one"
+          title="Prototyped both, committed to one."
+        >
+          SmartUp was originally scoped as two apps — a Control Panel for
+          managers and a POS Lite for floor staff. I iterated both far enough
+          to compare them honestly. Understanding both roles shaped every
+          decision that followed, including the biggest one: the product
+          manager and I merged them into a single, role-aware app. Cheaper
+          to build, one thing to learn, no compromise on either audience.
+        </SplitRow>
+
+        {/* 8. What was deliberately cut — the interesting design decisions */}
         <Section title="What was deliberately cut" tone="sunken">
           <SubList
             items={[
@@ -184,24 +224,8 @@ export default function SmartUpPage() {
           />
         </Section>
 
-        {/* 7. Outcome — big showcase, no frame */}
-        <Section>
-          <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-6">Outcome</div>
-          <div className="relative" style={{ aspectRatio: '16/6' }}>
-            <Zoom>
-              <Image
-                src="/assets/smartup/outcome-screens.png"
-                alt="Final high-fidelity screens across the app"
-                fill
-                sizes="(max-width: 768px) 100vw, 1024px"
-                className="object-contain"
-              />
-            </Zoom>
-          </div>
-        </Section>
-
-        {/* 8. Prototype walkthroughs — three phones */}
-        <Section title="Prototype walkthrough" tone="sunken">
+        {/* 9. Prototype walkthroughs — three phones */}
+        <Section title="Prototype walkthrough">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-end">
             <VideoTile
               video="/assets/smartup/v2-onboarding-and-hompage.mp4"
@@ -219,6 +243,36 @@ export default function SmartUpPage() {
               label="Managing inventory"
             />
           </div>
+        </Section>
+
+        {/* 10. Result — MetricCards, hiring-manager signal */}
+        <Section title="The result" tone="sunken">
+          <MetricGrid>
+            <MetricCard
+              value="Validated"
+              label="Test users asked when they could start using it"
+            />
+            <MetricCard
+              value="Funding"
+              label="Prototype used internally for partnership and funding discussions"
+            />
+            <MetricCard
+              value="Shipped"
+              label="Later built and adopted by real businesses, confirmed post-handoff"
+            />
+          </MetricGrid>
+        </Section>
+
+        {/* 11. What I learned — reflection */}
+        <Section title="What I learned">
+          <SubList
+            items={[
+              'The client makes the final call; my job is making every direction rigorous enough that the choice is informed.',
+              'Secondhand research works if you treat the document as a dataset and extract every signal from it.',
+              'One sharp filter beats a list of principles — context of use decided more than any guideline could.',
+              'Hand-crafted assets were a client constraint I would renegotiate; AI as a disposable prototyping assistant would have bought more iterations in the same time.',
+            ]}
+          />
         </Section>
       </CaseStudyShell>
     </motion.div>

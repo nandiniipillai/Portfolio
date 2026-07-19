@@ -39,6 +39,16 @@ export default function CaseStudyShell({ slug, index, title, oneLiner, meta = []
                 </p>
               </ScrollReveal>
             )}
+            {current?.whyHere && (
+              <ScrollReveal>
+                <p className="mt-4 md:mt-5 italic text-ash text-sm md:text-base max-w-3xl">
+                  <span className="not-italic text-[11px] tracking-[0.24em] uppercase mr-2" style={{ color: accent }}>
+                    Why on the portfolio
+                  </span>
+                  {current.whyHere}
+                </p>
+              </ScrollReveal>
+            )}
 
             <ScrollReveal>
               <dl className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 border-t border-white/[0.06] pt-8">
