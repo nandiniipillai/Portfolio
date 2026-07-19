@@ -273,39 +273,44 @@ export default function ILancasterPage() {
           </div>
         </Section>
 
-        {/* 6. What was cut + prototype walkthrough side by side */}
+        {/* 6. What was cut */}
         <Section title="What was traded away, on purpose">
-          <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-6 md:gap-10 items-start">
-            <div>
-              <SubList
-                items={[
-                  'Secondary features lost their home-screen presence and moved to contextual access points',
-                  'Open category choice in enquiries was replaced by a guided path',
-                  'Above-the-fold space capped at three elements, whatever else competed for it',
-                  'A new visual identity — the redesign stayed inside Lancaster&apos;s existing brand',
-                ]}
-              />
-              <Prose>
-                Each cut served the same bet: fewer things visible, every visible
-                thing findable.
-              </Prose>
-              <div className="mt-6">
-                <div className="text-[11px] tracking-[0.24em] uppercase text-ash">Try the prototype</div>
-                <p className="text-fog text-sm mt-1">Click through the redesigned home dashboard and check-in flow.</p>
-              </div>
-            </div>
-            <div className="w-full max-w-[200px] rounded-2xl overflow-hidden border border-white/[0.08] shadow-lg" style={{ aspectRatio: '390/844' }}>
-              <iframe
-                src="https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/proto/IWEzxQ7Ft4T5yvHOUD3ax0/iLancaster-Master?node-id=1224-10316&starting-point-node-id=1224%3A10316&t=KIIay9VltCOsBZza-1&scaling=scale-down&hide-ui=1"
-                className="w-full h-full"
-                allowFullScreen
-                loading="lazy"
+          <SubList
+            items={[
+              'Secondary features lost their home-screen presence and moved to contextual access points',
+              'Open category choice in enquiries was replaced by a guided path',
+              'Above-the-fold space capped at three elements, whatever else competed for it',
+              'A new visual identity — the redesign stayed inside Lancaster&apos;s existing brand',
+            ]}
+          />
+          <Prose>
+            Each cut served the same bet: fewer things visible, every visible
+            thing findable.
+          </Prose>
+        </Section>
+
+        {/* 7. Prototype walkthrough */}
+        <Section title="Prototype walkthrough">
+          <Prose>
+            Watch the redesigned home dashboard and check-in flow in motion.
+          </Prose>
+          <div className="mt-4">
+            <div className="w-full max-w-[220px] mx-auto rounded-2xl overflow-hidden border border-white/[0.08] shadow-lg">
+              <video
+                src="/assets/ilancaster/walkthrough-flow.mp4"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="none"
+                className="w-full h-auto"
+                style={{ mixBlendMode: 'lighten' }}
               />
             </div>
           </div>
         </Section>
 
-        {/* 7. The result */}
+        {/* 8. The result */}
         <Section title="The result" tone="sunken">
           <div className="space-y-0 divide-y divide-white/[0.06]">
             {[
@@ -358,7 +363,7 @@ export default function ILancasterPage() {
           </div>
         </Section>
 
-        {/* 8. What I learned */}
+        {/* 9. What I learned */}
         <Section title="What I learned">
           <SubList
             items={[
