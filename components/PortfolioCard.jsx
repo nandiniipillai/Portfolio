@@ -327,15 +327,14 @@ export default function PortfolioCard({ study, featured = false }) {
               {card.frame === 'luca-multi' && <LucaMock url={card.url} />}
               {card.frame === 'phones' && <PhonesMock images={card.images} />}
               {card.frame === 'flat' && card.image && (
-                <div className="w-full h-full flex items-center justify-center p-2">
-                  <div className="w-3/4 max-w-[420px] rounded-xl overflow-hidden border border-white/[0.08]">
+                <div className="w-full h-full flex items-center justify-center">
+                  <div className="relative w-[70%] max-w-[500px] aspect-[4/3]">
                     <Image
                       src={card.image}
                       alt={title}
-                      width={1200}
-                      height={800}
-                      className="w-full h-auto"
+                      fill
                       sizes="500px"
+                      className="object-contain"
                     />
                   </div>
                 </div>

@@ -3,6 +3,7 @@ import './globals.css';
 import Nav from '@/components/Nav';
 import ChromeShell from '@/components/ChromeShell';
 import MotionProvider from '@/components/MotionProvider';
+import LenisProvider from '@/components/LenisProvider';
 import { SITE } from '@/lib/site';
 
 const geist = Geist({ subsets: ['latin'], variable: '--font-geist', display: 'swap' });
@@ -28,10 +29,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${geist.variable} ${caveat.variable}`}>
       <body className="bg-black text-silver antialiased">
-        <MotionProvider>
-          <Nav />
-          <ChromeShell>{children}</ChromeShell>
-        </MotionProvider>
+        <LenisProvider>
+          <MotionProvider>
+            <Nav />
+            <ChromeShell>{children}</ChromeShell>
+          </MotionProvider>
+        </LenisProvider>
       </body>
     </html>
   );
