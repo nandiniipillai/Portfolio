@@ -67,19 +67,14 @@ export default function ILancasterPage() {
           ['Company', ['ISS Innovation Hub', 'Lancaster University']],
         ]}
       >
-        {/* 1. About — what the project is, before the problem */}
-        <Section>
-          <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-4">About</div>
+        {/* 1. Problem context — About merged in as first paragraph */}
+        <Section title="Most avoided opening it">
           <Prose>
             iLancaster is the native mobile companion for Lancaster University —
             a live campus hub that puts timetable, check-in, enquiries,
             notifications, and welfare resources into one app every student
             already carries.
           </Prose>
-        </Section>
-
-        {/* 2. Problem context — before image in PhoneFrame + three pain points */}
-        <Section title="Every Lancaster student had the app, and most avoided opening it">
           <Prose>
             The app contained everything a student needed. It just presented all
             of it at the same visual weight, with no hierarchy to guide attention
@@ -111,7 +106,7 @@ export default function ILancasterPage() {
           </div>
         </Section>
 
-        {/* 3. The failure story */}
+        {/* 2. The failure story */}
         <Section title="Round one testing failed, and the failure was architectural" tone="sunken">
           <Prose>
             The first wireframes clarified visual structure, but users still
@@ -129,7 +124,7 @@ export default function ILancasterPage() {
           <PullQuote>The failure was in the sitemap, not the wireframe.</PullQuote>
         </Section>
 
-        {/* 4. Marquee decision — Home dashboard, pulled out as SplitRow */}
+        {/* 3. Marquee decision — Home dashboard, pulled out as SplitRow */}
         <SplitRow
           src="/assets/ilancaster/home-day.png"
           alt="Home dashboard — day mode"
@@ -150,13 +145,8 @@ export default function ILancasterPage() {
           </p>
         </SplitRow>
 
-        {/* 5. Key design decisions — remaining four as DecisionRows */}
+        {/* 4. Key design decisions — remaining four as DecisionRows */}
         <Section title="Key design decisions">
-          <Prose>
-            Every decision below is a direct response to a specific research
-            finding or a failure caught in wireframe testing — not a visual
-            preference.
-          </Prose>
           <div className="mt-6">
             <DecisionRow
               label="Check-in: three fewer steps"
@@ -193,7 +183,7 @@ export default function ILancasterPage() {
           </div>
         </Section>
 
-        {/* 6. Design system — brand constraint */}
+        {/* 5. Design system — brand constraint */}
         <Section title="One design system, held across 80+ screens" tone="sunken">
           <Prose>
             Lancaster&apos;s existing colour and style guidelines were a fixed
