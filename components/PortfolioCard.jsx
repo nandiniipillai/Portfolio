@@ -7,171 +7,111 @@ import PhoneFrame from './PhoneFrame';
 import RollLabel from './RollLabel';
 import ScrollReveal from './ScrollReveal';
 
-function BaariDashboardMock({ accent }) {
-  const waiting = [
-    { token: 'T13', name: 'Sarah Chen', detail: '10:40 · Consultation · headache', badge: '4 visits' },
-    { token: 'T14', name: 'James Park', detail: '11:00 · party of 2' },
-    { token: 'T15', name: 'Priya Sharma', detail: '11:20 · Follow-up · 8 min late', late: true },
-    { token: 'T16', name: 'Sundar Rao', detail: '11:40 · skin', badge: '6 visits' },
-    { token: 'T17', name: 'Amir Khan', detail: '12:00 · Vaccination' },
-  ];
-  return (
-    <div className="rounded-lg overflow-hidden border border-white/[0.08] bg-[#0b0b0d] shadow-2xl">
-      {/* Browser chrome */}
-      <div className="flex items-center gap-1 px-2 py-1.5 bg-[#141416] border-b border-white/[0.04]">
-        <span className="flex gap-1" aria-hidden="true">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#FF5F57]" />
-          <span className="w-1.5 h-1.5 rounded-full bg-[#FEBC2E]" />
-          <span className="w-1.5 h-1.5 rounded-full bg-[#28C840]" />
-        </span>
-        <span className="mx-auto text-[7px] text-fog bg-white/[0.04] rounded-full px-2 py-0.5">
-          getbaari.in / queue
-        </span>
-      </div>
-      {/* App nav */}
-      <div className="flex items-center justify-between px-2.5 py-1.5 border-b border-white/[0.04]">
-        <div className="flex items-center gap-1.5">
-          <span
-            className="w-3 h-3 rounded flex items-center justify-center text-white text-[7px] font-bold"
-            style={{ background: accent }}
-          >
-            b
-          </span>
-          <span className="text-white text-[7px] font-medium">Pratiksha</span>
-        </div>
-        <div className="flex items-center gap-2 text-[6px] text-fog">
-          <span className="text-white bg-white/[0.06] rounded px-1.5 py-0.5">Queue</span>
-          <span>Search</span>
-          <span>Signal</span>
-        </div>
-        <span className="text-[6px] text-ash">Trial 60D</span>
-      </div>
-      {/* Body: Queue header + stats + two-column */}
-      <div className="p-2.5">
-        <div className="text-[6px] text-ash uppercase tracking-wider">Tue 15 Jul · 11:14 IST</div>
-        <div className="flex items-center justify-between mb-1.5">
-          <div className="text-white font-heading text-[15px] leading-none tracking-tightest">Queue</div>
-          <span
-            className="text-[6px] rounded-full px-2 py-0.5 text-black font-medium"
-            style={{ background: accent }}
-          >
-            + New booking
-          </span>
-        </div>
-        {/* Stats bar */}
-        <div className="flex gap-2 mb-2 text-[6px] text-fog bg-white/[0.02] border border-white/[0.04] rounded px-2 py-1">
-          <span>Today <span className="text-white font-medium">6</span></span>
-          <span>Waiting <span className="text-white font-medium">5</span></span>
-          <span>In consult <span className="text-white font-medium">1</span></span>
-          <span>Late <span className="text-white font-medium">1</span></span>
-        </div>
-        {/* Two-column: Waiting list + In consult panel */}
-        <div className="grid grid-cols-[1.5fr_1fr] gap-2">
-          <div className="rounded bg-white/[0.02] border border-white/[0.04] p-1.5">
-            <div className="flex items-center justify-between mb-1">
-              <span className="text-[6px] text-ash uppercase tracking-wider">Waiting</span>
-              <span className="text-[6px] text-white">5</span>
-            </div>
-            <div className="space-y-0.5">
-              {waiting.map((row, i) => (
-                <div
-                  key={i}
-                  className={`rounded p-1 flex items-center justify-between ${
-                    row.late ? 'bg-amber-500/10 border border-amber-500/30' : 'bg-white/[0.02]'
-                  }`}
-                >
-                  <div>
-                    <div className="flex items-baseline gap-1.5">
-                      <span className="text-[6px] text-fog">{row.token}</span>
-                      <span className="text-[7px] text-white font-medium">{row.name}</span>
-                    </div>
-                    <div className="text-[5px] text-ash leading-tight">{row.detail}</div>
-                  </div>
-                  {row.late && (
-                    <span className="text-[5px] text-amber-400 uppercase tracking-wider">Late</span>
-                  )}
-                  {row.badge && !row.late && (
-                    <span
-                      className="text-[5px] uppercase tracking-wider rounded-full px-1 py-0.5"
-                      style={{ color: accent, background: 'rgba(52,211,153,0.1)' }}
-                    >
-                      {row.badge}
-                    </span>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="rounded bg-white/[0.02] border border-white/[0.04] p-1.5 flex flex-col">
-            <div className="flex items-center justify-between mb-1">
-              <span className="text-[6px] text-ash uppercase tracking-wider">Token</span>
-              <span
-                className="text-[5px] rounded-full px-1.5 py-0.5"
-                style={{ background: 'rgba(52,211,153,0.15)', color: accent }}
-              >
-                In consult
-              </span>
-            </div>
-            <div
-              className="font-heading leading-none"
-              style={{ color: accent, fontSize: '30px', letterSpacing: '-0.04em' }}
-            >
-              T12
-            </div>
-            <div className="text-white text-[8px] font-medium mt-1.5">Emma Wilson</div>
-            <div className="text-[6px] text-fog leading-tight">Consultation · cold, sore throat</div>
-            <div className="text-[6px] text-ash leading-tight mt-0.5">Started 10:47 · 27 min in</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function TokenMock({ accent }) {
+  const queue = [
+    { token: 'T12', name: 'Emma Wilson', detail: 'cold, sore throat · 27 min in', active: true },
+    { token: 'T13', name: 'Sarah Chen', detail: '10:40 · headache', badge: '4 visits' },
+    { token: 'T14', name: 'James Park', detail: '11:00 · party of 2' },
+    { token: 'T15', name: 'Priya Sharma', detail: '11:20 · Follow-up', late: true },
+  ];
+
   return (
-    <div className="relative w-full h-full">
-      {/* Web dashboard — main element, left-anchored */}
-      <div className="absolute top-1/2 left-[2%] w-[68%]" style={{ transform: 'translateY(-50%)' }}>
-        <BaariDashboardMock accent={accent} />
-      </div>
-      {/* Mobile phone — overlaps right, slightly tilted */}
+    <div className="w-full h-full flex items-center justify-center p-4 md:p-6">
       <div
-        className="absolute top-1/2 right-[6%] w-[100px] md:w-[125px] z-10"
-        style={{ transform: 'translateY(-50%) rotate(3deg)' }}
+        className="w-full max-w-[520px] rounded-2xl border border-white/[0.08] overflow-hidden"
+        style={{ background: 'rgba(11,11,13,0.92)' }}
       >
-        <PhoneFrame>
-          <div className="w-full h-full bg-white flex flex-col text-black">
-            <div className="px-2 pt-6 pb-1.5">
-              <div className="text-[5px] text-gray-500">getbaari.in / queue</div>
-              <div className="text-[8px] font-semibold">Today&apos;s queue</div>
+        {/* Header bar */}
+        <div className="flex items-center justify-between px-4 py-3 border-b border-white/[0.05]">
+          <div className="flex items-center gap-2.5">
+            <div
+              className="w-6 h-6 rounded flex items-center justify-center"
+              style={{ background: accent }}
+            >
+              <span className="text-black text-xs font-bold">b</span>
             </div>
-            <div className="px-1.5 space-y-1">
-              {[
-                { token: 'T12', name: 'Emma Wilson', tag: 'In consult', accent: true },
-                { token: 'T13', name: 'Sarah Chen', tag: 'Waiting' },
-                { token: 'T14', name: 'James Park', tag: 'Waiting' },
-                { token: 'T15', name: 'Priya Sharma', tag: 'Late' },
-              ].map((row, i) => (
-                <div
-                  key={i}
-                  className={`rounded p-1 ${row.accent ? 'font-medium' : ''}`}
-                  style={
-                    row.accent
-                      ? { background: accent, color: '#0a0a0a' }
-                      : { background: 'rgba(0,0,0,0.045)' }
-                  }
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="text-[7px]">{row.token}</span>
-                    <span className="text-[5px] uppercase tracking-wider opacity-80">{row.tag}</span>
-                  </div>
-                  <div className="text-[5px] opacity-70">{row.name}</div>
-                </div>
-              ))}
+            <span className="text-white text-xs font-medium tracking-tight">Pratiksha</span>
+          </div>
+          <div className="flex items-center gap-3 text-[10px] text-fog">
+            <span className="text-white bg-white/[0.06] rounded-full px-2 py-0.5">Queue</span>
+            <span>Signal</span>
+          </div>
+        </div>
+
+        {/* Body */}
+        <div className="p-4 space-y-3">
+          {/* Day + count */}
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="text-xs text-ash tracking-wider">Tue 15 Jul · 11:14 IST</div>
+              <div className="text-white font-heading text-xl tracking-tightest mt-0.5">Queue</div>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-[10px] text-fog">Today <span className="text-white font-medium">6</span></span>
+              <span className="text-[10px] text-fog">Waiting <span className="text-white font-medium">4</span></span>
             </div>
           </div>
-        </PhoneFrame>
+
+          {/* Active patient card */}
+          {queue.filter((r) => r.active).map((row) => (
+            <div
+              key={row.token}
+              className="rounded-xl p-3.5"
+              style={{ background: accent, color: '#0a0a0a' }}
+            >
+              <div className="flex items-center justify-between mb-1">
+                <span className="text-[10px] tracking-widest uppercase font-medium">{row.token}</span>
+                <span
+                  className="text-[9px] rounded-full px-2 py-0.5 font-medium"
+                  style={{ background: 'rgba(0,0,0,0.15)', color: '#0a0a0a' }}
+                >
+                  In consult
+                </span>
+              </div>
+              <div className="text-base font-heading tracking-tightest leading-none">{row.name}</div>
+              <div className="text-[10px] opacity-70 mt-0.5">{row.detail}</div>
+              <div
+                className="mt-3 rounded-lg py-1.5 text-center text-[10px] font-medium"
+                style={{ background: 'rgba(0,0,0,0.12)', color: '#0a0a0a' }}
+              >
+                Mark done
+              </div>
+            </div>
+          ))}
+
+          {/* Waiting list */}
+          {queue
+            .filter((r) => !r.active)
+            .map((row) => (
+              <div
+                key={row.token}
+                className={`rounded-lg p-2.5 flex items-center justify-between ${
+                  row.late
+                    ? 'bg-amber-500/[0.08] border border-amber-500/20'
+                    : 'bg-white/[0.02] border border-white/[0.03]'
+                }`}
+              >
+                <div>
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-[10px] text-fog">{row.token}</span>
+                    <span className="text-[11px] text-white font-medium">{row.name}</span>
+                  </div>
+                  <div className="text-[9px] text-ash leading-tight mt-0.5">{row.detail}</div>
+                </div>
+                {row.late && (
+                  <span className="text-[9px] text-amber-400 uppercase tracking-wider">Late</span>
+                )}
+                {row.badge && !row.late && (
+                  <span
+                    className="text-[9px] rounded-full px-2 py-0.5 font-medium"
+                    style={{ color: accent, background: `${accent}15` }}
+                  >
+                    {row.badge}
+                  </span>
+                )}
+              </div>
+            ))}
+        </div>
       </div>
     </div>
   );
