@@ -257,7 +257,7 @@ export default function ILancasterPage() {
             ].map((f) => (
               <ScrollReveal key={f.label}>
                 <figure className="flex flex-col items-center">
-                  <div className="w-[130px] md:w-[150px] rounded-2xl overflow-hidden" style={{ aspectRatio: '390/844' }}>
+                  <div className="relative w-[130px] md:w-[150px] rounded-2xl overflow-hidden" style={{ aspectRatio: '390/844' }}>
                     <Image
                       src={f.src}
                       alt={f.label}
