@@ -9,17 +9,45 @@ import ScrollReveal from './ScrollReveal';
 
 function TokenMock({ accent }) {
   return (
-    <div className="relative w-full h-full rounded-2xl overflow-hidden bg-gradient-to-br from-carbon to-graphite border border-white/[0.06] flex items-center justify-center">
-      <div className="text-center">
-        <div className="text-fog text-[11px] tracking-[0.24em] uppercase mb-3">Your turn</div>
-        <div className="font-heading text-6xl md:text-8xl" style={{ color: accent, letterSpacing: '-0.04em' }}>
+    <div className="relative w-full h-full flex items-center justify-between gap-4 md:gap-6 px-4 md:px-6">
+      <div className="flex-1 text-center">
+        <div className="text-ash text-[10px] tracking-[0.24em] uppercase mb-1">Now serving</div>
+        <div
+          className="font-heading text-5xl md:text-7xl leading-none"
+          style={{ color: accent, letterSpacing: '-0.04em' }}
+        >
           A–044
         </div>
-        <div className="mt-3 flex items-center justify-center gap-2 text-[12px] text-silver">
+        <div className="mt-2 flex items-center justify-center gap-1.5 text-[10px] text-silver">
           <span className="inline-block w-1.5 h-1.5 rounded-full pulse-dot" style={{ background: '#7CFF9B' }} />
-          <span>Live · updates every 15s</span>
+          <span>Live · 15s</span>
         </div>
       </div>
+      <PhoneFrame className="!max-w-[130px] md:!max-w-[150px]">
+        <div className="w-full h-full bg-white flex flex-col text-black">
+          <div className="px-2 pt-7 pb-1.5">
+            <div className="text-[6px] text-gray-500">Aayush Clinic · East Legon</div>
+            <div className="text-[9px] font-medium">Today&apos;s queue</div>
+          </div>
+          <div className="px-1.5 space-y-1">
+            {[
+              { label: 'A–044', tag: 'Now', accent: true },
+              { label: 'A–045', tag: 'Next' },
+              { label: 'A–046', tag: 'In 5' },
+              { label: 'A–047', tag: 'In 8' },
+            ].map((row, i) => (
+              <div
+                key={i}
+                className={`flex items-center justify-between rounded p-1 ${row.accent ? 'font-medium' : ''}`}
+                style={row.accent ? { background: accent, color: '#0a0a0a' } : { background: 'rgba(0,0,0,0.04)' }}
+              >
+                <span className="text-[8px]">{row.label}</span>
+                <span className="text-[6px] uppercase tracking-wider">{row.tag}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </PhoneFrame>
     </div>
   );
 }
@@ -52,19 +80,9 @@ function LucaMock({ url }) {
   const front = '/assets/luca/landing-existing-user.png';
   return (
     <div className="relative w-full h-full rounded-2xl overflow-hidden bg-[#0a0a0a] border border-white/[0.06]">
-      {/* Red radial glow */}
+      {/* Subtle grid — texture kept for visual continuity with iLancaster cover */}
       <div
-        className="pointer-events-none absolute inset-0 flex items-center justify-center"
-        aria-hidden="true"
-      >
-        <div
-          className="w-[75%] h-[85%] rounded-full blur-3xl opacity-45"
-          style={{ background: 'radial-gradient(circle, #F0576B 0%, transparent 68%)' }}
-        />
-      </div>
-      {/* Subtle grid */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.08]"
+        className="pointer-events-none absolute inset-0 opacity-[0.06]"
         style={{
           backgroundImage:
             'linear-gradient(#F0576B 1px, transparent 1px), linear-gradient(90deg, #F0576B 1px, transparent 1px)',
@@ -72,7 +90,7 @@ function LucaMock({ url }) {
         }}
         aria-hidden="true"
       />
-      {/* Back window — smaller, tilted, offset up-left */}
+      {/* Back window */}
       <div
         className="absolute top-[10%] left-[6%] w-[46%] md:w-[42%] shadow-2xl"
         style={{ transform: 'rotate(-4deg)' }}
@@ -85,17 +103,10 @@ function LucaMock({ url }) {
               <span className="w-1.5 h-1.5 rounded-full bg-[#28C840]" />
             </span>
           </div>
-          <Image
-            src={back}
-            alt=""
-            width={1600}
-            height={900}
-            className="w-full h-auto"
-            sizes="400px"
-          />
+          <Image src={back} alt="" width={1600} height={900} className="w-full h-auto" sizes="400px" />
         </div>
       </div>
-      {/* Front window — larger, centered, offset down-right */}
+      {/* Front window */}
       <div className="absolute bottom-[8%] right-[6%] w-[62%] md:w-[58%] shadow-2xl">
         <div className="rounded-lg overflow-hidden border border-white/[0.08] bg-white">
           <div className="flex items-center gap-1 px-2 py-1.5 bg-gray-100">
@@ -110,14 +121,7 @@ function LucaMock({ url }) {
               </span>
             )}
           </div>
-          <Image
-            src={front}
-            alt=""
-            width={1600}
-            height={900}
-            className="w-full h-auto"
-            sizes="600px"
-          />
+          <Image src={front} alt="" width={1600} height={900} className="w-full h-auto" sizes="600px" />
         </div>
       </div>
     </div>
@@ -137,10 +141,8 @@ function PhonesMock({ images }) {
 }
 
 export default function PortfolioCard({ study, featured = false }) {
-  const { path, title, oneLiner, index, accent, category, tags = [], card } = study;
-  const containerCls = featured
-    ? 'md:col-span-2'
-    : 'md:col-span-1';
+  const { path, title, oneLiner, whyHere, accent, category, card } = study;
+  const containerCls = featured ? 'md:col-span-2' : 'md:col-span-1';
   const aspect = featured ? 'md:aspect-[16/7]' : 'md:aspect-[16/9]';
 
   return (
@@ -163,21 +165,27 @@ export default function PortfolioCard({ study, featured = false }) {
               </div>
               <p className="mt-3 text-fog text-sm md:text-base max-w-xs">{oneLiner}</p>
             </div>
-            {tags.length > 0 && (
-              <div className="mt-6 flex flex-wrap gap-2">
-                {tags.map((t) => (
-                  <span
-                    key={t}
-                    className="text-[10px] uppercase tracking-wider text-fog border border-white/[0.08] rounded-full px-3 py-1"
-                  >
-                    {t}
-                  </span>
-                ))}
+            {whyHere && (
+              <div className="mt-6 flex items-center gap-3 text-fog text-xs md:text-sm max-w-xs">
+                <span
+                  className="inline-block w-6 h-px shrink-0"
+                  style={{ background: accent, opacity: 0.75 }}
+                  aria-hidden="true"
+                />
+                <span className="leading-snug">{whyHere}</span>
               </div>
             )}
           </div>
           <div className="relative flex-1 min-h-[180px] md:min-h-0 p-4 md:p-6">
-            <div className="w-full h-full transition-transform duration-500 group-hover:scale-[1.03]">
+            {/* Accent glow — always visible, intensifies on hover */}
+            <div
+              className="pointer-events-none absolute inset-0 opacity-25 group-hover:opacity-50 transition-opacity duration-500 blur-2xl"
+              style={{
+                background: `radial-gradient(circle at 60% 45%, ${accent || '#B4B4B0'} 0%, transparent 62%)`,
+              }}
+              aria-hidden="true"
+            />
+            <div className="relative w-full h-full">
               {card.frame === 'token' && <TokenMock accent={accent} />}
               {card.frame === 'browser' && (
                 <BrowserFrame src={card.image} alt={title} url={card.url} className="h-full" />
