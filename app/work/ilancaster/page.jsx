@@ -81,9 +81,9 @@ export default function ILancasterPage() {
               <Image
                 src="/assets/ilancaster/before-compare.jpg"
                 alt="The original iLancaster home screen"
-                width={600}
-                height={900}
-                sizes="(max-width: 768px) 100vw, 400px"
+                width={1920}
+                height={805}
+                sizes="(max-width: 768px) 100vw, 600px"
                 className="w-full h-auto rounded-xl"
               />
               <div className="space-y-5">
@@ -126,9 +126,14 @@ export default function ILancasterPage() {
           <ScrollReveal>
             <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 items-start">
               <figure className="flex flex-col items-center">
-                <div className="w-full max-w-[140px]">
-                  <PhoneFrame src="/assets/ilancaster/before-home-v3.png" alt="Before — the original tile-grid home screen" />
-                </div>
+                <Image
+                  src="/assets/ilancaster/before-home-v3.png"
+                  alt="Before — the original tile-grid home screen"
+                  width={422}
+                  height={418}
+                  sizes="(max-width: 768px) 50vw, 200px"
+                  className="w-full max-w-[200px] h-auto rounded-xl"
+                />
                 <figcaption className="mt-3 text-[11px] tracking-[0.24em] uppercase text-ash">
                   Before — every feature at equal weight
                 </figcaption>
