@@ -198,8 +198,9 @@ export default function SmartUpPage() {
 
         {/* 7. Two products into one — the merge decision */}
         <SplitRow
-          src="/assets/smartup/v2-7.jpg"
-          alt="Mid-fidelity exploration — Control Panel and POS Lite converging"
+          src="/assets/smartup/mid-fi-exploration.jpg"
+          alt="Mid-fidelity exploration — five inventory screens across the app"
+          aspect="1920/826"
           imgSide="right"
           label="Two products into one"
           title="Prototyped both, committed to one."
