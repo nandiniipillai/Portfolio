@@ -60,7 +60,7 @@ function PhonesMock({ images }) {
 }
 
 export default function PortfolioCard({ study, featured = false }) {
-  const { path, title, oneLiner, whyHere, index, accent, category, card } = study;
+  const { path, title, oneLiner, index, accent, category, tags = [], card } = study;
   const containerCls = featured
     ? 'md:col-span-2'
     : 'md:col-span-1';
@@ -86,10 +86,17 @@ export default function PortfolioCard({ study, featured = false }) {
               </div>
               <p className="mt-3 text-fog text-sm md:text-base max-w-xs">{oneLiner}</p>
             </div>
-            {whyHere && (
-              <p className="text-ash text-xs md:text-sm italic leading-relaxed max-w-xs mt-6">
-                {whyHere}
-              </p>
+            {tags.length > 0 && (
+              <div className="mt-6 flex flex-wrap gap-2">
+                {tags.map((t) => (
+                  <span
+                    key={t}
+                    className="text-[10px] uppercase tracking-wider text-fog border border-white/[0.08] rounded-full px-3 py-1"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
             )}
           </div>
           <div
