@@ -71,36 +71,44 @@ function TokenMock({ accent }) {
           </div>
         </div>
 
-        {/* Phone — right panel */}
-        <div className="w-[90px] md:w-[110px] shrink-0 h-full flex items-center">
-          <PhoneFrame>
-            <div className="w-full h-full bg-white flex flex-col text-black">
-              <div className="px-2 pt-5 pb-1">
-                <div className="text-[5px] text-gray-400">getbaari.in</div>
-                <div className="text-[7px] font-semibold mt-0.5">Today's queue</div>
-              </div>
-              <div className="px-1.5 space-y-1">
-                {[
-                  { token: 'T12', name: 'Emma Wilson', tag: 'In consult', active: true },
-                  { token: 'T13', name: 'Sarah Chen', tag: 'Waiting' },
-                  { token: 'T14', name: 'James Park', tag: 'Waiting' },
-                  { token: 'T15', name: 'Priya Sharma', tag: 'Late' },
-                ].map((row) => (
-                  <div
-                    key={row.token}
-                    className="rounded p-1"
-                    style={row.active ? { background: accent, color: '#0a0a0a' } : { background: 'rgba(0,0,0,0.04)' }}
-                  >
-                    <div className="flex items-center justify-between">
-                      <span className="text-[6px] font-medium">{row.token}</span>
-                      <span className="text-[4px] uppercase tracking-wider opacity-70">{row.tag}</span>
+        {/* Phone — right panel, grounded with shadow and slight angle */}
+        <div className="w-[90px] md:w-[105px] shrink-0 flex items-center justify-center">
+          <div
+            className="w-full"
+            style={{
+              filter: 'drop-shadow(0 16px 32px rgba(0,0,0,0.55))',
+              transform: 'rotate(3deg)',
+            }}
+          >
+            <PhoneFrame>
+              <div className="w-full h-full bg-white flex flex-col text-black">
+                <div className="px-2 pt-5 pb-1">
+                  <div className="text-[5px] text-gray-400">getbaari.in</div>
+                  <div className="text-[7px] font-semibold mt-0.5">Today's queue</div>
+                </div>
+                <div className="px-1.5 space-y-1">
+                  {[
+                    { token: 'T12', name: 'Emma Wilson', tag: 'In consult', active: true },
+                    { token: 'T13', name: 'Sarah Chen', tag: 'Waiting' },
+                    { token: 'T14', name: 'James Park', tag: 'Waiting' },
+                    { token: 'T15', name: 'Priya Sharma', tag: 'Late' },
+                  ].map((row) => (
+                    <div
+                      key={row.token}
+                      className="rounded p-1"
+                      style={row.active ? { background: accent, color: '#0a0a0a' } : { background: 'rgba(0,0,0,0.04)' }}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="text-[6px] font-medium">{row.token}</span>
+                        <span className="text-[4px] uppercase tracking-wider opacity-70">{row.tag}</span>
+                      </div>
+                      <div className="text-[5px] opacity-70 mt-0.5">{row.name}</div>
                     </div>
-                    <div className="text-[5px] opacity-70 mt-0.5">{row.name}</div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
-          </PhoneFrame>
+            </PhoneFrame>
+          </div>
         </div>
       </div>
     </div>
