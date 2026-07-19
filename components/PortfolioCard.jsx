@@ -180,22 +180,30 @@ function TokenMock({ accent }) {
 function ILancasterMock() {
   return (
     <div className="relative w-full h-full flex items-center justify-center">
-      {/* Left phone — steep tilt, overlaps middle */}
+      {/* Left phone — sits at 28% of media width, tilted outward */}
       <div
-        className="absolute w-[115px] md:w-[135px] left-1/2 top-1/2"
-        style={{ transform: 'translate(-135%, -50%) rotate(-24deg)' }}
+        className="absolute w-[110px] md:w-[128px]"
+        style={{
+          left: '28%',
+          top: '50%',
+          transform: 'translate(-50%, -50%) rotate(-18deg)',
+        }}
       >
         <PhoneFrame src="/assets/ilancaster/timetable-day.png" />
       </div>
-      {/* Right phone — steep tilt, overlaps middle */}
+      {/* Right phone — mirrors at 72%, tilted outward */}
       <div
-        className="absolute w-[115px] md:w-[135px] left-1/2 top-1/2"
-        style={{ transform: 'translate(35%, -50%) rotate(24deg)' }}
+        className="absolute w-[110px] md:w-[128px]"
+        style={{
+          left: '72%',
+          top: '50%',
+          transform: 'translate(-50%, -50%) rotate(18deg)',
+        }}
       >
         <PhoneFrame src="/assets/ilancaster/welfare-day.png" />
       </div>
       {/* Centre phone — upright, forward, largest */}
-      <div className="relative z-10 w-[140px] md:w-[165px] drop-shadow-2xl">
+      <div className="relative z-10 w-[125px] md:w-[148px] drop-shadow-2xl">
         <PhoneFrame src="/assets/ilancaster/home-day.png" />
       </div>
     </div>
