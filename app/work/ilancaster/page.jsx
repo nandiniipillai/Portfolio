@@ -1,8 +1,5 @@
 'use client';
 
-import Image from 'next/image';
-import Zoom from 'react-medium-image-zoom';
-import 'react-medium-image-zoom/dist/styles.css';
 import { motion } from 'framer-motion';
 import CaseStudyShell from '@/components/CaseStudyShell';
 import { Section, Prose, SubList, PullQuote } from '@/components/CaseBits';
@@ -13,7 +10,6 @@ import ScrollReveal from '@/components/ScrollReveal';
 
 const ACCENT = '#E4002B';
 
-// A single "Key design decision" row: screen on one side, decision + why on the other.
 function DecisionRow({ label, decision, why, src, alt, imgSide = 'left' }) {
   const media = (
     <ScrollReveal>
@@ -43,15 +39,9 @@ function DecisionRow({ label, decision, why, src, alt, imgSide = 'left' }) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-14 items-center py-10 md:py-14 border-t border-white/[0.06] first:border-t-0">
       {imgSide === 'left' ? (
-        <>
-          {media}
-          {text}
-        </>
+        <>{media}{text}</>
       ) : (
-        <>
-          {text}
-          {media}
-        </>
+        <>{text}{media}</>
       )}
     </div>
   );
@@ -77,7 +67,18 @@ export default function ILancasterPage() {
           ['Company', ['ISS Innovation Hub', 'Lancaster University']],
         ]}
       >
-        {/* 1. Problem context — before image constrained, not full-bleed */}
+        {/* 1. About — what the project is, before the problem */}
+        <Section>
+          <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-4">About</div>
+          <Prose>
+            iLancaster is the native mobile companion for Lancaster University —
+            a live campus hub that puts timetable, check-in, enquiries,
+            notifications, and welfare resources into one app every student
+            already carries.
+          </Prose>
+        </Section>
+
+        {/* 2. Problem context — before image in PhoneFrame + three pain points */}
         <Section title="Every Lancaster student had the app, and most avoided opening it">
           <Prose>
             The app contained everything a student needed. It just presented all
@@ -86,8 +87,8 @@ export default function ILancasterPage() {
           </Prose>
           <div className="grid grid-cols-1 md:grid-cols-[1fr_1.5fr] gap-8 md:gap-12 items-center mt-8">
             <ScrollReveal>
-              <div className="mx-auto w-full max-w-[240px]">
-                <PhoneFrame src="/assets/ilancaster/before-home.jpg" alt="The original iLancaster home screen" />
+              <div className="mx-auto w-full max-w-[220px]">
+                <PhoneFrame src="/assets/ilancaster/before-home-new.png" alt="The original iLancaster home screen" />
               </div>
             </ScrollReveal>
             <div className="space-y-6">
@@ -110,22 +111,11 @@ export default function ILancasterPage() {
           </div>
         </Section>
 
-        {/* 2. About — one-sentence framing */}
-        <Section>
-          <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-4">About</div>
-          <Prose>
-            iLancaster is the native mobile companion for Lancaster University —
-            a live campus hub that puts timetable, check-in, enquiries,
-            notifications, and welfare resources into one app every student
-            already carries.
-          </Prose>
-        </Section>
-
         {/* 3. The failure story */}
         <Section title="Round one testing failed, and the failure was architectural" tone="sunken">
           <Prose>
             The first wireframes clarified visual structure, but users still
-            couldn’t reliably predict where features lived. That was an
+            couldn&apos;t reliably predict where features lived. That was an
             information architecture problem surfacing through wireframes, not a
             visual one, and it forced a mid-process navigation restructure
             before continuing.
@@ -139,26 +129,7 @@ export default function ILancasterPage() {
           <PullQuote>The failure was in the sitemap, not the wireframe.</PullQuote>
         </Section>
 
-        {/* 4. Before / After — the visual transformation */}
-        <Section tone="sunken">
-          <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-4">Before &amp; after</div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-start">
-            <SlideFigure
-              src="/assets/ilancaster/before-tile-grid-v2.png"
-              alt="The original iLancaster home screen — a tile grid with no hierarchy"
-              caption="Before — every feature at equal weight, no clear next step."
-              aspect="9/16"
-            />
-            <SlideFigure
-              src="/assets/ilancaster/home-day.png"
-              alt="The redesigned iLancaster home dashboard"
-              caption="After — today's timetable, check-in, and notifications above the fold."
-              aspect="9/16"
-            />
-          </div>
-        </Section>
-
-        {/* 5. Marquee decision — Home dashboard, pulled out as SplitRow */}
+        {/* 4. Marquee decision — Home dashboard, pulled out as SplitRow */}
         <SplitRow
           src="/assets/ilancaster/home-day.png"
           alt="Home dashboard — day mode"
@@ -179,7 +150,7 @@ export default function ILancasterPage() {
           </p>
         </SplitRow>
 
-        {/* 6. Key design decisions — remaining four as DecisionRows */}
+        {/* 5. Key design decisions — remaining four as DecisionRows */}
         <Section title="Key design decisions">
           <Prose>
             Every decision below is a direct response to a specific research
@@ -198,7 +169,7 @@ export default function ILancasterPage() {
             <DecisionRow
               label="Raise Enquiry: guided, not open-ended"
               decision="Replaced open category selection with a progressive guided flow that narrows options at each step."
-              why="Users didn’t know how to classify their own enquiries. Presenting every category at once made the problem worse; the guided pattern removes categorisation from the user entirely."
+              why="Users didn&apos;t know how to classify their own enquiries. Presenting every category at once made the problem worse; the guided pattern removes categorisation from the user entirely."
               src="/assets/ilancaster/enquiry-day.png"
               alt="Raise Enquiry — search-first ASK flow"
               imgSide="left"
@@ -222,10 +193,10 @@ export default function ILancasterPage() {
           </div>
         </Section>
 
-        {/* 7. Design system — brand constraint */}
+        {/* 6. Design system — brand constraint */}
         <Section title="One design system, held across 80+ screens" tone="sunken">
           <Prose>
-            Lancaster’s existing colour and style guidelines were a fixed
+            Lancaster&apos;s existing colour and style guidelines were a fixed
             constraint, so the transformation came from structure — not a
             rebrand. Typography, colour, spacing and component rules were
             defined upfront so the system stayed consistent across 80+ screens
@@ -255,14 +226,14 @@ export default function ILancasterPage() {
           </div>
         </Section>
 
-        {/* 8. What was cut */}
+        {/* 7. What was cut */}
         <Section title="What was traded away, on purpose">
           <SubList
             items={[
               'Secondary features lost their home-screen presence and moved to contextual access points',
               'Open category choice in enquiries was replaced by a guided path',
               'Above-the-fold space capped at three elements, whatever else competed for it',
-              'A new visual identity — the redesign stayed inside Lancaster’s existing brand',
+              'A new visual identity — the redesign stayed inside Lancaster&apos;s existing brand',
             ]}
           />
           <Prose>
@@ -271,7 +242,7 @@ export default function ILancasterPage() {
           </Prose>
         </Section>
 
-        {/* 9. Prototype walkthrough */}
+        {/* 8. Prototype walkthrough */}
         <Section title="Prototype walkthrough">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-end">
             <ScrollReveal>
@@ -301,7 +272,7 @@ export default function ILancasterPage() {
           </div>
         </Section>
 
-        {/* 10. Result — timeline of impact, matching SmartUp style */}
+        {/* 9. The result */}
         <Section title="The result" tone="sunken">
           <div className="space-y-0 divide-y divide-white/[0.06]">
             {[
@@ -310,14 +281,14 @@ export default function ILancasterPage() {
                 phase: 'Navigation',
                 headline: 'The top complaint stopped being the top complaint.',
                 support:
-                  'By round three of testing, navigation logic tested as resolved. It had been the primary failure point at round one.',
+                  'By round three of testing, navigation logic tested as resolved — down from the primary failure point at round one.',
               },
               {
                 num: '02',
                 phase: 'Check-in',
-                headline: 'Three fewer steps on the daily action.',
+                headline: 'Three fewer steps on the most time-sensitive daily action.',
                 support:
-                  'Moving check-in to the home screen as a persistent primary action cut the most time-sensitive flow to its minimum.',
+                  'Moving check-in to the home screen as a persistent primary card cut the flow from five taps to two.',
               },
               {
                 num: '03',
@@ -354,11 +325,11 @@ export default function ILancasterPage() {
           </div>
         </Section>
 
-        {/* 11. What I learned */}
+        {/* 10. What I learned */}
         <Section title="What I learned">
           <SubList
             items={[
-              'Diagnose the layer before fixing the symptom — round one’s failure looked visual but was architectural.',
+              'Diagnose the layer before fixing the symptom — round one&apos;s failure looked visual but was architectural.',
               'Splitting features between two designers works when the design system comes first.',
               'Feasibility checks with engineers mid-process beat discovering problems at handoff.',
               'A brand constraint is not a ceiling — hierarchy and structure changed the experience more than a restyle would have.',
