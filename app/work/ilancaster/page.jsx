@@ -297,10 +297,7 @@ export default function ILancasterPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
             <ScrollReveal>
               <figure className="flex flex-col items-center">
-                <div
-                  className="w-full max-w-[200px] rounded-2xl overflow-hidden border border-white/[0.08] shadow-lg bg-black"
-                  style={{ aspectRatio: '390/844' }}
-                >
+                <div className="w-full max-w-[200px] rounded-2xl overflow-hidden border border-white/[0.08] shadow-lg">
                   <video
                     src="/assets/ilancaster/walkthrough-home.mp4"
                     poster="/assets/ilancaster/home-day.png"
@@ -308,9 +305,8 @@ export default function ILancasterPage() {
                     muted
                     loop
                     playsInline
-                    controls
-                    preload="metadata"
-                    className="w-full h-full object-cover"
+                    webkit-playsinline="true"
+                    className="w-full h-auto"
                   />
                 </div>
                 <figcaption className="mt-3 text-[11px] tracking-[0.24em] uppercase text-ash">
@@ -320,10 +316,7 @@ export default function ILancasterPage() {
             </ScrollReveal>
             <ScrollReveal>
               <figure className="flex flex-col items-center">
-                <div
-                  className="w-full max-w-[200px] rounded-2xl overflow-hidden border border-white/[0.08] shadow-lg bg-black"
-                  style={{ aspectRatio: '390/844' }}
-                >
+                <div className="w-full max-w-[200px] rounded-2xl overflow-hidden border border-white/[0.08] shadow-lg">
                   <video
                     src="/assets/ilancaster/walkthrough-checkin.mp4"
                     poster="/assets/ilancaster/checkin-day.png"
@@ -331,9 +324,8 @@ export default function ILancasterPage() {
                     muted
                     loop
                     playsInline
-                    controls
-                    preload="metadata"
-                    className="w-full h-full object-cover"
+                    webkit-playsinline="true"
+                    className="w-full h-auto"
                   />
                 </div>
                 <figcaption className="mt-3 text-[11px] tracking-[0.24em] uppercase text-ash">
