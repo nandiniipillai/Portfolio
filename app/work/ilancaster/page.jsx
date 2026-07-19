@@ -88,7 +88,7 @@ export default function ILancasterPage() {
           <div className="grid grid-cols-1 md:grid-cols-[1fr_1.5fr] gap-8 md:gap-12 items-center mt-8">
             <ScrollReveal>
               <div className="mx-auto w-full max-w-[220px]">
-                <PhoneFrame src="/assets/ilancaster/before-home-new.png" alt="The original iLancaster home screen" />
+                <PhoneFrame src="/assets/ilancaster/before-home-v3.png" alt="The original iLancaster home screen" />
               </div>
             </ScrollReveal>
             <div className="space-y-6">
