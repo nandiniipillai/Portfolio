@@ -266,6 +266,7 @@ export default function ILancasterPage() {
                 <PhoneFrame
                   video="/assets/ilancaster/walkthrough-home.mp4"
                   poster="/assets/ilancaster/home-day.png"
+                  fit="contain"
                   className="!max-w-[180px]"
                 />
                 <figcaption className="mt-3 text-[11px] tracking-[0.24em] uppercase text-ash">
@@ -278,6 +279,7 @@ export default function ILancasterPage() {
                 <PhoneFrame
                   video="/assets/ilancaster/walkthrough-checkin.mp4"
                   poster="/assets/ilancaster/checkin-day.png"
+                  fit="contain"
                   className="!max-w-[180px]"
                 />
                 <figcaption className="mt-3 text-[11px] tracking-[0.24em] uppercase text-ash">

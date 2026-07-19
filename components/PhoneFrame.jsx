@@ -10,6 +10,7 @@ export default function PhoneFrame({
   children,
   chrome = true,
   className = '',
+  fit = 'cover',
 }) {
   return (
     <div
@@ -18,7 +19,7 @@ export default function PhoneFrame({
     >
       {video ? (
         <video
-          className="absolute inset-0 w-full h-full object-cover"
+          className={`absolute inset-0 w-full h-full object-${fit}`}
           src={video}
           poster={poster}
           autoPlay
@@ -32,7 +33,7 @@ export default function PhoneFrame({
           alt={alt || ''}
           fill
           sizes="320px"
-          className="object-cover"
+          className={`object-${fit}`}
         />
       ) : (
         <div className="absolute inset-0 flex items-center justify-center">{children}</div>
