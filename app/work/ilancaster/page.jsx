@@ -295,15 +295,14 @@ export default function ILancasterPage() {
             Click through the redesigned home dashboard and check-in flow.
           </Prose>
           <div className="mt-6">
-            <ScrollReveal>
-              <div className="w-full max-w-[360px] mx-auto rounded-2xl overflow-hidden border border-white/[0.08] shadow-lg" style={{ aspectRatio: '390/844' }}>
-                <iframe
-                  src="https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/proto/IWEzxQ7Ft4T5yvHOUD3ax0/iLancaster-Master?node-id=1224-10316&starting-point-node-id=1224%3A10316&t=KIIay9VltCOsBZza-1&scaling=scale-down&hide-ui=1"
-                  className="w-full h-full"
-                  allowFullScreen
-                />
-              </div>
-            </ScrollReveal>
+            <div className="w-full max-w-[220px] mx-auto rounded-2xl overflow-hidden border border-white/[0.08] shadow-lg" style={{ aspectRatio: '390/844' }}>
+              <iframe
+                src="https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/proto/IWEzxQ7Ft4T5yvHOUD3ax0/iLancaster-Master?node-id=1224-10316&starting-point-node-id=1224%3A10316&t=KIIay9VltCOsBZza-1&scaling=scale-down&hide-ui=1"
+                className="w-full h-full"
+                allowFullScreen
+                loading="lazy"
+              />
+            </div>
           </div>
         </Section>
 
