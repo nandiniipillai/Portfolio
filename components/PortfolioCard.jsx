@@ -275,7 +275,7 @@ export default function PortfolioCard({ study, featured = false }) {
   const containerCls = featured ? 'md:col-span-2' : 'md:col-span-1';
   const aspect = featured ? 'md:aspect-[16/7]' : 'md:aspect-[16/9]';
   const glowOrigin = glowPosition || '50% 50%';
-  const flatScale = card.scale || '80%';
+
 
   return (
     <ScrollReveal className={containerCls}>
@@ -327,14 +327,15 @@ export default function PortfolioCard({ study, featured = false }) {
               {card.frame === 'luca-multi' && <LucaMock url={card.url} />}
               {card.frame === 'phones' && <PhonesMock images={card.images} />}
               {card.frame === 'flat' && card.image && (
-                <div className="w-full h-full flex items-center justify-center">
-                  <div className="relative" style={{ width: flatScale, height: flatScale }}>
+                <div className="w-full h-full flex items-center justify-center p-2">
+                  <div className="w-3/4 max-w-[420px] rounded-xl overflow-hidden border border-white/[0.08]">
                     <Image
                       src={card.image}
                       alt={title}
-                      fill
+                      width={1200}
+                      height={800}
+                      className="w-full h-auto"
                       sizes="500px"
-                      className={card.fit === 'contain' ? 'object-contain' : 'object-cover'}
                     />
                   </div>
                 </div>
