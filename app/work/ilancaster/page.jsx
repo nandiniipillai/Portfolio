@@ -305,9 +305,9 @@ export default function ILancasterPage() {
                     muted
                     loop
                     playsInline
-                    webkit-playsinline="true"
                     preload="none"
                     className="w-full h-auto"
+                    style={{ mixBlendMode: 'lighten' }}
                   />
                 </div>
                 <figcaption className="mt-3 text-[11px] tracking-[0.24em] uppercase text-ash">
@@ -325,9 +325,9 @@ export default function ILancasterPage() {
                     muted
                     loop
                     playsInline
-                    webkit-playsinline="true"
                     preload="none"
                     className="w-full h-auto"
+                    style={{ mixBlendMode: 'lighten' }}
                   />
                 </div>
                 <figcaption className="mt-3 text-[11px] tracking-[0.24em] uppercase text-ash">
