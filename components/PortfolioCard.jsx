@@ -83,7 +83,10 @@ function LucaWindow({ src, url, dotSize = 'w-1.5 h-1.5', urlSize = 'text-[8px]' 
           </span>
         )}
       </div>
-      <Image src={src} alt="" width={1600} height={900} className="w-full h-auto" sizes="500px" />
+      {/* Fixed aspect ratio; show the TOP of each screen where the module identity lives */}
+      <div className="relative w-full" style={{ aspectRatio: '16/10' }}>
+        <Image src={src} alt="" fill className="object-cover object-top" sizes="500px" />
+      </div>
     </div>
   );
 }
@@ -91,22 +94,22 @@ function LucaWindow({ src, url, dotSize = 'w-1.5 h-1.5', urlSize = 'text-[8px]' 
 function LucaMock({ url }) {
   return (
     <div className="relative w-full h-full">
-      {/* CV optimiser — top-left, small, tilted */}
+      {/* CV optimiser — behind, tilted left */}
       <div
-        className="absolute top-[6%] left-[3%] w-[36%] shadow-xl"
-        style={{ transform: 'rotate(-5deg)' }}
+        className="absolute top-1/2 left-[4%] w-[42%] shadow-xl opacity-90"
+        style={{ transform: 'translateY(-50%) rotate(-8deg)' }}
       >
         <LucaWindow src="/assets/luca/cv-optimiser-2.png" />
       </div>
-      {/* AI Interview — top-right, small, tilted */}
+      {/* AI Interview — behind, tilted right */}
       <div
-        className="absolute top-[10%] right-[3%] w-[36%] shadow-xl"
-        style={{ transform: 'rotate(4deg)' }}
+        className="absolute top-1/2 right-[4%] w-[42%] shadow-xl opacity-90"
+        style={{ transform: 'translateY(-50%) rotate(8deg)' }}
       >
-        <LucaWindow src="/assets/luca/ai-interview.png" />
+        <LucaWindow src="/assets/luca/interview-setup.png" />
       </div>
-      {/* Dashboard — front, centered-bottom, largest */}
-      <div className="absolute bottom-[4%] left-1/2 -translate-x-1/2 w-[64%] shadow-2xl">
+      {/* Dashboard — front and centre, largest */}
+      <div className="absolute top-1/2 left-1/2 w-[58%] shadow-2xl z-10" style={{ transform: 'translate(-50%, -50%)' }}>
         <LucaWindow src="/assets/luca/dashboard-existing.png" url={url} />
       </div>
     </div>
