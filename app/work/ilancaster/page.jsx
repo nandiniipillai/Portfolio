@@ -7,6 +7,8 @@ import { motion } from 'framer-motion';
 import CaseStudyShell from '@/components/CaseStudyShell';
 import { Section, Prose, SubList, PullQuote } from '@/components/CaseBits';
 import SlideFigure from '@/components/SlideFigure';
+import SplitRow from '@/components/SplitRow';
+import PhoneFrame from '@/components/PhoneFrame';
 import ScrollReveal from '@/components/ScrollReveal';
 
 const ACCENT = '#E4002B';
@@ -124,7 +126,18 @@ export default function ILancasterPage() {
           </div>
         </Section>
 
-        {/* 2. The failure story */}
+        {/* 2. About — one-sentence framing */}
+        <Section>
+          <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-4">About</div>
+          <Prose>
+            iLancaster is the native mobile companion for Lancaster University —
+            a live campus hub that puts timetable, check-in, enquiries,
+            notifications, and welfare resources into one app every student
+            already carries.
+          </Prose>
+        </Section>
+
+        {/* 3. The failure story */}
         <Section title="Round one testing failed, and the failure was architectural" tone="sunken">
           <Prose>
             The first wireframes clarified visual structure, but users still
@@ -142,7 +155,47 @@ export default function ILancasterPage() {
           <PullQuote>The failure was in the sitemap, not the wireframe.</PullQuote>
         </Section>
 
-        {/* 4. Key design decisions — CONSOLIDATED gallery, five rows */}
+        {/* 4. Before / After — the visual transformation */}
+        <Section tone="sunken">
+          <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-4">Before &amp; after</div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-start">
+            <SlideFigure
+              src="/assets/ilancaster/before-tile-grid-v2.png"
+              alt="The original iLancaster home screen — a tile grid with no hierarchy"
+              caption="Before — every feature at equal weight, no clear next step."
+              aspect="9/16"
+            />
+            <SlideFigure
+              src="/assets/ilancaster/home-day.png"
+              alt="The redesigned iLancaster home dashboard"
+              caption="After — today's timetable, check-in, and notifications above the fold."
+              aspect="9/16"
+            />
+          </div>
+        </Section>
+
+        {/* 5. Marquee decision — Home dashboard, pulled out as SplitRow */}
+        <SplitRow
+          src="/assets/ilancaster/home-day.png"
+          alt="Home dashboard — day mode"
+          aspect="9/16"
+          imgSide="right"
+          label="Design decision"
+          title="Home dashboard"
+        >
+          <p>
+            <span className="text-silver font-medium">Decision. </span>
+            Surface only today&apos;s timetable, the check-in button and active
+            notifications above the fold.
+          </p>
+          <p>
+            <span className="text-silver font-medium">Why. </span>
+            The core complaint was that the most-needed features were the
+            hardest to reach. Everything else lives one deliberate tap away.
+          </p>
+        </SplitRow>
+
+        {/* 6. Key design decisions — remaining four as DecisionRows */}
         <Section title="Key design decisions">
           <Prose>
             Every decision below is a direct response to a specific research
@@ -150,14 +203,6 @@ export default function ILancasterPage() {
             preference.
           </Prose>
           <div className="mt-6">
-            <DecisionRow
-              label="Home dashboard"
-              decision="Surface only today’s timetable, the check-in button and active notifications above the fold."
-              why="The core complaint was that the most-needed features were the hardest to reach. Everything else lives one deliberate tap away."
-              src="/assets/ilancaster/home-day.png"
-              alt="Home dashboard — day mode"
-              imgSide="left"
-            />
             <DecisionRow
               label="Check-in: three fewer steps"
               decision="Persistent check-in card on the home screen as the primary action."
@@ -193,7 +238,7 @@ export default function ILancasterPage() {
           </div>
         </Section>
 
-        {/* 5. Design system — brand constraint */}
+        {/* 7. Design system — brand constraint */}
         <Section title="One design system, held across 80+ screens" tone="sunken">
           <Prose>
             Lancaster’s existing colour and style guidelines were a fixed
@@ -218,7 +263,7 @@ export default function ILancasterPage() {
           </div>
         </Section>
 
-        {/* 6. What was cut */}
+        {/* 8. What was cut */}
         <Section title="What was traded away, on purpose">
           <SubList
             items={[
@@ -234,7 +279,37 @@ export default function ILancasterPage() {
           </Prose>
         </Section>
 
-        {/* 7. Result — timeline of impact, matching SmartUp style */}
+        {/* 9. Prototype walkthrough */}
+        <Section title="Prototype walkthrough">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-end">
+            <ScrollReveal>
+              <figure className="flex flex-col items-center">
+                <PhoneFrame
+                  video="/assets/ilancaster/walkthrough-home.mp4"
+                  poster="/assets/ilancaster/home-day.png"
+                  className="!max-w-[240px]"
+                />
+                <figcaption className="mt-4 text-[11px] tracking-[0.24em] uppercase text-ash">
+                  Home dashboard
+                </figcaption>
+              </figure>
+            </ScrollReveal>
+            <ScrollReveal>
+              <figure className="flex flex-col items-center">
+                <PhoneFrame
+                  video="/assets/ilancaster/walkthrough-checkin.mp4"
+                  poster="/assets/ilancaster/checkin-day.png"
+                  className="!max-w-[240px]"
+                />
+                <figcaption className="mt-4 text-[11px] tracking-[0.24em] uppercase text-ash">
+                  Check-in flow
+                </figcaption>
+              </figure>
+            </ScrollReveal>
+          </div>
+        </Section>
+
+        {/* 10. Result — timeline of impact, matching SmartUp style */}
         <Section title="The result" tone="sunken">
           <div className="space-y-0 divide-y divide-white/[0.06]">
             {[
@@ -287,7 +362,7 @@ export default function ILancasterPage() {
           </div>
         </Section>
 
-        {/* 8. What I learned */}
+        {/* 11. What I learned */}
         <Section title="What I learned">
           <SubList
             items={[
