@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import CaseStudyShell from '@/components/CaseStudyShell';
 import { Section, Prose, SubList, PullQuote } from '@/components/CaseBits';
-import PhoneFrame from '@/components/PhoneFrame';
 import ScrollReveal from '@/components/ScrollReveal';
 
 const ACCENT = '#E4002B';
@@ -73,7 +72,7 @@ export default function ILancasterPage() {
           ['Company', ['ISS Innovation Hub', 'Lancaster University']],
         ]}
       >
-        {/* 1. Problem — compact, image aligned top-right */}
+        {/* 1. Problem — before image top-right */}
         <Section title="Most avoided opening it">
           <Prose>
             The app contained everything a student needed. It just presented all
@@ -101,7 +100,7 @@ export default function ILancasterPage() {
             </div>
             <Image
               src="/assets/ilancaster/before-home-v3.png"
-              alt="The original iLancaster home screen — tile grid with no hierarchy"
+              alt="The original iLancaster home screen"
               width={422}
               height={418}
               sizes="300px"
@@ -132,7 +131,7 @@ export default function ILancasterPage() {
           <PullQuote>The failure was in the sitemap, not the wireframe.</PullQuote>
         </Section>
 
-        {/* 3. Home dashboard — two phones (day + night) on right */}
+        {/* 3. Home dashboard — two phone screens (day + night) on right */}
         <Section>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-start py-6 md:py-8">
             <ScrollReveal>
@@ -155,18 +154,22 @@ export default function ILancasterPage() {
             </ScrollReveal>
             <ScrollReveal>
               <div className="flex gap-3 justify-end items-start">
-                <figure className="flex flex-col items-center">
-                  <div className="w-full max-w-[150px]">
-                    <PhoneFrame src="/assets/ilancaster/home-day.png" alt="Home dashboard — day mode" />
-                  </div>
-                  <figcaption className="mt-1.5 text-[9px] tracking-[0.2em] uppercase text-ash">Day</figcaption>
-                </figure>
-                <figure className="flex flex-col items-center">
-                  <div className="w-full max-w-[150px]">
-                    <PhoneFrame src="/assets/ilancaster/home-night.png" alt="Home dashboard — night mode" />
-                  </div>
-                  <figcaption className="mt-1.5 text-[9px] tracking-[0.2em] uppercase text-ash">Night</figcaption>
-                </figure>
+                {[
+                  { src: '/assets/ilancaster/home-day.png', label: 'Day', alt: 'Home dashboard — day mode' },
+                  { src: '/assets/ilancaster/home-night.png', label: 'Night', alt: 'Home dashboard — night mode' },
+                ].map((s) => (
+                  <figure key={s.label} className="flex flex-col items-center">
+                    <Image
+                      src={s.src}
+                      alt={s.alt}
+                      width={390}
+                      height={844}
+                      sizes="160px"
+                      className="w-[140px] md:w-[160px] h-auto rounded-2xl"
+                    />
+                    <figcaption className="mt-1.5 text-[9px] tracking-[0.2em] uppercase text-ash">{s.label}</figcaption>
+                  </figure>
+                ))}
               </div>
             </ScrollReveal>
           </div>
@@ -178,7 +181,7 @@ export default function ILancasterPage() {
             <DecisionRow
               label="Check-in: three fewer steps"
               decision="Persistent check-in card on the home screen as the primary action."
-              why="The most time-sensitive daily action in the app. Students needed it between classes, quickly, on the go — removing three steps from a daily flow has a disproportionate effect."
+              why="The most time-sensitive daily action in the app. Students needed it between classes, quickly, on the go."
               src="/assets/ilancaster/checkin-day.png"
               alt="Check-in card on the home screen"
               imgSide="right"
@@ -186,7 +189,7 @@ export default function ILancasterPage() {
             <DecisionRow
               label="Raise Enquiry: guided, not open-ended"
               decision="Replaced open category selection with a progressive guided flow that narrows options at each step."
-              why="Users didn&apos;t know how to classify their own enquiries. Presenting every category at once made the problem worse; the guided pattern removes categorisation from the user entirely."
+              why="Users didn&apos;t know how to classify their own enquiries. Presenting every category at once made the problem worse."
               src="/assets/ilancaster/enquiry-day.png"
               alt="Raise Enquiry — search-first ASK flow"
               imgSide="left"
@@ -194,7 +197,7 @@ export default function ILancasterPage() {
             <DecisionRow
               label="Notifications: prioritised, not just listed"
               decision="Visual hierarchy inside the notification feed separates urgent alerts from informational updates."
-              why="A flat notification list carries the implicit message that everything is equally important. Prioritised treatment lets students triage at a glance between lectures."
+              why="A flat notification list carries the implicit message that everything is equally important. Prioritised treatment lets students triage at a glance."
               src="/assets/ilancaster/notifications-night.png"
               alt="Prioritised notification feed"
               imgSide="right"
@@ -202,7 +205,7 @@ export default function ILancasterPage() {
             <DecisionRow
               label="Day & Night mode"
               decision="Both modes designed in parallel as equal, first-class experiences from day one."
-              why="Designing them together meant every hierarchy and contrast decision was validated in both environments — not colour-inverted at the end and hoped for the best."
+              why="Designing them together meant every hierarchy and contrast decision was validated in both environments."
               src="/assets/ilancaster/home-night.png"
               alt="Home dashboard — night mode"
               imgSide="left"
@@ -210,7 +213,7 @@ export default function ILancasterPage() {
           </div>
         </Section>
 
-        {/* 5. Design system — feature lineup with contain fit */}
+        {/* 5. Design system — feature lineup as raw screens */}
         <Section title="One design system, held across 80+ screens" tone="sunken">
           <Prose>
             Lancaster&apos;s existing colour and style guidelines were a fixed
@@ -228,9 +231,14 @@ export default function ILancasterPage() {
             ].map((f) => (
               <ScrollReveal key={f.label}>
                 <figure className="flex flex-col items-center">
-                  <div className="w-full max-w-[140px]">
-                    <PhoneFrame src={f.src} alt={f.label} fit="contain" />
-                  </div>
+                  <Image
+                    src={f.src}
+                    alt={f.label}
+                    width={390}
+                    height={844}
+                    sizes="150px"
+                    className="w-[130px] md:w-[150px] h-auto rounded-2xl"
+                  />
                   <figcaption className="mt-2 text-[10px] tracking-[0.2em] uppercase text-ash">{f.label}</figcaption>
                 </figure>
               </ScrollReveal>
@@ -254,19 +262,23 @@ export default function ILancasterPage() {
           </Prose>
         </Section>
 
-        {/* 7. Prototype walkthrough */}
+        {/* 7. Prototype walkthrough — raw video, no PhoneFrame */}
         <Section title="Prototype walkthrough">
           <Prose>
             Watch the redesigned home dashboard and check-in flow in motion.
           </Prose>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-end mt-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
             <ScrollReveal>
               <figure className="flex flex-col items-center">
-                <div className="w-full max-w-[200px]">
-                  <PhoneFrame
-                    video="/assets/ilancaster/walkthrough-home.mp4"
+                <div className="w-full max-w-[200px] rounded-2xl overflow-hidden border border-white/[0.08] shadow-lg">
+                  <video
+                    src="/assets/ilancaster/walkthrough-home.mp4"
                     poster="/assets/ilancaster/home-day.png"
-                    fit="contain"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="w-full h-auto"
                   />
                 </div>
                 <figcaption className="mt-3 text-[11px] tracking-[0.24em] uppercase text-ash">
@@ -276,11 +288,15 @@ export default function ILancasterPage() {
             </ScrollReveal>
             <ScrollReveal>
               <figure className="flex flex-col items-center">
-                <div className="w-full max-w-[200px]">
-                  <PhoneFrame
-                    video="/assets/ilancaster/walkthrough-checkin.mp4"
+                <div className="w-full max-w-[200px] rounded-2xl overflow-hidden border border-white/[0.08] shadow-lg">
+                  <video
+                    src="/assets/ilancaster/walkthrough-checkin.mp4"
                     poster="/assets/ilancaster/checkin-day.png"
-                    fit="contain"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="w-full h-auto"
                   />
                 </div>
                 <figcaption className="mt-3 text-[11px] tracking-[0.24em] uppercase text-ash">
