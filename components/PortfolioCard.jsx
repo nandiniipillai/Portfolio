@@ -45,53 +45,60 @@ function TokenMock({ accent }) {
 
 function ILancasterMock() {
   return (
-    <div className="w-full h-full flex items-center justify-center gap-4 md:gap-6 p-6 bg-gradient-to-br from-[#1a0004] via-graphite to-carbon rounded-2xl border border-white/[0.06]">
-      <PhoneFrame className="!max-w-[140px] md:!max-w-[160px]">
-        <div className="w-full h-full bg-[#0a0a0a] p-3 text-[9px] text-white">
-          <div className="text-[10px] mb-2">Good evening</div>
-          <div className="rounded-lg bg-[#E4002B] text-white p-2 mb-1.5 text-center text-[8px]">Check in</div>
-          <div className="rounded-lg bg-white/[0.05] p-2 mb-1 text-[7px]">Timetable</div>
-          <div className="rounded-lg bg-white/[0.05] p-2 text-[7px]">Enquiry</div>
-        </div>
-      </PhoneFrame>
-      <PhoneFrame className="!max-w-[140px] md:!max-w-[160px]">
-        <div className="w-full h-full bg-white p-3 text-[9px] text-black">
-          <div className="text-[10px] mb-2">Good morning</div>
-          <div className="rounded-lg bg-[#E4002B] text-white p-2 mb-1.5 text-center text-[8px]">Check in</div>
-          <div className="rounded-lg bg-black/[0.05] p-2 mb-1 text-[7px]">Timetable</div>
-          <div className="rounded-lg bg-black/[0.05] p-2 text-[7px]">Enquiry</div>
-        </div>
-      </PhoneFrame>
+    <div className="relative w-full h-full flex items-end justify-center gap-2 md:gap-3 px-2">
+      <div className="w-[110px] md:w-[130px] translate-y-3">
+        <PhoneFrame src="/assets/ilancaster/timetable-day.png" />
+      </div>
+      <div className="w-[125px] md:w-[150px] -translate-y-2">
+        <PhoneFrame src="/assets/ilancaster/home-day.png" />
+      </div>
+      <div className="w-[110px] md:w-[130px] translate-y-3">
+        <PhoneFrame src="/assets/ilancaster/welfare-day.png" />
+      </div>
+    </div>
+  );
+}
+
+function LucaWindow({ src, url, dotSize = 'w-1.5 h-1.5', urlSize = 'text-[8px]' }) {
+  return (
+    <div className="rounded-lg overflow-hidden border border-white/[0.08] bg-white">
+      <div className="flex items-center gap-1 px-2 py-1.5 bg-gray-100">
+        <span className="flex gap-1" aria-hidden="true">
+          <span className={`${dotSize} rounded-full bg-[#FF5F57]`} />
+          <span className={`${dotSize} rounded-full bg-[#FEBC2E]`} />
+          <span className={`${dotSize} rounded-full bg-[#28C840]`} />
+        </span>
+        {url && (
+          <span className={`mx-auto ${urlSize} text-gray-500 bg-white/60 rounded-full px-2 py-0.5`}>
+            {url}
+          </span>
+        )}
+      </div>
+      <Image src={src} alt="" width={1600} height={900} className="w-full h-auto" sizes="500px" />
     </div>
   );
 }
 
 function LucaMock({ url }) {
   return (
-    <div className="relative w-full h-full flex items-center justify-center">
-      <div className="w-[86%] shadow-2xl">
-        <div className="rounded-lg overflow-hidden border border-white/[0.08] bg-white">
-          <div className="flex items-center gap-1.5 px-2.5 py-2 bg-gray-100">
-            <span className="flex gap-1" aria-hidden="true">
-              <span className="w-2 h-2 rounded-full bg-[#FF5F57]" />
-              <span className="w-2 h-2 rounded-full bg-[#FEBC2E]" />
-              <span className="w-2 h-2 rounded-full bg-[#28C840]" />
-            </span>
-            {url && (
-              <span className="mx-auto text-[9px] text-gray-500 bg-white/60 rounded-full px-2.5 py-0.5">
-                {url}
-              </span>
-            )}
-          </div>
-          <Image
-            src="/assets/luca/landing-existing-user.png"
-            alt=""
-            width={1600}
-            height={900}
-            className="w-full h-auto"
-            sizes="600px"
-          />
-        </div>
+    <div className="relative w-full h-full">
+      {/* CV optimiser — top-left, small, tilted */}
+      <div
+        className="absolute top-[6%] left-[3%] w-[36%] shadow-xl"
+        style={{ transform: 'rotate(-5deg)' }}
+      >
+        <LucaWindow src="/assets/luca/cv-optimiser-2.png" />
+      </div>
+      {/* AI Interview — top-right, small, tilted */}
+      <div
+        className="absolute top-[10%] right-[3%] w-[36%] shadow-xl"
+        style={{ transform: 'rotate(4deg)' }}
+      >
+        <LucaWindow src="/assets/luca/ai-interview.png" />
+      </div>
+      {/* Dashboard — front, centered-bottom, largest */}
+      <div className="absolute bottom-[4%] left-1/2 -translate-x-1/2 w-[64%] shadow-2xl">
+        <LucaWindow src="/assets/luca/dashboard-existing.png" url={url} />
       </div>
     </div>
   );
