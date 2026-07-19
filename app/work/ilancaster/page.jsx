@@ -8,10 +8,10 @@ import ScrollReveal from '@/components/ScrollReveal';
 
 const ACCENT = '#E4002B';
 
-function DecisionRow({ label, decision, why, src, alt, imgSide = 'left' }) {
+function DecisionRow({ label, decision, why, src, alt, notes = [], imgSide = 'left' }) {
   const media = (
     <ScrollReveal>
-      <div className="mx-auto w-full max-w-[180px]">
+      <div className="relative mx-auto w-full max-w-[180px]">
         <Image
           src={src}
           alt={alt}
@@ -20,6 +20,20 @@ function DecisionRow({ label, decision, why, src, alt, imgSide = 'left' }) {
           sizes="200px"
           className="w-full h-auto rounded-2xl"
         />
+        {notes.map((n, i) => (
+          <span
+            key={i}
+            className="absolute text-fog/70 text-sm leading-none pointer-events-none"
+            style={{
+              fontFamily: 'var(--font-caveat)',
+              top: n.top,
+              left: n.left,
+              transform: `rotate(${n.rotate || -4}deg)`,
+            }}
+          >
+            {n.text}
+          </span>
+        ))}
       </div>
     </ScrollReveal>
   );
@@ -103,8 +117,8 @@ export default function ILancasterPage() {
               alt="The original iLancaster home screen"
               width={422}
               height={418}
-              sizes="300px"
-              className="w-[280px] md:w-[320px] h-auto rounded-xl"
+              sizes="400px"
+              className="w-[340px] md:w-[380px] h-auto rounded-xl"
             />
           </div>
         </Section>
@@ -164,8 +178,8 @@ export default function ILancasterPage() {
                       alt={s.alt}
                       width={390}
                       height={844}
-                      sizes="160px"
-                      className="w-[140px] md:w-[160px] h-auto rounded-2xl"
+                      sizes="200px"
+                      className="w-[160px] md:w-[190px] h-auto rounded-2xl"
                     />
                     <figcaption className="mt-1.5 text-[9px] tracking-[0.2em] uppercase text-ash">{s.label}</figcaption>
                   </figure>
@@ -185,6 +199,10 @@ export default function ILancasterPage() {
               src="/assets/ilancaster/checkin-day.png"
               alt="Check-in card on the home screen"
               imgSide="right"
+              notes={[
+                { text: 'Check-in ↗', top: '42%', left: '62%', rotate: -5 },
+                { text: 'one tap', top: '54%', left: '64%', rotate: 2 },
+              ]}
             />
             <DecisionRow
               label="Raise Enquiry: guided, not open-ended"
@@ -193,6 +211,9 @@ export default function ILancasterPage() {
               src="/assets/ilancaster/enquiry-day.png"
               alt="Raise Enquiry — search-first ASK flow"
               imgSide="left"
+              notes={[
+                { text: 'guided flow →', top: '38%', left: '58%', rotate: -3 },
+              ]}
             />
             <DecisionRow
               label="Notifications: prioritised, not just listed"
@@ -201,6 +222,9 @@ export default function ILancasterPage() {
               src="/assets/ilancaster/notifications-night.png"
               alt="Prioritised notification feed"
               imgSide="right"
+              notes={[
+                { text: 'urgent first ↖', top: '18%', left: '60%', rotate: -4 },
+              ]}
             />
             <DecisionRow
               label="Day & Night mode"
@@ -209,6 +233,9 @@ export default function ILancasterPage() {
               src="/assets/ilancaster/home-night.png"
               alt="Home dashboard — night mode"
               imgSide="left"
+              notes={[
+                { text: 'dark mode ↙', top: '6%', left: '58%', rotate: -3 },
+              ]}
             />
           </div>
         </Section>
@@ -231,14 +258,15 @@ export default function ILancasterPage() {
             ].map((f) => (
               <ScrollReveal key={f.label}>
                 <figure className="flex flex-col items-center">
-                  <Image
-                    src={f.src}
-                    alt={f.label}
-                    width={390}
-                    height={844}
-                    sizes="150px"
-                    className="w-[130px] md:w-[150px] h-auto rounded-2xl"
-                  />
+                  <div className="w-[130px] md:w-[150px] rounded-2xl overflow-hidden" style={{ aspectRatio: '390/844' }}>
+                    <Image
+                      src={f.src}
+                      alt={f.label}
+                      fill
+                      sizes="150px"
+                      className="object-cover object-top"
+                    />
+                  </div>
                   <figcaption className="mt-2 text-[10px] tracking-[0.2em] uppercase text-ash">{f.label}</figcaption>
                 </figure>
               </ScrollReveal>
