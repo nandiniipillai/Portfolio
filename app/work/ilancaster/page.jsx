@@ -294,7 +294,7 @@ export default function ILancasterPage() {
           <Prose>
             Watch the redesigned home dashboard and check-in flow in motion.
           </Prose>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+          <div className="mt-6">
             <ScrollReveal>
               <figure className="flex flex-col items-center">
                 <div className="w-full max-w-[200px] rounded-2xl overflow-hidden border border-white/[0.08] shadow-lg">
@@ -311,27 +311,7 @@ export default function ILancasterPage() {
                   />
                 </div>
                 <figcaption className="mt-3 text-[11px] tracking-[0.24em] uppercase text-ash">
-                  Home dashboard
-                </figcaption>
-              </figure>
-            </ScrollReveal>
-            <ScrollReveal>
-              <figure className="flex flex-col items-center">
-                <div className="w-full max-w-[200px] rounded-2xl overflow-hidden border border-white/[0.08] shadow-lg">
-                  <video
-                    src="/assets/ilancaster/walkthrough-checkin.mp4"
-                    poster="/assets/ilancaster/checkin-day.png"
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    preload="none"
-                    className="w-full h-auto"
-                    style={{ mixBlendMode: 'lighten' }}
-                  />
-                </div>
-                <figcaption className="mt-3 text-[11px] tracking-[0.24em] uppercase text-ash">
-                  Check-in flow
+                  Home dashboard &amp; check-in flow
                 </figcaption>
               </figure>
             </ScrollReveal>
