@@ -306,6 +306,7 @@ export default function ILancasterPage() {
                     loop
                     playsInline
                     webkit-playsinline="true"
+                    preload="none"
                     className="w-full h-auto"
                   />
                 </div>
