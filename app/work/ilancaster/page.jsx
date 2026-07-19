@@ -8,10 +8,10 @@ import ScrollReveal from '@/components/ScrollReveal';
 
 const ACCENT = '#E4002B';
 
-function DecisionRow({ label, decision, why, src, alt, notes = [], imgSide = 'left' }) {
+function DecisionRow({ label, decision, why, src, alt, imgSide = 'left' }) {
   const media = (
     <ScrollReveal>
-      <div className="relative mx-auto w-full max-w-[180px]">
+      <div className="mx-auto w-full max-w-[180px]">
         <Image
           src={src}
           alt={alt}
@@ -20,20 +20,6 @@ function DecisionRow({ label, decision, why, src, alt, notes = [], imgSide = 'le
           sizes="200px"
           className="w-full h-auto rounded-2xl"
         />
-        {notes.map((n, i) => (
-          <span
-            key={i}
-            className="absolute text-fog/70 text-sm leading-none pointer-events-none"
-            style={{
-              fontFamily: 'var(--font-caveat)',
-              top: n.top,
-              left: n.left,
-              transform: `rotate(${n.rotate || -4}deg)`,
-            }}
-          >
-            {n.text}
-          </span>
-        ))}
       </div>
     </ScrollReveal>
   );
@@ -199,9 +185,6 @@ export default function ILancasterPage() {
               src="/assets/ilancaster/checkin-day.png"
               alt="Check-in card on the home screen"
               imgSide="right"
-              notes={[
-                { text: 'one-tap check-in →', top: '55%', left: '56%', rotate: -4 },
-              ]}
             />
             <DecisionRow
               label="Raise Enquiry: guided, not open-ended"
@@ -210,9 +193,6 @@ export default function ILancasterPage() {
               src="/assets/ilancaster/enquiry-day.png"
               alt="Raise Enquiry — search-first ASK flow"
               imgSide="left"
-              notes={[
-                { text: 'step by step ↙', top: '32%', left: '56%', rotate: -5 },
-              ]}
             />
             <DecisionRow
               label="Notifications: prioritised, not just listed"
@@ -221,9 +201,6 @@ export default function ILancasterPage() {
               src="/assets/ilancaster/notifications-night.png"
               alt="Prioritised notification feed"
               imgSide="right"
-              notes={[
-                { text: 'urgent ↑', top: '14%', left: '60%', rotate: -6 },
-              ]}
             />
             <DecisionRow
               label="Day & Night mode"
@@ -232,9 +209,6 @@ export default function ILancasterPage() {
               src="/assets/ilancaster/home-night.png"
               alt="Home dashboard — night mode"
               imgSide="left"
-              notes={[
-                { text: 'dark ↙', top: '8%', left: '60%', rotate: -4 },
-              ]}
             />
           </div>
         </Section>
@@ -289,28 +263,7 @@ export default function ILancasterPage() {
           </Prose>
         </Section>
 
-        {/* 7. Prototype walkthrough */}
-        <Section title="Prototype walkthrough">
-          <Prose>
-            Watch the redesigned home dashboard and check-in flow in motion.
-          </Prose>
-          <div className="mt-4">
-            <div className="w-full max-w-[220px] mx-auto rounded-2xl overflow-hidden border border-white/[0.08] shadow-lg">
-              <video
-                src="/assets/ilancaster/walkthrough-flow.mp4"
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="none"
-                className="w-full h-auto"
-                style={{ mixBlendMode: 'lighten' }}
-              />
-            </div>
-          </div>
-        </Section>
-
-        {/* 8. The result */}
+        {/* 7. The result */}
         <Section title="The result" tone="sunken">
           <div className="space-y-0 divide-y divide-white/[0.06]">
             {[
@@ -363,7 +316,7 @@ export default function ILancasterPage() {
           </div>
         </Section>
 
-        {/* 9. What I learned */}
+        {/* 8. What I learned */}
         <Section title="What I learned">
           <SubList
             items={[
