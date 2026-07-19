@@ -9,45 +9,31 @@ import ScrollReveal from './ScrollReveal';
 
 function TokenMock({ accent }) {
   return (
-    <div className="relative w-full h-full flex items-center justify-between gap-4 md:gap-6 px-4 md:px-6">
-      <div className="flex-1 min-w-0">
-        <div className="text-ash text-[10px] tracking-[0.24em] uppercase mb-2">In consult</div>
-        <div
-          className="font-heading text-5xl md:text-6xl leading-none"
-          style={{ color: accent, letterSpacing: '-0.04em' }}
-        >
-          T12
-        </div>
-        <div className="mt-2 text-silver text-xs md:text-sm">Emma Wilson</div>
-        <div className="text-fog text-[10px] md:text-[11px]">cold, sore throat</div>
-        <div className="mt-2 flex items-center gap-1.5 text-[10px] text-silver">
-          <span className="inline-block w-1.5 h-1.5 rounded-full pulse-dot" style={{ background: '#7CFF9B' }} />
-          <span>27 min in</span>
-        </div>
-      </div>
-      <PhoneFrame className="!max-w-[130px] md:!max-w-[150px]">
+    <div className="relative w-full h-full flex items-center justify-center">
+      <PhoneFrame className="!max-w-[160px] md:!max-w-[190px]">
         <div className="w-full h-full bg-white flex flex-col text-black">
-          <div className="px-2 pt-7 pb-1.5">
-            <div className="text-[6px] text-gray-500">getbaari.in/queue</div>
-            <div className="text-[9px] font-medium">Today&apos;s queue</div>
+          <div className="px-2.5 pt-8 pb-2">
+            <div className="text-[7px] text-gray-500">getbaari.in / queue</div>
+            <div className="text-[11px] font-semibold">Today&apos;s queue</div>
           </div>
-          <div className="px-1.5 space-y-1">
+          <div className="px-2 space-y-1.5">
             {[
               { token: 'T12', name: 'Emma Wilson', tag: 'In consult', accent: true },
               { token: 'T13', name: 'James Kumar', tag: 'Waiting · 4m' },
               { token: 'T14', name: 'Priya Shah', tag: 'Waiting · 8m' },
               { token: 'T15', name: 'Ade Adekunle', tag: 'Booked 11:30' },
+              { token: 'T16', name: 'Riya Menon', tag: 'Booked 11:45' },
             ].map((row, i) => (
               <div
                 key={i}
-                className={`rounded p-1 ${row.accent ? 'font-medium' : ''}`}
-                style={row.accent ? { background: accent, color: '#0a0a0a' } : { background: 'rgba(0,0,0,0.04)' }}
+                className={`rounded-md p-1.5 ${row.accent ? 'font-medium' : ''}`}
+                style={row.accent ? { background: accent, color: '#0a0a0a' } : { background: 'rgba(0,0,0,0.045)' }}
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-[8px]">{row.token}</span>
-                  <span className="text-[6px] uppercase tracking-wider">{row.tag}</span>
+                  <span className="text-[9px]">{row.token}</span>
+                  <span className="text-[7px] uppercase tracking-wider opacity-80">{row.tag}</span>
                 </div>
-                <div className="text-[6px] opacity-70">{row.name}</div>
+                <div className="text-[7px] opacity-70">{row.name}</div>
               </div>
             ))}
           </div>
@@ -81,52 +67,30 @@ function ILancasterMock() {
 }
 
 function LucaMock({ url }) {
-  const back = '/assets/luca/interview-setup.png';
-  const front = '/assets/luca/landing-existing-user.png';
   return (
-    <div className="relative w-full h-full rounded-2xl overflow-hidden bg-[#0a0a0a] border border-white/[0.06]">
-      {/* Subtle grid — texture kept for visual continuity with iLancaster cover */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.06]"
-        style={{
-          backgroundImage:
-            'linear-gradient(#F0576B 1px, transparent 1px), linear-gradient(90deg, #F0576B 1px, transparent 1px)',
-          backgroundSize: '52px 52px',
-        }}
-        aria-hidden="true"
-      />
-      {/* Back window */}
-      <div
-        className="absolute top-[10%] left-[6%] w-[46%] md:w-[42%] shadow-2xl"
-        style={{ transform: 'rotate(-4deg)' }}
-      >
+    <div className="relative w-full h-full flex items-center justify-center">
+      <div className="w-[86%] shadow-2xl">
         <div className="rounded-lg overflow-hidden border border-white/[0.08] bg-white">
-          <div className="flex items-center gap-1 px-2 py-1.5 bg-gray-100">
+          <div className="flex items-center gap-1.5 px-2.5 py-2 bg-gray-100">
             <span className="flex gap-1" aria-hidden="true">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#FF5F57]" />
-              <span className="w-1.5 h-1.5 rounded-full bg-[#FEBC2E]" />
-              <span className="w-1.5 h-1.5 rounded-full bg-[#28C840]" />
-            </span>
-          </div>
-          <Image src={back} alt="" width={1600} height={900} className="w-full h-auto" sizes="400px" />
-        </div>
-      </div>
-      {/* Front window */}
-      <div className="absolute bottom-[8%] right-[6%] w-[62%] md:w-[58%] shadow-2xl">
-        <div className="rounded-lg overflow-hidden border border-white/[0.08] bg-white">
-          <div className="flex items-center gap-1 px-2 py-1.5 bg-gray-100">
-            <span className="flex gap-1" aria-hidden="true">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#FF5F57]" />
-              <span className="w-1.5 h-1.5 rounded-full bg-[#FEBC2E]" />
-              <span className="w-1.5 h-1.5 rounded-full bg-[#28C840]" />
+              <span className="w-2 h-2 rounded-full bg-[#FF5F57]" />
+              <span className="w-2 h-2 rounded-full bg-[#FEBC2E]" />
+              <span className="w-2 h-2 rounded-full bg-[#28C840]" />
             </span>
             {url && (
-              <span className="mx-auto text-[8px] text-gray-500 bg-white/60 rounded-full px-2 py-0.5">
+              <span className="mx-auto text-[9px] text-gray-500 bg-white/60 rounded-full px-2.5 py-0.5">
                 {url}
               </span>
             )}
           </div>
-          <Image src={front} alt="" width={1600} height={900} className="w-full h-auto" sizes="600px" />
+          <Image
+            src="/assets/luca/landing-existing-user.png"
+            alt=""
+            width={1600}
+            height={900}
+            className="w-full h-auto"
+            sizes="600px"
+          />
         </div>
       </div>
     </div>
@@ -146,7 +110,7 @@ function PhonesMock({ images }) {
 }
 
 export default function PortfolioCard({ study, featured = false }) {
-  const { path, title, oneLiner, whyHere, accent, category, card } = study;
+  const { path, title, oneLiner, accent, category, card } = study;
   const containerCls = featured ? 'md:col-span-2' : 'md:col-span-1';
   const aspect = featured ? 'md:aspect-[16/7]' : 'md:aspect-[16/9]';
 
@@ -157,31 +121,33 @@ export default function PortfolioCard({ study, featured = false }) {
         className={`group card-tex block relative w-full aspect-[16/10] ${aspect} overflow-hidden`}
       >
         <div className="absolute inset-0 flex flex-col md:flex-row">
-          <div className="p-6 md:p-8 md:w-2/5 flex flex-col justify-between">
-            <div>
-              <div className="text-[11px] tracking-[0.24em] uppercase mb-3" style={{ color: accent || '#B4B4B0' }}>
-                {category}
-              </div>
-              <div
-                className="font-heading tracking-tightest text-silver"
-                style={{ fontSize: 'clamp(28px, 3.4vw, 44px)', lineHeight: 1 }}
-              >
-                <RollLabel>{title}</RollLabel>
-              </div>
-              <p className="mt-3 text-fog text-sm md:text-base max-w-xs">{oneLiner}</p>
+          <div className="p-6 md:p-8 md:w-2/5 flex flex-col justify-center">
+            <div className="text-[11px] tracking-[0.24em] uppercase mb-3" style={{ color: accent || '#B4B4B0' }}>
+              {category}
             </div>
-            {whyHere && (
-              <p className="mt-6 font-heading tracking-tight text-silver text-sm md:text-base leading-snug max-w-xs">
-                {whyHere}
-              </p>
-            )}
+            <div
+              className="font-heading tracking-tightest text-silver"
+              style={{ fontSize: 'clamp(28px, 3.4vw, 44px)', lineHeight: 1 }}
+            >
+              <RollLabel>{title}</RollLabel>
+            </div>
+            <p className="mt-3 text-fog text-sm md:text-base max-w-xs">{oneLiner}</p>
           </div>
-          <div className="relative flex-1 min-h-[180px] md:min-h-0 p-4 md:p-6">
+          <div className="relative flex-1 min-h-[180px] md:min-h-0 p-4 md:p-6 overflow-hidden">
+            {/* Shared grid backdrop — same across all four cards */}
+            <div
+              className="pointer-events-none absolute inset-0 opacity-[0.05]"
+              style={{
+                backgroundImage: `linear-gradient(${accent || '#B4B4B0'} 1px, transparent 1px), linear-gradient(90deg, ${accent || '#B4B4B0'} 1px, transparent 1px)`,
+                backgroundSize: '52px 52px',
+              }}
+              aria-hidden="true"
+            />
             {/* Accent glow — always visible, intensifies on hover */}
             <div
               className="pointer-events-none absolute inset-0 opacity-25 group-hover:opacity-50 transition-opacity duration-500 blur-2xl"
               style={{
-                background: `radial-gradient(circle at 60% 45%, ${accent || '#B4B4B0'} 0%, transparent 62%)`,
+                background: `radial-gradient(circle at 50% 50%, ${accent || '#B4B4B0'} 0%, transparent 62%)`,
               }}
               aria-hidden="true"
             />
