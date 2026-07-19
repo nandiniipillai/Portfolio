@@ -6,7 +6,6 @@ import 'react-medium-image-zoom/dist/styles.css';
 import { motion } from 'framer-motion';
 import CaseStudyShell from '@/components/CaseStudyShell';
 import { Section, Prose, SubList, PullQuote } from '@/components/CaseBits';
-import SplitRow from '@/components/SplitRow';
 import PhoneFrame from '@/components/PhoneFrame';
 import ScrollReveal from '@/components/ScrollReveal';
 
@@ -38,32 +37,45 @@ function Showcase({ src, alt, aspect = '16/9', tone = 'default' }) {
   );
 }
 
-function ThumbGrid({ items }) {
+function BeforeAfter({ before, after, beforeLabel, afterLabel }) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-      {items.map((it) => (
-        <ScrollReveal key={it.src}>
-          <figure>
-            <div
-              className="relative rounded-xl overflow-hidden bg-carbon border border-white/[0.05]"
-              style={{ aspectRatio: '16/9' }}
-            >
-              <Zoom>
-                <Image
-                  src={it.src}
-                  alt={it.label}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 340px"
-                  className="object-cover"
-                />
-              </Zoom>
-            </div>
-            <figcaption className="mt-3 text-[11px] tracking-[0.24em] uppercase text-ash">
-              {it.label}
-            </figcaption>
-          </figure>
-        </ScrollReveal>
-      ))}
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+      <ScrollReveal>
+        <figure className="flex flex-col items-center">
+          <div className="relative w-full max-w-md" style={{ aspectRatio: '4/3' }}>
+            <Zoom>
+              <Image
+                src={before}
+                alt={beforeLabel}
+                fill
+                sizes="(max-width: 768px) 100vw, 500px"
+                className="object-contain"
+              />
+            </Zoom>
+          </div>
+          <figcaption className="mt-4 text-[11px] tracking-[0.24em] uppercase text-ash">
+            {beforeLabel}
+          </figcaption>
+        </figure>
+      </ScrollReveal>
+      <ScrollReveal>
+        <figure className="flex flex-col items-center">
+          <div className="relative w-full max-w-[240px]" style={{ aspectRatio: '1170/2532' }}>
+            <Zoom>
+              <Image
+                src={after}
+                alt={afterLabel}
+                fill
+                sizes="(max-width: 768px) 100vw, 240px"
+                className="object-contain"
+              />
+            </Zoom>
+          </div>
+          <figcaption className="mt-4 text-[11px] tracking-[0.24em] uppercase text-ash">
+            {afterLabel}
+          </figcaption>
+        </figure>
+      </ScrollReveal>
     </div>
   );
 }
@@ -101,14 +113,14 @@ export default function SmartUpPage() {
           ['Company', 'Detosphere Ltd. - ISS Innovation Hub'],
         ]}
       >
-        {/* 1. Hero showcase */}
+        {/* 1. Hero */}
         <Showcase
           src="/assets/smartup/v2-2.jpg"
           alt="SmartUp mobile screens flatlay"
           aspect="16/9"
         />
 
-        {/* 2. About — her copy, centered prose */}
+        {/* 2. About */}
         <Section>
           <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-4">About</div>
           <Prose>
@@ -118,27 +130,32 @@ export default function SmartUpPage() {
           </Prose>
         </Section>
 
-        {/* 3. Pull quote for a moment of drama */}
+        {/* 3. Pull quote */}
         <PullQuote>
           Access critical business data anytime, anywhere, without sacrificing
           simplicity or usability.
         </PullQuote>
 
-        {/* 4. The challenge — split */}
-        <SplitRow
-          src="/assets/smartup/v2-3.jpg"
-          alt="Desktop-only platform, redesigned for mobile"
-          imgSide="right"
-          tone="sunken"
-          label="The challenge"
-        >
-          Existing SmartUp Retail users could only access the system on
-          desktop, limiting flexibility and efficiency. My task was to design
-          a mobile solution that enabled users to access critical business
-          data anytime, anywhere, without sacrificing simplicity or usability.
-        </SplitRow>
+        {/* 4. The challenge — before / after */}
+        <Section tone="sunken">
+          <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-4">The challenge</div>
+          <Prose>
+            Existing SmartUp Retail users could only access the system on
+            desktop, limiting flexibility and efficiency. My task was to design
+            a mobile solution that enabled users to access critical business
+            data anytime, anywhere, without sacrificing simplicity or usability.
+          </Prose>
+          <div className="mt-10">
+            <BeforeAfter
+              before="/assets/smartup/challenge-desktop.png"
+              beforeLabel="Was — desktop only"
+              after="/assets/smartup/challenge-mobile.png"
+              afterLabel="Now — mobile-first"
+            />
+          </div>
+        </Section>
 
-        {/* 5. The goal — centered prose + list */}
+        {/* 5. The goal */}
         <Section>
           <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-4">The goal</div>
           <Prose>
@@ -155,13 +172,14 @@ export default function SmartUpPage() {
           />
         </Section>
 
-        {/* 6. Process artefacts — thumb grid, no prose */}
-        <Section title="Process" tone="sunken">
-          <ThumbGrid
+        {/* 6. What was deliberately cut — the interesting design decisions */}
+        <Section title="What was deliberately cut" tone="sunken">
+          <SubList
             items={[
-              { src: '/assets/smartup/v2-5.jpg', label: 'User flow' },
-              { src: '/assets/smartup/v2-6.jpg', label: 'Wireframes' },
-              { src: '/assets/smartup/v2-7.jpg', label: 'Mid-fidelity exploration' },
+              'Financial and logistics dashboards — desktop-only, no shop-floor use case',
+              'Historical reporting archives — mobile shows today, desktop shows trends',
+              'Two specialised apps — one unified app cost less to build and maintain',
+              'Feature parity as a goal — context of use decided scope instead',
             ]}
           />
         </Section>
@@ -169,20 +187,20 @@ export default function SmartUpPage() {
         {/* 7. Outcome — big showcase */}
         <Section>
           <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-6">Outcome</div>
-          <div className="relative rounded-2xl overflow-hidden bg-carbon border border-white/[0.05]" style={{ aspectRatio: '16/9' }}>
+          <div className="relative rounded-2xl overflow-hidden bg-carbon border border-white/[0.05]" style={{ aspectRatio: '16/6' }}>
             <Zoom>
               <Image
-                src="/assets/smartup/v2-8.jpg"
-                alt="Final high-fidelity screens"
+                src="/assets/smartup/outcome-screens.png"
+                alt="Final high-fidelity screens across the app"
                 fill
                 sizes="(max-width: 768px) 100vw, 1024px"
-                className="object-cover"
+                className="object-contain"
               />
             </Zoom>
           </div>
         </Section>
 
-        {/* 8. Prototype walkthroughs — three phones in a row */}
+        {/* 8. Prototype walkthroughs — three phones */}
         <Section title="Prototype walkthrough" tone="sunken">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-end">
             <VideoTile
