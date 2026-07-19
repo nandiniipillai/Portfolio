@@ -79,10 +79,10 @@ export default function ILancasterPage() {
         title="iLancaster"
         oneLiner="Redesigning the app every Lancaster University student carries daily."
         meta={[
-          ['Role', 'Product Designer'],
-          ['Team', ['One other designer', 'Product Manager', 'Engineers']],
-          ['Industry', 'EdTech · Mobile'],
-          ['Company', 'Lancaster University'],
+          ['Role', '2 Product Designers'],
+          ['Team', ['Product Manager', 'Team of BE & FE Engineers']],
+          ['Industry', 'EdTech · Mobile App Redesign'],
+          ['Company', ['ISS Innovation Hub', 'Lancaster University']],
         ]}
       >
         {/* 1. Problem context — full-bleed before image, no hero redundancy */}
