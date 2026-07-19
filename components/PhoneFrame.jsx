@@ -39,18 +39,18 @@ export default function PhoneFrame({
       )}
       {chrome && (
         <>
-          {/* Dynamic Island */}
+          {/* Dynamic Island — proportioned to real iPhone (≈9.5% wide × 1.3% tall) */}
           <div
             className="absolute left-1/2 -translate-x-1/2 bg-black rounded-full z-10 pointer-events-none"
-            style={{ top: '1.6%', width: '30%', height: '3.4%' }}
+            style={{ top: '1.4%', width: '22%', height: '2.4%' }}
             aria-hidden="true"
           />
-          {/* Home indicator */}
+          {/* Home indicator — proportioned to real iPhone (≈10% wide) */}
           <div
             className="absolute left-1/2 -translate-x-1/2 rounded-full z-10 pointer-events-none"
             style={{
-              bottom: '1%',
-              width: '32%',
+              bottom: '1.2%',
+              width: '26%',
               height: '0.5%',
               background: 'rgba(255,255,255,0.85)',
             }}
