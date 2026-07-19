@@ -95,7 +95,7 @@ export default function ILancasterPage() {
             iLancaster is the native mobile companion for Lancaster University.
           </Prose>
           <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-6 md:gap-8 items-start mt-4">
-            <div className="space-y-4 max-w-lg">
+            <div className="space-y-4 max-w-sm">
               {[
                 { label: 'No information hierarchy', detail: 'Critical and secondary features competed equally for attention.' },
                 { label: 'Clustered interfaces', detail: 'High information density with no visual breathing room.' },
@@ -118,7 +118,7 @@ export default function ILancasterPage() {
               width={422}
               height={418}
               sizes="400px"
-              className="w-[340px] md:w-[380px] h-auto rounded-xl"
+              className="w-[340px] md:w-[380px] h-auto rounded-xl -mt-3"
             />
           </div>
         </Section>
