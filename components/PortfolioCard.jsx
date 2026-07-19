@@ -199,11 +199,6 @@ export default function PortfolioCard({ study, featured = false }) {
             </div>
           </div>
         </div>
-        {index && (
-          <span className="absolute top-6 left-6 text-[11px] tracking-[0.24em] uppercase text-ash z-10">
-            {index}
-          </span>
-        )}
         <span className="absolute top-6 right-6 card-arrow text-silver text-xl" aria-hidden="true">↗</span>
       </Link>
     </ScrollReveal>
