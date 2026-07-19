@@ -245,22 +245,57 @@ export default function SmartUpPage() {
           </div>
         </Section>
 
-        {/* 10. Result — MetricCards, hiring-manager signal */}
+        {/* 10. Result — timeline of impact, not parallel labels */}
         <Section title="The result" tone="sunken">
-          <MetricGrid>
-            <MetricCard
-              value="Validated"
-              label="Test users asked when they could start using it"
-            />
-            <MetricCard
-              value="Funding"
-              label="Prototype used internally for partnership and funding discussions"
-            />
-            <MetricCard
-              value="Shipped"
-              label="Later built and adopted by real businesses, confirmed post-handoff"
-            />
-          </MetricGrid>
+          <div className="space-y-0 divide-y divide-white/[0.06]">
+            {[
+              {
+                num: '01',
+                phase: 'At validation',
+                headline: 'Users didn’t want the demo to end.',
+                support:
+                  'Test participants asked when they could start using the prototype for real.',
+              },
+              {
+                num: '02',
+                phase: 'With stakeholders',
+                headline: 'The prototype outlived the design phase.',
+                support:
+                  'Detosphere used it internally in partnership and funding conversations.',
+              },
+              {
+                num: '03',
+                phase: 'After handoff',
+                headline: 'It shipped, and it stayed shipped.',
+                support:
+                  'Built out by the engineers post-handoff and adopted by real retail businesses.',
+              },
+            ].map((row) => (
+              <ScrollReveal key={row.num}>
+                <div className="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-4 md:gap-10 py-8 md:py-10">
+                  <div>
+                    <span
+                      className="font-heading tracking-tightest leading-none"
+                      style={{ color: ACCENT, fontSize: 'clamp(36px, 4vw, 56px)', letterSpacing: '-0.04em' }}
+                    >
+                      {row.num}
+                    </span>
+                    <div className="text-[11px] tracking-[0.24em] uppercase text-ash mt-2">
+                      {row.phase}
+                    </div>
+                  </div>
+                  <div>
+                    <p className="font-heading tracking-tight text-silver text-xl md:text-2xl leading-tight">
+                      {row.headline}
+                    </p>
+                    <p className="text-fog text-base md:text-lg leading-relaxed mt-3 max-w-2xl">
+                      {row.support}
+                    </p>
+                  </div>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
         </Section>
 
         {/* 11. What I learned — reflection */}
