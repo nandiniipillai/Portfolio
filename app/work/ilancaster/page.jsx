@@ -61,8 +61,8 @@ export default function ILancasterPage() {
         title="iLancaster"
         oneLiner="Redesigning the app every Lancaster University student carries daily."
         meta={[
-          ['Role', '2 Product Designers'],
-          ['Team', ['Product Manager', 'Team of BE & FE Engineers']],
+          ['Role', 'Product Designer'],
+          ['Team', ['Designers', 'Product Manager', 'Team of BE & FE Engineers']],
           ['Industry', 'EdTech · Mobile App Redesign'],
           ['Company', ['ISS Innovation Hub', 'Lancaster University']],
         ]}
