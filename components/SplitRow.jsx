@@ -58,7 +58,7 @@ export default function SplitRow({
   );
 
   return (
-    <section className={`py-14 md:py-20 px-5 md:px-10 ${bg}`}>
+    <section className={`py-10 md:py-16 px-5 md:px-10 ${bg}`}>
       <div className="mx-auto max-w-6xl">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-14 items-center">
           {imgSide === 'left' ? (

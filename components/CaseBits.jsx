@@ -6,7 +6,7 @@ import ScrollReveal from './ScrollReveal';
 export function Section({ title, tone = 'default', children, className = '' }) {
   const bg = tone === 'sunken' ? 'bg-graphite' : '';
   return (
-    <section className={`py-16 md:py-24 px-5 md:px-10 ${bg} ${className}`}>
+    <section className={`py-10 md:py-16 px-5 md:px-10 ${bg} ${className}`}>
       <div className="mx-auto max-w-5xl">
         {title ? (
           <ScrollReveal as="h2" className="font-heading tracking-tightest text-silver text-3xl md:text-5xl mb-8 md:mb-12">

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, createContext, useContext } from 'react';
+import { usePathname } from 'next/navigation';
 import Lenis from 'lenis';
 
 const LenisContext = createContext(null);
@@ -12,6 +13,7 @@ export function useLenis() {
 export default function LenisProvider({ children }) {
   const lenisRef = useRef(null);
   const scrollRef = useRef({ y: 0, limit: 0, progress: 0 });
+  const pathname = usePathname();
 
   useEffect(() => {
     const lenis = new Lenis({
@@ -39,6 +41,12 @@ export default function LenisProvider({ children }) {
       lenisRef.current = null;
     };
   }, []);
+
+  useEffect(() => {
+    if (lenisRef.current) {
+      lenisRef.current.scrollTo(0, { immediate: true });
+    }
+  }, [pathname]);
 
   return (
     <LenisContext.Provider value={{ lenis: lenisRef, scroll: scrollRef }}>
