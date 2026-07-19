@@ -17,16 +17,8 @@ const ACCENT = '#E4002B';
 function DecisionRow({ label, decision, why, src, alt, imgSide = 'left' }) {
   const media = (
     <ScrollReveal>
-      <div className="relative mx-auto w-full max-w-[220px]" style={{ aspectRatio: '9/16' }}>
-        <Zoom>
-          <Image
-            src={src}
-            alt={alt}
-            fill
-            sizes="(max-width: 768px) 60vw, 220px"
-            className="object-contain rounded-2xl"
-          />
-        </Zoom>
+      <div className="mx-auto w-full max-w-[200px]">
+        <PhoneFrame src={src} alt={alt} />
       </div>
     </ScrollReveal>
   );
@@ -85,44 +77,36 @@ export default function ILancasterPage() {
           ['Company', ['ISS Innovation Hub', 'Lancaster University']],
         ]}
       >
-        {/* 1. Problem context — full-bleed before image, no hero redundancy */}
+        {/* 1. Problem context — before image constrained, not full-bleed */}
         <Section title="Every Lancaster student had the app, and most avoided opening it">
           <Prose>
             The app contained everything a student needed. It just presented all
             of it at the same visual weight, with no hierarchy to guide attention
             and no reliable pattern for where features lived between sessions.
           </Prose>
-          <ScrollReveal>
-            <div className="mt-8">
-              <Zoom>
-                <Image
-                  src="/assets/ilancaster/before-tile-grid-v2.png"
-                  alt="The original iLancaster tile-grid home screen"
-                  width={1600}
-                  height={1000}
-                  sizes="(max-width: 768px) 100vw, 900px"
-                  className="w-full h-auto rounded-2xl"
-                  priority
-                />
-              </Zoom>
-            </div>
-          </ScrollReveal>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-            {[
-              { label: 'No information hierarchy', detail: 'Critical and secondary features competed equally for attention.' },
-              { label: 'Clustered interfaces', detail: 'High information density with no visual breathing room.' },
-              { label: 'Unpredictable navigation', detail: 'Users couldn\'t consistently locate features across sessions.' },
-            ].map((item) => (
-              <ScrollReveal key={item.label}>
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: ACCENT }} aria-hidden="true" />
-                    <span className="text-silver font-medium text-sm">{item.label}</span>
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_1.5fr] gap-8 md:gap-12 items-center mt-8">
+            <ScrollReveal>
+              <div className="mx-auto w-full max-w-[240px]">
+                <PhoneFrame src="/assets/ilancaster/before-home.jpg" alt="The original iLancaster home screen" />
+              </div>
+            </ScrollReveal>
+            <div className="space-y-6">
+              {[
+                { label: 'No information hierarchy', detail: 'Critical and secondary features competed equally for attention.' },
+                { label: 'Clustered interfaces', detail: 'High information density with no visual breathing room.' },
+                { label: 'Unpredictable navigation', detail: 'Users couldn\'t consistently locate features across sessions.' },
+              ].map((item) => (
+                <ScrollReveal key={item.label}>
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: ACCENT }} aria-hidden="true" />
+                      <span className="text-silver font-medium text-sm">{item.label}</span>
+                    </div>
+                    <p className="text-fog text-sm leading-relaxed pl-5">{item.detail}</p>
                   </div>
-                  <p className="text-fog text-sm leading-relaxed pl-5">{item.detail}</p>
-                </div>
-              </ScrollReveal>
-            ))}
+                </ScrollReveal>
+              ))}
+            </div>
           </div>
         </Section>
 
@@ -247,19 +231,27 @@ export default function ILancasterPage() {
             defined upfront so the system stayed consistent across 80+ screens
             and two designers.
           </Prose>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-            <SlideFigure
-              src="/assets/ilancaster/timetable-day.png"
-              alt="Timetable, day mode"
-              caption="Timetable, day."
-              aspect="9/16"
-            />
-            <SlideFigure
-              src="/assets/ilancaster/timetable-night.png"
-              alt="Timetable, night mode"
-              caption="Timetable, night."
-              aspect="9/16"
-            />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
+            <ScrollReveal>
+              <figure className="flex flex-col items-center">
+                <div className="mx-auto w-full max-w-[200px]">
+                  <PhoneFrame src="/assets/ilancaster/timetable-day.png" alt="Timetable, day mode" />
+                </div>
+                <figcaption className="mt-4 text-[11px] tracking-[0.24em] uppercase text-ash">
+                  Timetable, day.
+                </figcaption>
+              </figure>
+            </ScrollReveal>
+            <ScrollReveal>
+              <figure className="flex flex-col items-center">
+                <div className="mx-auto w-full max-w-[200px]">
+                  <PhoneFrame src="/assets/ilancaster/timetable-night.png" alt="Timetable, night mode" />
+                </div>
+                <figcaption className="mt-4 text-[11px] tracking-[0.24em] uppercase text-ash">
+                  Timetable, night.
+                </figcaption>
+              </figure>
+            </ScrollReveal>
           </div>
         </Section>
 
