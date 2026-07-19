@@ -15,13 +15,13 @@ export default function LucaPage() {
         slug="luca"
         index="02"
         accent={ACCENT}
-        title="LUCA helps Lancaster students land interviews without losing their voice to AI."
+        title="LUCA"
         oneLiner="An AI careers coach that helps Lancaster students land interviews without losing their voice."
         meta={[
-          ['Role', 'Sole product designer'],
-          ['Team', 'Cross-functional · PM + engineers'],
-          ['Timeline', '~5–6 iteration rounds'],
-          ['Outcome', 'Adopted by students & staff'],
+          ['Role', 'Sole Product Designer'],
+          ['Team', ['Product Manager', 'Front-end developer', 'Back-end developer']],
+          ['Industry', 'EdTech · AI'],
+          ['Company', ['ISS Innovation Hub', 'Lancaster University']],
         ]}
       >
         <Section>

@@ -14,11 +14,11 @@ export default function BaariPage() {
         slug="baari"
         index="01"
         accent={ACCENT}
-        title="Baari replaces the paper register at small-business front desks with a live queue."
+        title="Baari"
         oneLiner="A live queue for India’s clinics and salons, shipped to production."
         meta={[
-          ['Role', 'Co-founder · Product Designer'],
-          ['Team', 'Two co-founders — product + infra'],
+          ['Role', 'Co-founder & Product Designer'],
+          ['Team', ['Nandini Pillai — design & product', 'Mayank Yadav — infra & build']],
           ['Build', 'AI coding agents as engineering'],
           ['Status', 'Live · getbaari.in'],
         ]}

@@ -18,13 +18,13 @@ export default function ILancasterPage() {
         slug="ilancaster"
         index="03"
         accent={ACCENT}
-        title="iLancaster runs a Lancaster student’s day — timetable, check-in and campus support in one app."
+        title="iLancaster"
         oneLiner="Redesigning the app every Lancaster University student carries daily."
         meta={[
-          ['Role', 'Product designer (with one other designer)'],
-          ['Team', 'Designers, engineers, PM'],
-          ['Timeline', '4–6 months'],
-          ['Scope', 'Nav, home, check-in, enquiry, notifications'],
+          ['Role', 'Product Designer'],
+          ['Team', ['One other designer', 'Product Manager', 'Engineers']],
+          ['Industry', 'EdTech · Mobile'],
+          ['Company', 'Lancaster University'],
         ]}
       >
         {/* Hero — three phones fanned */}
