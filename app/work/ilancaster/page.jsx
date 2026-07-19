@@ -11,7 +11,7 @@ import ScrollReveal from '@/components/ScrollReveal';
 
 const ACCENT = '#E4002B';
 
-function DecisionRow({ label, decision, why, src, alt, imgSide = 'left' }) {
+function DecisionRow({ label, decision, why, src, alt }) {
   const media = (
     <ScrollReveal>
       <div className="mx-auto w-full max-w-[140px]">
@@ -38,12 +38,9 @@ function DecisionRow({ label, decision, why, src, alt, imgSide = 'left' }) {
     </ScrollReveal>
   );
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-center py-6 md:py-8 border-t border-white/[0.06] first:border-t-0">
-      {imgSide === 'left' ? (
-        <>{media}{text}</>
-      ) : (
-        <>{text}{media}</>
-      )}
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-center py-6 md:py-8 border-t border-white/[0.06]">
+      {text}
+      {media}
     </div>
   );
 }
@@ -68,21 +65,19 @@ export default function ILancasterPage() {
           ['Company', ['ISS Innovation Hub', 'Lancaster University']],
         ]}
       >
-        {/* 1. Problem context — About merged in as first paragraph */}
+        {/* 1. Problem context — problem first, then About */}
         <Section title="Most avoided opening it">
           <Prose>
+            The app contained everything a student needed. It just presented all
+            of it at the same visual weight, with no hierarchy to guide attention
+            and no reliable pattern for where features lived between sessions.
             iLancaster is the native mobile companion for Lancaster University —
             a live campus hub that puts timetable, check-in, enquiries,
             notifications, and welfare resources into one app every student
             already carries.
           </Prose>
-          <Prose>
-            The app contained everything a student needed. It just presented all
-            of it at the same visual weight, with no hierarchy to guide attention
-            and no reliable pattern for where features lived between sessions.
-          </Prose>
-          <div className="grid grid-cols-1 md:grid-cols-[1fr_1.5fr] gap-6 md:gap-10 items-center mt-6">
-            <ScrollReveal>
+          <ScrollReveal>
+            <div className="mt-6 grid grid-cols-1 md:grid-cols-[1fr_1.5fr] gap-6 md:gap-10 items-center">
               <Image
                 src="/assets/ilancaster/before-compare.jpg"
                 alt="The original iLancaster home screen"
@@ -91,25 +86,23 @@ export default function ILancasterPage() {
                 sizes="(max-width: 768px) 100vw, 400px"
                 className="w-full h-auto rounded-xl"
               />
-            </ScrollReveal>
-            <div className="space-y-6">
-              {[
-                { label: 'No information hierarchy', detail: 'Critical and secondary features competed equally for attention.' },
-                { label: 'Clustered interfaces', detail: 'High information density with no visual breathing room.' },
-                { label: 'Unpredictable navigation', detail: 'Users couldn\'t consistently locate features across sessions.' },
-              ].map((item) => (
-                <ScrollReveal key={item.label}>
-                  <div className="space-y-2">
+              <div className="space-y-5">
+                {[
+                  { label: 'No information hierarchy', detail: 'Critical and secondary features competed equally for attention.' },
+                  { label: 'Clustered interfaces', detail: 'High information density with no visual breathing room.' },
+                  { label: 'Unpredictable navigation', detail: 'Users couldn\'t consistently locate features across sessions.' },
+                ].map((item) => (
+                  <div key={item.label} className="space-y-1.5">
                     <div className="flex items-center gap-2">
                       <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: ACCENT }} aria-hidden="true" />
                       <span className="text-silver font-medium text-sm">{item.label}</span>
                     </div>
                     <p className="text-fog text-sm leading-relaxed pl-5">{item.detail}</p>
                   </div>
-                </ScrollReveal>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
+          </ScrollReveal>
         </Section>
 
         {/* 2. The failure story */}
@@ -128,6 +121,28 @@ export default function ILancasterPage() {
             aspect="16/9"
           />
           <PullQuote>The failure was in the sitemap, not the wireframe.</PullQuote>
+
+          {/* Before / After visual bridge — right after the failure */}
+          <ScrollReveal>
+            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 items-start">
+              <figure className="flex flex-col items-center">
+                <div className="w-full max-w-[140px]">
+                  <PhoneFrame src="/assets/ilancaster/before-home-v3.png" alt="Before — the original tile-grid home screen" />
+                </div>
+                <figcaption className="mt-3 text-[11px] tracking-[0.24em] uppercase text-ash">
+                  Before — every feature at equal weight
+                </figcaption>
+              </figure>
+              <figure className="flex flex-col items-center">
+                <div className="w-full max-w-[140px]">
+                  <PhoneFrame src="/assets/ilancaster/home-day.png" alt="After — the redesigned home dashboard" />
+                </div>
+                <figcaption className="mt-3 text-[11px] tracking-[0.24em] uppercase text-ash">
+                  After — timetable, check-in, notifications above the fold
+                </figcaption>
+              </figure>
+            </div>
+          </ScrollReveal>
         </Section>
 
         {/* 3. Marquee decision — Home dashboard, pulled out as SplitRow */}
@@ -151,16 +166,15 @@ export default function ILancasterPage() {
           </p>
         </SplitRow>
 
-        {/* 4. Key design decisions — remaining four as DecisionRows */}
+        {/* 4. Key design decisions — all screens on right, text on left */}
         <Section title="Key design decisions">
-          <div className="mt-6">
+          <div className="divide-y divide-white/[0.06]">
             <DecisionRow
               label="Check-in: three fewer steps"
               decision="Persistent check-in card on the home screen as the primary action."
               why="The most time-sensitive daily action in the app. Students needed it between classes, quickly, on the go — removing three steps from a daily flow has a disproportionate effect."
               src="/assets/ilancaster/checkin-day.png"
               alt="Check-in card on the home screen"
-              imgSide="right"
             />
             <DecisionRow
               label="Raise Enquiry: guided, not open-ended"
@@ -168,7 +182,6 @@ export default function ILancasterPage() {
               why="Users didn&apos;t know how to classify their own enquiries. Presenting every category at once made the problem worse; the guided pattern removes categorisation from the user entirely."
               src="/assets/ilancaster/enquiry-day.png"
               alt="Raise Enquiry — search-first ASK flow"
-              imgSide="left"
             />
             <DecisionRow
               label="Notifications: prioritised, not just listed"
@@ -176,7 +189,6 @@ export default function ILancasterPage() {
               why="A flat notification list carries the implicit message that everything is equally important. Prioritised treatment lets students triage at a glance between lectures."
               src="/assets/ilancaster/notifications-night.png"
               alt="Prioritised notification feed"
-              imgSide="right"
             />
             <DecisionRow
               label="Day & Night mode"
@@ -184,7 +196,6 @@ export default function ILancasterPage() {
               why="Designing them together meant every hierarchy and contrast decision was validated in both environments — not colour-inverted at the end and hoped for the best."
               src="/assets/ilancaster/home-night.png"
               alt="Home dashboard — night mode"
-              imgSide="left"
             />
           </div>
         </Section>
@@ -198,23 +209,23 @@ export default function ILancasterPage() {
             defined upfront so the system stayed consistent across 80+ screens
             and two designers.
           </Prose>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
             <ScrollReveal>
               <figure className="flex flex-col items-center">
-                <div className="mx-auto w-full max-w-[200px]">
+                <div className="mx-auto w-full max-w-[140px]">
                   <PhoneFrame src="/assets/ilancaster/timetable-day.png" alt="Timetable, day mode" />
                 </div>
-                <figcaption className="mt-4 text-[11px] tracking-[0.24em] uppercase text-ash">
+                <figcaption className="mt-3 text-[11px] tracking-[0.24em] uppercase text-ash">
                   Timetable, day.
                 </figcaption>
               </figure>
             </ScrollReveal>
             <ScrollReveal>
               <figure className="flex flex-col items-center">
-                <div className="mx-auto w-full max-w-[200px]">
+                <div className="mx-auto w-full max-w-[140px]">
                   <PhoneFrame src="/assets/ilancaster/timetable-night.png" alt="Timetable, night mode" />
                 </div>
-                <figcaption className="mt-4 text-[11px] tracking-[0.24em] uppercase text-ash">
+                <figcaption className="mt-3 text-[11px] tracking-[0.24em] uppercase text-ash">
                   Timetable, night.
                 </figcaption>
               </figure>
@@ -222,7 +233,7 @@ export default function ILancasterPage() {
           </div>
         </Section>
 
-        {/* 7. What was cut */}
+        {/* 6. What was cut */}
         <Section title="What was traded away, on purpose">
           <SubList
             items={[
@@ -238,9 +249,13 @@ export default function ILancasterPage() {
           </Prose>
         </Section>
 
-        {/* 8. Prototype walkthrough */}
+        {/* 7. Prototype walkthrough */}
         <Section title="Prototype walkthrough">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-end">
+          <Prose>
+            Watch the redesigned home dashboard and check-in flow in motion —
+            the two highest-frequency daily interactions for Lancaster students.
+          </Prose>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-end mt-4">
             <ScrollReveal>
               <figure className="flex flex-col items-center">
                 <PhoneFrame
@@ -268,7 +283,7 @@ export default function ILancasterPage() {
           </div>
         </Section>
 
-        {/* 9. The result */}
+        {/* 8. The result */}
         <Section title="The result" tone="sunken">
           <div className="space-y-0 divide-y divide-white/[0.06]">
             {[
@@ -321,7 +336,7 @@ export default function ILancasterPage() {
           </div>
         </Section>
 
-        {/* 10. What I learned */}
+        {/* 9. What I learned */}
         <Section title="What I learned">
           <SubList
             items={[
