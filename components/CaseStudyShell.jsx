@@ -2,14 +2,16 @@
 
 import Link from 'next/link';
 import { AccentProvider } from '@/lib/caseStudyTheme';
-import { nextCaseStudy } from '@/lib/case-studies';
+import { nextCaseStudy, getCaseStudy } from '@/lib/case-studies';
 import { SITE } from '@/lib/site';
 import DisplayTitle from './DisplayTitle';
 import ScrollReveal from './ScrollReveal';
 import ScrollProgress from './ScrollProgress';
 
-export default function CaseStudyShell({ slug, index, title, oneLiner, meta = [], accent, children }) {
+export default function CaseStudyShell({ slug, index, title, oneLiner, meta = [], accent, readTime, children }) {
   const next = nextCaseStudy(slug);
+  const current = getCaseStudy(slug);
+  const effectiveReadTime = readTime ?? current?.readTime;
   return (
     <AccentProvider accent={accent}>
       <ScrollProgress accent={accent} />
@@ -25,8 +27,8 @@ export default function CaseStudyShell({ slug, index, title, oneLiner, meta = []
             <ScrollReveal>
               <div className="flex items-center gap-4 text-[11px] tracking-[0.24em] uppercase text-fog mb-6">
                 <span style={{ color: accent }}>Case study {index}</span>
-                {meta[3] && <span className="text-ash">·</span>}
-                {meta[3] && <span>{meta[3][1]}</span>}
+                {effectiveReadTime && <span className="text-ash">·</span>}
+                {effectiveReadTime && <span>{effectiveReadTime}</span>}
               </div>
             </ScrollReveal>
             <DisplayTitle>{title}</DisplayTitle>
@@ -72,17 +74,47 @@ export default function CaseStudyShell({ slug, index, title, oneLiner, meta = []
           </div>
         </section>
 
-        {/* Next case study */}
+        {/* Next case study — mini card with accent glow */}
         <section className="px-5 md:px-10 pb-20">
-          <div className="mx-auto max-w-5xl border-t border-white/[0.06] pt-10 flex items-center justify-between">
-            <span className="text-[11px] tracking-[0.24em] uppercase text-ash">Next case study</span>
+          <div className="mx-auto max-w-5xl">
             <Link
               href={next.path}
-              className="group flex items-center gap-3 text-silver font-heading tracking-tightest text-2xl md:text-3xl hover:text-lime transition-colors"
-              style={{ ['--accent']: next.accent }}
+              className="group card-tex block relative w-full py-8 md:py-10 px-6 md:px-8 overflow-hidden"
             >
-              {next.title}
-              <span className="card-arrow" aria-hidden="true">↗</span>
+              <div
+                className="pointer-events-none absolute -right-32 top-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-3xl opacity-20 transition-opacity duration-500 group-hover:opacity-30"
+                style={{ background: next.accent }}
+                aria-hidden="true"
+              />
+              <div className="relative flex items-center justify-between gap-6">
+                <div className="min-w-0">
+                  <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-3">
+                    Next case study
+                  </div>
+                  <div className="flex items-baseline gap-4">
+                    <span
+                      className="text-[11px] tracking-[0.24em] uppercase"
+                      style={{ color: next.accent }}
+                    >
+                      {next.index}
+                    </span>
+                    <h3
+                      className="font-heading tracking-tightest text-silver leading-none"
+                      style={{ fontSize: 'clamp(28px, 3.4vw, 44px)' }}
+                    >
+                      {next.title}
+                    </h3>
+                  </div>
+                  {next.oneLiner && (
+                    <p className="mt-3 text-fog text-sm md:text-base max-w-2xl">
+                      {next.oneLiner}
+                    </p>
+                  )}
+                </div>
+                <span className="card-arrow text-silver text-2xl shrink-0" aria-hidden="true">
+                  ↗
+                </span>
+              </div>
             </Link>
           </div>
         </section>

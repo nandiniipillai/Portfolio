@@ -60,7 +60,7 @@ function PhonesMock({ images }) {
 }
 
 export default function PortfolioCard({ study, featured = false }) {
-  const { path, title, oneLiner, role, status, accent, category, tags = [], card } = study;
+  const { path, title, oneLiner, whyHere, index, accent, category, card } = study;
   const containerCls = featured
     ? 'md:col-span-2'
     : 'md:col-span-1';
@@ -86,16 +86,11 @@ export default function PortfolioCard({ study, featured = false }) {
               </div>
               <p className="mt-3 text-fog text-sm md:text-base max-w-xs">{oneLiner}</p>
             </div>
-            <div className="mt-6 flex flex-wrap gap-2">
-              {tags.map((t) => (
-                <span
-                  key={t}
-                  className="text-[10px] uppercase tracking-wider text-fog border border-white/[0.08] rounded-full px-3 py-1"
-                >
-                  {t}
-                </span>
-              ))}
-            </div>
+            {whyHere && (
+              <p className="text-ash text-xs md:text-sm italic leading-relaxed max-w-xs mt-6">
+                {whyHere}
+              </p>
+            )}
           </div>
           <div
             className={`relative flex-1 min-h-[180px] md:min-h-0 ${
@@ -123,13 +118,12 @@ export default function PortfolioCard({ study, featured = false }) {
             </div>
           </div>
         </div>
-        <span className="absolute top-6 right-6 card-arrow text-silver text-xl" aria-hidden="true">↗</span>
-        {(role || status) && (
-          <div className="absolute bottom-6 right-6 text-right text-[11px] text-ash">
-            {role && <div>{role}</div>}
-            {status && <div className="text-fog">{status}</div>}
-          </div>
+        {index && (
+          <span className="absolute top-6 left-6 text-[11px] tracking-[0.24em] uppercase text-ash z-10">
+            {index}
+          </span>
         )}
+        <span className="absolute top-6 right-6 card-arrow text-silver text-xl" aria-hidden="true">↗</span>
       </Link>
     </ScrollReveal>
   );

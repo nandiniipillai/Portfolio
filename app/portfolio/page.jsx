@@ -16,6 +16,9 @@ export default function PortfolioPage() {
     >
       <div className="mx-auto max-w-6xl">
         <BlurReveal>
+          <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-4">
+            Selected work · {CASE_STUDIES.length} cases
+          </div>
           <p
             className="font-heading tracking-tightest text-silver max-w-3xl"
             style={{ fontSize: 'clamp(28px, 4vw, 48px)', lineHeight: 1.1 }}

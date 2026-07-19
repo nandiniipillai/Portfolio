@@ -12,7 +12,7 @@ export default function OtherProjects() {
       <div className="flex items-baseline justify-between mb-6">
         <h2 className="text-[11px] tracking-[0.24em] uppercase text-ash font-medium">Other projects</h2>
         <span className="text-[11px] tracking-[0.24em] uppercase text-ash">
-          Strategy · early work · on request
+          Strategy &amp; early work
         </span>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
