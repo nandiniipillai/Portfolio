@@ -104,8 +104,8 @@ export default function ILancasterPage() {
               alt="The original iLancaster home screen — tile grid with no hierarchy"
               width={422}
               height={418}
-              sizes="220px"
-              className="w-[220px] h-auto rounded-xl"
+              sizes="300px"
+              className="w-[280px] md:w-[320px] h-auto rounded-xl"
             />
           </div>
         </Section>
@@ -156,13 +156,13 @@ export default function ILancasterPage() {
             <ScrollReveal>
               <div className="flex gap-3 justify-end items-start">
                 <figure className="flex flex-col items-center">
-                  <div className="w-full max-w-[110px]">
+                  <div className="w-full max-w-[150px]">
                     <PhoneFrame src="/assets/ilancaster/home-day.png" alt="Home dashboard — day mode" />
                   </div>
                   <figcaption className="mt-1.5 text-[9px] tracking-[0.2em] uppercase text-ash">Day</figcaption>
                 </figure>
                 <figure className="flex flex-col items-center">
-                  <div className="w-full max-w-[110px]">
+                  <div className="w-full max-w-[150px]">
                     <PhoneFrame src="/assets/ilancaster/home-night.png" alt="Home dashboard — night mode" />
                   </div>
                   <figcaption className="mt-1.5 text-[9px] tracking-[0.2em] uppercase text-ash">Night</figcaption>
@@ -228,7 +228,7 @@ export default function ILancasterPage() {
             ].map((f) => (
               <ScrollReveal key={f.label}>
                 <figure className="flex flex-col items-center">
-                  <div className="w-full max-w-[110px]">
+                  <div className="w-full max-w-[140px]">
                     <PhoneFrame src={f.src} alt={f.label} fit="contain" />
                   </div>
                   <figcaption className="mt-2 text-[10px] tracking-[0.2em] uppercase text-ash">{f.label}</figcaption>
@@ -262,7 +262,7 @@ export default function ILancasterPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-end mt-4">
             <ScrollReveal>
               <figure className="flex flex-col items-center">
-                <div className="w-full max-w-[170px]">
+                <div className="w-full max-w-[200px]">
                   <PhoneFrame
                     video="/assets/ilancaster/walkthrough-home.mp4"
                     poster="/assets/ilancaster/home-day.png"
@@ -276,7 +276,7 @@ export default function ILancasterPage() {
             </ScrollReveal>
             <ScrollReveal>
               <figure className="flex flex-col items-center">
-                <div className="w-full max-w-[170px]">
+                <div className="w-full max-w-[200px]">
                   <PhoneFrame
                     video="/assets/ilancaster/walkthrough-checkin.mp4"
                     poster="/assets/ilancaster/checkin-day.png"

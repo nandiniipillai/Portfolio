@@ -14,8 +14,8 @@ export default function PhoneFrame({
 }) {
   return (
     <div
-      className={`relative mx-auto w-full rounded-[36px] bg-black border-[3px] border-black ring-1 ring-white/[0.08] shadow-2xl overflow-hidden ${className}`}
-      style={{ aspectRatio: '1170/2532', maxWidth: '320px' }}
+      className={`relative mx-auto w-full max-w-[320px] rounded-[36px] bg-black border-[3px] border-black ring-1 ring-white/[0.08] shadow-2xl overflow-hidden ${className}`}
+      style={{ aspectRatio: '1170/2532' }}
     >
       {video ? (
         <video
