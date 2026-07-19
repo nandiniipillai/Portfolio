@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import CaseStudyShell from '@/components/CaseStudyShell';
 import { Section, Prose, SubList, PullQuote } from '@/components/CaseBits';
 import SlideFigure from '@/components/SlideFigure';
@@ -13,23 +14,23 @@ const ACCENT = '#E4002B';
 function DecisionRow({ label, decision, why, src, alt, imgSide = 'left' }) {
   const media = (
     <ScrollReveal>
-      <div className="mx-auto w-full max-w-[200px]">
+      <div className="mx-auto w-full max-w-[140px]">
         <PhoneFrame src={src} alt={alt} />
       </div>
     </ScrollReveal>
   );
   const text = (
     <ScrollReveal>
-      <div className="space-y-4">
+      <div className="space-y-3">
         <div className="text-[11px] tracking-[0.24em] uppercase text-ash">Design decision</div>
-        <h3 className="font-heading tracking-tightest text-silver text-2xl md:text-3xl leading-tight">
+        <h3 className="font-heading tracking-tightest text-silver text-xl md:text-2xl leading-tight">
           {label}
         </h3>
-        <p className="text-fog text-base md:text-lg leading-relaxed">
+        <p className="text-fog text-sm md:text-base leading-relaxed">
           <span className="text-silver font-medium">Decision. </span>
           {decision}
         </p>
-        <p className="text-fog text-base md:text-lg leading-relaxed">
+        <p className="text-fog text-sm md:text-base leading-relaxed">
           <span className="text-silver font-medium">Why. </span>
           {why}
         </p>
@@ -37,7 +38,7 @@ function DecisionRow({ label, decision, why, src, alt, imgSide = 'left' }) {
     </ScrollReveal>
   );
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-14 items-center py-10 md:py-14 border-t border-white/[0.06] first:border-t-0">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-center py-6 md:py-8 border-t border-white/[0.06] first:border-t-0">
       {imgSide === 'left' ? (
         <>{media}{text}</>
       ) : (
@@ -80,11 +81,16 @@ export default function ILancasterPage() {
             of it at the same visual weight, with no hierarchy to guide attention
             and no reliable pattern for where features lived between sessions.
           </Prose>
-          <div className="grid grid-cols-1 md:grid-cols-[1fr_1.5fr] gap-8 md:gap-12 items-center mt-8">
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_1.5fr] gap-6 md:gap-10 items-center mt-6">
             <ScrollReveal>
-              <div className="mx-auto w-full max-w-[220px]">
-                <PhoneFrame src="/assets/ilancaster/before-home-v3.png" alt="The original iLancaster home screen" />
-              </div>
+              <Image
+                src="/assets/ilancaster/before-compare.jpg"
+                alt="The original iLancaster home screen"
+                width={600}
+                height={900}
+                sizes="(max-width: 768px) 100vw, 400px"
+                className="w-full h-auto rounded-xl"
+              />
             </ScrollReveal>
             <div className="space-y-6">
               {[
@@ -240,9 +246,9 @@ export default function ILancasterPage() {
                 <PhoneFrame
                   video="/assets/ilancaster/walkthrough-home.mp4"
                   poster="/assets/ilancaster/home-day.png"
-                  className="!max-w-[240px]"
+                  className="!max-w-[180px]"
                 />
-                <figcaption className="mt-4 text-[11px] tracking-[0.24em] uppercase text-ash">
+                <figcaption className="mt-3 text-[11px] tracking-[0.24em] uppercase text-ash">
                   Home dashboard
                 </figcaption>
               </figure>
@@ -252,9 +258,9 @@ export default function ILancasterPage() {
                 <PhoneFrame
                   video="/assets/ilancaster/walkthrough-checkin.mp4"
                   poster="/assets/ilancaster/checkin-day.png"
-                  className="!max-w-[240px]"
+                  className="!max-w-[180px]"
                 />
-                <figcaption className="mt-4 text-[11px] tracking-[0.24em] uppercase text-ash">
+                <figcaption className="mt-3 text-[11px] tracking-[0.24em] uppercase text-ash">
                   Check-in flow
                 </figcaption>
               </figure>
