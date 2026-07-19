@@ -45,7 +45,17 @@ export default function CaseStudyShell({ slug, index, title, oneLiner, meta = []
                 {meta.map(([label, value], i) => (
                   <div key={i}>
                     <dt className="text-[11px] tracking-[0.24em] uppercase text-ash mb-1.5">{label}</dt>
-                    <dd className="text-silver text-sm md:text-base">{value}</dd>
+                    <dd className="text-silver text-sm md:text-base">
+                      {Array.isArray(value) ? (
+                        <div className="space-y-0.5">
+                          {value.map((v, j) => (
+                            <div key={j}>{v}</div>
+                          ))}
+                        </div>
+                      ) : (
+                        value
+                      )}
+                    </dd>
                   </div>
                 ))}
               </dl>
