@@ -5,15 +5,71 @@ import Zoom from 'react-medium-image-zoom';
 import 'react-medium-image-zoom/dist/styles.css';
 import { motion } from 'framer-motion';
 import CaseStudyShell from '@/components/CaseStudyShell';
-import { Section, Prose, SubList, PullQuote, MetricCard, MetricGrid, AssetPlaceholder, HandNote } from '@/components/CaseBits';
+import { Section, Prose, SubList, PullQuote } from '@/components/CaseBits';
 import SlideFigure from '@/components/SlideFigure';
 import ScrollReveal from '@/components/ScrollReveal';
 
 const ACCENT = '#E4002B';
 
+// A single "Key design decision" row: screen on one side, decision + why on the other.
+function DecisionRow({ label, decision, why, src, alt, imgSide = 'left' }) {
+  const media = (
+    <ScrollReveal>
+      <div className="relative mx-auto w-full max-w-[220px]" style={{ aspectRatio: '9/16' }}>
+        <Zoom>
+          <Image
+            src={src}
+            alt={alt}
+            fill
+            sizes="(max-width: 768px) 60vw, 220px"
+            className="object-contain rounded-2xl"
+          />
+        </Zoom>
+      </div>
+    </ScrollReveal>
+  );
+  const text = (
+    <ScrollReveal>
+      <div className="space-y-4">
+        <div className="text-[11px] tracking-[0.24em] uppercase text-ash">Design decision</div>
+        <h3 className="font-heading tracking-tightest text-silver text-2xl md:text-3xl leading-tight">
+          {label}
+        </h3>
+        <p className="text-fog text-base md:text-lg leading-relaxed">
+          <span className="text-silver font-medium">Decision. </span>
+          {decision}
+        </p>
+        <p className="text-fog text-base md:text-lg leading-relaxed">
+          <span className="text-silver font-medium">Why. </span>
+          {why}
+        </p>
+      </div>
+    </ScrollReveal>
+  );
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-14 items-center py-10 md:py-14 border-t border-white/[0.06] first:border-t-0">
+      {imgSide === 'left' ? (
+        <>
+          {media}
+          {text}
+        </>
+      ) : (
+        <>
+          {text}
+          {media}
+        </>
+      )}
+    </div>
+  );
+}
+
 export default function ILancasterPage() {
   return (
-    <motion.div initial={{ opacity: 0, filter: 'blur(10px)' }} animate={{ opacity: 1, filter: 'blur(0px)' }} transition={{ duration: 0.5 }}>
+    <motion.div
+      initial={{ opacity: 0, filter: 'blur(10px)' }}
+      animate={{ opacity: 1, filter: 'blur(0px)' }}
+      transition={{ duration: 0.5 }}
+    >
       <CaseStudyShell
         slug="ilancaster"
         index="03"
@@ -27,7 +83,7 @@ export default function ILancasterPage() {
           ['Company', 'Lancaster University'],
         ]}
       >
-        {/* Hero — three phones fanned */}
+        {/* 1. Hero — three phones fanned */}
         <section className="py-8 md:py-12 px-5 md:px-10">
           <ScrollReveal>
             <div className="mx-auto max-w-6xl">
@@ -47,112 +103,219 @@ export default function ILancasterPage() {
           </ScrollReveal>
         </section>
 
-        <Section>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <SlideFigure src="/assets/ilancaster/home-day.png" alt="iLancaster home dashboard (day mode)" caption="Day mode." aspect="9/16" />
-            <SlideFigure src="/assets/ilancaster/home-night.png" alt="iLancaster home dashboard (night mode)" caption="Night mode — designed in parallel, not inverted." aspect="9/16" />
-          </div>
-          <div className="text-center mt-4">
-            <HandNote rotate={-2}>same screen, both modes — designed as equals ✦</HandNote>
-          </div>
-        </Section>
-
+        {/* 2. Problem context — real Before screen, no placeholder */}
         <Section title="Every Lancaster student had the app, and most avoided opening it">
           <Prose>
-            The redesign began as a simple observation — the app contained everything a student needed, yet students avoided it, a pain I knew firsthand as a Lancaster student at the time. Every feature sat at the same visual weight, screens packed information with no breathing room, and nobody could predict where features lived between sessions. Complaints about navigation and the dated interface piled up until the university invested in a full redesign. I owned the navigation, home, check-in, enquiry and notification flows, splitting the feature set with one other designer alongside a product designer, engineers and a product manager.
+            The app contained everything a student needed. It just presented all
+            of it at the same visual weight, with no hierarchy to guide attention
+            and no reliable pattern for where features lived between sessions.
           </Prose>
-          <AssetPlaceholder label="Before — the original tile-grid home screen with three callouts: equal visual weight, information density, unpredictable navigation" aspect="16/9" />
-        </Section>
-
-        <Section title="Features were re-ranked by how often a student actually needs them" tone="sunken">
-          <Prose>
-            Research named navigation as the primary failure point, so the information architecture was rebuilt before any screen was designed. Daily actions like check-in and timetable were elevated, occasional tasks moved to contextual access points, and everything else sat behind one deliberate tap. One rule governed every screen — show what is needed now, reveal complexity only when asked.
-          </Prose>
-          <PullQuote>Show what is needed now, and reveal complexity only when asked.</PullQuote>
-        </Section>
-
-        <Section title="The home screen shows today and nothing else">
-          <Prose>
-            Only today’s timetable, the check-in button and active notifications appear above the fold, answering the complaint that the most-needed features were hardest to reach.
-          </Prose>
-          <div className="mt-6">
-            <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-3">Check-in lost three steps because it happens between classes</div>
-            <Prose>
-              Check-in is the most time-sensitive daily action in the app, done on the move between lectures. Making it a persistent home-screen action removed three steps from a flow students run every day.
-            </Prose>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-            <SlideFigure src="/assets/ilancaster/checkin-day.png" alt="Check-in card, day mode" caption="Persistent check-in card, day mode." aspect="9/16" />
-            <SlideFigure src="/assets/ilancaster/timetable-day.png" alt="Timetable week view" caption="Today’s timetable — above the fold." aspect="9/16" />
-          </div>
-        </Section>
-
-        <Section title="Raise Enquiry stopped asking students to classify their own problem" tone="sunken">
-          <Prose>
-            Users did not know which category their enquiry belonged to, and presenting every category at once made it worse. Open selection became a progressive guided flow that narrows options at each step, removing the categorisation burden entirely.
-          </Prose>
-          <div className="mt-6">
-            <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-3">Notifications triage themselves</div>
-            <Prose>
-              A flat feed told students everything was equally important. Visual hierarchy now separates urgent alerts from informational updates, letting students triage at a glance between lectures.
-            </Prose>
-          </div>
-          <SlideFigure src="/assets/ilancaster/notifications-night.png" alt="Prioritised notification feed" caption="Prioritised feed — urgency separated from informational noise." aspect="9/16" />
-        </Section>
-
-        <Section title="One design system, defined once, held across 80+ screens">
-          <Prose>
-            Lancaster’s existing colour and style guidelines were a fixed constraint, so the transformation came from structure, not a rebrand. Typography, colour, spacing and component rules were defined upfront and applied across 80+ screens, with day and night mode designed in parallel so every contrast decision was validated in both environments, never colour-inverted at the end. Engineers and stakeholders reviewed work mid-process to flag anything broken or hard to build.
-          </Prose>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-            <SlideFigure src="/assets/ilancaster/timetable-night.png" alt="Timetable, night mode" caption="Timetable, night mode." aspect="9/16" />
-            <SlideFigure src="/assets/ilancaster/events-day.png" alt="Events tab, day mode" caption="Events tab, day mode." aspect="9/16" />
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-8 md:gap-12 items-center mt-8">
+            <SlideFigure
+              src="/assets/ilancaster/before-tile-grid.png"
+              alt="The original iLancaster tile-grid home screen"
+              caption="Before — the tile-grid home screen. Every feature equal, no clear next step."
+              aspect="1/1"
+            />
+            <div className="space-y-4">
+              <div className="flex items-start gap-3">
+                <span className="mt-1.5 w-1.5 h-1.5 rounded-full shrink-0" style={{ background: ACCENT }} aria-hidden="true" />
+                <p className="text-fog text-base md:text-lg leading-relaxed">
+                  <span className="text-silver font-medium">No information hierarchy.</span>{' '}
+                  Critical and secondary features competed equally for attention.
+                </p>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="mt-1.5 w-1.5 h-1.5 rounded-full shrink-0" style={{ background: ACCENT }} aria-hidden="true" />
+                <p className="text-fog text-base md:text-lg leading-relaxed">
+                  <span className="text-silver font-medium">Clustered interfaces.</span>{' '}
+                  High information density with no visual breathing room.
+                </p>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="mt-1.5 w-1.5 h-1.5 rounded-full shrink-0" style={{ background: ACCENT }} aria-hidden="true" />
+                <p className="text-fog text-base md:text-lg leading-relaxed">
+                  <span className="text-silver font-medium">Unpredictable navigation.</span>{' '}
+                  Users couldn’t consistently locate features across sessions.
+                </p>
+              </div>
+            </div>
           </div>
         </Section>
 
+        {/* 3. The failure story — MOVED UP so it frames the decisions */}
         <Section title="Round one testing failed, and the failure was architectural" tone="sunken">
           <Prose>
-            The first wireframes clarified visual structure, but users still could not predict where features lived. That was an information architecture problem surfacing through wireframes, not a visual one, and it forced a mid-process navigation restructure. Round two flagged enquiry and search as remaining friction; by round three, navigation logic tested as resolved.
+            The first wireframes clarified visual structure, but users still
+            couldn’t reliably predict where features lived. That was an
+            information architecture problem surfacing through wireframes, not a
+            visual one, and it forced a mid-process navigation restructure
+            before continuing.
+          </Prose>
+          <SlideFigure
+            src="/assets/ilancaster/wireframes-round-one.jpg"
+            alt="Round-one wireframes tiled together"
+            caption="Round one — the wireframes read cleanly on paper and still failed in testing."
+            aspect="16/9"
+          />
+          <PullQuote>The failure was in the sitemap, not the wireframe.</PullQuote>
+        </Section>
+
+        {/* 4. Key design decisions — CONSOLIDATED gallery, five rows */}
+        <Section title="Key design decisions">
+          <Prose>
+            Every decision below is a direct response to a specific research
+            finding or a failure caught in wireframe testing — not a visual
+            preference.
+          </Prose>
+          <div className="mt-6">
+            <DecisionRow
+              label="Home dashboard"
+              decision="Surface only today’s timetable, the check-in button and active notifications above the fold."
+              why="The core complaint was that the most-needed features were the hardest to reach. Everything else lives one deliberate tap away."
+              src="/assets/ilancaster/home-day.png"
+              alt="Home dashboard — day mode"
+              imgSide="left"
+            />
+            <DecisionRow
+              label="Check-in: three fewer steps"
+              decision="Persistent check-in card on the home screen as the primary action."
+              why="The most time-sensitive daily action in the app. Students needed it between classes, quickly, on the go — removing three steps from a daily flow has a disproportionate effect."
+              src="/assets/ilancaster/checkin-day.png"
+              alt="Check-in card on the home screen"
+              imgSide="right"
+            />
+            <DecisionRow
+              label="Raise Enquiry: guided, not open-ended"
+              decision="Replaced open category selection with a progressive guided flow that narrows options at each step."
+              why="Users didn’t know how to classify their own enquiries. Presenting every category at once made the problem worse; the guided pattern removes categorisation from the user entirely."
+              src="/assets/ilancaster/enquiry-day.png"
+              alt="Raise Enquiry — search-first ASK flow"
+              imgSide="left"
+            />
+            <DecisionRow
+              label="Notifications: prioritised, not just listed"
+              decision="Visual hierarchy inside the notification feed separates urgent alerts from informational updates."
+              why="A flat notification list carries the implicit message that everything is equally important. Prioritised treatment lets students triage at a glance between lectures."
+              src="/assets/ilancaster/notifications-night.png"
+              alt="Prioritised notification feed"
+              imgSide="right"
+            />
+            <DecisionRow
+              label="Day & Night mode"
+              decision="Both modes designed in parallel as equal, first-class experiences from day one."
+              why="Designing them together meant every hierarchy and contrast decision was validated in both environments — not colour-inverted at the end and hoped for the best."
+              src="/assets/ilancaster/home-night.png"
+              alt="Home dashboard — night mode"
+              imgSide="left"
+            />
+          </div>
+        </Section>
+
+        {/* 5. Design system — brand constraint */}
+        <Section title="One design system, held across 80+ screens" tone="sunken">
+          <Prose>
+            Lancaster’s existing colour and style guidelines were a fixed
+            constraint, so the transformation came from structure — not a
+            rebrand. Typography, colour, spacing and component rules were
+            defined upfront so the system stayed consistent across 80+ screens
+            and two designers.
           </Prose>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-            <SlideFigure src="/assets/ilancaster/search-day.png" alt="Search results, day mode" caption="Search, day." aspect="9/16" />
-            <SlideFigure src="/assets/ilancaster/search-night.png" alt="Search results, night mode" caption="Search, night." aspect="9/16" />
+            <SlideFigure
+              src="/assets/ilancaster/timetable-day.png"
+              alt="Timetable, day mode"
+              caption="Timetable, day."
+              aspect="9/16"
+            />
+            <SlideFigure
+              src="/assets/ilancaster/timetable-night.png"
+              alt="Timetable, night mode"
+              caption="Timetable, night."
+              aspect="9/16"
+            />
           </div>
         </Section>
 
+        {/* 6. What was cut */}
         <Section title="What was traded away, on purpose">
-          <SubList items={[
-            'Secondary features lost their home-screen presence and moved to contextual access points',
-            'Open category choice in enquiries was removed in favour of a guided path',
-            'Above-the-fold space capped at three elements, whatever else competed for it',
-            'A new visual identity — the redesign stayed inside Lancaster’s existing brand',
-          ]} />
-          <Prose>Each cut served the same bet: fewer things visible, every visible thing findable.</Prose>
+          <SubList
+            items={[
+              'Secondary features lost their home-screen presence and moved to contextual access points',
+              'Open category choice in enquiries was replaced by a guided path',
+              'Above-the-fold space capped at three elements, whatever else competed for it',
+              'A new visual identity — the redesign stayed inside Lancaster’s existing brand',
+            ]}
+          />
+          <Prose>
+            Each cut served the same bet: fewer things visible, every visible
+            thing findable.
+          </Prose>
         </Section>
 
-        <Section title="Navigation went from the top student complaint to resolved" tone="sunken">
-          <Prose>The redesign shipped live to Lancaster students, who responded well to the new look and feel.</Prose>
-          <MetricGrid>
-            <MetricCard value="3 fewer" label="Steps to check in" />
-            <MetricCard value="80+" label="Screens on one consistent design system" />
-            <MetricCard value="3 rounds" label="Navigation went from unclear to resolved" />
-          </MetricGrid>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
-            <SlideFigure src="/assets/ilancaster/welfare-day.png" alt="Welfare tab, day mode" caption="Welfare, day." aspect="9/16" />
-            <SlideFigure src="/assets/ilancaster/academic-day.png" alt="Academic tab, day mode" caption="Academic, day." aspect="9/16" />
-            <SlideFigure src="/assets/ilancaster/news-day.png" alt="News tab, day mode" caption="News, day." aspect="9/16" />
+        {/* 7. Result — timeline of impact, matching SmartUp style */}
+        <Section title="The result" tone="sunken">
+          <div className="space-y-0 divide-y divide-white/[0.06]">
+            {[
+              {
+                num: '01',
+                phase: 'Navigation',
+                headline: 'The top complaint stopped being the top complaint.',
+                support:
+                  'By round three of testing, navigation logic tested as resolved. It had been the primary failure point at round one.',
+              },
+              {
+                num: '02',
+                phase: 'Check-in',
+                headline: 'Three fewer steps on the daily action.',
+                support:
+                  'Moving check-in to the home screen as a persistent primary action cut the most time-sensitive flow to its minimum.',
+              },
+              {
+                num: '03',
+                phase: 'System',
+                headline: 'One design system across 80+ screens, day and night.',
+                support:
+                  'Two designers, one shared system, both modes designed in parallel. Shipped live to Lancaster students.',
+              },
+            ].map((row) => (
+              <ScrollReveal key={row.num}>
+                <div className="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-4 md:gap-10 py-8 md:py-10">
+                  <div>
+                    <span
+                      className="font-heading tracking-tightest leading-none"
+                      style={{ color: ACCENT, fontSize: 'clamp(36px, 4vw, 56px)', letterSpacing: '-0.04em' }}
+                    >
+                      {row.num}
+                    </span>
+                    <div className="text-[11px] tracking-[0.24em] uppercase text-ash mt-2">
+                      {row.phase}
+                    </div>
+                  </div>
+                  <div>
+                    <p className="font-heading tracking-tight text-silver text-xl md:text-2xl leading-tight">
+                      {row.headline}
+                    </p>
+                    <p className="text-fog text-base md:text-lg leading-relaxed mt-3 max-w-2xl">
+                      {row.support}
+                    </p>
+                  </div>
+                </div>
+              </ScrollReveal>
+            ))}
           </div>
         </Section>
 
-        <Section title="What I learned and where it goes next">
-          <SubList items={[
-            'Diagnose the layer before fixing the symptom — our round-one failure looked visual but was architectural.',
-            'Splitting features between two designers works when the design system comes first.',
-            'Feasibility checks with engineers mid-process beat discovering problems at handoff.',
-            'A brand constraint is not a ceiling — hierarchy and structure changed the experience more than a restyle would have.',
-            'This project was fully manual; next time AI handles research synthesis, ideation and prototype variants.',
-          ]} />
-          <Prose>Next: apply the same frequency-first logic to the untouched flows, starting with search.</Prose>
+        {/* 8. What I learned */}
+        <Section title="What I learned">
+          <SubList
+            items={[
+              'Diagnose the layer before fixing the symptom — round one’s failure looked visual but was architectural.',
+              'Splitting features between two designers works when the design system comes first.',
+              'Feasibility checks with engineers mid-process beat discovering problems at handoff.',
+              'A brand constraint is not a ceiling — hierarchy and structure changed the experience more than a restyle would have.',
+            ]}
+          />
         </Section>
       </CaseStudyShell>
     </motion.div>
