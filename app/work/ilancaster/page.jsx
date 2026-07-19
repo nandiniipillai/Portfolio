@@ -1,9 +1,13 @@
 'use client';
 
+import Image from 'next/image';
+import Zoom from 'react-medium-image-zoom';
+import 'react-medium-image-zoom/dist/styles.css';
 import { motion } from 'framer-motion';
 import CaseStudyShell from '@/components/CaseStudyShell';
 import { Section, Prose, SubList, PullQuote, MetricCard, MetricGrid, AssetPlaceholder, HandNote } from '@/components/CaseBits';
 import SlideFigure from '@/components/SlideFigure';
+import ScrollReveal from '@/components/ScrollReveal';
 
 const ACCENT = '#E4002B';
 
@@ -23,6 +27,26 @@ export default function ILancasterPage() {
           ['Scope', 'Nav, home, check-in, enquiry, notifications'],
         ]}
       >
+        {/* Hero — three phones fanned */}
+        <section className="py-8 md:py-12 px-5 md:px-10">
+          <ScrollReveal>
+            <div className="mx-auto max-w-6xl">
+              <div className="relative w-full" style={{ aspectRatio: '691/361' }}>
+                <Zoom>
+                  <Image
+                    src="/assets/ilancaster/cover-hero.png"
+                    alt="Three iLancaster phones — Notifications, Home (Hello Naa), Event Details"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 1100px"
+                    className="object-contain"
+                    priority
+                  />
+                </Zoom>
+              </div>
+            </div>
+          </ScrollReveal>
+        </section>
+
         <Section>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <SlideFigure src="/assets/ilancaster/home-day.png" alt="iLancaster home dashboard (day mode)" caption="Day mode." aspect="9/16" />
