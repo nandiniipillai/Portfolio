@@ -4,18 +4,24 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import CaseStudyShell from '@/components/CaseStudyShell';
 import { Section, Prose, SubList, PullQuote } from '@/components/CaseBits';
-import SlideFigure from '@/components/SlideFigure';
 import SplitRow from '@/components/SplitRow';
 import PhoneFrame from '@/components/PhoneFrame';
 import ScrollReveal from '@/components/ScrollReveal';
 
 const ACCENT = '#E4002B';
 
-function DecisionRow({ label, decision, why, src, alt }) {
+function DecisionRow({ label, decision, why, src, alt, imgSide = 'left' }) {
   const media = (
     <ScrollReveal>
-      <div className="mx-auto w-full max-w-[140px]">
-        <PhoneFrame src={src} alt={alt} />
+      <div className="mx-auto w-full max-w-[180px]">
+        <Image
+          src={src}
+          alt={alt}
+          width={390}
+          height={844}
+          sizes="200px"
+          className="w-full h-auto rounded-2xl"
+        />
       </div>
     </ScrollReveal>
   );
@@ -38,9 +44,12 @@ function DecisionRow({ label, decision, why, src, alt }) {
     </ScrollReveal>
   );
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-center py-6 md:py-8 border-t border-white/[0.06]">
-      {text}
-      {media}
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-center py-6 md:py-8 border-t border-white/[0.06] first:border-t-0">
+      {imgSide === 'left' ? (
+        <>{media}{text}</>
+      ) : (
+        <>{text}{media}</>
+      )}
     </div>
   );
 }
@@ -65,7 +74,7 @@ export default function ILancasterPage() {
           ['Company', ['ISS Innovation Hub', 'Lancaster University']],
         ]}
       >
-        {/* 1. Problem context — problem first, then About */}
+        {/* 1. Problem — before image on right, bullets on left */}
         <Section title="Most avoided opening it">
           <Prose>
             The app contained everything a student needed. It just presented all
@@ -77,15 +86,7 @@ export default function ILancasterPage() {
             already carries.
           </Prose>
           <ScrollReveal>
-            <div className="mt-6 grid grid-cols-1 md:grid-cols-[1fr_1.5fr] gap-6 md:gap-10 items-center">
-              <Image
-                src="/assets/ilancaster/before-compare.jpg"
-                alt="The original iLancaster home screen"
-                width={1920}
-                height={805}
-                sizes="(max-width: 768px) 100vw, 600px"
-                className="w-full h-auto rounded-xl"
-              />
+            <div className="mt-6 grid grid-cols-1 md:grid-cols-[1.5fr_1fr] gap-6 md:gap-10 items-center">
               <div className="space-y-5">
                 {[
                   { label: 'No information hierarchy', detail: 'Critical and secondary features competed equally for attention.' },
@@ -101,11 +102,19 @@ export default function ILancasterPage() {
                   </div>
                 ))}
               </div>
+              <Image
+                src="/assets/ilancaster/before-home-v3.png"
+                alt="The original iLancaster home screen — tile grid with no hierarchy"
+                width={422}
+                height={418}
+                sizes="(max-width: 768px) 50vw, 280px"
+                className="w-full h-auto rounded-xl"
+              />
             </div>
           </ScrollReveal>
         </Section>
 
-        {/* 2. The failure story */}
+        {/* 2. The failure story — 13.jpg replaces wireframes */}
         <Section title="Round one testing failed, and the failure was architectural" tone="sunken">
           <Prose>
             The first wireframes clarified visual structure, but users still
@@ -114,43 +123,20 @@ export default function ILancasterPage() {
             visual one, and it forced a mid-process navigation restructure
             before continuing.
           </Prose>
-          <SlideFigure
-            src="/assets/ilancaster/wireframes-round-one.jpg"
-            alt="Round-one wireframes tiled together"
-            caption="Round one — the wireframes read cleanly on paper and still failed in testing."
-            aspect="16/9"
-          />
-          <PullQuote>The failure was in the sitemap, not the wireframe.</PullQuote>
-
-          {/* Before / After visual bridge — right after the failure */}
           <ScrollReveal>
-            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 items-start">
-              <figure className="flex flex-col items-center">
-                <Image
-                  src="/assets/ilancaster/before-home-v3.png"
-                  alt="Before — the original tile-grid home screen"
-                  width={422}
-                  height={418}
-                  sizes="(max-width: 768px) 50vw, 200px"
-                  className="w-full max-w-[200px] h-auto rounded-xl"
-                />
-                <figcaption className="mt-3 text-[11px] tracking-[0.24em] uppercase text-ash">
-                  Before — every feature at equal weight
-                </figcaption>
-              </figure>
-              <figure className="flex flex-col items-center">
-                <div className="w-full max-w-[140px]">
-                  <PhoneFrame src="/assets/ilancaster/home-day.png" alt="After — the redesigned home dashboard" />
-                </div>
-                <figcaption className="mt-3 text-[11px] tracking-[0.24em] uppercase text-ash">
-                  After — timetable, check-in, notifications above the fold
-                </figcaption>
-              </figure>
-            </div>
+            <Image
+              src="/assets/ilancaster/before-compare.jpg"
+              alt="Round one testing comparison"
+              width={1920}
+              height={805}
+              sizes="(max-width: 768px) 100vw, 800px"
+              className="w-full h-auto rounded-xl mt-6"
+            />
           </ScrollReveal>
+          <PullQuote>The failure was in the sitemap, not the wireframe.</PullQuote>
         </Section>
 
-        {/* 3. Marquee decision — Home dashboard, pulled out as SplitRow */}
+        {/* 3. Marquee decision — Home dashboard */}
         <SplitRow
           src="/assets/ilancaster/home-day.png"
           alt="Home dashboard — day mode"
@@ -171,7 +157,7 @@ export default function ILancasterPage() {
           </p>
         </SplitRow>
 
-        {/* 4. Key design decisions — all screens on right, text on left */}
+        {/* 4. Key design decisions — alternating, raw images */}
         <Section title="Key design decisions">
           <div className="divide-y divide-white/[0.06]">
             <DecisionRow
@@ -180,6 +166,7 @@ export default function ILancasterPage() {
               why="The most time-sensitive daily action in the app. Students needed it between classes, quickly, on the go — removing three steps from a daily flow has a disproportionate effect."
               src="/assets/ilancaster/checkin-day.png"
               alt="Check-in card on the home screen"
+              imgSide="right"
             />
             <DecisionRow
               label="Raise Enquiry: guided, not open-ended"
@@ -187,6 +174,7 @@ export default function ILancasterPage() {
               why="Users didn&apos;t know how to classify their own enquiries. Presenting every category at once made the problem worse; the guided pattern removes categorisation from the user entirely."
               src="/assets/ilancaster/enquiry-day.png"
               alt="Raise Enquiry — search-first ASK flow"
+              imgSide="left"
             />
             <DecisionRow
               label="Notifications: prioritised, not just listed"
@@ -194,6 +182,7 @@ export default function ILancasterPage() {
               why="A flat notification list carries the implicit message that everything is equally important. Prioritised treatment lets students triage at a glance between lectures."
               src="/assets/ilancaster/notifications-night.png"
               alt="Prioritised notification feed"
+              imgSide="right"
             />
             <DecisionRow
               label="Day & Night mode"
@@ -201,11 +190,12 @@ export default function ILancasterPage() {
               why="Designing them together meant every hierarchy and contrast decision was validated in both environments — not colour-inverted at the end and hoped for the best."
               src="/assets/ilancaster/home-night.png"
               alt="Home dashboard — night mode"
+              imgSide="left"
             />
           </div>
         </Section>
 
-        {/* 5. Design system — brand constraint */}
+        {/* 5. Design system — feature lineup */}
         <Section title="One design system, held across 80+ screens" tone="sunken">
           <Prose>
             Lancaster&apos;s existing colour and style guidelines were a fixed
@@ -214,28 +204,34 @@ export default function ILancasterPage() {
             defined upfront so the system stayed consistent across 80+ screens
             and two designers.
           </Prose>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-            <ScrollReveal>
+          <ScrollReveal>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mt-6">
               <figure className="flex flex-col items-center">
-                <div className="mx-auto w-full max-w-[140px]">
-                  <PhoneFrame src="/assets/ilancaster/timetable-day.png" alt="Timetable, day mode" />
+                <div className="w-full max-w-[120px]">
+                  <PhoneFrame src="/assets/ilancaster/feature-news.png" alt="News Tab" />
                 </div>
-                <figcaption className="mt-3 text-[11px] tracking-[0.24em] uppercase text-ash">
-                  Timetable, day.
-                </figcaption>
+                <figcaption className="mt-2 text-[10px] tracking-[0.2em] uppercase text-ash">News</figcaption>
               </figure>
-            </ScrollReveal>
-            <ScrollReveal>
               <figure className="flex flex-col items-center">
-                <div className="mx-auto w-full max-w-[140px]">
-                  <PhoneFrame src="/assets/ilancaster/timetable-night.png" alt="Timetable, night mode" />
+                <div className="w-full max-w-[120px]">
+                  <PhoneFrame src="/assets/ilancaster/feature-events.png" alt="Events Tab" />
                 </div>
-                <figcaption className="mt-3 text-[11px] tracking-[0.24em] uppercase text-ash">
-                  Timetable, night.
-                </figcaption>
+                <figcaption className="mt-2 text-[10px] tracking-[0.2em] uppercase text-ash">Events</figcaption>
               </figure>
-            </ScrollReveal>
-          </div>
+              <figure className="flex flex-col items-center">
+                <div className="w-full max-w-[120px]">
+                  <PhoneFrame src="/assets/ilancaster/feature-welfare.png" alt="Welfare Tab" />
+                </div>
+                <figcaption className="mt-2 text-[10px] tracking-[0.2em] uppercase text-ash">Welfare</figcaption>
+              </figure>
+              <figure className="flex flex-col items-center">
+                <div className="w-full max-w-[120px]">
+                  <PhoneFrame src="/assets/ilancaster/feature-academic.png" alt="Academic Tab" />
+                </div>
+                <figcaption className="mt-2 text-[10px] tracking-[0.2em] uppercase text-ash">Academic</figcaption>
+              </figure>
+            </div>
+          </ScrollReveal>
         </Section>
 
         {/* 6. What was cut */}
