@@ -74,7 +74,7 @@ function LucaMock({ url }) {
       />
       {/* Back window — smaller, tilted, offset up-left */}
       <div
-        className="absolute top-[8%] left-[6%] w-[52%] md:w-[48%] shadow-2xl"
+        className="absolute top-[10%] left-[6%] w-[46%] md:w-[42%] shadow-2xl"
         style={{ transform: 'rotate(-4deg)' }}
       >
         <div className="rounded-lg overflow-hidden border border-white/[0.08] bg-white">
@@ -96,7 +96,7 @@ function LucaMock({ url }) {
         </div>
       </div>
       {/* Front window — larger, centered, offset down-right */}
-      <div className="absolute bottom-[6%] right-[4%] w-[68%] md:w-[64%] shadow-2xl">
+      <div className="absolute bottom-[8%] right-[6%] w-[62%] md:w-[58%] shadow-2xl">
         <div className="rounded-lg overflow-hidden border border-white/[0.08] bg-white">
           <div className="flex items-center gap-1 px-2 py-1.5 bg-gray-100">
             <span className="flex gap-1" aria-hidden="true">
@@ -176,11 +176,7 @@ export default function PortfolioCard({ study, featured = false }) {
               </div>
             )}
           </div>
-          <div
-            className={`relative flex-1 min-h-[180px] md:min-h-0 ${
-              card.frame === 'flat' && card.fit === 'contain' ? 'p-0' : 'p-4 md:p-6'
-            }`}
-          >
+          <div className="relative flex-1 min-h-[180px] md:min-h-0 p-4 md:p-6">
             <div className="w-full h-full transition-transform duration-500 group-hover:scale-[1.03]">
               {card.frame === 'token' && <TokenMock accent={accent} />}
               {card.frame === 'browser' && (
