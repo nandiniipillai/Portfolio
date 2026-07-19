@@ -333,6 +333,7 @@ export default function PortfolioCard({ study, featured = false }) {
                   fill
                   sizes="(max-width: 768px) 100vw, 60vw"
                   className="object-contain p-4"
+                  style={{ mixBlendMode: 'lighten' }}
                 />
               )}
             </div>
