@@ -8,109 +8,99 @@ import RollLabel from './RollLabel';
 import ScrollReveal from './ScrollReveal';
 
 function TokenMock({ accent }) {
-  const queue = [
-    { token: 'T12', name: 'Emma Wilson', detail: 'cold, sore throat · 27 min in', active: true },
-    { token: 'T13', name: 'Sarah Chen', detail: '10:40 · headache', badge: '4 visits' },
-    { token: 'T14', name: 'James Park', detail: '11:00 · party of 2' },
-    { token: 'T15', name: 'Priya Sharma', detail: '11:20 · Follow-up', late: true },
-  ];
-
   return (
-    <div className="w-full h-full flex items-center justify-center p-4 md:p-6">
-      <div
-        className="w-full max-w-[520px] rounded-2xl border border-white/[0.08] overflow-hidden"
-        style={{ background: 'rgba(11,11,13,0.92)' }}
-      >
-        {/* Header bar */}
-        <div className="flex items-center justify-between px-4 py-3 border-b border-white/[0.05]">
-          <div className="flex items-center gap-2.5">
-            <div
-              className="w-6 h-6 rounded flex items-center justify-center"
-              style={{ background: accent }}
-            >
-              <span className="text-black text-xs font-bold">b</span>
+    <div className="w-full h-full flex items-center justify-center p-3 md:p-4">
+      <div className="flex items-center gap-3 md:gap-4 h-full max-w-[680px] w-full">
+        {/* Web queue — left panel, wider */}
+        <div
+          className="flex-1 rounded-2xl border border-white/[0.08] overflow-hidden h-full flex flex-col"
+          style={{ background: 'rgba(11,11,13,0.92)' }}
+        >
+          {/* Header */}
+          <div className="flex items-center justify-between px-3 py-2 border-b border-white/[0.05] shrink-0">
+            <div className="flex items-center gap-2">
+              <div className="w-5 h-5 rounded flex items-center justify-center" style={{ background: accent }}>
+                <span className="text-black text-[10px] font-bold">b</span>
+              </div>
+              <span className="text-white text-[10px] font-medium tracking-tight">Pratiksha</span>
             </div>
-            <span className="text-white text-xs font-medium tracking-tight">Pratiksha</span>
+            <div className="flex items-center gap-2 text-[8px] text-fog">
+              <span className="text-white bg-white/[0.06] rounded-full px-1.5 py-0.5">Queue</span>
+              <span>Signal</span>
+            </div>
           </div>
-          <div className="flex items-center gap-3 text-[10px] text-fog">
-            <span className="text-white bg-white/[0.06] rounded-full px-2 py-0.5">Queue</span>
-            <span>Signal</span>
+          {/* Body */}
+          <div className="p-2.5 space-y-2 flex-1 overflow-hidden">
+            <div className="flex items-center justify-between">
+              <div className="text-[8px] text-ash tracking-wider">Tue 15 Jul · 11:14 IST</div>
+              <div className="flex items-center gap-2 text-[8px] text-fog">
+                <span>Today <span className="text-white font-medium">6</span></span>
+                <span>Waiting <span className="text-white font-medium">4</span></span>
+              </div>
+            </div>
+
+            {/* Active patient */}
+            <div className="rounded-xl p-2.5" style={{ background: accent, color: '#0a0a0a' }}>
+              <div className="flex items-center justify-between mb-0.5">
+                <span className="text-[9px] tracking-widest uppercase font-medium">T12</span>
+                <span className="text-[7px] rounded-full px-1.5 py-0.5 font-medium" style={{ background: 'rgba(0,0,0,0.15)', color: '#0a0a0a' }}>In consult</span>
+              </div>
+              <div className="text-[13px] font-heading tracking-tightest leading-none">Emma Wilson</div>
+              <div className="text-[8px] opacity-70 mt-0.5">cold, sore throat · 27 min in</div>
+              <div className="mt-2 rounded-lg py-1 text-center text-[8px] font-medium" style={{ background: 'rgba(0,0,0,0.12)', color: '#0a0a0a' }}>Mark done</div>
+            </div>
+
+            {/* Waiting patients */}
+            {[
+              { token: 'T13', name: 'Sarah Chen', detail: '10:40 · headache', badge: '4 visits' },
+              { token: 'T14', name: 'James Park', detail: '11:00 · party of 2' },
+              { token: 'T15', name: 'Priya Sharma', detail: '11:20 · Follow-up', late: true },
+            ].map((row) => (
+              <div key={row.token} className={`rounded-lg p-2 flex items-center justify-between ${row.late ? 'bg-amber-500/[0.08] border border-amber-500/20' : 'bg-white/[0.02] border border-white/[0.03]'}`}>
+                <div>
+                  <div className="flex items-baseline gap-1.5">
+                    <span className="text-[8px] text-fog">{row.token}</span>
+                    <span className="text-[9px] text-white font-medium">{row.name}</span>
+                  </div>
+                  <div className="text-[7px] text-ash leading-tight mt-0.5">{row.detail}</div>
+                </div>
+                {row.late && <span className="text-[7px] text-amber-400 uppercase tracking-wider">Late</span>}
+                {row.badge && !row.late && <span className="text-[7px] rounded-full px-1.5 py-0.5 font-medium" style={{ color: accent, background: `${accent}15` }}>{row.badge}</span>}
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* Body */}
-        <div className="p-4 space-y-3">
-          {/* Day + count */}
-          <div className="flex items-center justify-between">
-            <div>
-              <div className="text-xs text-ash tracking-wider">Tue 15 Jul · 11:14 IST</div>
-              <div className="text-white font-heading text-xl tracking-tightest mt-0.5">Queue</div>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-[10px] text-fog">Today <span className="text-white font-medium">6</span></span>
-              <span className="text-[10px] text-fog">Waiting <span className="text-white font-medium">4</span></span>
-            </div>
-          </div>
-
-          {/* Active patient card */}
-          {queue.filter((r) => r.active).map((row) => (
-            <div
-              key={row.token}
-              className="rounded-xl p-3.5"
-              style={{ background: accent, color: '#0a0a0a' }}
-            >
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-[10px] tracking-widest uppercase font-medium">{row.token}</span>
-                <span
-                  className="text-[9px] rounded-full px-2 py-0.5 font-medium"
-                  style={{ background: 'rgba(0,0,0,0.15)', color: '#0a0a0a' }}
-                >
-                  In consult
-                </span>
+        {/* Phone — right panel */}
+        <div className="w-[90px] md:w-[110px] shrink-0 h-full flex items-center">
+          <PhoneFrame>
+            <div className="w-full h-full bg-white flex flex-col text-black">
+              <div className="px-2 pt-5 pb-1">
+                <div className="text-[5px] text-gray-400">getbaari.in</div>
+                <div className="text-[7px] font-semibold mt-0.5">Today's queue</div>
               </div>
-              <div className="text-base font-heading tracking-tightest leading-none">{row.name}</div>
-              <div className="text-[10px] opacity-70 mt-0.5">{row.detail}</div>
-              <div
-                className="mt-3 rounded-lg py-1.5 text-center text-[10px] font-medium"
-                style={{ background: 'rgba(0,0,0,0.12)', color: '#0a0a0a' }}
-              >
-                Mark done
-              </div>
-            </div>
-          ))}
-
-          {/* Waiting list */}
-          {queue
-            .filter((r) => !r.active)
-            .map((row) => (
-              <div
-                key={row.token}
-                className={`rounded-lg p-2.5 flex items-center justify-between ${
-                  row.late
-                    ? 'bg-amber-500/[0.08] border border-amber-500/20'
-                    : 'bg-white/[0.02] border border-white/[0.03]'
-                }`}
-              >
-                <div>
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-[10px] text-fog">{row.token}</span>
-                    <span className="text-[11px] text-white font-medium">{row.name}</span>
-                  </div>
-                  <div className="text-[9px] text-ash leading-tight mt-0.5">{row.detail}</div>
-                </div>
-                {row.late && (
-                  <span className="text-[9px] text-amber-400 uppercase tracking-wider">Late</span>
-                )}
-                {row.badge && !row.late && (
-                  <span
-                    className="text-[9px] rounded-full px-2 py-0.5 font-medium"
-                    style={{ color: accent, background: `${accent}15` }}
+              <div className="px-1.5 space-y-1">
+                {[
+                  { token: 'T12', name: 'Emma Wilson', tag: 'In consult', active: true },
+                  { token: 'T13', name: 'Sarah Chen', tag: 'Waiting' },
+                  { token: 'T14', name: 'James Park', tag: 'Waiting' },
+                  { token: 'T15', name: 'Priya Sharma', tag: 'Late' },
+                ].map((row) => (
+                  <div
+                    key={row.token}
+                    className="rounded p-1"
+                    style={row.active ? { background: accent, color: '#0a0a0a' } : { background: 'rgba(0,0,0,0.04)' }}
                   >
-                    {row.badge}
-                  </span>
-                )}
+                    <div className="flex items-center justify-between">
+                      <span className="text-[6px] font-medium">{row.token}</span>
+                      <span className="text-[4px] uppercase tracking-wider opacity-70">{row.tag}</span>
+                    </div>
+                    <div className="text-[5px] opacity-70 mt-0.5">{row.name}</div>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
+          </PhoneFrame>
         </div>
       </div>
     </div>
@@ -272,7 +262,7 @@ export default function PortfolioCard({ study, featured = false }) {
                   alt={title}
                   fill
                   sizes="(max-width: 768px) 100vw, 60vw"
-                  className="object-contain p-4"
+                  className={`object-contain ${card.scale || 'p-4'}`}
                   style={{ mixBlendMode: 'lighten' }}
                 />
               )}
