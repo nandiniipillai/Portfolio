@@ -45,15 +45,24 @@ function TokenMock({ accent }) {
 
 function ILancasterMock() {
   return (
-    <div className="relative w-full h-full flex items-end justify-center gap-2 md:gap-3 px-2">
-      <div className="w-[110px] md:w-[130px] translate-y-3">
+    <div className="relative w-full h-full flex items-center justify-center">
+      {/* Left phone — tilted outward, sits behind */}
+      <div
+        className="absolute w-[105px] md:w-[125px] left-[18%] md:left-[22%] top-1/2"
+        style={{ transform: 'translateY(-42%) rotate(-16deg)' }}
+      >
         <PhoneFrame src="/assets/ilancaster/timetable-day.png" />
       </div>
-      <div className="w-[125px] md:w-[150px] -translate-y-2">
-        <PhoneFrame src="/assets/ilancaster/home-day.png" />
-      </div>
-      <div className="w-[110px] md:w-[130px] translate-y-3">
+      {/* Right phone — tilted outward, sits behind */}
+      <div
+        className="absolute w-[105px] md:w-[125px] right-[18%] md:right-[22%] top-1/2"
+        style={{ transform: 'translateY(-42%) rotate(16deg)' }}
+      >
         <PhoneFrame src="/assets/ilancaster/welfare-day.png" />
+      </div>
+      {/* Centre phone — upright, forward, largest */}
+      <div className="relative z-10 w-[130px] md:w-[160px] drop-shadow-2xl">
+        <PhoneFrame src="/assets/ilancaster/home-day.png" />
       </div>
     </div>
   );
