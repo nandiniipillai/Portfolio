@@ -42,7 +42,7 @@ function BeforeAfter({ before, after, beforeLabel, afterLabel }) {
     <div className="grid grid-cols-1 md:grid-cols-[1.5fr_1fr] gap-6 md:gap-10 items-end">
       <ScrollReveal>
         <figure className="flex flex-col items-center md:items-start">
-          <div className="relative w-full max-w-xl" style={{ aspectRatio: '2272/1888' }}>
+          <div className="relative w-full max-w-xl" style={{ aspectRatio: '2272/1180' }}>
             <Zoom>
               <Image
                 src={before}
