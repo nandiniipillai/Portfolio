@@ -289,7 +289,7 @@ export default function ILancasterPage() {
           </Prose>
         </Section>
 
-        {/* 7. Prototype walkthrough — raw video, no PhoneFrame */}
+        {/* 7. Prototype walkthrough */}
         <Section title="Prototype walkthrough">
           <Prose>
             Watch the redesigned home dashboard and check-in flow in motion.
@@ -297,7 +297,10 @@ export default function ILancasterPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
             <ScrollReveal>
               <figure className="flex flex-col items-center">
-                <div className="w-full max-w-[200px] rounded-2xl overflow-hidden border border-white/[0.08] shadow-lg">
+                <div
+                  className="w-full max-w-[200px] rounded-2xl overflow-hidden border border-white/[0.08] shadow-lg bg-black"
+                  style={{ aspectRatio: '390/844' }}
+                >
                   <video
                     src="/assets/ilancaster/walkthrough-home.mp4"
                     poster="/assets/ilancaster/home-day.png"
@@ -305,7 +308,9 @@ export default function ILancasterPage() {
                     muted
                     loop
                     playsInline
-                    className="w-full h-auto"
+                    controls
+                    preload="metadata"
+                    className="w-full h-full object-cover"
                   />
                 </div>
                 <figcaption className="mt-3 text-[11px] tracking-[0.24em] uppercase text-ash">
@@ -315,7 +320,10 @@ export default function ILancasterPage() {
             </ScrollReveal>
             <ScrollReveal>
               <figure className="flex flex-col items-center">
-                <div className="w-full max-w-[200px] rounded-2xl overflow-hidden border border-white/[0.08] shadow-lg">
+                <div
+                  className="w-full max-w-[200px] rounded-2xl overflow-hidden border border-white/[0.08] shadow-lg bg-black"
+                  style={{ aspectRatio: '390/844' }}
+                >
                   <video
                     src="/assets/ilancaster/walkthrough-checkin.mp4"
                     poster="/assets/ilancaster/checkin-day.png"
@@ -323,7 +331,9 @@ export default function ILancasterPage() {
                     muted
                     loop
                     playsInline
-                    className="w-full h-auto"
+                    controls
+                    preload="metadata"
+                    className="w-full h-full object-cover"
                   />
                 </div>
                 <figcaption className="mt-3 text-[11px] tracking-[0.24em] uppercase text-ash">
