@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import CaseStudyShell from '@/components/CaseStudyShell';
 import { Section, Prose, SubList, PullQuote } from '@/components/CaseBits';
-import SplitRow from '@/components/SplitRow';
 import PhoneFrame from '@/components/PhoneFrame';
 import ScrollReveal from '@/components/ScrollReveal';
 
@@ -74,47 +73,44 @@ export default function ILancasterPage() {
           ['Company', ['ISS Innovation Hub', 'Lancaster University']],
         ]}
       >
-        {/* 1. Problem — before image on right, bullets on left */}
+        {/* 1. Problem — compact, image aligned top-right */}
         <Section title="Most avoided opening it">
           <Prose>
             The app contained everything a student needed. It just presented all
             of it at the same visual weight, with no hierarchy to guide attention
             and no reliable pattern for where features lived between sessions.
-            iLancaster is the native mobile companion for Lancaster University —
-            a live campus hub that puts timetable, check-in, enquiries,
-            notifications, and welfare resources into one app every student
-            already carries.
+            iLancaster is the native mobile companion for Lancaster University.
           </Prose>
-          <ScrollReveal>
-            <div className="mt-6 grid grid-cols-1 md:grid-cols-[1.5fr_1fr] gap-6 md:gap-10 items-center">
-              <div className="space-y-5">
-                {[
-                  { label: 'No information hierarchy', detail: 'Critical and secondary features competed equally for attention.' },
-                  { label: 'Clustered interfaces', detail: 'High information density with no visual breathing room.' },
-                  { label: 'Unpredictable navigation', detail: 'Users couldn\'t consistently locate features across sessions.' },
-                ].map((item) => (
-                  <div key={item.label} className="space-y-1.5">
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-6 md:gap-8 items-start mt-4">
+            <div className="space-y-4 max-w-lg">
+              {[
+                { label: 'No information hierarchy', detail: 'Critical and secondary features competed equally for attention.' },
+                { label: 'Clustered interfaces', detail: 'High information density with no visual breathing room.' },
+                { label: 'Unpredictable navigation', detail: 'Users couldn\'t consistently locate features across sessions.' },
+              ].map((item) => (
+                <ScrollReveal key={item.label}>
+                  <div className="space-y-1.5">
                     <div className="flex items-center gap-2">
                       <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: ACCENT }} aria-hidden="true" />
                       <span className="text-silver font-medium text-sm">{item.label}</span>
                     </div>
                     <p className="text-fog text-sm leading-relaxed pl-5">{item.detail}</p>
                   </div>
-                ))}
-              </div>
-              <Image
-                src="/assets/ilancaster/before-home-v3.png"
-                alt="The original iLancaster home screen — tile grid with no hierarchy"
-                width={422}
-                height={418}
-                sizes="(max-width: 768px) 50vw, 280px"
-                className="w-full h-auto rounded-xl"
-              />
+                </ScrollReveal>
+              ))}
             </div>
-          </ScrollReveal>
+            <Image
+              src="/assets/ilancaster/before-home-v3.png"
+              alt="The original iLancaster home screen — tile grid with no hierarchy"
+              width={422}
+              height={418}
+              sizes="220px"
+              className="w-[220px] h-auto rounded-xl"
+            />
+          </div>
         </Section>
 
-        {/* 2. The failure story — 13.jpg replaces wireframes */}
+        {/* 2. The failure story */}
         <Section title="Round one testing failed, and the failure was architectural" tone="sunken">
           <Prose>
             The first wireframes clarified visual structure, but users still
@@ -136,26 +132,45 @@ export default function ILancasterPage() {
           <PullQuote>The failure was in the sitemap, not the wireframe.</PullQuote>
         </Section>
 
-        {/* 3. Marquee decision — Home dashboard */}
-        <SplitRow
-          src="/assets/ilancaster/home-day.png"
-          alt="Home dashboard — day mode"
-          aspect="9/16"
-          imgSide="right"
-          label="Design decision"
-          title="Home dashboard"
-        >
-          <p>
-            <span className="text-silver font-medium">Decision. </span>
-            Surface only today&apos;s timetable, the check-in button and active
-            notifications above the fold.
-          </p>
-          <p>
-            <span className="text-silver font-medium">Why. </span>
-            The core complaint was that the most-needed features were the
-            hardest to reach. Everything else lives one deliberate tap away.
-          </p>
-        </SplitRow>
+        {/* 3. Home dashboard — two phones (day + night) on right */}
+        <Section>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-start py-6 md:py-8">
+            <ScrollReveal>
+              <div className="space-y-4">
+                <div className="text-[11px] tracking-[0.24em] uppercase text-ash">Design decision</div>
+                <h2 className="font-heading tracking-tightest text-silver text-2xl md:text-3xl leading-tight">
+                  Home dashboard
+                </h2>
+                <p className="text-fog text-sm md:text-base leading-relaxed">
+                  <span className="text-silver font-medium">Decision. </span>
+                  Surface only today&apos;s timetable, the check-in button and active
+                  notifications above the fold.
+                </p>
+                <p className="text-fog text-sm md:text-base leading-relaxed">
+                  <span className="text-silver font-medium">Why. </span>
+                  The core complaint was that the most-needed features were the
+                  hardest to reach. Everything else lives one deliberate tap away.
+                </p>
+              </div>
+            </ScrollReveal>
+            <ScrollReveal>
+              <div className="flex gap-3 justify-end items-start">
+                <figure className="flex flex-col items-center">
+                  <div className="w-full max-w-[110px]">
+                    <PhoneFrame src="/assets/ilancaster/home-day.png" alt="Home dashboard — day mode" />
+                  </div>
+                  <figcaption className="mt-1.5 text-[9px] tracking-[0.2em] uppercase text-ash">Day</figcaption>
+                </figure>
+                <figure className="flex flex-col items-center">
+                  <div className="w-full max-w-[110px]">
+                    <PhoneFrame src="/assets/ilancaster/home-night.png" alt="Home dashboard — night mode" />
+                  </div>
+                  <figcaption className="mt-1.5 text-[9px] tracking-[0.2em] uppercase text-ash">Night</figcaption>
+                </figure>
+              </div>
+            </ScrollReveal>
+          </div>
+        </Section>
 
         {/* 4. Key design decisions — alternating, raw images */}
         <Section title="Key design decisions">
@@ -195,7 +210,7 @@ export default function ILancasterPage() {
           </div>
         </Section>
 
-        {/* 5. Design system — feature lineup */}
+        {/* 5. Design system — feature lineup with contain fit */}
         <Section title="One design system, held across 80+ screens" tone="sunken">
           <Prose>
             Lancaster&apos;s existing colour and style guidelines were a fixed
@@ -204,34 +219,23 @@ export default function ILancasterPage() {
             defined upfront so the system stayed consistent across 80+ screens
             and two designers.
           </Prose>
-          <ScrollReveal>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mt-6">
-              <figure className="flex flex-col items-center">
-                <div className="w-full max-w-[120px]">
-                  <PhoneFrame src="/assets/ilancaster/feature-news.png" alt="News Tab" />
-                </div>
-                <figcaption className="mt-2 text-[10px] tracking-[0.2em] uppercase text-ash">News</figcaption>
-              </figure>
-              <figure className="flex flex-col items-center">
-                <div className="w-full max-w-[120px]">
-                  <PhoneFrame src="/assets/ilancaster/feature-events.png" alt="Events Tab" />
-                </div>
-                <figcaption className="mt-2 text-[10px] tracking-[0.2em] uppercase text-ash">Events</figcaption>
-              </figure>
-              <figure className="flex flex-col items-center">
-                <div className="w-full max-w-[120px]">
-                  <PhoneFrame src="/assets/ilancaster/feature-welfare.png" alt="Welfare Tab" />
-                </div>
-                <figcaption className="mt-2 text-[10px] tracking-[0.2em] uppercase text-ash">Welfare</figcaption>
-              </figure>
-              <figure className="flex flex-col items-center">
-                <div className="w-full max-w-[120px]">
-                  <PhoneFrame src="/assets/ilancaster/feature-academic.png" alt="Academic Tab" />
-                </div>
-                <figcaption className="mt-2 text-[10px] tracking-[0.2em] uppercase text-ash">Academic</figcaption>
-              </figure>
-            </div>
-          </ScrollReveal>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mt-6">
+            {[
+              { src: '/assets/ilancaster/feature-news.png', label: 'News' },
+              { src: '/assets/ilancaster/feature-events.png', label: 'Events' },
+              { src: '/assets/ilancaster/feature-welfare.png', label: 'Welfare' },
+              { src: '/assets/ilancaster/feature-academic.png', label: 'Academic' },
+            ].map((f) => (
+              <ScrollReveal key={f.label}>
+                <figure className="flex flex-col items-center">
+                  <div className="w-full max-w-[110px]">
+                    <PhoneFrame src={f.src} alt={f.label} fit="contain" />
+                  </div>
+                  <figcaption className="mt-2 text-[10px] tracking-[0.2em] uppercase text-ash">{f.label}</figcaption>
+                </figure>
+              </ScrollReveal>
+            ))}
+          </div>
         </Section>
 
         {/* 6. What was cut */}
@@ -253,18 +257,18 @@ export default function ILancasterPage() {
         {/* 7. Prototype walkthrough */}
         <Section title="Prototype walkthrough">
           <Prose>
-            Watch the redesigned home dashboard and check-in flow in motion —
-            the two highest-frequency daily interactions for Lancaster students.
+            Watch the redesigned home dashboard and check-in flow in motion.
           </Prose>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-end mt-4">
             <ScrollReveal>
               <figure className="flex flex-col items-center">
-                <PhoneFrame
-                  video="/assets/ilancaster/walkthrough-home.mp4"
-                  poster="/assets/ilancaster/home-day.png"
-                  fit="contain"
-                  className="!max-w-[180px]"
-                />
+                <div className="w-full max-w-[170px]">
+                  <PhoneFrame
+                    video="/assets/ilancaster/walkthrough-home.mp4"
+                    poster="/assets/ilancaster/home-day.png"
+                    fit="contain"
+                  />
+                </div>
                 <figcaption className="mt-3 text-[11px] tracking-[0.24em] uppercase text-ash">
                   Home dashboard
                 </figcaption>
@@ -272,12 +276,13 @@ export default function ILancasterPage() {
             </ScrollReveal>
             <ScrollReveal>
               <figure className="flex flex-col items-center">
-                <PhoneFrame
-                  video="/assets/ilancaster/walkthrough-checkin.mp4"
-                  poster="/assets/ilancaster/checkin-day.png"
-                  fit="contain"
-                  className="!max-w-[180px]"
-                />
+                <div className="w-full max-w-[170px]">
+                  <PhoneFrame
+                    video="/assets/ilancaster/walkthrough-checkin.mp4"
+                    poster="/assets/ilancaster/checkin-day.png"
+                    fit="contain"
+                  />
+                </div>
                 <figcaption className="mt-3 text-[11px] tracking-[0.24em] uppercase text-ash">
                   Check-in flow
                 </figcaption>
