@@ -39,6 +39,7 @@ export default function WobblePage() {
         ['Role', 'Strategy · research · marketing'],
         ['Team', 'Sage Studio · 5 designers'],
         ['Timeline', '8 weeks'],
+        ['Status', 'Client accepted, seeking funding'],
       ]}
       overview={
         <>
@@ -60,6 +61,32 @@ export default function WobblePage() {
       }
     >
       <ScrollReveal>
+        <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-4">The challenge</div>
+        <p className="text-fog text-base leading-relaxed max-w-3xl">
+          UK children spend less time outdoors than ever before. Parents want
+          safe, developmental play, but existing indoor centres copy Asian
+          entertainment models — bright lights, passive rides, no developmental
+          purpose. Wobble needed to be the opposite: a space that does what a
+          park does, inside.
+        </p>
+      </ScrollReveal>
+
+      <ScrollReveal>
+        <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-4 mt-8">The strategy</div>
+        <p className="text-fog text-base leading-relaxed max-w-3xl">
+          I interviewed parents across three UK cities, ran thematic synthesis
+          on the findings, and built the business model canvas. The positioning
+          we landed on was simple: Wobble is not entertainment, it is
+          developmental play in a safe, weather-proof environment. Every zone
+          maps to a skill the outdoor world builds naturally — climbing, risk
+          assessment, pretend play, social mixing.
+        </p>
+      </ScrollReveal>
+
+      <ScrollReveal>
+        <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-4 mt-8">The space</div>
+      </ScrollReveal>
+      <ScrollReveal>
         <ZoomFig
           src="/assets/wobble/v2-3.jpg"
           alt="Isometric cutaway of the Wobble floor plan"
@@ -79,6 +106,15 @@ export default function WobblePage() {
           />
         </ScrollReveal>
       </div>
+
+      <ScrollReveal>
+        <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-4 mt-8">Outcome</div>
+        <p className="text-fog text-base leading-relaxed max-w-3xl">
+          The client accepted the full proposal — strategy, spatial design,
+          brand, and business model. The startup is now seeking funding to
+          build the first location.
+        </p>
+      </ScrollReveal>
     </BriefPage>
   );
 }
