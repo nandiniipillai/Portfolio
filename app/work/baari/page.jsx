@@ -17,10 +17,11 @@ export default function BaariPage() {
         title="Baari"
         oneLiner="A live queue for India’s clinics and salons, shipped to production."
         meta={[
-          ['Role', 'Co-founder & Product Designer'],
-          ['Team', ['Nandini Pillai — design & product', 'Mayank Yadav — infra & build']],
-          ['Build', 'AI coding agents as engineering'],
-          ['Status', 'Live · getbaari.in'],
+          ['Role', 'Founding Product Designer'],
+          ['Team', ['Product Designer', 'Software Developer']],
+          ['Industry', 'B2C SAAS'],
+          ['Status', 'Pilot stage'],
+          ['URL', 'getbaari.in'],
         ]}
       >
         <Section>
