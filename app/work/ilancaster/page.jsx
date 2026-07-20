@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import CaseStudyShell from '@/components/CaseStudyShell';
 import { Section, Prose, SubList, PullQuote } from '@/components/CaseBits';
-import SlideFigure from '@/components/SlideFigure';
 import ScrollReveal from '@/components/ScrollReveal';
 
 const ACCENT = '#E4002B';
@@ -129,12 +128,6 @@ export default function ILancasterPage() {
               className="w-full h-auto rounded-xl mt-6"
             />
           </ScrollReveal>
-          <SlideFigure
-            src="/assets/ilancaster/wireframes-round-one.jpg"
-            alt="Round-one wireframes tiled together"
-            caption="Round one — the wireframes read cleanly on paper and still failed in testing."
-            aspect="16/9"
-          />
           <PullQuote>The failure was in the sitemap, not the wireframe.</PullQuote>
         </Section>
 
@@ -270,18 +263,22 @@ export default function ILancasterPage() {
         {/* 7. Try it */}
         <Section title="Try the prototype">
           <Prose>
-            Click through the redesigned home dashboard and check-in flow.
+            Click through the redesigned home dashboard and check-in flow
+            in full screen.
           </Prose>
-          <div className="mt-4">
-            <div className="w-full max-w-[220px] mx-auto rounded-2xl overflow-hidden border border-white/[0.08] shadow-lg" style={{ aspectRatio: '390/844' }}>
-              <iframe
-                src="https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/proto/IWEzxQ7Ft4T5yvHOUD3ax0/iLancaster-Master?node-id=1224-10316&starting-point-node-id=1224%3A10316&t=KIIay9VltCOsBZza-1&scaling=scale-down&hide-ui=1"
-                className="w-full h-full"
-                allowFullScreen
-                loading="lazy"
-              />
+          <ScrollReveal>
+            <div className="mt-4">
+              <a
+                href="https://www.figma.com/proto/IWEzxQ7Ft4T5yvHOUD3ax0/iLancaster-Master?node-id=1224-10316&starting-point-node-id=1224%3A10316&t=KIIay9VltCOsBZza-1"
+                target="_blank"
+                rel="noreferrer noopener"
+                className="inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-medium transition-colors"
+                style={{ background: ACCENT, color: '#0a0a0a' }}
+              >
+                Open prototype ↗
+              </a>
             </div>
-          </div>
+          </ScrollReveal>
         </Section>
 
         {/* 8. The result */}
