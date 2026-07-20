@@ -272,10 +272,10 @@ export default function ILancasterPage() {
                 href="https://www.figma.com/proto/IWEzxQ7Ft4T5yvHOUD3ax0/iLancaster-Master?node-id=1224-10316&starting-point-node-id=1224%3A10316&t=KIIay9VltCOsBZza-1"
                 target="_blank"
                 rel="noreferrer noopener"
-                className="inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-medium transition-colors"
-                style={{ background: ACCENT, color: '#0a0a0a' }}
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-transform hover:-translate-y-0.5"
+                style={{ background: ACCENT, color: '#0b0b0a' }}
               >
-                Open prototype ↗
+                Open prototype <span aria-hidden="true">↗</span>
               </a>
             </div>
           </ScrollReveal>
