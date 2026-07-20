@@ -37,14 +37,14 @@ export default function WobblePage() {
   return (
     <BriefPage
       title="Wobble"
-      oneLiner="Brings the benefits of outdoor play indoors for UK children."
+      oneLiner="Brings the benefits of outdoor play indoors for UK children — Designing for a business — Interactive indoor play arena"
       category="Strategy & Service Design"
       accent={ACCENT}
       meta={[
-        ['Role', 'Strategy · research · marketing'],
-        ['Team', 'Sage Studio · 5 designers'],
+        ['Role', ['Strategic Design', 'User research & Analysis', 'Marketing']],
+        ['Team', ['Sage Studio', '5 Multidisciplinary designers']],
         ['Timeline', '8 weeks'],
-        ['Status', 'Client adopted, seeking funding'],
+        ['Status', 'Client adopted the proposal, seeking funding'],
       ]}
       overview={
         <>
