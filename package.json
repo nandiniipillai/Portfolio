@@ -14,13 +14,16 @@
     "deploy:preview": "vercel"
   },
   "dependencies": {
+    "@remotion/cli": "^4.0.494",
+    "@remotion/player": "^4.0.494",
     "framer-motion": "^12.0.0",
     "lenis": "^1.3.25",
     "next": "15.5.20",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-icons": "^5.7.0",
-    "react-medium-image-zoom": "^5.2.11"
+    "react-medium-image-zoom": "^5.2.11",
+    "remotion": "^4.0.494"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

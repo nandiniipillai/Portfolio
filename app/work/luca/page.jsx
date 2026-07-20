@@ -144,7 +144,28 @@ export default function LucaPage() {
           </div>
         </Section>
 
-        {/* 7. Result */}
+        {/* 7. Walkthrough */}
+        <Section title="See LUCA in motion">
+          <Prose>
+            Watch the full flow — from job description upload through CV optimisation,
+            cover letter coaching, and interview practice.
+          </Prose>
+          <div className="mt-4">
+            <div className="w-full max-w-[300px] mx-auto rounded-2xl overflow-hidden border border-white/[0.08] shadow-lg">
+              <video
+                src="/assets/luca/walkthrough.mp4"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="none"
+                className="w-full h-auto"
+              />
+            </div>
+          </div>
+        </Section>
+
+        {/* 8. Result */}
         <Section title="Students shut out of appointments finally had somewhere real to go" tone="sunken">
           <Prose>
             Hard conversion numbers stayed with the university, but the behavioural
@@ -161,7 +182,7 @@ export default function LucaPage() {
           </PullQuote>
         </Section>
 
-        {/* 8. What I learned */}
+        {/* 9. What I learned */}
         <Section title="What I learned">
           <SubList items={[
             'Designing AI products means designing for appropriate trust. Copy, framing, feedback and feature boundaries all calibrate it.',
