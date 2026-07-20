@@ -15,11 +15,11 @@ export default function LucaPage() {
         index="02"
         accent={ACCENT}
         title="LUCA"
-        oneLiner="An AI careers coach that helps Lancaster students land interviews without losing their voice."
+        oneLiner="AI-Powered Career Development Platform"
         meta={[
           ['Role', 'Sole Product Designer'],
           ['Team', ['Product Manager', 'Front-end developer', 'Back-end developer']],
-          ['Industry', 'EdTech · AI'],
+          ['Industry', ['EdTech', 'SAAS', 'AI']],
           ['Company', ['ISS Innovation Hub', 'Lancaster University']],
         ]}
       >
