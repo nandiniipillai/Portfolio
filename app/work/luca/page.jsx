@@ -45,7 +45,29 @@ export default function LucaPage() {
           />
         </Section>
 
-        {/* 2. Three-way tension */}
+        {/* 2. Before LUCA — Smart Statement */}
+        <Section title="Before LUCA, students had Smart Statement — and most had stopped using it" tone="sunken">
+          <Prose>
+            Lancaster&apos;s existing careers tool only tailored CVs and cover letters with
+            basic templates. ChatGPT did more, so students quietly abandoned it. The
+            interface felt like a university portal — dense forms, no guidance, no
+            coaching. You uploaded a document, waited, and got a templated response.
+          </Prose>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+            <SlideFigure
+              src="/assets/luca/smart-statement-1.png"
+              alt="Smart Statement — the old Lancaster careers tool"
+              caption="Smart Statement — the tool students abandoned for ChatGPT."
+            />
+            <SlideFigure
+              src="/assets/luca/smart-statement-2.png"
+              alt="Smart Statement output generation screen"
+              caption="Template-based output — no coaching, no skills built."
+            />
+          </div>
+        </Section>
+
+        {/* 3. Three-way tension */}
         <Section title="The careers problem surfaced in workshops that were never about careers" tone="sunken">
           <Prose>
             We ran hypothetical-scenario workshops with students and staff covering
