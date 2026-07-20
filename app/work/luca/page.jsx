@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import CaseStudyShell from '@/components/CaseStudyShell';
-import { Section, Prose, SubList, PullQuote, MetricCard, MetricGrid, HandNote, AssetPlaceholder } from '@/components/CaseBits';
+import { Section, Prose, SubList, PullQuote, MetricCard, MetricGrid, HandNote } from '@/components/CaseBits';
 import SlideFigure from '@/components/SlideFigure';
 import BrowserFrame from '@/components/BrowserFrame';
 
@@ -36,7 +36,11 @@ export default function LucaPage() {
           <Prose>
             I was the sole product designer on a cross-functional team building LUCA, an AI careers platform for Lancaster University. The human careers service was chronically oversubscribed, and the university’s existing tool, Smart Statement, only tailored CVs and cover letters. Students had quietly abandoned it because ChatGPT did more, and many were outsourcing entire applications to it.
           </Prose>
-          <AssetPlaceholder label="Before/After — Smart Statement's output generation vs LUCA's coaching flow" />
+          <SlideFigure
+            src="/assets/luca/dashboard-existing.png"
+            alt="LUCA's main dashboard for existing users"
+            caption="LUCA's coach-not-writer interface — every feature draws from the uploaded job description."
+          />
         </Section>
 
         <Section title="The careers problem surfaced in workshops that were never about careers" tone="sunken">
@@ -91,7 +95,11 @@ export default function LucaPage() {
           <Prose>
             We started with six functional areas and nineteen features, then pruned across five to six iteration rounds with students and careers staff in the loop. I would pitch a feature verbally, turn it into a quick prototype with AI tools like Google Stitch, and watch people use it. I used AI the same way LUCA uses it with students, as an assistant that accelerates, never a replacement that generates.
           </Prose>
-          <AssetPlaceholder label="Iteration collage — rapid prototypes across the 5–6 rounds, shrinking from 19 features to shipped v1" />
+          <SlideFigure
+            src="/assets/luca/cv-optimiser-3.png"
+            alt="CV Optimiser showing feedback and suggestions"
+            caption="Rapid prototype — features were tested, pruned, and reshaped across 5–6 rounds."
+          />
         </Section>
 
         <Section title="Usability testing exposed four trust gaps, and every fix shipped in v1">
