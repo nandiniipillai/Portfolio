@@ -220,7 +220,7 @@ export default function WobblePage() {
         />
       </ScrollReveal>
 
-      {/* Story: competitor mining — transferable research skill */}
+      {/* Story: competitor mining — transferable research skill, confident statement */}
       <ScrollReveal>
         <div className="mt-8">
           <p className="text-silver font-heading tracking-tightest text-lg md:text-xl leading-snug mb-3">
@@ -231,8 +231,10 @@ export default function WobblePage() {
             The recurring complaints — understaffing, poor cleanliness,
             overcrowding, hidden costs — were each triaged into an operational
             requirement, from sanitising stations to timed entry at peak hours.
-            The same skill that drives a digital feature audit: find the failure
-            modes, design them out upstream.
+          </p>
+          <p className="text-silver text-sm font-medium mt-4">
+            This is a digital feature audit in a different medium. Find the
+            failure modes, design them out upstream.
           </p>
         </div>
       </ScrollReveal>
@@ -254,7 +256,7 @@ export default function WobblePage() {
         </ScrollReveal>
       </div>
 
-      {/* Story: business model — image 53 for transferable business thinking */}
+      {/* Story: business model — confident transferable statement */}
       <ScrollReveal>
         <div className="mt-8">
           <p className="text-silver font-heading tracking-tightest text-lg md:text-xl leading-snug mb-3">
@@ -263,30 +265,24 @@ export default function WobblePage() {
           <p className="text-fog text-base leading-relaxed max-w-3xl">
             I built the Business Model Canvas and presented it through five
             strategic lenses — entry fees, memberships, parties, school trips,
-            the café and merchandise. The same muscle that informs a SaaS
-            pricing ladder or a retention loop in a digital product: design the
-            business, not just the surface.
+            the café and merchandise.
+          </p>
+          <p className="text-silver text-sm font-medium mt-4">
+            This is the same muscle that builds a SaaS pricing ladder or a
+            retention loop. Design the business, not just the surface.
           </p>
         </div>
       </ScrollReveal>
 
       <ScrollReveal>
         <ZoomFig
-          src="/assets/wobble/w-53.jpg"
-          alt="Business model strategic breakdown"
-          caption="Business model — six revenue streams, five strategic lenses."
-        />
-      </ScrollReveal>
-
-      <ScrollReveal>
-        <ZoomFig
           src="/assets/wobble/w-55.jpg"
           alt="Business Model Canvas"
-          caption="Business Model Canvas — the operating model."
+          caption="Business Model Canvas — six revenue streams, five strategic lenses."
         />
       </ScrollReveal>
 
-      {/* Story: brand — image 52 for transferable brand-thinking */}
+      {/* Story: brand — confident transferable statement */}
       <ScrollReveal>
         <div className="mt-8">
           <p className="text-silver font-heading tracking-tightest text-lg md:text-xl leading-snug mb-3">
@@ -296,8 +292,11 @@ export default function WobblePage() {
             Local competitor sites are cluttered with clip art. Wobble&apos;s
             clean pastel identity — calm, neutral, developmental — read
             instantly as a different category. Per Neumeier, the brand is the
-            thing that distinguishes, and that is the same craft that sharpens
-            a digital product&apos;s voice and trust signals.
+            thing that distinguishes.
+          </p>
+          <p className="text-silver text-sm font-medium mt-4">
+            This is the craft that sharpens a digital product&apos;s voice and
+            trust signals.
           </p>
         </div>
       </ScrollReveal>
@@ -334,15 +333,6 @@ export default function WobblePage() {
         </div>
       </ScrollReveal>
 
-      <ScrollReveal>
-        <ZoomFig
-          src="/assets/wobble/w-26.jpg"
-          alt="Light-up musical sensory seating in calm neutral palette"
-          caption="The calm, neutral direction — sensory seating proof point."
-          aspect="16/10"
-        />
-      </ScrollReveal>
-
       {/* Story: outcome */}
       <ScrollReveal>
         <div className="mt-8">
@@ -368,6 +358,50 @@ export default function WobblePage() {
             preload="none"
             className="w-full h-auto"
           />
+        </div>
+      </ScrollReveal>
+
+      {/* What this proves in digital */}
+      <ScrollReveal>
+        <div className="mt-10">
+          <p className="text-silver font-heading tracking-tightest text-lg md:text-xl leading-snug mb-4">
+            What this proves in digital product design.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {[
+              ['Research synthesis', '15 interviews, 8 themes, 5 binding constraints — the same flow that turns user research into feature specs.'],
+              ['Competitor mining', 'Review-triaged failure modes, designed out upstream — the same method behind a digital feature audit.'],
+              ['Business model design', 'Six revenue streams across five strategic lenses — the same muscle that builds a SaaS pricing ladder or retention loop.'],
+              ['Brand positioning', 'Clean identity as differentiation in a cluttered market — the same craft that sharpens a digital product&apos;s voice and trust signals.'],
+            ].map(([label, detail]) => (
+              <div key={label} className="border-l-2 pl-4" style={{ borderColor: ACCENT }}>
+                <div className="text-silver font-medium text-sm">{label}</div>
+                <div className="text-fog text-sm mt-0.5">{detail}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </ScrollReveal>
+
+      {/* What I learned */}
+      <ScrollReveal>
+        <div className="mt-10">
+          <p className="text-silver font-heading tracking-tightest text-lg md:text-xl leading-snug mb-4">
+            What I learned.
+          </p>
+          <div className="space-y-3">
+            {[
+              'Adaptation is about function, not geography — keep the benefit, rebuild the form.',
+              'Research earns client buy-in when every finding maps to a visible decision.',
+              'Strategy and space argue for each other when design sits at the business level.',
+              'Next time I would set measurable success criteria with the client at kickoff.',
+            ].map((item) => (
+              <div key={item} className="flex items-start gap-3">
+                <span className="mt-2 w-1.5 h-1.5 rounded-full shrink-0" style={{ background: ACCENT }} aria-hidden="true" />
+                <p className="text-fog text-sm leading-relaxed">{item}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </ScrollReveal>
     </BriefPage>
