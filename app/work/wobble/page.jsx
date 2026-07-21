@@ -351,19 +351,24 @@ export default function WobblePage() {
           </p>
           <p className="text-fog text-base leading-relaxed max-w-3xl">
             Strategy, spatial design, brand, and business model — accepted in
-            full. The client is now seeking funding for the Lancaster flagship.
-            Highest grade in the class for the module, entering a UK indoor
-            entertainment market projected at $2.72B by 2031.
+            full. The client is now seeking funding for the first Wobble
+            location. Highest grade in the class for the module, entering a
+            UK indoor entertainment market projected at $2.72B by 2031.
           </p>
         </div>
       </ScrollReveal>
       <ScrollReveal>
-        <ZoomFig
-          src="/assets/wobble/w-62.jpg"
-          alt="England expansion map with Lancaster flagship pin"
-          caption="The Lancaster flagship — first location on the expansion map."
-          aspect="16/10"
-        />
+        <div className="rounded-2xl overflow-hidden border border-white/[0.07] bg-carbon">
+          <video
+            src="/assets/wobble/wobble-cover.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="none"
+            className="w-full h-auto"
+          />
+        </div>
       </ScrollReveal>
     </BriefPage>
   );

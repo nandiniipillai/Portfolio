@@ -31,11 +31,23 @@ export default function OtherProjects() {
                   <p className="mt-2 text-fog text-sm max-w-md">{p.oneLiner}</p>
                 </div>
               </div>
-              {p.image && (
+              {p.video ? (
+                <div className="absolute inset-0 -z-0 opacity-40 group-hover:opacity-55 transition-opacity duration-500 overflow-hidden">
+                  <video
+                    src={p.video}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="none"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                </div>
+              ) : p.image ? (
                 <div className="absolute inset-0 -z-0 opacity-40 group-hover:opacity-55 transition-opacity duration-500">
                   <Image src={p.image} alt="" fill sizes="600px" className="object-cover transition-transform duration-700 group-hover:scale-105" />
                 </div>
-              )}
+              ) : null}
               {p.hasPage && (
                 <span className="absolute top-6 right-6 card-arrow text-silver text-xl z-10" aria-hidden="true">↗</span>
               )}
