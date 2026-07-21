@@ -68,7 +68,7 @@ export default function WobblePage() {
         </>
       }
     >
-      {/* Hero isometric */}
+      {/* Opening — the space we designed */}
       <ScrollReveal>
         <ZoomFig
           src="/assets/wobble/w-47.jpg"
@@ -77,38 +77,53 @@ export default function WobblePage() {
         />
       </ScrollReveal>
 
-      {/* The problem */}
+      {/* Story: the problem */}
       <ScrollReveal>
-        <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-4 mt-8">The problem</div>
-        <p className="text-fog text-base leading-relaxed max-w-3xl">
-          UK kids average under 4 hours of exercise a week against 14+ hours
-          of screen time. Every alternative fails somewhere: parks work only
-          in summer, homes cannot host physical play, and local soft play
-          centres are overcrowded, hard to keep clean, and offer either exercise
-          or education — rarely both.
-        </p>
+        <div className="mt-8">
+          <p className="text-silver font-heading tracking-tightest text-lg md:text-xl leading-snug mb-3">
+            UK kids average under 4 hours of exercise a week against 14+ hours of
+            screen time.
+          </p>
+          <p className="text-fog text-base leading-relaxed max-w-3xl">
+            Every alternative fails somewhere. Parks work only in summer, homes
+            cannot host physical play, and local soft play centres are
+            overcrowded, hard to keep clean, and offer either exercise or
+            education — rarely both. Toddlers miss over 1,000 adult-spoken words
+            a day to screens. The brief was not &ldquo;build a play centre.&rdquo;
+            It was &ldquo;replace what children lose outdoors.&rdquo;
+          </p>
+        </div>
       </ScrollReveal>
 
-      {/* The founding decision */}
+      {/* Story: the founding decision */}
       <ScrollReveal>
-        <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-4 mt-8">The founding decision</div>
-        <p className="text-fog text-base leading-relaxed max-w-3xl">
-          The client wanted a UK version of centres like Shenzhen&apos;s Meland
-          Club. I pushed back on replicating the format — the real job was
-          replacing what UK children lose outdoors. That became the guiding
-          rule: the space must do the job of a park. We dropped the imported
-          entertainment theming entirely.
-        </p>
+        <div className="mt-8">
+          <p className="text-silver font-heading tracking-tightest text-lg md:text-xl leading-snug mb-3">
+            The client wanted a UK version of China&rsquo;s Meland Club.
+          </p>
+          <p className="text-fog text-base leading-relaxed max-w-3xl">
+            I pushed back on replicating the format. The real job was replacing
+            what UK children lose outdoors — so the space must do what a park
+            does, inside. We dropped the imported entertainment theming entirely,
+            and that &ldquo;park job&rdquo; framing held every later decision.
+          </p>
+        </div>
       </ScrollReveal>
 
       {/* Research → spatial rules */}
       <ScrollReveal>
-        <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-4 mt-8">Fifteen parent interviews became binding spatial rules</div>
-        <p className="text-fog text-base leading-relaxed max-w-3xl mb-4">
-          I ran the interviews and synthesised eight themes, then held the
-          spatial team to them as constraints:
-        </p>
+        <div className="mt-8">
+          <p className="text-silver font-heading tracking-tightest text-lg md:text-xl leading-snug mb-3">
+            Fifteen parent interviews became binding spatial rules.
+          </p>
+          <p className="text-fog text-base leading-relaxed max-w-3xl mb-4">
+            I synthesised eight themes, then held the spatial team to them as
+            constraints. Every research finding mapped directly to a visible
+            decision — that is what earned client buy-in.
+          </p>
+        </div>
       </ScrollReveal>
+
       <ScrollReveal>
         <ZoomFig
           src="/assets/wobble/w-16.jpg"
@@ -116,6 +131,7 @@ export default function WobblePage() {
           caption="Thematic analysis — eight themes from fifteen parent interviews."
         />
       </ScrollReveal>
+
       <ScrollReveal>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
           {[
@@ -133,37 +149,50 @@ export default function WobblePage() {
         </div>
       </ScrollReveal>
 
-      {/* Zoned plan + annotated factors */}
+      {/* The zones flow into imagery */}
       <ScrollReveal>
-        <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-4 mt-8">Graduated zones and circulation routes</div>
+        <div className="mt-8">
+          <p className="text-silver font-heading tracking-tightest text-lg md:text-xl leading-snug mb-3">
+            Graduated zones, separate circulation, the café as a vantage point.
+          </p>
+          <p className="text-fog text-base leading-relaxed max-w-3xl">
+            Kids aged 3 to 10 get the adventure zones, babies get their own wing,
+            and parents get a café with full sightlines over everything.
+            Supervision feels effortless, and birthday-party rooms triaged peak
+            demand keep weekdays full.
+          </p>
+        </div>
       </ScrollReveal>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
         <ScrollReveal>
           <ZoomFig
             src="/assets/wobble/w-21.jpg"
-            alt="Zoned isometric plan with colour-coded circulation routes for kids, parents and babies"
+            alt="Zoned isometric plan with colour-coded circulation routes"
             caption="Zoned plan — separate routes for kids 3-10, parents, and babies."
           />
         </ScrollReveal>
         <ScrollReveal>
           <ZoomFig
             src="/assets/wobble/w-22.jpg"
-            alt="Annotated isometric with callouts for acoustic panels, child-scale openings, visibility"
+            alt="Annotated isometric with callouts for acoustic panels, child-scale openings"
             caption="Design constraints mapped to spatial decisions."
           />
         </ScrollReveal>
       </div>
 
-      {/* Child-scale high street */}
+      {/* Story: the high street */}
       <ScrollReveal>
-        <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-4 mt-8">A child-scale UK high street replaced the imported theming</div>
-        <p className="text-fog text-base leading-relaxed max-w-3xl">
-          The pretend-play zone recreates a typical UK street — bakery,
-          bookstore, pharmacy — modelled on real London shopfronts at a
-          child&apos;s height. Children role-play by imitating the adults around
-          them, so the street stages the daily life they actually see rather
-          than a borrowed fantasy.
-        </p>
+        <div className="mt-8">
+          <p className="text-silver font-heading tracking-tightest text-lg md:text-xl leading-snug mb-3">
+            A child-scale UK high street replaced the imported theming.
+          </p>
+          <p className="text-fog text-base leading-relaxed max-w-3xl">
+            Bakery, bookstore, pharmacy — modelled on real London shopfronts at a
+            child&apos;s height. Children role-play by imitating the adults
+            around them, so the street stages the daily life they actually see
+            rather than a borrowed fantasy.
+          </p>
+        </div>
       </ScrollReveal>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
         <ScrollReveal>
@@ -191,16 +220,23 @@ export default function WobblePage() {
         />
       </ScrollReveal>
 
-      {/* Competitor analysis */}
+      {/* Story: competitor mining — transferable research skill */}
       <ScrollReveal>
-        <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-4 mt-8">Review-mining competitors surfaced the failures to design out</div>
-        <p className="text-fog text-base leading-relaxed max-w-3xl">
-          I mined reviews of play centres across China, Japan and the UK. The
-          recurring complaints — understaffing, poor cleanliness, overcrowding,
-          hidden costs — were each triaged into an operational requirement, from
-          sanitising stations to timed entry at peak hours.
-        </p>
+        <div className="mt-8">
+          <p className="text-silver font-heading tracking-tightest text-lg md:text-xl leading-snug mb-3">
+            Review-mining competitors surfaced the failures to design out.
+          </p>
+          <p className="text-fog text-base leading-relaxed max-w-3xl">
+            I mined reviews of play centres across China, Japan and the UK.
+            The recurring complaints — understaffing, poor cleanliness,
+            overcrowding, hidden costs — were each triaged into an operational
+            requirement, from sanitising stations to timed entry at peak hours.
+            The same skill that drives a digital feature audit: find the failure
+            modes, design them out upstream.
+          </p>
+        </div>
       </ScrollReveal>
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
         <ScrollReveal>
           <ZoomFig
@@ -213,34 +249,74 @@ export default function WobblePage() {
           <ZoomFig
             src="/assets/wobble/w-54.jpg"
             alt="Competitor website comparison against minimal Wobble homepage"
-            caption="Competitor sites vs Wobble — clean pastel identity as differentiation."
+            caption="Competitor sites vs Wobble — clean identity as differentiation."
           />
         </ScrollReveal>
       </div>
 
-      {/* Business model */}
+      {/* Story: business model — image 53 for transferable business thinking */}
       <ScrollReveal>
-        <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-4 mt-8">The business model spreads revenue across six streams</div>
-        <p className="text-fog text-base leading-relaxed max-w-3xl">
-          I built the Business Model Canvas and presented it through five
-          strategic lenses. Revenue comes from entry fees, memberships, parties,
-          school trips, the café and merchandise. Brand carried the
-          differentiation — local competitor sites are cluttered with clip art,
-          so Wobble&apos;s clean pastel identity positions it as the option with
-          no substitute.
-        </p>
+        <div className="mt-8">
+          <p className="text-silver font-heading tracking-tightest text-lg md:text-xl leading-snug mb-3">
+            The business model spreads revenue across six streams.
+          </p>
+          <p className="text-fog text-base leading-relaxed max-w-3xl">
+            I built the Business Model Canvas and presented it through five
+            strategic lenses — entry fees, memberships, parties, school trips,
+            the café and merchandise. The same muscle that informs a SaaS
+            pricing ladder or a retention loop in a digital product: design the
+            business, not just the surface.
+          </p>
+        </div>
       </ScrollReveal>
+
+      <ScrollReveal>
+        <ZoomFig
+          src="/assets/wobble/w-53.jpg"
+          alt="Business model strategic breakdown"
+          caption="Business model — six revenue streams, five strategic lenses."
+        />
+      </ScrollReveal>
+
       <ScrollReveal>
         <ZoomFig
           src="/assets/wobble/w-55.jpg"
           alt="Business Model Canvas"
-          caption="Business Model Canvas — six revenue streams, five strategic lenses."
+          caption="Business Model Canvas — the operating model."
         />
       </ScrollReveal>
 
-      {/* What was cut */}
+      {/* Story: brand — image 52 for transferable brand-thinking */}
       <ScrollReveal>
-        <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-4 mt-8">What we deliberately cut and why</div>
+        <div className="mt-8">
+          <p className="text-silver font-heading tracking-tightest text-lg md:text-xl leading-snug mb-3">
+            Brand positioned Wobble as the option with no substitute.
+          </p>
+          <p className="text-fog text-base leading-relaxed max-w-3xl">
+            Local competitor sites are cluttered with clip art. Wobble&apos;s
+            clean pastel identity — calm, neutral, developmental — read
+            instantly as a different category. Per Neumeier, the brand is the
+            thing that distinguishes, and that is the same craft that sharpens
+            a digital product&apos;s voice and trust signals.
+          </p>
+        </div>
+      </ScrollReveal>
+
+      <ScrollReveal>
+        <ZoomFig
+          src="/assets/wobble/w-52.jpg"
+          alt="Brand positioning and identity comparison"
+          caption="Brand positioning — Wobble's clean identity vs the cluttered competitor set."
+        />
+      </ScrollReveal>
+
+      {/* Story: what was cut */}
+      <ScrollReveal>
+        <div className="mt-8">
+          <p className="text-silver font-heading tracking-tightest text-lg md:text-xl leading-snug mb-3">
+            What we deliberately cut — and why.
+          </p>
+        </div>
       </ScrollReveal>
       <ScrollReveal>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -258,25 +334,28 @@ export default function WobblePage() {
         </div>
       </ScrollReveal>
 
-      {/* Sensory seating proof */}
       <ScrollReveal>
         <ZoomFig
           src="/assets/wobble/w-26.jpg"
-          alt="Light-up musical sensory seating in calm, neutral palette"
+          alt="Light-up musical sensory seating in calm neutral palette"
           caption="The calm, neutral direction — sensory seating proof point."
           aspect="16/10"
         />
       </ScrollReveal>
 
-      {/* Outcome */}
+      {/* Story: outcome */}
       <ScrollReveal>
-        <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-4 mt-8">The client adopted the entire proposal</div>
-        <p className="text-fog text-base leading-relaxed max-w-3xl">
-          The client accepted the complete proposal — strategy, spatial design,
-          brand, and business model — and is now seeking funding for the
-          Lancaster flagship. Highest grade in the class for the module.
-          Entering a UK indoor entertainment market projected at $2.72B by 2031.
-        </p>
+        <div className="mt-8">
+          <p className="text-silver font-heading tracking-tightest text-lg md:text-xl leading-snug mb-3">
+            The client adopted the entire proposal.
+          </p>
+          <p className="text-fog text-base leading-relaxed max-w-3xl">
+            Strategy, spatial design, brand, and business model — accepted in
+            full. The client is now seeking funding for the Lancaster flagship.
+            Highest grade in the class for the module, entering a UK indoor
+            entertainment market projected at $2.72B by 2031.
+          </p>
+        </div>
       </ScrollReveal>
       <ScrollReveal>
         <ZoomFig
