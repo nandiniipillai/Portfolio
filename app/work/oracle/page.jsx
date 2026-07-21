@@ -68,41 +68,33 @@ export default function OraclePage() {
         </>
       }
     >
-      {/* 1. The world — 2071 context */}
+      {/* Hero — concept render */}
       <ScrollReveal>
         <ZoomFig
-          src="/assets/oracle/slide-title.png"
-          alt="Oracle — 2071 speculative world context"
-          caption="2071 — humanity spreading across the solar system after surviving the ecological crisis."
+          src="/assets/oracle/oracle-concept.jpeg"
+          alt="Oracle concept — headgear with quantum sensors for neural pathway recording"
+          caption="Oracle — headgear with quantum sensors for neural pathway recording and transfer."
         />
       </ScrollReveal>
 
+      {/* Synopsis: the brief */}
       <ScrollReveal>
         <div className="mt-8">
           <p className="text-silver font-heading tracking-tightest text-lg md:text-xl leading-snug mb-3">
             One week. A speculative world. A business pitch to a fictional corporation.
           </p>
           <p className="text-fog text-base leading-relaxed max-w-3xl">
-            The Imagination Lab module challenged us to design for 2071 — a
-            world after ecological collapse, where survivors need tools not only
-            to live but to thrive. The brief required a full business
-            proposition: the product, the context, the business model, marketing
-            and branding, and ecological impact neutral enough to satisfy the
-            Solar System Eco-Police. We pitched to the Weyland-Yutani
-            Corporation, who had &pound;800 billion credits to invest.
+            The Imagination Lab challenged us to design for 2071 — a world
+            after ecological collapse where survivors need tools not only to
+            live but to thrive. The brief required a complete business
+            proposition: product, context, business model, marketing and
+            branding, and ecological impact neutral enough to satisfy the Solar
+            System Eco-Police.
           </p>
         </div>
       </ScrollReveal>
 
-      {/* 2. The product — Oracle */}
-      <ScrollReveal>
-        <ZoomFig
-          src="/assets/oracle/slide-product.png"
-          alt="Oracle product concept — headgear with quantum sensors"
-          caption="Oracle — headgear with quantum sensors for neural pathway recording and transfer."
-        />
-      </ScrollReveal>
-
+      {/* Synopsis: what Oracle does */}
       <ScrollReveal>
         <div className="mt-8">
           <p className="text-silver font-heading tracking-tightest text-lg md:text-xl leading-snug mb-3">
@@ -111,102 +103,41 @@ export default function OraclePage() {
           <p className="text-fog text-base leading-relaxed max-w-3xl">
             A skilled operator wears Oracle while performing a task — combat
             manoeuvres, survival techniques, defensive procedures. Quantum
-            sensors monitor and record the brain&apos;s neural pathways in real
-            time. The recording transfers to another user via deep brain
-            stimulation, compressing years of physical learning into hours of
-            guided neural practice. The recipient does not just watch — their
-            brain rehearses the skill at a neural level before their body
-            follows.
+            sensors record the brain&apos;s neural pathways in real time. The
+            recording transfers to another user via deep brain stimulation,
+            compressing years of physical learning into hours. The recipient
+            does not just watch — their brain rehearses the skill at a neural
+            level before their body follows.
           </p>
         </div>
       </ScrollReveal>
 
-      {/* 3. The process — how we got there */}
+      {/* Concept board */}
+      <ScrollReveal>
+        <ZoomFig
+          src="/assets/oracle/oracle-group.jpg"
+          alt="Genesis concept board — Oracle world-building and product context"
+          caption="Concept board — world-building and product context for Oracle."
+        />
+      </ScrollReveal>
+
+      {/* Synopsis: the process */}
       <ScrollReveal>
         <div className="mt-8">
           <p className="text-silver font-heading tracking-tightest text-lg md:text-xl leading-snug mb-3">
             From chip implants and consciousness transfers to one focused idea.
           </p>
           <p className="text-fog text-base leading-relaxed max-w-3xl">
-            Our process moved through five phases: research, define, ideate,
-            sketch and visualise, iterate. Early ideas were broad — chip
-            implants in the brain, storing memories, transferring consciousness
-            to another body or machine. We kept narrowing until Oracle was born:
-            skill transfer via neural pathway recording and deep brain
-            stimulation. Not memories. Not identity. Skills.
+            We moved through research, define, ideate, sketch and visualise,
+            iterate. Early ideas were broad — chip implants, storing memories,
+            transferring consciousness to another body or machine. We kept
+            narrowing until Oracle was born: skill transfer, not memory.
+            Not identity. Skills that help communities rebuild.
           </p>
         </div>
       </ScrollReveal>
 
-      <ScrollReveal>
-        <ZoomFig
-          src="/assets/oracle/process.png"
-          alt="Design process diagram: Research, Define, Ideate, Sketch, Iterate, Visualise"
-          caption="The process — five phases from research to visualization."
-          aspect="3/4"
-        />
-      </ScrollReveal>
-
-      {/* 4. Ideation — narrowing down */}
-      <ScrollReveal>
-        <div className="mt-8">
-          <p className="text-silver font-heading tracking-tightest text-lg md:text-xl leading-snug mb-3">
-            Initial ideas, iterations, mockups.
-          </p>
-          <p className="text-fog text-base leading-relaxed max-w-3xl">
-            We started with everything — AI detective systems, memory storage,
-            consciousness transfer. Each round of research and feedback cut the
-            scope tighter until we landed on skill transfer as the sharpest
-            value proposition: a product that teaches combat and survival skills
-            to communities recovering from ecological devastation.
-          </p>
-        </div>
-      </ScrollReveal>
-
-      <ScrollReveal>
-        <ZoomFig
-          src="/assets/oracle/ideation-mockups.png"
-          alt="Initial ideas, iterations, and mockups progression"
-          caption="From broad concepts to focused mockups — the narrowing process."
-          aspect="3/4"
-        />
-      </ScrollReveal>
-
-      {/* 5. Application — how it's used */}
-      <ScrollReveal>
-        <div className="mt-8">
-          <p className="text-silver font-heading tracking-tightest text-lg md:text-xl leading-snug mb-3">
-            Where Oracle fits in the world.
-          </p>
-          <p className="text-fog text-base leading-relaxed max-w-3xl">
-            Oracle starts where the need is sharpest — military and law
-            enforcement, where skill transfer is the difference between life
-            and death. The expansion path moves into healthcare (training
-            surgeons), education (accelerating apprenticeships), and space
-            industries (preparing colonists for hazardous environments) over
-            15 years.
-          </p>
-        </div>
-      </ScrollReveal>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-        <ScrollReveal>
-          <ZoomFig
-            src="/assets/oracle/slide-application.png"
-            alt="Oracle application scenarios"
-            caption="Application — where Oracle fits across 2071 society."
-          />
-        </ScrollReveal>
-        <ScrollReveal>
-          <ZoomFig
-            src="/assets/oracle/slide-use-case.png"
-            alt="Oracle use case — skill transfer in action"
-            caption="Use case — skill transfer in action."
-          />
-        </ScrollReveal>
-      </div>
-
-      {/* 6. Business model — transferable skill */}
+      {/* Synopsis: business model — transferable skill */}
       <ScrollReveal>
         <div className="mt-8">
           <p className="text-silver font-heading tracking-tightest text-lg md:text-xl leading-snug mb-3">
@@ -214,12 +145,11 @@ export default function OraclePage() {
           </p>
           <p className="text-fog text-base leading-relaxed max-w-3xl">
             I framed revenue across five streams: Weyland-Yutani investment,
-            government contracts (offering specialised features for a 20%
-            annual increase), subscription-based software platforms, refit
-            commission from repair outfits, and intellectual property licensing
-            with customised versions. The model projected a path from 2071 to
-            2073, scaling from a military wedge into healthcare, education, and
-            space industries by year 15.
+            government contracts with specialised features, subscription-based
+            software platforms, refit commissions from repair outfits, and IP
+            licensing with customised versions. The expansion path scales from
+            military and law enforcement into healthcare, education, and space
+            industries over 15 years.
           </p>
           <p className="text-silver text-sm font-medium mt-4">
             This is the same muscle that builds a pricing strategy for a product
@@ -228,24 +158,16 @@ export default function OraclePage() {
         </div>
       </ScrollReveal>
 
-      <ScrollReveal>
-        <ZoomFig
-          src="/assets/oracle/slide-scenario.png"
-          alt="Oracle business model and revenue streams"
-          caption="Business model — five revenue streams and a 15-year expansion path."
-        />
-      </ScrollReveal>
-
-      {/* 7. Ethical framework — transferable skill */}
+      {/* Synopsis: ethical framework — transferable skill */}
       <ScrollReveal>
         <div className="mt-8">
           <p className="text-silver font-heading tracking-tightest text-lg md:text-xl leading-snug mb-3">
-            Neural enhancement demanded an ethical framework, not just a feature list.
+            Neural enhancement demanded an ethical framework.
           </p>
           <p className="text-fog text-base leading-relaxed max-w-3xl">
-            I explored privacy risks, data ownership, and accessibility concerns,
-            helping the team develop AI governance frameworks aligned with ethical
-            design principles. The question was not just &ldquo;can we transfer
+            I explored privacy risks, data ownership, and accessibility —
+            developing AI governance frameworks aligned with ethical design
+            principles. The question was not just &ldquo;can we transfer
             skills?&rdquo; but &ldquo;who owns a neural recording?&rdquo; and
             &ldquo;who gets access?&rdquo;
           </p>
@@ -256,41 +178,7 @@ export default function OraclePage() {
         </div>
       </ScrollReveal>
 
-      {/* 8. Marketing & brand */}
-      <ScrollReveal>
-        <ZoomFig
-          src="/assets/oracle/slide-marketing.png"
-          alt="Oracle marketing and brand strategy"
-          caption="Marketing — positioning Oracle for the Weyland-Yutani pitch."
-        />
-      </ScrollReveal>
-
-      {/* 9. Team */}
-      <ScrollReveal>
-        <div className="mt-8">
-          <p className="text-silver font-heading tracking-tightest text-lg md:text-xl leading-snug mb-3">
-            Genesis — six designers, one week, one pitch.
-          </p>
-          <p className="text-fog text-base leading-relaxed max-w-3xl">
-            I led the team from planning to execution — facilitating brainstorming
-            sessions, delegating tasks, and synchronising efforts across product
-            development, business strategy, branding, and presentation. The team
-            pulled together through time pressure and evolving ideas, and we
-            pitched Oracle as a cohesive, strategically sound proposition.
-          </p>
-        </div>
-      </ScrollReveal>
-
-      <ScrollReveal>
-        <ZoomFig
-          src="/assets/oracle/team.png"
-          alt="Genesis team — six designers across product, business, and marketing"
-          caption="Genesis — team across product, business, and marketing."
-          aspect="3/4"
-        />
-      </ScrollReveal>
-
-      {/* 10. Concept in motion */}
+      {/* Concept in motion */}
       <ScrollReveal>
         <div className="mt-8">
           <p className="text-silver font-heading tracking-tightest text-lg md:text-xl leading-snug mb-3">
@@ -315,7 +203,7 @@ export default function OraclePage() {
         </div>
       </ScrollReveal>
 
-      {/* 11. What this proves in digital */}
+      {/* What this proves in digital */}
       <ScrollReveal>
         <div className="mt-10">
           <p className="text-silver font-heading tracking-tightest text-lg md:text-xl leading-snug mb-4">
@@ -337,7 +225,7 @@ export default function OraclePage() {
         </div>
       </ScrollReveal>
 
-      {/* 12. What I learned */}
+      {/* What I learned */}
       <ScrollReveal>
         <div className="mt-10">
           <p className="text-silver font-heading tracking-tightest text-lg md:text-xl leading-snug mb-4">
