@@ -47,7 +47,9 @@ export default function BriefPage({
                     <div key={i}>
                       <dt className="text-[11px] tracking-[0.24em] uppercase text-ash mb-1.5">{label}</dt>
                       <dd className="text-silver text-sm md:text-base">
-                        {Array.isArray(value) ? value.join(' · ') : value}
+                        {Array.isArray(value) ? value.map((v, i) => (
+                          <span key={i} className="block">{v}</span>
+                        )) : value}
                       </dd>
                     </div>
                   ))}
