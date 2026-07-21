@@ -8,23 +8,28 @@ import ScrollReveal from '@/components/ScrollReveal';
 
 const ACCENT = '#D946EF';
 
-function ZoomFig({ src, alt, aspect = '16/9' }) {
+function ZoomFig({ src, alt, caption, aspect = '16/9' }) {
   return (
-    <div
-      className="relative rounded-2xl overflow-hidden bg-carbon border border-white/[0.05]"
-      style={{ aspectRatio: aspect }}
-    >
-      <Zoom>
-        <Image
-          src={src}
-          alt={alt}
-          width={1600}
-          height={1000}
-          className="w-full h-full object-cover"
-          sizes="(max-width: 768px) 100vw, 900px"
-        />
-      </Zoom>
-    </div>
+    <figure className="flex flex-col">
+      <div
+        className="relative rounded-2xl overflow-hidden bg-carbon border border-white/[0.05]"
+        style={{ aspectRatio: aspect }}
+      >
+        <Zoom>
+          <Image
+            src={src}
+            alt={alt}
+            width={1600}
+            height={1000}
+            className="w-full h-full object-cover"
+            sizes="(max-width: 768px) 100vw, 900px"
+          />
+        </Zoom>
+      </div>
+      {caption && (
+        <figcaption className="mt-3 text-[11px] tracking-[0.24em] uppercase text-ash">{caption}</figcaption>
+      )}
+    </figure>
   );
 }
 
@@ -32,59 +37,163 @@ export default function OraclePage() {
   return (
     <BriefPage
       title="Oracle"
-      oneLiner="A speculative knowledge-transmission device for a 2071 post-crisis society."
-      category="Speculative Design"
+      oneLiner="A speculative knowledge-transmission device for a 2071 post-crisis society — Designing beyond human-centred design"
+      category="Speculative Design · Design Fiction"
       accent={ACCENT}
       meta={[
-        ['Role', 'Concept · storyboarding · business strategy'],
-        ['Team', 'Genesis · 5 designers'],
+        ['Role', ['Team Leader', 'Business strategy', 'Ethical design']],
+        ['Team', ['Genesis', '6 designers']],
         ['Type', 'Academic project'],
-        ['Year', '2024'],
+        ['Year', '2025'],
       ]}
       overview={
         <>
           <p>
-            Oracle is a concept for 2071 — a society on the brink of rebirth
-            where survivors need tools not only to live, but to thrive. The
-            device transmits skills and knowledge across communities recovering
-            from ecological devastation, compressing years of learning into
-            hours.
+            The year is 2071. Humanity survived the ecological crisis of the
+            2030s and is spreading across the solar system — settlements on the
+            Moon, Mars, and beyond. The Weyland-Yutani Corporation has &pound;800
+            billion credits to invest, and our team — Genesis — had one week
+            to build a convincing business proposition for a product that
+            serves this world.
           </p>
           <p>
-            The five of us — Genesis studio — worked through four phases:
-            research and ideation on post-crisis needs, concept definition
-            balancing speculative fiction against feasible advancement,
-            storyboarding and 3D visualisation, and a business strategy
-            grounded in cost and market analysis.
+            Oracle is a headgear embedded with quantum sensors that monitors
+            and records the brain&apos;s neural pathways while performing a
+            task. The data transfers directly into another user&apos;s neural
+            pathways using deep brain stimulation — compressing years of
+            learning into hours. We designed it for combat skills, survival
+            skills, and collective defense.
+          </p>
+          <p>
+            I led the team, shaped the business model and value proposition,
+            outlined future expansion from law enforcement to healthcare and
+            education, and addressed the ethical implications of neural
+            enhancement and skill sharing.
           </p>
         </>
       }
     >
+      {/* Hero — concept image */}
       <ScrollReveal>
-        <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-4">The premise</div>
-        <p className="text-fog text-base leading-relaxed max-w-3xl">
-          By 2071, ecological collapse has fragmented communities. Schools,
-          internet infrastructure, and institutional knowledge are gone.
-          Survivors need to rebuild skills — farming, engineering, medicine —
-          but have no teachers and no time. Oracle is the answer: a wearable
-          device that transmits tacit knowledge directly, learned through
-          guided physical practice rather than abstract study.
-        </p>
+        <ZoomFig
+          src="/assets/oracle/oracle-concept.jpeg"
+          alt="Oracle concept — headgear with quantum sensors for neural pathway recording"
+          caption="Oracle — headgear with quantum sensors for neural pathway recording and transfer."
+        />
       </ScrollReveal>
 
+      {/* The brief */}
       <ScrollReveal>
-        <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-4 mt-8">How it works</div>
-        <p className="text-fog text-base leading-relaxed max-w-3xl">
-          Oracle pairs a wearable with a community knowledge hub. A learner
-          selects a skill, performs the physical motions guided by haptic
-          feedback and projected instructions, and the device records their
-          progression. Knowledge is shared peer-to-peer between devices, so
-          one community&apos;s mastery becomes the next&apos;s starting point.
-        </p>
+        <div className="mt-8">
+          <p className="text-silver font-heading tracking-tightest text-lg md:text-xl leading-snug mb-3">
+            One week. A speculative world. A business pitch to a fictional corporation.
+          </p>
+          <p className="text-fog text-base leading-relaxed max-w-3xl">
+            The Imagination Lab module challenged us to design for 2071 — a
+            world after ecological collapse, where survivors need tools not only
+            to live but to thrive. The brief required a full business
+            proposition: the product, the context, the business model, marketing
+            and branding, and ecological impact neutral enough to satisfy the
+            Solar System Eco-Police.
+          </p>
+        </div>
       </ScrollReveal>
 
+      {/* The process */}
       <ScrollReveal>
-        <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-4 mt-8">The concept in motion</div>
+        <div className="mt-8">
+          <p className="text-silver font-heading tracking-tightest text-lg md:text-xl leading-snug mb-3">
+            From chip implants and consciousness transfers to one focused idea.
+          </p>
+          <p className="text-fog text-base leading-relaxed max-w-3xl">
+            Our process moved through five phases: research, define, ideate,
+            sketch and visualize, iterate. Early ideas were broad — chip
+            implants in the brain, storing memories, transferring consciousness
+            to another body or machine. We narrowed focus until Oracle was born:
+            skill transfer via neural pathway recording and deep brain
+            stimulation. Not memories. Not identity. Skills.
+          </p>
+        </div>
+      </ScrollReveal>
+
+      {/* Group concept image */}
+      <ScrollReveal>
+        <ZoomFig
+          src="/assets/oracle/oracle-group.jpg"
+          alt="Genesis team concept board — Oracle world-building and product context"
+          caption="Genesis — concept board and world-building for Oracle."
+        />
+      </ScrollReveal>
+
+      {/* What Oracle does */}
+      <ScrollReveal>
+        <div className="mt-8">
+          <p className="text-silver font-heading tracking-tightest text-lg md:text-xl leading-snug mb-3">
+            Oracle records what the brain does, then teaches it to someone else.
+          </p>
+          <p className="text-fog text-base leading-relaxed max-w-3xl">
+            A skilled operator wears Oracle while performing a task — combat
+            manoeuvres, survival techniques, defensive procedures. Quantum
+            sensors monitor and record the brain&apos;s neural pathways in
+            real time. The recording transfers to another user via deep brain
+            stimulation, compressing years of physical learning into hours of
+            guided neural practice. The recipient does not just watch — their
+            brain rehearsed the skill at a neural level before their body
+            followed.
+          </p>
+        </div>
+      </ScrollReveal>
+
+      {/* The business model */}
+      <ScrollReveal>
+        <div className="mt-8">
+          <p className="text-silver font-heading tracking-tightest text-lg md:text-xl leading-snug mb-3">
+            A business model for a product that does not exist yet.
+          </p>
+          <p className="text-fog text-base leading-relaxed max-w-3xl">
+            I framed revenue across five streams: Weyland-Yutani investment,
+            government contracts (offering specialised features for a 20%
+            annual increase), subscription-based software platforms, refit
+            commission from repair outfits, and intellectual property licensing
+            with customised versions. The model projected a path from 2071 to
+            2073, scaling from a military and law-enforcement wedge into
+            healthcare, education, and space industries by year 15.
+          </p>
+          <p className="text-silver text-sm font-medium mt-4">
+            This is the same muscle that builds a pricing strategy for a
+            product with no precedent — design the business model, not just the
+            artifact.
+          </p>
+        </div>
+      </ScrollReveal>
+
+      {/* The ethical framework */}
+      <ScrollReveal>
+        <div className="mt-8">
+          <p className="text-silver font-heading tracking-tightest text-lg md:text-xl leading-snug mb-3">
+            Neural enhancement demanded an ethical framework, not just a feature list.
+          </p>
+          <p className="text-fog text-base leading-relaxed max-w-3xl">
+            I explored privacy risks, data ownership, and accessibility concerns,
+            helping the team develop AI governance frameworks that aligned with
+            ethical design principles. The question was not just &ldquo;can we
+            transfer skills?&rdquo; but &ldquo;who owns a neural recording?&rdquo;
+            and &ldquo;who gets access?&rdquo;
+          </p>
+          <p className="text-silver text-sm font-medium mt-4">
+            This is the same thinking that shapes AI trust design — defining
+            what a product refuses to do before shipping what it does.
+          </p>
+        </div>
+      </ScrollReveal>
+
+      {/* The concept in motion */}
+      <ScrollReveal>
+        <div className="mt-8">
+          <p className="text-silver font-heading tracking-tightest text-lg md:text-xl leading-snug mb-3">
+            The concept in motion.
+          </p>
+        </div>
       </ScrollReveal>
       <ScrollReveal>
         <div
@@ -103,15 +212,48 @@ export default function OraclePage() {
         </div>
       </ScrollReveal>
 
+      {/* What this proves in digital */}
       <ScrollReveal>
-        <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-4 mt-8">What I contributed</div>
-        <p className="text-fog text-base leading-relaxed max-w-3xl">
-          I led concept definition and storyboarding, balancing speculative
-          fiction against plausible technology. I also built the business
-          strategy — cost analysis, market positioning, and the peer-to-peer
-          knowledge model that makes Oracle defensible in a world without
-          institutions.
-        </p>
+        <div className="mt-10">
+          <p className="text-silver font-heading tracking-tightest text-lg md:text-xl leading-snug mb-4">
+            What this proves in digital product design.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {[
+              ['Speculative thinking', 'Designing for a world that does not exist yet — the same skill that shapes visionary product roadmaps and future-facing concepts.'],
+              ['Business model design', 'Revenue across five streams for a product with no precedent — the same muscle that builds a pricing strategy for a novel product category.'],
+              ['Ethical frameworks', 'Defining what a product refuses to do — the same thinking that shapes AI trust, data ownership, and accessibility design.'],
+              ['Team leadership', 'Orchestrating a 6-person team through 5 process phases in one week — the same coordination that drives cross-functional product delivery.'],
+            ].map(([label, detail]) => (
+              <div key={label} className="border-l-2 pl-4" style={{ borderColor: ACCENT }}>
+                <div className="text-silver font-medium text-sm">{label}</div>
+                <div className="text-fog text-sm mt-0.5">{detail}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </ScrollReveal>
+
+      {/* What I learned */}
+      <ScrollReveal>
+        <div className="mt-10">
+          <p className="text-silver font-heading tracking-tightest text-lg md:text-xl leading-snug mb-4">
+            What I learned.
+          </p>
+          <div className="space-y-3">
+            {[
+              'Speculative design is not about certainty — it is about exploring future scenarios and starting discussions about what would be the case.',
+              'Making an idea simple doesn&apos;t weaken it. In most cases, it becomes more impactful and digestible.',
+              'A product is not just about visual appeal and functionalities — it is about commercial viability and value to users.',
+              'Next time I would set measurable success criteria at kickoff and communicate openly when feeling overwhelmed or underutilised.',
+            ].map((item) => (
+              <div key={item} className="flex items-start gap-3">
+                <span className="mt-2 w-1.5 h-1.5 rounded-full shrink-0" style={{ background: ACCENT }} aria-hidden="true" />
+                <p className="text-fog text-sm leading-relaxed">{item}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </ScrollReveal>
     </BriefPage>
   );
