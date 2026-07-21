@@ -37,7 +37,7 @@ export default function WobblePage() {
   return (
     <BriefPage
       title="Wobble"
-      oneLiner="Brings the benefits of outdoor play indoors for UK children — Designing for a business — Interactive indoor play arena"
+      oneLiner="Brings the benefits of outdoor play indoors for UK children — Designing for a business"
       category="Strategy & Service Design"
       accent={ACCENT}
       meta={[
@@ -50,15 +50,20 @@ export default function WobblePage() {
         <>
           <p>
             The client arrived with a reference to China&rsquo;s
-            entertainment-scale play centres and asked for a UK version. The
-            strategic pivot was to stop asking &ldquo;how do we copy
-            Meland?&rdquo; and start asking &ldquo;how do we do the
-            developmental job of a park inside four walls?&rdquo;
+            entertainment-scale play centres and asked for a UK version. We had
+            barely direct competitors, little to no awareness among users, and a
+            whole lot of limitations when designing for kids.
           </p>
           <p>
-            I owned the strategy side — parent interviews, thematic synthesis,
-            the business model canvas, and brand positioning — while four
-            teammates carried the spatial design and 3D.
+            The strategic pivot was to stop asking &ldquo;how do we copy?&rdquo;
+            and start asking &ldquo;how do we do the developmental job of a park
+            inside four walls?&rdquo;
+          </p>
+          <p>
+            I owned the strategy side — secondary research, parent interviews,
+            thematic synthesis, the business model canvas, and brand positioning
+            — while two teammates carried the spatial design and 3D, and the
+            other two carried branding and marketing material.
           </p>
         </>
       }
