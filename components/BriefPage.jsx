@@ -42,11 +42,13 @@ export default function BriefPage({
             )}
             {meta.length > 0 && (
               <ScrollReveal>
-                <dl className="mt-12 grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 border-t border-white/[0.06] pt-8">
+                <dl className={`mt-12 grid grid-cols-2 ${meta.length === 4 ? 'md:grid-cols-4' : 'md:grid-cols-3'} gap-6 md:gap-8 border-t border-white/[0.06] pt-8`}>
                   {meta.map(([label, value], i) => (
                     <div key={i}>
                       <dt className="text-[11px] tracking-[0.24em] uppercase text-ash mb-1.5">{label}</dt>
-                      <dd className="text-silver text-sm md:text-base">{value}</dd>
+                      <dd className="text-silver text-sm md:text-base">
+                        {Array.isArray(value) ? value.join(' · ') : value}
+                      </dd>
                     </div>
                   ))}
                 </dl>

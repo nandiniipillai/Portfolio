@@ -41,7 +41,7 @@ export default function WobblePage() {
       category="Strategy & Service Design"
       accent={ACCENT}
       meta={[
-        ['Role', ['Strategic Design', 'User research & Analysis', 'Marketing']],
+        ['Role', ['Strategic Design', 'User research']],
         ['Team', ['Sage Studio', '5 Multidisciplinary designers']],
         ['Timeline', '8 weeks'],
         ['Status', 'Client adopted the proposal, seeking funding'],
