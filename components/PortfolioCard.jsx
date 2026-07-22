@@ -41,7 +41,8 @@ function ILancasterMock() {
 }
 
 // One browser-framed screenshot window. theme 'dark' matches dark-UI shots (Baari).
-function BrowserWindow({ src, alt, url, theme = 'light', sizesAttr = '400px' }) {
+// pos overrides the crop focus for tall screenshots (default: top of page).
+function BrowserWindow({ src, alt, url, theme = 'light', sizesAttr = '400px', pos }) {
   const dark = theme === 'dark';
   return (
     <div
@@ -61,7 +62,7 @@ function BrowserWindow({ src, alt, url, theme = 'light', sizesAttr = '400px' }) 
         </span>
         {url && (
           <span
-            className={`mx-auto text-[8px] rounded-full px-2 py-0.5 ${
+            className={`mx-auto text-[10px] rounded-full px-2 py-0.5 ${
               dark ? 'text-fog bg-white/[0.06]' : 'text-gray-500 bg-white/60'
             }`}
           >
@@ -70,34 +71,42 @@ function BrowserWindow({ src, alt, url, theme = 'light', sizesAttr = '400px' }) 
         )}
       </div>
       <div className="relative w-full" style={{ aspectRatio: '16/10' }}>
-        <Image src={src} alt={alt || ''} fill sizes={sizesAttr} className="object-cover object-top" />
+        <Image
+          src={src}
+          alt={alt || ''}
+          fill
+          sizes={sizesAttr}
+          className="object-cover"
+          style={{ objectPosition: pos || 'top' }}
+        />
       </div>
     </div>
   );
 }
 
 // Spread of three real screens fanned like the phone covers: centre window forward,
-// side windows tilted behind. images = [left, centre, right].
-function CoverSpread({ images, alts = [], url, theme }) {
+// side windows tilted behind. images = [left, centre, right]. Images are decorative
+// (the card link carries the accessible name), so alts stay empty.
+function CoverSpread({ images, url, theme, positions = [] }) {
   return (
     <div className="relative w-full h-full flex items-center justify-center transition-transform duration-500 ease-out group-hover:scale-[1.02]">
       {/* Left window — behind, tilted out */}
       <div
-        className="absolute w-[46%]"
-        style={{ left: '23%', top: '50%', transform: 'translate(-50%, -50%) rotate(-6deg)' }}
+        className="absolute w-[52%]"
+        style={{ left: '26%', top: '50%', transform: 'translate(-50%, -50%) rotate(-6deg)' }}
       >
-        <BrowserWindow src={images[0]} alt={alts[0]} theme={theme} sizesAttr="300px" />
+        <BrowserWindow src={images[0]} alt="" theme={theme} sizesAttr="340px" pos={positions[0]} />
       </div>
       {/* Right window — behind, tilted out */}
       <div
-        className="absolute w-[46%]"
-        style={{ left: '77%', top: '50%', transform: 'translate(-50%, -50%) rotate(6deg)' }}
+        className="absolute w-[52%]"
+        style={{ left: '74%', top: '50%', transform: 'translate(-50%, -50%) rotate(6deg)' }}
       >
-        <BrowserWindow src={images[2]} alt={alts[2]} theme={theme} sizesAttr="300px" />
+        <BrowserWindow src={images[2]} alt="" theme={theme} sizesAttr="340px" pos={positions[2]} />
       </div>
       {/* Centre window — forward, largest, carries the URL */}
-      <div className="relative z-10 w-[58%] drop-shadow-2xl">
-        <BrowserWindow src={images[1]} alt={alts[1]} url={url} theme={theme} sizesAttr="420px" />
+      <div className="relative z-10 w-[66%] drop-shadow-2xl">
+        <BrowserWindow src={images[1]} alt="" url={url} theme={theme} sizesAttr="480px" pos={positions[1]} />
       </div>
     </div>
   );
@@ -126,6 +135,7 @@ export default function PortfolioCard({ study, featured = false }) {
     <ScrollReveal className={containerCls}>
       <Link
         href={path}
+        aria-label={`${title}. ${oneLiner}`}
         className={`group block relative w-full ${aspect} overflow-hidden rounded-[32px] bg-white/[0.03] border border-white/[0.05] transition-colors duration-500 hover:bg-white/[0.05]`}
         style={{ boxShadow: 'inset 0 1px 0 0 rgba(255,255,255,0.05)' }}
       >
@@ -182,7 +192,7 @@ export default function PortfolioCard({ study, featured = false }) {
               )}
               {card.frame === 'ilancaster' && <ILancasterMock />}
               {card.frame === 'cover-spread' && (
-                <CoverSpread images={card.images} alts={card.alts} url={card.url} theme={card.theme} />
+                <CoverSpread images={card.images} url={card.url} theme={card.theme} positions={card.positions} />
               )}
               {card.frame === 'phones' && <PhonesMock images={card.images} />}
               {card.frame === 'flat' && card.image && (

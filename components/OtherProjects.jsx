@@ -32,7 +32,7 @@ export default function OtherProjects() {
                 </div>
               </div>
               {p.video ? (
-                <div className="absolute inset-0 -z-0 opacity-40 group-hover:opacity-55 transition-opacity duration-500 overflow-hidden">
+                <div aria-hidden="true" className="absolute inset-0 -z-0 opacity-40 group-hover:opacity-55 transition-opacity duration-500 overflow-hidden">
                   <video
                     src={p.video}
                     autoPlay
@@ -44,7 +44,7 @@ export default function OtherProjects() {
                   />
                 </div>
               ) : p.image ? (
-                <div className="absolute inset-0 -z-0 opacity-40 group-hover:opacity-55 transition-opacity duration-500">
+                <div aria-hidden="true" className="absolute inset-0 -z-0 opacity-40 group-hover:opacity-55 transition-opacity duration-500">
                   <Image src={p.image} alt="" fill sizes="600px" className="object-cover transition-transform duration-700 group-hover:scale-105" />
                 </div>
               ) : null}

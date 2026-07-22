@@ -15,7 +15,7 @@ export default {
         seam: '#2A2A2C',
         silver: '#F4F4F2',
         fog: '#B4B4B0',
-        ash: '#6E6E6A',
+        ash: '#7A7A76', // lightened from #6E6E6A for WCAG AA (4.86:1 on black)
         lime: '#C6F24E',
       },
       fontFamily: {
