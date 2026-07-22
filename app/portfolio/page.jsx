@@ -31,7 +31,7 @@ export default function PortfolioPage() {
             className="font-heading tracking-tightest text-silver max-w-3xl"
             style={{ fontSize: 'clamp(28px, 4vw, 48px)', lineHeight: 1.1 }}
           >
-            Dive into a few projects that represent my most fulfilling design experiences.
+            Four products shipped to real users. Built from problem to production.
           </p>
         </BlurReveal>
 

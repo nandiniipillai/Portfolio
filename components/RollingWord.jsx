@@ -81,8 +81,8 @@ export function RollingWordBand({ className = '' }) {
         lineHeight: 0.9,
         letterSpacing: '-0.04em',
         color: '#F4F4F2',
-        filter: 'blur(7px)',
-        opacity: 1,
+        filter: 'blur(10px)',
+        opacity: 0.12,
         fontWeight: 500,
       }}
       aria-hidden="true"

@@ -148,49 +148,69 @@ function ILancasterMock() {
   );
 }
 
-function LucaWindow({ src, url, dotSize = 'w-1.5 h-1.5', urlSize = 'text-[8px]' }) {
-  return (
-    <div className="rounded-lg overflow-hidden border border-white/[0.08] bg-white">
-      <div className="flex items-center gap-1 px-2 py-1.5 bg-gray-100">
-        <span className="flex gap-1" aria-hidden="true">
-          <span className={`${dotSize} rounded-full bg-[#FF5F57]`} />
-          <span className={`${dotSize} rounded-full bg-[#FEBC2E]`} />
-          <span className={`${dotSize} rounded-full bg-[#28C840]`} />
-        </span>
-        {url && (
-          <span className={`mx-auto ${urlSize} text-gray-500 bg-white/60 rounded-full px-2 py-0.5`}>
-            {url}
-          </span>
-        )}
-      </div>
-      {/* Fixed aspect ratio; show the TOP of each screen where the module identity lives */}
-      <div className="relative w-full" style={{ aspectRatio: '16/10' }}>
-        <Image src={src} alt="" fill className="object-cover object-top" sizes="500px" />
-      </div>
-    </div>
-  );
-}
-
 function LucaMock({ url }) {
   return (
-    <div className="relative w-full h-full py-3">
-      {/* CV optimiser — behind, tilted left */}
-      <div
-        className="absolute top-1/2 left-[6%] w-[40%] shadow-xl opacity-90"
-        style={{ transform: 'translateY(-50%) rotate(-6deg)' }}
-      >
-        <LucaWindow src="/assets/luca/cv-optimiser-2.png" />
-      </div>
-      {/* AI Interview — behind, tilted right */}
-      <div
-        className="absolute top-1/2 right-[6%] w-[40%] shadow-xl opacity-90"
-        style={{ transform: 'translateY(-50%) rotate(6deg)' }}
-      >
-        <LucaWindow src="/assets/luca/interview-setup.png" />
-      </div>
-      {/* Dashboard — front and centre, largest */}
-      <div className="absolute top-1/2 left-1/2 w-[56%] shadow-2xl z-10" style={{ transform: 'translate(-50%, -50%)' }}>
-        <LucaWindow src="/assets/luca/dashboard-existing.png" url={url} />
+    <div className="w-full h-full flex items-center justify-center p-3 md:p-5">
+      <div className="w-full max-w-[480px] rounded-2xl overflow-hidden border border-white/[0.08] bg-white">
+        {/* Browser chrome */}
+        <div className="flex items-center gap-1 px-2.5 py-2 bg-gray-100 border-b border-gray-200">
+          <span className="flex gap-1" aria-hidden="true">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#FF5F57]" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#FEBC2E]" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#28C840]" />
+          </span>
+          {url && (
+            <span className="mx-auto text-[9px] text-gray-500 bg-white/60 rounded-full px-2 py-0.5">
+              {url}
+            </span>
+          )}
+        </div>
+        {/* Dashboard content */}
+        <div className="p-3 space-y-2.5">
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="text-[10px] font-semibold text-gray-900">Continue where you left off</div>
+              <div className="text-[8px] text-gray-500 mt-0.5">Upload a job description to get started</div>
+            </div>
+            <div className="w-7 h-7 rounded-full bg-red-100 flex items-center justify-center">
+              <span className="text-red-500 text-[10px] font-bold">L</span>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-2">
+            <div className="rounded-lg p-2 border border-gray-100">
+              <div className="text-[8px] text-gray-500">CV Optimiser</div>
+              <div className="text-[9px] font-medium text-gray-900 mt-0.5">Tailor your CV</div>
+              <div className="flex items-center gap-1 mt-1">
+                <span className="w-2 h-2 rounded-full bg-green-400" />
+                <span className="text-[7px] text-green-600 font-medium">Ready</span>
+              </div>
+            </div>
+            <div className="rounded-lg p-2 border border-gray-100">
+              <div className="text-[8px] text-gray-500">Interview Prep</div>
+              <div className="text-[9px] font-medium text-gray-900 mt-0.5">Practice questions</div>
+              <div className="flex items-center gap-1 mt-1">
+                <span className="w-2 h-2 rounded-full bg-amber-400" />
+                <span className="text-[7px] text-amber-600 font-medium">New</span>
+              </div>
+            </div>
+            <div className="rounded-lg p-2 border border-gray-100">
+              <div className="text-[8px] text-gray-500">Cover Letter</div>
+              <div className="text-[9px] font-medium text-gray-900 mt-0.5">Role-specific</div>
+              <div className="flex items-center gap-1 mt-1">
+                <span className="w-2 h-2 rounded-full bg-green-400" />
+                <span className="text-[7px] text-green-600 font-medium">Ready</span>
+              </div>
+            </div>
+            <div className="rounded-lg p-2 border border-gray-100">
+              <div className="text-[8px] text-gray-500">Employer Intel</div>
+              <div className="text-[9px] font-medium text-gray-900 mt-0.5">Company research</div>
+              <div className="flex items-center gap-1 mt-1">
+                <span className="w-2 h-2 rounded-full bg-gray-300" />
+                <span className="text-[7px] text-gray-500 font-medium">Locked</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

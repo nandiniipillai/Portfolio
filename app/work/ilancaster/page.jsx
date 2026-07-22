@@ -64,7 +64,7 @@ export default function ILancasterPage() {
         index="03"
         accent={ACCENT}
         title="iLancaster"
-        oneLiner="Redesigning the app every Lancaster University student carries daily."
+        oneLiner="Redesigning the app every Lancaster University student carries."
         meta={[
           ['Role', 'Product Designer'],
           ['Team', ['Designers', 'Product Manager', 'Team of BE & FE Engineers']],
