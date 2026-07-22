@@ -37,7 +37,7 @@ export default function WobblePage() {
   return (
     <BriefPage
       title="Wobble"
-      oneLiner="Brings the benefits of outdoor play indoors for UK children — Designing for a business"
+      oneLiner="An indoor play centre that gives UK children the outdoors back."
       category="Strategy & Service Design"
       accent={ACCENT}
       meta={[

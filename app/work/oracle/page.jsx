@@ -37,7 +37,7 @@ export default function OraclePage() {
   return (
     <BriefPage
       title="Oracle"
-      oneLiner="A speculative knowledge-transmission device for a 2071 post-crisis society — Designing beyond human-centred design"
+      oneLiner="A knowledge-transmission device for a 2071 post-crisis society."
       category="Speculative Design · Design Fiction"
       accent={ACCENT}
       meta={[
