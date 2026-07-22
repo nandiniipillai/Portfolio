@@ -40,49 +40,64 @@ function ILancasterMock() {
   );
 }
 
-// Quiet cover: one real product screenshot inside a minimal browser frame,
-// centred in the media column. Same visual temperature as the flat image covers.
-// theme 'dark' matches dark-UI screenshots (Baari); default light chrome for light UIs.
-function CoverShot({ src, alt, url, theme = 'light' }) {
+// One browser-framed screenshot window. theme 'dark' matches dark-UI shots (Baari).
+function BrowserWindow({ src, alt, url, theme = 'light', sizesAttr = '400px' }) {
   const dark = theme === 'dark';
   return (
-    <div className="w-full h-full flex items-center justify-center p-2 md:p-3">
+    <div
+      className={`w-full rounded-lg md:rounded-xl overflow-hidden border shadow-2xl ${
+        dark ? 'border-white/[0.25] bg-[#0f0f12]' : 'border-white/[0.08] bg-white'
+      }`}
+    >
       <div
-        className={`w-full max-w-[620px] rounded-xl md:rounded-2xl overflow-hidden border shadow-2xl transition-transform duration-500 ease-out group-hover:scale-[1.02] ${
-          dark ? 'border-white/[0.25] bg-[#0f0f12]' : 'border-white/[0.08] bg-white'
+        className={`flex items-center gap-1 px-2 py-1.5 border-b ${
+          dark ? 'bg-[#1a1a1e] border-white/[0.06]' : 'bg-gray-100 border-gray-200'
         }`}
       >
-        {/* Browser chrome */}
-        <div
-          className={`flex items-center gap-1 px-2.5 py-2 border-b ${
-            dark ? 'bg-[#1a1a1e] border-white/[0.06]' : 'bg-gray-100 border-gray-200'
-          }`}
-        >
-          <span className="flex gap-1" aria-hidden="true">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#FF5F57]" />
-            <span className="w-1.5 h-1.5 rounded-full bg-[#FEBC2E]" />
-            <span className="w-1.5 h-1.5 rounded-full bg-[#28C840]" />
+        <span className="flex gap-1" aria-hidden="true">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#FF5F57]" />
+          <span className="w-1.5 h-1.5 rounded-full bg-[#FEBC2E]" />
+          <span className="w-1.5 h-1.5 rounded-full bg-[#28C840]" />
+        </span>
+        {url && (
+          <span
+            className={`mx-auto text-[8px] rounded-full px-2 py-0.5 ${
+              dark ? 'text-fog bg-white/[0.06]' : 'text-gray-500 bg-white/60'
+            }`}
+          >
+            {url}
           </span>
-          {url && (
-            <span
-              className={`mx-auto text-[9px] rounded-full px-2 py-0.5 ${
-                dark ? 'text-fog bg-white/[0.06]' : 'text-gray-500 bg-white/60'
-              }`}
-            >
-              {url}
-            </span>
-          )}
-        </div>
-        {/* Real product screenshot — top-anchored so header + primary content show */}
-        <div className="relative w-full" style={{ aspectRatio: '16/10' }}>
-          <Image
-            src={src}
-            alt={alt || ''}
-            fill
-            sizes="(max-width: 768px) 90vw, 620px"
-            className="object-cover object-top"
-          />
-        </div>
+        )}
+      </div>
+      <div className="relative w-full" style={{ aspectRatio: '16/10' }}>
+        <Image src={src} alt={alt || ''} fill sizes={sizesAttr} className="object-cover object-top" />
+      </div>
+    </div>
+  );
+}
+
+// Spread of three real screens fanned like the phone covers: centre window forward,
+// side windows tilted behind. images = [left, centre, right].
+function CoverSpread({ images, alts = [], url, theme }) {
+  return (
+    <div className="relative w-full h-full flex items-center justify-center transition-transform duration-500 ease-out group-hover:scale-[1.02]">
+      {/* Left window — behind, tilted out */}
+      <div
+        className="absolute w-[46%]"
+        style={{ left: '23%', top: '50%', transform: 'translate(-50%, -50%) rotate(-6deg)' }}
+      >
+        <BrowserWindow src={images[0]} alt={alts[0]} theme={theme} sizesAttr="300px" />
+      </div>
+      {/* Right window — behind, tilted out */}
+      <div
+        className="absolute w-[46%]"
+        style={{ left: '77%', top: '50%', transform: 'translate(-50%, -50%) rotate(6deg)' }}
+      >
+        <BrowserWindow src={images[2]} alt={alts[2]} theme={theme} sizesAttr="300px" />
+      </div>
+      {/* Centre window — forward, largest, carries the URL */}
+      <div className="relative z-10 w-[58%] drop-shadow-2xl">
+        <BrowserWindow src={images[1]} alt={alts[1]} url={url} theme={theme} sizesAttr="420px" />
       </div>
     </div>
   );
@@ -166,8 +181,8 @@ export default function PortfolioCard({ study, featured = false }) {
                 <BrowserFrame src={card.image} alt={title} url={card.url} className="h-full" />
               )}
               {card.frame === 'ilancaster' && <ILancasterMock />}
-              {card.frame === 'cover-shot' && (
-                <CoverShot src={card.image} alt={title} url={card.url} theme={card.theme} />
+              {card.frame === 'cover-spread' && (
+                <CoverSpread images={card.images} alts={card.alts} url={card.url} theme={card.theme} />
               )}
               {card.frame === 'phones' && <PhonesMock images={card.images} />}
               {card.frame === 'flat' && card.image && (
