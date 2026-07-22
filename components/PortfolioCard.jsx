@@ -148,10 +148,12 @@ function ILancasterMock() {
   );
 }
 
-function LucaMock({ url }) {
+// Quiet cover: one real product screenshot inside a minimal browser frame,
+// centred in the media column. Same visual temperature as the flat image covers.
+function CoverShot({ src, alt, url }) {
   return (
     <div className="w-full h-full flex items-center justify-center p-3 md:p-5">
-      <div className="w-full max-w-[480px] rounded-2xl overflow-hidden border border-white/[0.08] bg-white">
+      <div className="w-full max-w-[480px] rounded-xl md:rounded-2xl overflow-hidden border border-white/[0.08] bg-white shadow-2xl">
         {/* Browser chrome */}
         <div className="flex items-center gap-1 px-2.5 py-2 bg-gray-100 border-b border-gray-200">
           <span className="flex gap-1" aria-hidden="true">
@@ -165,51 +167,15 @@ function LucaMock({ url }) {
             </span>
           )}
         </div>
-        {/* Dashboard content */}
-        <div className="p-3 space-y-2.5">
-          <div className="flex items-center justify-between">
-            <div>
-              <div className="text-[10px] font-semibold text-gray-900">Continue where you left off</div>
-              <div className="text-[8px] text-gray-500 mt-0.5">Upload a job description to get started</div>
-            </div>
-            <div className="w-7 h-7 rounded-full bg-red-100 flex items-center justify-center">
-              <span className="text-red-500 text-[10px] font-bold">L</span>
-            </div>
-          </div>
-          <div className="grid grid-cols-2 gap-2">
-            <div className="rounded-lg p-2 border border-gray-100">
-              <div className="text-[8px] text-gray-500">CV Optimiser</div>
-              <div className="text-[9px] font-medium text-gray-900 mt-0.5">Tailor your CV</div>
-              <div className="flex items-center gap-1 mt-1">
-                <span className="w-2 h-2 rounded-full bg-green-400" />
-                <span className="text-[7px] text-green-600 font-medium">Ready</span>
-              </div>
-            </div>
-            <div className="rounded-lg p-2 border border-gray-100">
-              <div className="text-[8px] text-gray-500">Interview Prep</div>
-              <div className="text-[9px] font-medium text-gray-900 mt-0.5">Practice questions</div>
-              <div className="flex items-center gap-1 mt-1">
-                <span className="w-2 h-2 rounded-full bg-amber-400" />
-                <span className="text-[7px] text-amber-600 font-medium">New</span>
-              </div>
-            </div>
-            <div className="rounded-lg p-2 border border-gray-100">
-              <div className="text-[8px] text-gray-500">Cover Letter</div>
-              <div className="text-[9px] font-medium text-gray-900 mt-0.5">Role-specific</div>
-              <div className="flex items-center gap-1 mt-1">
-                <span className="w-2 h-2 rounded-full bg-green-400" />
-                <span className="text-[7px] text-green-600 font-medium">Ready</span>
-              </div>
-            </div>
-            <div className="rounded-lg p-2 border border-gray-100">
-              <div className="text-[8px] text-gray-500">Employer Intel</div>
-              <div className="text-[9px] font-medium text-gray-900 mt-0.5">Company research</div>
-              <div className="flex items-center gap-1 mt-1">
-                <span className="w-2 h-2 rounded-full bg-gray-300" />
-                <span className="text-[7px] text-gray-500 font-medium">Locked</span>
-              </div>
-            </div>
-          </div>
+        {/* Real product screenshot — top-anchored so header + primary content show */}
+        <div className="relative w-full" style={{ aspectRatio: '16/10' }}>
+          <Image
+            src={src}
+            alt={alt || ''}
+            fill
+            sizes="(max-width: 768px) 90vw, 480px"
+            className="object-cover object-top"
+          />
         </div>
       </div>
     </div>
@@ -239,10 +205,11 @@ export default function PortfolioCard({ study, featured = false }) {
     <ScrollReveal className={containerCls}>
       <Link
         href={path}
-        className={`group block relative w-full aspect-[16/10] ${aspect} overflow-hidden rounded-[32px] bg-white/[0.03] border border-white/[0.05] transition-colors duration-500 hover:bg-white/[0.05]`}
+        className={`group block relative w-full ${aspect} overflow-hidden rounded-[32px] bg-white/[0.03] border border-white/[0.05] transition-colors duration-500 hover:bg-white/[0.05]`}
         style={{ boxShadow: 'inset 0 1px 0 0 rgba(255,255,255,0.05)' }}
       >
-        <div className="absolute inset-0 flex flex-col md:flex-row">
+        {/* In-flow on mobile so the card grows with its content; absolute + aspect-locked on desktop */}
+        <div className="relative md:absolute md:inset-0 flex flex-col md:flex-row">
           <div className="p-6 md:p-8 md:w-2/5 flex flex-col justify-center">
             {year && (
               <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-2">{year}</div>
@@ -258,7 +225,7 @@ export default function PortfolioCard({ study, featured = false }) {
             </div>
             <p className="mt-3 text-fog text-sm md:text-base max-w-xs">{oneLiner}</p>
           </div>
-          <div className="relative flex-1 min-h-[180px] md:min-h-0 p-4 md:p-6 overflow-hidden">
+          <div className="relative flex-1 min-h-[250px] md:min-h-0 p-4 md:p-6 overflow-hidden">
             {/* Shared grid backdrop — same across all four cards */}
             <div
               className="pointer-events-none absolute inset-0 opacity-[0.05]"
@@ -276,13 +243,17 @@ export default function PortfolioCard({ study, featured = false }) {
               }}
               aria-hidden="true"
             />
-            <div className="relative w-full h-full">
+            {/* min-h on mobile: h-full resolves to auto against the min-h parent, which
+                collapses `fill` images — give the frame box a real height instead */}
+            <div className="relative w-full h-full min-h-[218px] md:min-h-0">
               {card.frame === 'token' && <TokenMock accent={accent} />}
               {card.frame === 'browser' && (
                 <BrowserFrame src={card.image} alt={title} url={card.url} className="h-full" />
               )}
               {card.frame === 'ilancaster' && <ILancasterMock />}
-              {card.frame === 'luca-multi' && <LucaMock url={card.url} />}
+              {card.frame === 'cover-shot' && (
+                <CoverShot src={card.image} alt={title} url={card.url} />
+              )}
               {card.frame === 'phones' && <PhonesMock images={card.images} />}
               {card.frame === 'flat' && card.image && (
                 <Image

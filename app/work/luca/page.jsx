@@ -15,7 +15,7 @@ export default function LucaPage() {
         index="02"
         accent={ACCENT}
         title="LUCA"
-        oneLiner="AI-Powered Career Development Platform"
+        oneLiner="An AI careers coach for Lancaster University students."
         meta={[
           ['Role', 'Sole Product Designer'],
           ['Team', ['Product Manager', 'Front-end developer', 'Back-end developer']],

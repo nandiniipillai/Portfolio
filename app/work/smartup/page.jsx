@@ -106,7 +106,7 @@ export default function SmartUpPage() {
         index="04"
         accent={ACCENT}
         title="SmartUp"
-        oneLiner="Inventory Management Retail SaaS App."
+        oneLiner="Stock, sales and staff, in a retailer’s pocket."
         meta={[
           ['Role', 'UX & Product Designer'],
           ['Team', ['Product Manager', 'Front-end developer', 'Back-end developer']],
