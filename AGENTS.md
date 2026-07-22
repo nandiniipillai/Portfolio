@@ -181,6 +181,39 @@ production case study looks like on this site:
 - **Case-study `whyHere`** surfaces automatically from
   `lib/case-studies.js` via `CaseStudyShell` (reads via `getCaseStudy`).
   You don't need to pass it as a prop.
+- **Portfolio card `oneLiner` must match between `lib/case-studies.js` and
+  the case study page.** They are not automatically synced — update both
+  files when changing a oneLiner.
+- **Flat-frame images on portfolio cards** use `card.scale` to control
+  padding (e.g. `scale: 'p-1'` to reduce padding and make the image
+  appear larger). Default is `p-4`. The `mixBlendMode: 'lighten'` style
+  blends black backgrounds into the card's dark backdrop.
+- **PhoneFrame's max-width is a Tailwind class** (`max-w-[320px]`) not an
+  inline style. This means wrapper `<div>` elements can constrain it with
+  their own `max-w-*` class. The `fit` prop controls `object-cover` vs
+  `object-contain` — default `cover`, use `contain` when source content
+  doesn't match the 1170:2532 iPhone ratio.
+- **`next/image` with `fill` requires `position: relative` on the parent**
+  or the image will escape the container and break the layout.
+- **BriefPage meta grid** auto-adjusts: `md:grid-cols-4` when 4 meta
+  items, otherwise `md:grid-cols-3`. Array meta values render each on
+  its own line via `block` spans.
+- **Case study assets are in multiple source folders.** LUCA: `E:\Z
+  FOLIO\portfolio-developer\portfolio-developer\assets\LUCA\`,
+  iLancaster: same path under `iLancaster\`, Wobble: `D:\Newportfolio
+  materials\Wobbles\`, Oracle: `D:\MA Design Management\Lancaster\LICA
+  429 Imagination Lab\`. Check the original source before copying.
+- **OtherProjects cards** support a `video` field (in addition to `image`)
+  for background video tiles. Used by the Wobble card on `/portfolio`.
+- **Transferable skills sections** ("What this proves in digital product
+  design") are used on Wobble and Oracle to bridge strategic/speculative
+  work back to Nandini's digital product design profile. Keep this
+  pattern when adding non-digital projects.
+- **Lenis smooth scroll** was added via `components/LenisProvider.jsx`.
+  It wraps the root layout. On route changes it resets to top via
+  `usePathname`. If scroll issues appear, check the Lenis config in
+  that file and the `ScrollProgress` component which reads from the
+  Lenis ref instead of framer-motion's `useScroll()`.
 
 ## When in doubt
 
