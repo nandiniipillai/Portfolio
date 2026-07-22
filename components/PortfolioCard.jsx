@@ -7,114 +7,6 @@ import PhoneFrame from './PhoneFrame';
 import RollLabel from './RollLabel';
 import ScrollReveal from './ScrollReveal';
 
-function TokenMock({ accent }) {
-  return (
-    <div className="w-full h-full flex items-center justify-center p-3 md:p-4">
-      <div className="flex items-center gap-3 md:gap-4 h-full max-w-[680px] w-full">
-        {/* Web queue — left panel, wider */}
-        <div
-          className="flex-1 rounded-2xl border border-white/[0.08] overflow-hidden h-full flex flex-col"
-          style={{ background: 'rgba(11,11,13,0.92)' }}
-        >
-          {/* Header */}
-          <div className="flex items-center justify-between px-3 py-2 border-b border-white/[0.05] shrink-0">
-            <div className="flex items-center gap-2">
-              <div className="w-5 h-5 rounded flex items-center justify-center" style={{ background: accent }}>
-                <span className="text-black text-[10px] font-bold">b</span>
-              </div>
-              <span className="text-white text-[10px] font-medium tracking-tight">Pratiksha</span>
-            </div>
-            <div className="flex items-center gap-2 text-[8px] text-fog">
-              <span className="text-white bg-white/[0.06] rounded-full px-1.5 py-0.5">Queue</span>
-              <span>Signal</span>
-            </div>
-          </div>
-          {/* Body */}
-          <div className="p-2.5 space-y-2 flex-1 overflow-hidden">
-            <div className="flex items-center justify-between">
-              <div className="text-[8px] text-ash tracking-wider">Tue 15 Jul · 11:14 IST</div>
-              <div className="flex items-center gap-2 text-[8px] text-fog">
-                <span>Today <span className="text-white font-medium">6</span></span>
-                <span>Waiting <span className="text-white font-medium">4</span></span>
-              </div>
-            </div>
-
-            {/* Active patient */}
-            <div className="rounded-xl p-2.5" style={{ background: accent, color: '#0a0a0a' }}>
-              <div className="flex items-center justify-between mb-0.5">
-                <span className="text-[9px] tracking-widest uppercase font-medium">T12</span>
-                <span className="text-[7px] rounded-full px-1.5 py-0.5 font-medium" style={{ background: 'rgba(0,0,0,0.15)', color: '#0a0a0a' }}>In consult</span>
-              </div>
-              <div className="text-[13px] font-heading tracking-tightest leading-none">Emma Wilson</div>
-              <div className="text-[8px] opacity-70 mt-0.5">cold, sore throat · 27 min in</div>
-              <div className="mt-2 rounded-lg py-1 text-center text-[8px] font-medium" style={{ background: 'rgba(0,0,0,0.12)', color: '#0a0a0a' }}>Mark done</div>
-            </div>
-
-            {/* Waiting patients */}
-            {[
-              { token: 'T13', name: 'Sarah Chen', detail: '10:40 · headache', badge: '4 visits' },
-              { token: 'T14', name: 'James Park', detail: '11:00 · party of 2' },
-              { token: 'T15', name: 'Priya Sharma', detail: '11:20 · Follow-up', late: true },
-            ].map((row) => (
-              <div key={row.token} className={`rounded-lg p-2 flex items-center justify-between ${row.late ? 'bg-amber-500/[0.08] border border-amber-500/20' : 'bg-white/[0.02] border border-white/[0.03]'}`}>
-                <div>
-                  <div className="flex items-baseline gap-1.5">
-                    <span className="text-[8px] text-fog">{row.token}</span>
-                    <span className="text-[9px] text-white font-medium">{row.name}</span>
-                  </div>
-                  <div className="text-[7px] text-ash leading-tight mt-0.5">{row.detail}</div>
-                </div>
-                {row.late && <span className="text-[7px] text-amber-400 uppercase tracking-wider">Late</span>}
-                {row.badge && !row.late && <span className="text-[7px] rounded-full px-1.5 py-0.5 font-medium" style={{ color: accent, background: `${accent}15` }}>{row.badge}</span>}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Phone — right panel, grounded with shadow and slight angle */}
-        <div className="w-[90px] md:w-[105px] shrink-0 flex items-center justify-center">
-          <div
-            className="w-full"
-            style={{
-              filter: 'drop-shadow(0 16px 32px rgba(0,0,0,0.55))',
-              transform: 'rotate(3deg)',
-            }}
-          >
-            <PhoneFrame>
-              <div className="w-full h-full bg-white flex flex-col text-black">
-                <div className="px-2 pt-5 pb-1">
-                  <div className="text-[5px] text-gray-400">getbaari.in</div>
-                  <div className="text-[7px] font-semibold mt-0.5">Today's queue</div>
-                </div>
-                <div className="px-1.5 space-y-1">
-                  {[
-                    { token: 'T12', name: 'Emma Wilson', tag: 'In consult', active: true },
-                    { token: 'T13', name: 'Sarah Chen', tag: 'Waiting' },
-                    { token: 'T14', name: 'James Park', tag: 'Waiting' },
-                    { token: 'T15', name: 'Priya Sharma', tag: 'Late' },
-                  ].map((row) => (
-                    <div
-                      key={row.token}
-                      className="rounded p-1"
-                      style={row.active ? { background: accent, color: '#0a0a0a' } : { background: 'rgba(0,0,0,0.04)' }}
-                    >
-                      <div className="flex items-center justify-between">
-                        <span className="text-[6px] font-medium">{row.token}</span>
-                        <span className="text-[4px] uppercase tracking-wider opacity-70">{row.tag}</span>
-                      </div>
-                      <div className="text-[5px] opacity-70 mt-0.5">{row.name}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </PhoneFrame>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function ILancasterMock() {
   return (
     <div className="relative w-full h-full flex items-center justify-center">
@@ -150,19 +42,33 @@ function ILancasterMock() {
 
 // Quiet cover: one real product screenshot inside a minimal browser frame,
 // centred in the media column. Same visual temperature as the flat image covers.
-function CoverShot({ src, alt, url }) {
+// theme 'dark' matches dark-UI screenshots (Baari); default light chrome for light UIs.
+function CoverShot({ src, alt, url, theme = 'light' }) {
+  const dark = theme === 'dark';
   return (
     <div className="w-full h-full flex items-center justify-center p-3 md:p-5">
-      <div className="w-full max-w-[480px] rounded-xl md:rounded-2xl overflow-hidden border border-white/[0.08] bg-white shadow-2xl">
+      <div
+        className={`w-full max-w-[480px] rounded-xl md:rounded-2xl overflow-hidden border shadow-2xl ${
+          dark ? 'border-white/[0.12] bg-[#0f0f12]' : 'border-white/[0.08] bg-white'
+        }`}
+      >
         {/* Browser chrome */}
-        <div className="flex items-center gap-1 px-2.5 py-2 bg-gray-100 border-b border-gray-200">
+        <div
+          className={`flex items-center gap-1 px-2.5 py-2 border-b ${
+            dark ? 'bg-[#1a1a1e] border-white/[0.06]' : 'bg-gray-100 border-gray-200'
+          }`}
+        >
           <span className="flex gap-1" aria-hidden="true">
             <span className="w-1.5 h-1.5 rounded-full bg-[#FF5F57]" />
             <span className="w-1.5 h-1.5 rounded-full bg-[#FEBC2E]" />
             <span className="w-1.5 h-1.5 rounded-full bg-[#28C840]" />
           </span>
           {url && (
-            <span className="mx-auto text-[9px] text-gray-500 bg-white/60 rounded-full px-2 py-0.5">
+            <span
+              className={`mx-auto text-[9px] rounded-full px-2 py-0.5 ${
+                dark ? 'text-fog bg-white/[0.06]' : 'text-gray-500 bg-white/60'
+              }`}
+            >
               {url}
             </span>
           )}
@@ -246,13 +152,12 @@ export default function PortfolioCard({ study, featured = false }) {
             {/* min-h on mobile: h-full resolves to auto against the min-h parent, which
                 collapses `fill` images — give the frame box a real height instead */}
             <div className="relative w-full h-full min-h-[218px] md:min-h-0">
-              {card.frame === 'token' && <TokenMock accent={accent} />}
               {card.frame === 'browser' && (
                 <BrowserFrame src={card.image} alt={title} url={card.url} className="h-full" />
               )}
               {card.frame === 'ilancaster' && <ILancasterMock />}
               {card.frame === 'cover-shot' && (
-                <CoverShot src={card.image} alt={title} url={card.url} />
+                <CoverShot src={card.image} alt={title} url={card.url} theme={card.theme} />
               )}
               {card.frame === 'phones' && <PhonesMock images={card.images} />}
               {card.frame === 'flat' && card.image && (
