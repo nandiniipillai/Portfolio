@@ -133,12 +133,12 @@ export default function BentoNav() {
           <RollingWordBand />
         </div>
 
-        {/* Bento — 4×2 fixed grid */}
+        {/* Bento — 4×2 fixed grid on md+; uniform 220px auto-rows when stacked on mobile
+            (inline gridTemplateRows only sized the first two rows, so rows 3+ collapsed) */}
         <div
-          className="relative grid gap-4 mx-auto"
+          className="relative grid gap-4 mx-auto auto-rows-[220px] md:auto-rows-auto md:[grid-template-rows:242px_242px]"
           style={{
             gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',
-            gridTemplateRows: '242px 242px',
             zIndex: 2,
           }}
         >

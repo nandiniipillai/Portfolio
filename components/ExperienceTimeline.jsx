@@ -62,10 +62,7 @@ export default function ExperienceTimeline() {
       <div className="divide-y divide-white/[0.06]">
         {EXPERIENCE.map((row, i) => {
           const inner = (
-            <div
-              className="py-6 grid gap-4 items-start hover:bg-white/[0.02] transition-colors px-2 -mx-2 rounded-xl"
-              style={{ gridTemplateColumns: 'minmax(140px, 344px) minmax(180px, 320px) 1fr' }}
-            >
+            <div className="py-6 grid grid-cols-1 gap-2 md:gap-4 items-start hover:bg-white/[0.02] transition-colors px-2 -mx-2 rounded-xl md:[grid-template-columns:minmax(140px,344px)_minmax(180px,320px)_1fr]">
               <div className="text-ash text-sm md:text-base">{row.years}</div>
               <div>
                 <div className="text-silver font-medium">{row.role}</div>
