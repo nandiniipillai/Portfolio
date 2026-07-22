@@ -8,7 +8,7 @@ import ScrollReveal from '@/components/ScrollReveal';
 
 const ACCENT = '#D946EF';
 
-function ZoomFig({ src, alt, caption, aspect = '16/9' }) {
+function ZoomFig({ src, alt, caption, aspect = '16/9', fit = 'cover' }) {
   return (
     <figure className="flex flex-col">
       <div
@@ -21,7 +21,7 @@ function ZoomFig({ src, alt, caption, aspect = '16/9' }) {
             alt={alt}
             width={1600}
             height={1000}
-            className="w-full h-full object-cover"
+            className={`w-full h-full object-${fit}`}
             sizes="(max-width: 768px) 100vw, 900px"
           />
         </Zoom>
@@ -68,12 +68,13 @@ export default function OraclePage() {
         </>
       }
     >
-      {/* Hero — concept render */}
+      {/* Hero — concept render, shown in full */}
       <ScrollReveal>
         <ZoomFig
           src="/assets/oracle/oracle-concept.jpeg"
           alt="Oracle concept — headgear with quantum sensors for neural pathway recording"
-          caption="Oracle — headgear with quantum sensors for neural pathway recording and transfer."
+          aspect="9/16"
+          fit="contain"
         />
       </ScrollReveal>
 
@@ -109,6 +110,17 @@ export default function OraclePage() {
             does not just watch — their brain rehearses the skill at a neural
             level before their body follows.
           </p>
+        </div>
+      </ScrollReveal>
+
+      {/* Product render */}
+      <ScrollReveal>
+        <div className="mt-6">
+          <ZoomFig
+            src="/assets/oracle/oracle-render.png"
+            alt="Oracle product render — the headgear in its 2071 context"
+            caption="Oracle — the product render in its 2071 context."
+          />
         </div>
       </ScrollReveal>
 
