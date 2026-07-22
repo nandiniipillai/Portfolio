@@ -46,10 +46,10 @@ function ILancasterMock() {
 function CoverShot({ src, alt, url, theme = 'light' }) {
   const dark = theme === 'dark';
   return (
-    <div className="w-full h-full flex items-center justify-center p-3 md:p-5">
+    <div className="w-full h-full flex items-center justify-center p-2 md:p-3">
       <div
-        className={`w-full max-w-[480px] rounded-xl md:rounded-2xl overflow-hidden border shadow-2xl ${
-          dark ? 'border-white/[0.12] bg-[#0f0f12]' : 'border-white/[0.08] bg-white'
+        className={`w-full max-w-[620px] rounded-xl md:rounded-2xl overflow-hidden border shadow-2xl transition-transform duration-500 ease-out group-hover:scale-[1.02] ${
+          dark ? 'border-white/[0.25] bg-[#0f0f12]' : 'border-white/[0.08] bg-white'
         }`}
       >
         {/* Browser chrome */}
@@ -79,7 +79,7 @@ function CoverShot({ src, alt, url, theme = 'light' }) {
             src={src}
             alt={alt || ''}
             fill
-            sizes="(max-width: 768px) 90vw, 480px"
+            sizes="(max-width: 768px) 90vw, 620px"
             className="object-cover object-top"
           />
         </div>
@@ -101,7 +101,7 @@ function PhonesMock({ images }) {
 }
 
 export default function PortfolioCard({ study, featured = false }) {
-  const { path, title, oneLiner, accent, category, year, glowPosition, card } = study;
+  const { path, title, oneLiner, status, accent, category, year, glowPosition, card } = study;
   const containerCls = featured ? 'md:col-span-2' : 'md:col-span-1';
   const aspect = featured ? 'md:aspect-[16/7]' : 'md:aspect-[16/9]';
   const glowOrigin = glowPosition || '50% 50%';
@@ -130,6 +130,16 @@ export default function PortfolioCard({ study, featured = false }) {
               <RollLabel>{title}</RollLabel>
             </div>
             <p className="mt-3 text-fog text-sm md:text-base max-w-xs">{oneLiner}</p>
+            {status && (
+              <p className="mt-4 text-[13px] text-silver flex items-center gap-2">
+                <span
+                  className="inline-block w-1.5 h-1.5 rounded-full shrink-0"
+                  style={{ background: accent }}
+                  aria-hidden="true"
+                />
+                {status}
+              </p>
+            )}
           </div>
           <div className="relative flex-1 min-h-[250px] md:min-h-0 p-4 md:p-6 overflow-hidden">
             {/* Shared grid backdrop — same across all four cards */}
@@ -166,7 +176,7 @@ export default function PortfolioCard({ study, featured = false }) {
                   alt={title}
                   fill
                   sizes="(max-width: 768px) 100vw, 60vw"
-                  className={`object-contain ${card.scale || 'p-4'}`}
+                  className={`object-contain transition-transform duration-500 ease-out group-hover:scale-[1.02] ${card.scale || 'p-4'}`}
                   style={{ mixBlendMode: 'lighten' }}
                 />
               )}
