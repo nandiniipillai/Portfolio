@@ -36,8 +36,8 @@ export default function PortfolioPage() {
         </BlurReveal>
 
         <div className="mt-14 md:mt-20 grid grid-cols-1 gap-5">
-          {CASE_STUDIES.map((s) => (
-            <PortfolioCard key={s.slug} study={s} featured />
+          {CASE_STUDIES.map((s, i) => (
+            <PortfolioCard key={s.slug} study={s} featured priority={i === 0} />
           ))}
         </div>
 

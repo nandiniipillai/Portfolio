@@ -17,6 +17,13 @@ export const metadata = {
     title: 'Nandini Pillai — Product & Experience Designer',
     description: SITE.positioning,
     type: 'website',
+    images: [{ url: '/og.png', width: 1200, height: 630, alt: 'Nandini Pillai — portfolio home' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Nandini Pillai — Product & Experience Designer',
+    description: SITE.positioning,
+    images: ['/og.png'],
   },
 };
 

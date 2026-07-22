@@ -42,7 +42,7 @@ function ILancasterMock() {
 
 // One browser-framed screenshot window. theme 'dark' matches dark-UI shots (Baari).
 // pos overrides the crop focus for tall screenshots (default: top of page).
-function BrowserWindow({ src, alt, url, theme = 'light', sizesAttr = '400px', pos }) {
+function BrowserWindow({ src, alt, url, theme = 'light', sizesAttr = '400px', pos, priority = false }) {
   const dark = theme === 'dark';
   return (
     <div
@@ -76,6 +76,7 @@ function BrowserWindow({ src, alt, url, theme = 'light', sizesAttr = '400px', po
           alt={alt || ''}
           fill
           sizes={sizesAttr}
+          priority={priority}
           className="object-cover"
           style={{ objectPosition: pos || 'top' }}
         />
@@ -87,7 +88,7 @@ function BrowserWindow({ src, alt, url, theme = 'light', sizesAttr = '400px', po
 // Spread of three real screens fanned like the phone covers: centre window forward,
 // side windows tilted behind. images = [left, centre, right]. Images are decorative
 // (the card link carries the accessible name), so alts stay empty.
-function CoverSpread({ images, url, theme, positions = [] }) {
+function CoverSpread({ images, url, theme, positions = [], priority = false }) {
   return (
     <div className="relative w-full h-full flex items-center justify-center transition-transform duration-500 ease-out group-hover:scale-[1.02]">
       {/* Left window — behind, tilted out */}
@@ -106,7 +107,7 @@ function CoverSpread({ images, url, theme, positions = [] }) {
       </div>
       {/* Centre window — forward, largest, carries the URL */}
       <div className="relative z-10 w-[66%] drop-shadow-2xl">
-        <BrowserWindow src={images[1]} alt="" url={url} theme={theme} sizesAttr="480px" pos={positions[1]} />
+        <BrowserWindow src={images[1]} alt="" url={url} theme={theme} sizesAttr="480px" pos={positions[1]} priority={priority} />
       </div>
     </div>
   );
@@ -124,7 +125,7 @@ function PhonesMock({ images }) {
   );
 }
 
-export default function PortfolioCard({ study, featured = false }) {
+export default function PortfolioCard({ study, featured = false, priority = false }) {
   const { path, title, oneLiner, status, accent, category, year, glowPosition, card } = study;
   const containerCls = featured ? 'md:col-span-2' : 'md:col-span-1';
   const aspect = featured ? 'md:aspect-[16/7]' : 'md:aspect-[16/9]';
@@ -192,7 +193,7 @@ export default function PortfolioCard({ study, featured = false }) {
               )}
               {card.frame === 'ilancaster' && <ILancasterMock />}
               {card.frame === 'cover-spread' && (
-                <CoverSpread images={card.images} url={card.url} theme={card.theme} positions={card.positions} />
+                <CoverSpread images={card.images} url={card.url} theme={card.theme} positions={card.positions} priority={priority} />
               )}
               {card.frame === 'phones' && <PhonesMock images={card.images} />}
               {card.frame === 'flat' && card.image && (

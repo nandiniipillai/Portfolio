@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import CaseStudyShell from '@/components/CaseStudyShell';
-import { Section, Prose, SubList, PullQuote, MetricCard, MetricGrid, HandNote, AssetPlaceholder } from '@/components/CaseBits';
+import { Section, Prose, SubList, PullQuote, MetricCard, MetricGrid, HandNote } from '@/components/CaseBits';
 import { DashboardQueue, TokenCard, LiveStatus, Analytics } from '@/components/BaariMocks';
 
 const ACCENT = '#34D399';
@@ -38,14 +38,12 @@ export default function BaariPage() {
           <Prose>
             Baari began as a simple observation — customers routinely lose hours waiting for sequential services because the front desk has no system beyond a notebook. Around 90% of small Indian clinics, salons, spas and vets track nothing: no-shows go uncounted, quiet regulars are forgotten, and yesterday’s revenue is a guess. The alternatives are Practo-style suites that push paid listings and take per-consultation cuts, or tools like Calendly built for solo consultants rather than walk-in-heavy desks.
           </Prose>
-          <AssetPlaceholder label="Problem visual — paper register beside three failed alternatives, positioning Baari as the middle path" />
         </Section>
 
         <Section title="Three roles, one booking">
           <Prose>
             The receptionist runs the product all day. The owner signs up, pays, and reads the reports. The customer just wants to know when their turn comes. Each role got its own surface and language, but every booking is one shared record on one backend — created at the desk or in the app, visible everywhere within a 15-second poll.
           </Prose>
-          <AssetPlaceholder label="Role diagram — receptionist, owner, customer around a single booking record, each seeing their own view" aspect="16/8" />
         </Section>
 
         <Section title="The queue board puts the receptionist’s whole day on one screen" tone="sunken">
@@ -86,7 +84,6 @@ export default function BaariPage() {
           <Prose>
             Acting as my own QA, I walked both surfaces from recordings and triaged every finding by one question — can this make a booking wrong, lost, or dishonest? A vanished booking and a silent double-booking ranked P0; a missing skeleton screen ranked P2. Ten must-fix items came out, each specified to acceptance criteria, including a timezone bug where one diagnosis collapsed four reports into a single root cause.
           </Prose>
-          <AssetPlaceholder label="Audit board — P0–P3 findings as a triage board, trust-breaking bugs on top" />
         </Section>
 
         <Section title="What I traded away, on purpose" tone="sunken">
