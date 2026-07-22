@@ -21,7 +21,7 @@ export default function BaariPage() {
           ['Team', ['Product Designer', 'Software Developer']],
           ['Industry', 'B2C SAAS'],
           ['Status', 'Pilot stage'],
-          ['URL', 'getbaari.in'],
+          ['URL', <a key="url" href="https://getbaari.in" target="_blank" rel="noreferrer noopener" style={{ color: ACCENT, textDecoration: 'underline' }}>getbaari.in ↗</a>],
         ]}
       >
         <Section>
