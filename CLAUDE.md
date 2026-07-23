@@ -73,6 +73,10 @@ Copy any of them for a new one.
   from this. Use Tailwind bracket classes for anything that changes by viewport.
 - **Match a frame's `aspect` to the source image ratio** — these frames are
   `object-cover`, so a 0.88 capture in a `16/10` box loses ~40% of its height.
+- **Cap a video's container at its native pixel width** (LUCA's walkthrough is
+  1350×760 → `max-w-[1350px]`). Wider only adds blur. Re-encode screen
+  recordings before shipping — the LUCA master went 22.6 MB → 1.1 MB with no
+  visible text loss. Always set a `poster`.
 - **`next/image` with `fill` needs `position: relative` on the parent**, and a
   bare `h-full` against a `min-h` parent resolves to auto and collapses it.
 - **Reduced motion** is handled globally by `MotionProvider` for framer-motion

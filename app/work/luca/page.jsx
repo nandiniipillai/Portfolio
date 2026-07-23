@@ -317,26 +317,49 @@ export default function LucaPage() {
           </Prose>
         </Section>
 
-        {/* 10. Walkthrough */}
-        <Section title="See LUCA in motion">
-          <Prose>
-            The full flow, from job description upload through CV optimisation, cover letter
-            coaching, and interview practice.
-          </Prose>
-          <div className="mt-4">
-            <div className="w-full max-w-[300px] mx-auto rounded-2xl overflow-hidden border border-white/[0.08] shadow-lg">
-              <video
-                src="/assets/luca/walkthrough.mp4"
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="none"
-                className="w-full h-auto"
-              />
-            </div>
+        {/* 10. Walkthrough — capped at the recording's native 1350px so it never upscales */}
+        <section className="py-6 md:py-10 px-5 md:px-10">
+          <div className="mx-auto max-w-5xl">
+            <ScrollReveal as="h2" className="font-heading tracking-tightest text-silver text-3xl md:text-5xl mb-8 md:mb-12">
+              See LUCA in motion
+            </ScrollReveal>
+            <Prose>
+              The full flow, from job description upload through CV optimisation, cover letter
+              coaching, and interview practice.
+            </Prose>
           </div>
-        </Section>
+          <ScrollReveal>
+            <div className="mx-auto max-w-[1350px] mt-8">
+              {/* Dark chrome on a black stage: the recording is pillarboxed with pure #000
+                  on some segments, so a black stage absorbs the bars instead of showing
+                  them as bands against a white frame. */}
+              <div className="w-full rounded-xl md:rounded-2xl overflow-hidden border border-white/[0.14] bg-black shadow-2xl">
+                <div className="flex items-center gap-1 px-2.5 py-2 bg-[#1a1a1e] border-b border-white/[0.06]">
+                  <span className="flex gap-1" aria-hidden="true">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#FF5F57]" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#FEBC2E]" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#28C840]" />
+                  </span>
+                  <span className="mx-auto text-[10px] text-fog bg-white/[0.06] rounded-full px-2 py-0.5">
+                    luca.lancaster.ac.uk
+                  </span>
+                </div>
+                <video
+                  src="/assets/luca/walkthrough.mp4"
+                  poster="/assets/luca/walkthrough-poster.jpg"
+                  aria-label="Walkthrough of LUCA, from job description upload through CV optimisation, cover letter coaching and interview feedback"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  controls
+                  preload="metadata"
+                  className="block w-full h-auto bg-black"
+                />
+              </div>
+            </div>
+          </ScrollReveal>
+        </section>
 
         {/* 11. The result */}
         <Section title="Students shut out of appointments finally had somewhere real to go" tone="sunken">

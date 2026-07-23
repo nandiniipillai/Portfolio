@@ -237,6 +237,24 @@ three placeholder boxes for a while — caught in audit, removed.)
   wrong captions shipped because the filename was trusted. Read the PNG,
   then write the caption. A caption that claims something the screenshot
   does not show is the same class of error as an `AssetPlaceholder`.
+- **Size a walkthrough video to its native width, never beyond.** Past its
+  own pixel width a screen recording only gains blur. `luca/walkthrough.mp4`
+  is 1350×760, so its container is `max-w-[1350px]` — 1:1 on a large screen,
+  scaling down gracefully below. It was previously boxed at
+  `max-w-[300px]` (22% scale), which made every word in it unreadable.
+  Check `videoWidth` vs `getBoundingClientRect().width` in the pane.
+- **Screen recordings need re-encoding before they ship.** The LUCA master
+  was 22.6 MB for 41s, with a silent AAC track and 2px of black on the top
+  and bottom edges. `ffmpeg -an -vf "crop=W:H:X:Y" -c:v libx264 -crf 22
+  -preset slow -pix_fmt yuv420p -movflags +faststart` took it to 1.1 MB with
+  no visible text degradation at 1:1. Always give a video a `poster` (pull a
+  content-rich frame with `-ss`) and `preload="metadata"`.
+- **Pillarboxed recordings want a dark stage, not a light one.** LUCA's
+  walkthrough switches between a full-bleed 1350px capture and a 1080px one
+  padded with pure `#000`. Inside a white browser frame those bars read as a
+  defect; on a black stage with dark chrome they vanish, and a light UI in a
+  dark browser window just reads as dark mode. Run `cropdetect` across the
+  timeline before choosing a frame treatment.
 - **Match the frame's `aspect` to the source image ratio.** These frames
   use `object-cover`, so a 0.88-ratio capture in a `16/10` box loses ~40%
   of its height. Measure first (PowerShell + `System.Drawing`), then set
