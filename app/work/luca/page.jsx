@@ -100,40 +100,40 @@ function DecisionRow({ label, points, why, imgSide = 'left', media }) {
   );
 }
 
-// Two real workshop photos, staggered like pinned prints, filling the space
-// beside the workshops paragraph. Percentage widths + a negative top margin do
-// the overlap so it reflows safely; on mobile it just stacks under the text.
-// Zoomable — the sticky-note detail is legible on click, not at collage size.
+// Two real workshop photos fanned side by side like pinned prints — a short,
+// wide collage so it sits level with the (short) workshops text instead of
+// towering beside it. Negative horizontal margins do the overlap so it reflows
+// safely. Zoomable — the sticky-note detail is legible on click, not at size.
 function WorkshopCollage() {
   return (
-    <ScrollReveal>
-      <div className="mx-auto max-w-[380px] md:max-w-none">
-        <figure className="w-[82%] rounded-xl overflow-hidden border border-white/[0.1] shadow-2xl -rotate-2">
+    <ScrollReveal className="md:pt-1">
+      <div className="relative flex justify-center items-start max-w-[380px] mx-auto md:max-w-none">
+        <figure className="w-[52%] mt-8 -mr-[5%] rounded-xl overflow-hidden border border-white/[0.1] shadow-2xl -rotate-3">
           <Zoom>
             <Image
               src="/assets/luca/workshop-board.jpg"
               alt="A START / IMPROVE / CONTINUE board of sticky notes answering “how can we make students feel more welcome?” — a scenario that was never about careers"
               width={1080}
               height={1350}
-              sizes="(max-width: 768px) 82vw, 340px"
+              sizes="(max-width: 768px) 46vw, 230px"
               className="w-full h-auto"
             />
           </Zoom>
         </figure>
-        <figure className="w-[72%] ml-auto -mt-[26%] relative z-10 rounded-xl overflow-hidden border border-white/[0.16] shadow-2xl rotate-[2.5deg]">
+        <figure className="w-[54%] -ml-[5%] relative z-10 rounded-xl overflow-hidden border border-white/[0.16] shadow-2xl rotate-[3deg]">
           <Zoom>
             <Image
               src="/assets/luca/workshop-wall.jpg"
               alt="Students standing at a whiteboard covered in affinity-mapped sticky notes during a scenario workshop"
               width={1280}
               height={1600}
-              sizes="(max-width: 768px) 72vw, 300px"
+              sizes="(max-width: 768px) 48vw, 240px"
               className="w-full h-auto"
             />
           </Zoom>
         </figure>
       </div>
-      <p className="mt-5 font-hand text-xl text-fog/80 -rotate-1">
+      <p className="mt-6 text-center font-hand text-xl text-fog/80 -rotate-1">
         Scenario workshops with students and staff.
       </p>
     </ScrollReveal>
@@ -236,7 +236,7 @@ export default function LucaPage() {
 
         {/* 4. Three-way tension */}
         <Section title="The careers problem surfaced in workshops that were never about careers">
-          <div className="grid md:grid-cols-[1.1fr_0.9fr] gap-10 md:gap-14 items-start">
+          <div className="grid md:grid-cols-[1.1fr_0.9fr] gap-10 md:gap-14 items-center">
             <div className="space-y-6">
               <Prose>
                 We ran hypothetical-scenario workshops with students and staff covering everyday
