@@ -5,19 +5,21 @@ import Image from 'next/image';
 import CaseStudyShell from '@/components/CaseStudyShell';
 import { Section, Prose, SubList, PullQuote } from '@/components/CaseBits';
 import ScrollReveal from '@/components/ScrollReveal';
+import CaseStudyNav from '@/components/CaseStudyNav';
 
 const ACCENT = '#E4002B';
 
-function DecisionRow({ label, decision, why, src, alt, imgSide = 'left' }) {
+// One design decision: phone screen on one side, scannable pointers on the other.
+function DecisionRow({ label, points, why, src, alt, imgSide = 'left' }) {
   const media = (
     <ScrollReveal>
-      <div className="mx-auto w-full max-w-[180px]">
+      <div className="mx-auto w-full max-w-[215px]">
         <Image
           src={src}
           alt={alt}
           width={390}
           height={844}
-          sizes="200px"
+          sizes="240px"
           className="w-full h-auto rounded-2xl"
         />
       </div>
@@ -30,14 +32,24 @@ function DecisionRow({ label, decision, why, src, alt, imgSide = 'left' }) {
         <h3 className="font-heading tracking-tightest text-silver text-xl md:text-2xl leading-tight">
           {label}
         </h3>
-        <p className="text-fog text-sm md:text-base leading-relaxed">
-          <span className="text-silver font-medium">Decision. </span>
-          {decision}
-        </p>
-        <p className="text-fog text-sm md:text-base leading-relaxed">
-          <span className="text-silver font-medium">Why. </span>
-          {why}
-        </p>
+        <ul className="space-y-2 mt-1">
+          {points.map((p, i) => (
+            <li key={i} className="pl-5 relative text-fog text-sm md:text-base leading-relaxed">
+              <span
+                className="absolute left-0 top-2 w-1.5 h-1.5 rounded-full"
+                style={{ background: ACCENT }}
+                aria-hidden="true"
+              />
+              {p}
+            </li>
+          ))}
+        </ul>
+        {why && (
+          <p className="text-fog text-sm leading-relaxed pt-1">
+            <span className="text-[11px] tracking-[0.24em] uppercase mr-2" style={{ color: ACCENT }}>Why</span>
+            {why}
+          </p>
+        )}
       </div>
     </ScrollReveal>
   );
@@ -52,13 +64,95 @@ function DecisionRow({ label, decision, why, src, alt, imgSide = 'left' }) {
   );
 }
 
+// Front-loaded summary. The role line is deliberately precise: she owned these
+// surfaces as one of two designers, and tested with users rather than running
+// the upfront discovery, which the PM supplied.
+const GLANCE = [
+  ['My role', 'One of two designers splitting the feature set. I owned the navigation and IA, the home dashboard, check-in, Raise Enquiry and notifications.'],
+  ['Scope', 'One design system held across 80+ screens, day and night modes in parallel, through three rounds of user testing.'],
+  ['Outcome', 'Shipped live to Lancaster students. Navigation went from the primary failure point to resolved; check-in lost three steps.'],
+];
+
+function AtAGlance() {
+  return (
+    <section className="px-5 md:px-10">
+      <div className="mx-auto max-w-5xl grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10 border-y border-white/[0.08] py-8 md:py-10">
+        {GLANCE.map(([label, body]) => (
+          <ScrollReveal key={label}>
+            <div className="text-[11px] tracking-[0.24em] uppercase mb-2" style={{ color: ACCENT }}>
+              {label}
+            </div>
+            <p className="text-fog text-sm md:text-base leading-relaxed">{body}</p>
+          </ScrollReveal>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+// The navigation-first bet drawn, not just told: what earns the fold versus what
+// sits one deliberate tap behind it.
+const ABOVE_FOLD = [
+  ["Today's timetable", 'The one thing checked between every class.'],
+  ['Check-in', 'The most time-sensitive daily action.'],
+  ['Active notifications', 'Anything that needs a decision now.'],
+];
+
+function FoldDiagram() {
+  return (
+    <ScrollReveal>
+      <div className="rounded-2xl border border-white/[0.08] bg-white/[0.02] p-5 md:p-8">
+        <div className="grid md:grid-cols-[minmax(0,1fr)_auto_minmax(0,0.9fr)] gap-6 md:gap-0 items-center">
+          <div className="space-y-3">
+            <div className="text-[11px] tracking-[0.24em] uppercase" style={{ color: ACCENT }}>
+              Above the fold — capped at three
+            </div>
+            {ABOVE_FOLD.map(([what, why]) => (
+              <div
+                key={what}
+                className="rounded-lg border border-white/[0.08] bg-white/[0.03] px-4 py-3 border-l-2"
+                style={{ borderLeftColor: ACCENT }}
+              >
+                <div className="text-silver text-sm md:text-base font-medium">{what}</div>
+                <div className="text-fog text-xs md:text-sm mt-0.5 leading-relaxed">{why}</div>
+              </div>
+            ))}
+          </div>
+          <div className="hidden md:flex items-center justify-center px-6" aria-hidden="true">
+            <span className="text-3xl leading-none text-ash">→</span>
+          </div>
+          <div className="md:hidden flex justify-center" aria-hidden="true">
+            <span className="text-2xl leading-none text-ash">↓</span>
+          </div>
+          <div className="rounded-xl border border-white/[0.08] bg-white/[0.02] p-5">
+            <div className="text-[11px] tracking-[0.24em] uppercase text-ash">
+              One deliberate tap away
+            </div>
+            <div className="font-heading tracking-tightest text-silver text-xl md:text-2xl mt-1">
+              Everything else
+            </div>
+            <p className="text-fog text-sm mt-2 leading-relaxed">
+              Maps, explore, news, events, welfare, academic tools — reachable from a
+              contextual access point rather than competing for the home screen.
+            </p>
+          </div>
+        </div>
+      </div>
+    </ScrollReveal>
+  );
+}
+
 export default function ILancasterPage() {
   return (
-    <motion.div
-      initial={{ opacity: 0, filter: 'blur(10px)' }}
-      animate={{ opacity: 1, filter: 'blur(0px)' }}
-      transition={{ duration: 0.5 }}
-    >
+    <>
+      {/* Outside the motion.div: its `filter` animation would become the
+          containing block for the rail's position:fixed. */}
+      <CaseStudyNav accent={ACCENT} />
+      <motion.div
+        initial={{ opacity: 0, filter: 'blur(10px)' }}
+        animate={{ opacity: 1, filter: 'blur(0px)' }}
+        transition={{ duration: 0.5 }}
+      >
       <CaseStudyShell
         slug="ilancaster"
         index="03"
@@ -72,6 +166,22 @@ export default function ILancasterPage() {
           ['Company', ['ISS Innovation Hub', 'Lancaster University']],
         ]}
       >
+        {/* At a glance — role, scope, outcome, up front */}
+        <AtAGlance />
+
+        {/* 0. The insider arc */}
+        <Section title="I was one of the students it was failing">
+          <Prose>
+            I was studying at Lancaster while this redesign was being built, and I was
+            one of the people who struggled with the original app. Then I got to rebuild
+            the parts I struggled with — and once it shipped, I watched my own peers
+            using it on campus.
+          </Prose>
+          <PullQuote>
+            Once it was live, I could see my peers actually using and appreciating it.
+          </PullQuote>
+        </Section>
+
         {/* 1. Problem — before image top-right */}
         <Section title="Most avoided opening it">
           <Prose>
@@ -135,17 +245,27 @@ export default function ILancasterPage() {
         <Section title="Home dashboard">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-start">
             <ScrollReveal>
-              <div className="space-y-4">
+              <div className="space-y-3">
                 <div className="text-[11px] tracking-[0.24em] uppercase text-ash">Design decision</div>
-                <p className="text-fog text-sm md:text-base leading-relaxed">
-                  <span className="text-silver font-medium">Decision. </span>
-                  Surface only today&apos;s timetable, the check-in button and active
-                  notifications above the fold.
-                </p>
-                <p className="text-fog text-sm md:text-base leading-relaxed">
-                  <span className="text-silver font-medium">Why. </span>
-                  The core complaint was that the most-needed features were the
-                  hardest to reach. Everything else lives one deliberate tap away.
+                <ul className="space-y-2 mt-1">
+                  {[
+                    'Only today’s timetable, the check-in button and active notifications sit above the fold.',
+                    'Every feature was mapped against real usage frequency; secondary ones moved to contextual access points.',
+                    'Show what’s needed now, and reveal complexity only when asked.',
+                  ].map((p, i) => (
+                    <li key={i} className="pl-5 relative text-fog text-sm md:text-base leading-relaxed">
+                      <span
+                        className="absolute left-0 top-2 w-1.5 h-1.5 rounded-full"
+                        style={{ background: ACCENT }}
+                        aria-hidden="true"
+                      />
+                      {p}
+                    </li>
+                  ))}
+                </ul>
+                <p className="text-fog text-sm leading-relaxed pt-1">
+                  <span className="text-[11px] tracking-[0.24em] uppercase mr-2" style={{ color: ACCENT }}>Why</span>
+                  The core complaint was that the most-needed features were the hardest to reach.
                 </p>
               </div>
             </ScrollReveal>
@@ -170,6 +290,9 @@ export default function ILancasterPage() {
               </div>
             </ScrollReveal>
           </div>
+          <div className="mt-8">
+            <FoldDiagram />
+          </div>
         </Section>
 
         {/* 4. Key design decisions — alternating, raw images */}
@@ -177,35 +300,59 @@ export default function ILancasterPage() {
           <div className="divide-y divide-white/[0.06]">
             <DecisionRow
               label="Check-in: three fewer steps"
-              decision="Persistent check-in card on the home screen as the primary action."
-              why="The most time-sensitive daily action in the app. Students needed it between classes, quickly, on the go."
+              points={[
+                'A persistent check-in card on the home screen, as the primary action.',
+                'The flow dropped from five taps to two.',
+              ]}
+              why="It is the most time-sensitive daily action in the app — students need it between classes, quickly, on the go."
               src="/assets/ilancaster/checkin-day.png"
               alt="Check-in card on the home screen"
               imgSide="right"
             />
             <DecisionRow
               label="Raise Enquiry: guided, not open-ended"
-              decision="Replaced open category selection with a progressive guided flow that narrows options at each step."
-              why="Users didn&apos;t know how to classify their own enquiries. Presenting every category at once made the problem worse."
+              points={[
+                'Open category selection replaced with a progressive flow that narrows the options at each step.',
+                'The burden of classifying the problem moved off the student entirely.',
+              ]}
+              why="Students didn’t know how to categorise their own enquiries, and showing every category at once made that worse. It was the most complex flow in the project."
               src="/assets/ilancaster/enquiry-day.png"
               alt="Raise Enquiry — search-first ASK flow"
               imgSide="left"
             />
             <DecisionRow
-              label="Notifications: prioritised, not just listed"
-              decision="Visual hierarchy inside the notification feed separates urgent alerts from informational updates."
-              why="A flat notification list carries the implicit message that everything is equally important. Prioritised treatment lets students triage at a glance."
-              src="/assets/ilancaster/notifications-night.png"
-              alt="Prioritised notification feed"
+              label="Search: scoped, after round two flagged it"
+              points={[
+                'One search field across the whole app, with scope chips for All, ASK, Apps and Timetable.',
+                'Results stay in one list; the chip narrows it rather than sending the student somewhere else.',
+                'Raise an enquiry sits inside the ASK scope, so a failed search has an exit.',
+              ]}
+              why="Round two testing named Search and Raise Enquiry as the remaining friction points once navigation was fixed."
+              src="/assets/ilancaster/search-day.png"
+              alt="Search with All, ASK, Apps and Timetable scope chips"
               imgSide="right"
             />
             <DecisionRow
-              label="Day & Night mode"
-              decision="Both modes designed in parallel as equal, first-class experiences from day one."
-              why="Designing them together meant every hierarchy and contrast decision was validated in both environments."
+              label="Notifications: prioritised, not just listed"
+              points={[
+                'Visual hierarchy inside the feed separates urgent alerts from informational updates.',
+                'Students can triage the list at a glance between lectures.',
+              ]}
+              why="A flat list carries the implicit message that everything is equally important."
+              src="/assets/ilancaster/notifications-night.png"
+              alt="Prioritised notification feed"
+              imgSide="left"
+            />
+            <DecisionRow
+              label="Day & night designed in parallel"
+              points={[
+                'Both modes were treated as equal, first-class experiences from day one.',
+                'Every hierarchy and contrast decision was validated in both environments as it was made.',
+              ]}
+              why="Night mode was not colour-inverted at the end and hoped for the best."
               src="/assets/ilancaster/home-night.png"
               alt="Home dashboard — night mode"
-              imgSide="left"
+              imgSide="right"
             />
           </div>
         </Section>
@@ -251,7 +398,7 @@ export default function ILancasterPage() {
               'Secondary features lost their home-screen presence and moved to contextual access points',
               'Open category choice in enquiries was replaced by a guided path',
               'Above-the-fold space capped at three elements, whatever else competed for it',
-              'A new visual identity — the redesign stayed inside Lancaster&apos;s existing brand',
+              'A new visual identity — the redesign stayed inside Lancaster’s existing brand',
             ]}
           />
           <Prose>
@@ -259,6 +406,34 @@ export default function ILancasterPage() {
             thing findable.
           </Prose>
         </Section>
+
+        {/* 6b. Walkthrough — the prototype in motion */}
+        <section className="py-6 md:py-10 px-5 md:px-10">
+          <div className="mx-auto max-w-5xl">
+            <ScrollReveal as="h2" className="font-heading tracking-tightest text-silver text-3xl md:text-5xl mb-8 md:mb-12">
+              See it in motion
+            </ScrollReveal>
+            <Prose>
+              The redesigned timetable and the scoped search, clicked through side by side.
+            </Prose>
+          </div>
+          <ScrollReveal>
+            <div className="mx-auto max-w-[900px] mt-8">
+              <video
+                src="/assets/ilancaster/walkthrough.mp4"
+                poster="/assets/ilancaster/walkthrough-poster.jpg"
+                aria-label="Walkthrough of the redesigned iLancaster app — the weekly timetable and the search screen with All, ASK, Apps and Timetable scope chips"
+                autoPlay
+                muted
+                loop
+                playsInline
+                controls
+                preload="metadata"
+                className="block w-full h-auto rounded-2xl"
+              />
+            </div>
+          </ScrollReveal>
+        </section>
 
         {/* 7. Try it */}
         <Section title="Try the prototype">
@@ -338,7 +513,7 @@ export default function ILancasterPage() {
         <Section title="What I learned">
           <SubList
             items={[
-              'Diagnose the layer before fixing the symptom — round one&apos;s failure looked visual but was architectural.',
+              'Diagnose the layer before fixing the symptom — round one’s failure looked visual but was architectural.',
               'Splitting features between two designers works when the design system comes first.',
               'Feasibility checks with engineers mid-process beat discovering problems at handoff.',
               'A brand constraint is not a ceiling — hierarchy and structure changed the experience more than a restyle would have.',
@@ -346,6 +521,7 @@ export default function ILancasterPage() {
           />
         </Section>
       </CaseStudyShell>
-    </motion.div>
+      </motion.div>
+    </>
   );
 }
