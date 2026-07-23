@@ -88,26 +88,39 @@ function BrowserWindow({ src, alt, url, theme = 'light', sizesAttr = '400px', po
 // Spread of three real screens fanned like the phone covers: centre window forward,
 // side windows tilted behind. images = [left, centre, right]. Images are decorative
 // (the card link carries the accessible name), so alts stay empty.
+//
+// Hover is staggered: the outer wrapper of each window holds the static fan transform
+// (inline, so it can't be overridden by a utility), and an inner wrapper carries the
+// hover transform. Nested transforms compose, so the sides fan a little wider while
+// the centre lifts first. Delays are static utilities so the stagger plays on exit too.
+const STAGGER_BASE = 'transition-transform duration-500 ease-out motion-reduce:transition-none motion-reduce:transform-none';
+
 function CoverSpread({ images, url, theme, positions = [], priority = false }) {
   return (
-    <div className="relative w-full h-full flex items-center justify-center transition-transform duration-500 ease-out group-hover:scale-[1.02]">
+    <div className="relative w-full h-full flex items-center justify-center transition-transform duration-500 ease-out motion-reduce:transition-none motion-reduce:transform-none group-hover:scale-[1.02]">
       {/* Left window — behind, tilted out */}
       <div
         className="absolute w-[52%]"
         style={{ left: '26%', top: '50%', transform: 'translate(-50%, -50%) rotate(-6deg)' }}
       >
-        <BrowserWindow src={images[0]} alt="" theme={theme} sizesAttr="340px" pos={positions[0]} />
+        <div className={`${STAGGER_BASE} delay-100 group-hover:-translate-x-[8px] group-hover:-translate-y-[3px] group-hover:-rotate-2`}>
+          <BrowserWindow src={images[0]} alt="" theme={theme} sizesAttr="340px" pos={positions[0]} />
+        </div>
       </div>
       {/* Right window — behind, tilted out */}
       <div
         className="absolute w-[52%]"
         style={{ left: '74%', top: '50%', transform: 'translate(-50%, -50%) rotate(6deg)' }}
       >
-        <BrowserWindow src={images[2]} alt="" theme={theme} sizesAttr="340px" pos={positions[2]} />
+        <div className={`${STAGGER_BASE} delay-150 group-hover:translate-x-[8px] group-hover:-translate-y-[3px] group-hover:rotate-2`}>
+          <BrowserWindow src={images[2]} alt="" theme={theme} sizesAttr="340px" pos={positions[2]} />
+        </div>
       </div>
-      {/* Centre window — forward, largest, carries the URL */}
+      {/* Centre window — forward, largest, carries the URL. Leads the stagger. */}
       <div className="relative z-10 w-[66%] drop-shadow-2xl">
-        <BrowserWindow src={images[1]} alt="" url={url} theme={theme} sizesAttr="480px" pos={positions[1]} priority={priority} />
+        <div className={`${STAGGER_BASE} group-hover:-translate-y-[6px]`}>
+          <BrowserWindow src={images[1]} alt="" url={url} theme={theme} sizesAttr="480px" pos={positions[1]} priority={priority} />
+        </div>
       </div>
     </div>
   );
