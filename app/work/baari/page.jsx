@@ -92,6 +92,43 @@ function FeatureRow({ label, points, why, imgSide = 'left', media }) {
   );
 }
 
+// A decision whose evidence is a wide product screen: pointers first, then the
+// shot full-width, so dense UI stays legible instead of being squeezed into a
+// half column.
+function WideFeature({ label, points, why, media }) {
+  return (
+    <div className="py-8 md:py-10 border-t border-white/[0.06]">
+      <ScrollReveal>
+        <div className="max-w-measure space-y-3">
+          <div className="text-[11px] tracking-[0.24em] uppercase text-ash">Design decision</div>
+          <h3 className="font-heading tracking-tightest text-silver text-xl md:text-2xl leading-tight">
+            {label}
+          </h3>
+          <ul className="space-y-2 mt-1">
+            {points.map((p, i) => (
+              <li key={i} className="pl-5 relative text-fog text-sm md:text-base leading-relaxed">
+                <span
+                  className="absolute left-0 top-2 w-1.5 h-1.5 rounded-full"
+                  style={{ background: ACCENT }}
+                  aria-hidden="true"
+                />
+                {p}
+              </li>
+            ))}
+          </ul>
+          {why && (
+            <p className="text-fog text-sm leading-relaxed pt-1">
+              <span className="text-[11px] tracking-[0.24em] uppercase mr-2" style={{ color: ACCENT }}>Why</span>
+              {why}
+            </p>
+          )}
+        </div>
+      </ScrollReveal>
+      <ScrollReveal className="mt-6">{media}</ScrollReveal>
+    </div>
+  );
+}
+
 // Front-loaded summary: role (who owns what), scope (the honest numbers), outcome.
 const GLANCE = [
   ['My role', 'Founding product designer. I own design and product; my co-founder owns engineering. I designed the system as written specifications.'],
@@ -186,8 +223,7 @@ export default function BaariPage() {
           ['Role', 'Founding Product Designer'],
           ['Team', ['Product Designer', 'Software Developer']],
           ['Industry', 'B2C SaaS'],
-          ['Status', 'Pilot stage'],
-          ['URL', <a key="url" href="https://getbaari.in" target="_blank" rel="noreferrer noopener" style={{ color: ACCENT, textDecoration: 'underline' }}>getbaari.in ↗</a>],
+          ['Status', ['Pilot stage', <a key="url" href="https://getbaari.in" target="_blank" rel="noreferrer noopener" style={{ color: ACCENT, textDecoration: 'underline' }}>getbaari.in ↗</a>]],
         ]}
       >
         {/* 1. Hero — the live product */}
@@ -195,9 +231,10 @@ export default function BaariPage() {
           <ScrollReveal>
             <div className="mx-auto max-w-6xl">
               <BrowserShot
-                src="/assets/baari/queue-dashboard.png"
-                alt="Baari queue dashboard — a clinic's live day: waiting list and in-consult panel"
+                src="/assets/baari/live-queue.png"
+                alt="Baari queue board at a live dental clinic — waiting list of tokens on the left, the patient currently in consult on the right"
                 url="getbaari.in"
+                aspect="1660/760"
                 priority
               />
               <p className="mt-3 text-[11px] tracking-[0.24em] uppercase text-ash text-center">
@@ -238,32 +275,126 @@ export default function BaariPage() {
             <FeatureRow
               label="The queue board refuses navigation"
               points={[
-                'The whole day on one screen: waiting and in-consult panels side by side, live timers, a stats bar on top.',
-                'The three actions a front desk needs — walk-in, new booking, close day — are always visible.',
+                'The whole day on one screen: waiting and in-consult side by side, under a stats bar reading Today, Waiting, In consult, Running late and Next free.',
+                'The three actions a front desk needs — walk in, new booking, close day — never move.',
+                'The consult card carries a live timer, so “how long has this been running?” is answered without asking.',
                 'Labels adapt to the business: “in chair” for a dental desk, “in consult” for a clinic, “in session” for a spa.',
               ]}
               why="A receptionist mid-rush cannot tab-hunt, and should not have to translate generic software vocabulary."
               imgSide="left"
               media={
+                <div className="mx-auto w-full max-w-[420px]">
+                  <BrowserShot
+                    src="/assets/baari/live-inconsult.png"
+                    alt="Now in consult — token T6, a live timer reading 2 min in, and a single Mark done button"
+                    aspect="600/410"
+                  />
+                </div>
+              }
+            />
+            <FeatureRow
+              label="The whole booking is one panel"
+              points={[
+                'Name, mobile with country code, reason, party size and a first-visit flag in a single side panel — never a multi-step wizard.',
+                'The slot grid carries the day’s real availability inline — “13 of 20 slots free today” — with taken slots struck through rather than hidden.',
+                '“Save & add another” keeps the desk moving when a family books back to back.',
+              ]}
+              why="The desk is taking the booking while the customer stands there. Every extra screen is a queue forming behind them."
+              imgSide="right"
+              media={
+                <div className="mx-auto w-full max-w-[380px]">
+                  <BrowserShot
+                    src="/assets/baari/live-booking-panel.png"
+                    alt="New booking panel — patient name, mobile, reason, party size, first visit, and a slot grid showing 13 of 20 slots free today"
+                    aspect="580/744"
+                  />
+                </div>
+              }
+            />
+            <FeatureRow
+              label="Every action is one tap, and the tap is the record"
+              points={[
+                'Check in, mark done, walk in and no-show are the only gestures the desk needs all day.',
+                'Each one lands in the day’s record automatically, so the receptionist never does data entry.',
+                'Anyone past their slot is flagged automatically; one tap marks a no-show and the next customer moves up.',
+              ]}
+              why="The paper register survived because it was fast. Baari had to be faster, and turn the same gesture into data the notebook never gave back."
+              imgSide="left"
+              media={
+                <div className="mx-auto w-full max-w-[330px]">
+                  <BrowserShot
+                    src="/assets/baari/live-collection.png"
+                    alt="Every check-in is a data point — one tap in, one tap done, and each event lands in the day's record"
+                    aspect="430/530"
+                  />
+                </div>
+              }
+            />
+            <WideFeature
+              label="Search is a first-class surface, not a filter"
+              points={[
+                'Find anyone by name or 10-digit mobile, with recent patients already listed before a single key is pressed.',
+                'A walk-in with no record can be added as a guest on the spot, so an unknown face never blocks the queue.',
+                'Every result opens a profile with that person’s history behind it.',
+              ]}
+              why="After the queue, looking someone up is the thing a front desk does most — so it earns its own tab, not a filter buried in a table."
+              media={
                 <BrowserShot
-                  src="/assets/baari/queue-dashboard.png"
-                  alt="Queue board with waiting list and in-consult panel side by side"
+                  src="/assets/baari/live-search.png"
+                  alt="Search — find a patient by name or 10-digit mobile, with a list of recent patients below"
+                  aspect="1432/470"
+                />
+              }
+            />
+            <WideFeature
+              label="The register that reads itself"
+              points={[
+                'Reports the owner acts on: silent churn, category revenue, no-show rate, busiest days, hourly distribution and top services.',
+                'Every booking is listed with its source — app, front desk or walk-in — so demand is attributable rather than guessed.',
+                'Every number is a byproduct of taps the receptionist already makes, so nothing needs separate bookkeeping.',
+              ]}
+              why="This is the picture the paper register never showed — and it is what the owner, who signs up and pays, is buying."
+              media={
+                <BrowserShot
+                  src="/assets/baari/live-reports.png"
+                  alt="Reports — hourly distribution peaking at 09:00 and busiest days peaking on Thursday"
+                  aspect="1432/300"
+                />
+              }
+            />
+            <WideFeature
+              label="Empty states that name the next action"
+              points={[
+                'A report with no data yet explains itself: “Not enough history yet — this chart fills in after a couple of months of visits.”',
+                'Where the owner has to do something to fill it, the empty state says exactly what: “tag categories when you tap Mark done to see the split here.”',
+                'A genuinely good result reads as good news, not as missing data: “No silent churn — every returning patient has been in recently.”',
+              ]}
+              why="A blank chart reads as broken software. An empty state that names the next action turns a gap into an instruction."
+              media={
+                <BrowserShot
+                  src="/assets/baari/live-empty-states.png"
+                  alt="Three report cards with instructional empty states for silent churn, category revenue and cohort retention"
+                  aspect="1432/530"
                 />
               }
             />
             <FeatureRow
-              label="Every action is one tap"
+              label="The promises are part of the product"
               points={[
-                'A walk-in joins the queue in one tap; marking a visit done is one tap.',
-                'Each tap lands in the day’s record automatically — no separate data entry.',
+                'No paid ranking, ever — app listings rank by distance, rating and response time, and changing that policy carries 30 days’ notice.',
+                'No lock-in: the patient list, booking history and revenue reports export at any time.',
+                'A 30-day billing notice, and nothing gets paywalled retroactively once a plan is picked.',
               ]}
-              why="The paper register survived because it was fast. Baari had to be faster, and turn the same gesture into data the notebook never gave back."
+              why="The incumbents sell placement and take a cut per consultation. Writing the opposite down, inside the product, is the positioning."
               imgSide="right"
               media={
-                <BrowserShot
-                  src="/assets/baari/checkin-card.png"
-                  alt="One-tap check-in card — Emma Wilson, in consult, Mark done"
-                />
+                <div className="mx-auto w-full max-w-[400px]">
+                  <BrowserShot
+                    src="/assets/baari/live-promises.png"
+                    alt="Written promises — no paid ranking ever, and a 30-day billing notice"
+                    aspect="480/494"
+                  />
+                </div>
               }
             />
             <FeatureRow
@@ -288,21 +419,6 @@ export default function BaariPage() {
                     />
                   </Zoom>
                 </div>
-              }
-            />
-            <FeatureRow
-              label="The register that reads itself"
-              points={[
-                'Reports the owner acts on: silent churn (regulars who stopped coming), category revenue (what actually pays), no-show rate, busiest hours.',
-                'Every number is a byproduct of the taps the receptionist already makes — no extra bookkeeping.',
-              ]}
-              why="This is the picture the paper register never showed — and it is what the owner, who signs up and pays, is buying."
-              imgSide="right"
-              media={
-                <BrowserShot
-                  src="/assets/baari/signal-analytics.png"
-                  alt="Analytics — silent churn and category revenue cards"
-                />
               }
             />
           </div>
