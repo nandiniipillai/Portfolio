@@ -162,7 +162,7 @@ export default function ILancasterPage() {
         meta={[
           ['Role', 'Product Designer'],
           ['Team', ['Designers', 'Product Manager', 'Team of BE & FE Engineers']],
-          ['Industry', 'EdTech · Mobile App Redesign'],
+          ['Industry', ['EdTech', 'Mobile App Redesign']],
           ['Company', ['ISS Innovation Hub', 'Lancaster University']],
         ]}
       >
@@ -434,27 +434,6 @@ export default function ILancasterPage() {
             </div>
           </ScrollReveal>
         </section>
-
-        {/* 7. Try it */}
-        <Section title="Try the prototype">
-          <Prose>
-            Click through the redesigned home dashboard and check-in flow
-            in full screen.
-          </Prose>
-          <ScrollReveal>
-            <div className="mt-4">
-              <a
-                href="https://www.figma.com/proto/IWEzxQ7Ft4T5yvHOUD3ax0/iLancaster-Master?node-id=1224-10316&starting-point-node-id=1224%3A10316&t=KIIay9VltCOsBZza-1"
-                target="_blank"
-                rel="noreferrer noopener"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-transform hover:-translate-y-0.5"
-                style={{ background: ACCENT, color: '#0b0b0a' }}
-              >
-                Open prototype <span aria-hidden="true">↗</span>
-              </a>
-            </div>
-          </ScrollReveal>
-        </Section>
 
         {/* 8. The result */}
         <Section title="The result" tone="sunken">
