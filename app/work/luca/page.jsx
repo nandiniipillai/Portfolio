@@ -292,7 +292,6 @@ export default function LucaPage() {
         oneLiner="An AI careers coach for Lancaster University students."
         meta={[
           ['Role', 'Sole Product Designer'],
-          ['Timeline', '2025 · ~4 months'],
           ['Team', ['Product Manager', 'Front-end + back-end', 'Design engineers']],
           ['Industry', ['EdTech', 'SaaS']],
           ['Company', ['ISS Innovation Hub', 'Lancaster University']],
