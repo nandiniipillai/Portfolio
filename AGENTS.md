@@ -199,6 +199,16 @@ three placeholder boxes for a while — caught in audit, removed.)
   via `read_page` and JS DOM inspection (`getBoundingClientRect`,
   `getComputedStyle`) rather than fighting the renderer.
 
+## Dev-server flakiness on OneDrive
+
+The repo lives under OneDrive, which syncs the `.next` build cache out from
+under Turbopack. Symptom: the dev server starts fine but a route serves an
+empty document (`document.body.innerText.length` near zero, no `h2`/`img`),
+and `preview_logs` shows a storm of `ENOENT ... _buildManifest.js.tmp` /
+`app-build-manifest.json` errors. It is not a code error — `npm run build`
+still passes. Fix: stop the preview, `rm -rf .next`, start it again. If it
+recurs often, pause OneDrive sync while developing.
+
 ## Windows / git specifics
 
 - The repo lives on OneDrive at

@@ -50,8 +50,10 @@ function BrowserShot({ src, alt, url, aspect = '16/10', pos = 'center', priority
   );
 }
 
-// One design decision: product shot on one side, Decision + Why on the other.
-function DecisionRow({ label, decision, why, imgSide = 'left', media }) {
+// One design decision: product shot on one side, scannable pointers on the other.
+// `points` are the decision as short bullets (built to be skimmed, not read as
+// prose); `why` is a single one-line rationale under them.
+function DecisionRow({ label, points, why, imgSide = 'left', media }) {
   const mediaCol = <ScrollReveal>{media}</ScrollReveal>;
   const text = (
     <ScrollReveal>
@@ -60,14 +62,24 @@ function DecisionRow({ label, decision, why, imgSide = 'left', media }) {
         <h3 className="font-heading tracking-tightest text-silver text-xl md:text-2xl leading-tight">
           {label}
         </h3>
-        <p className="text-fog text-sm md:text-base leading-relaxed">
-          <span className="text-silver font-medium">Decision. </span>
-          {decision}
-        </p>
-        <p className="text-fog text-sm md:text-base leading-relaxed">
-          <span className="text-silver font-medium">Why. </span>
-          {why}
-        </p>
+        <ul className="space-y-2 mt-1">
+          {points.map((p, i) => (
+            <li key={i} className="pl-5 relative text-fog text-sm md:text-base leading-relaxed">
+              <span
+                className="absolute left-0 top-2 w-1.5 h-1.5 rounded-full"
+                style={{ background: ACCENT }}
+                aria-hidden="true"
+              />
+              {p}
+            </li>
+          ))}
+        </ul>
+        {why && (
+          <p className="text-fog text-sm leading-relaxed pt-1">
+            <span className="text-[11px] tracking-[0.24em] uppercase mr-2" style={{ color: ACCENT }}>Why</span>
+            {why}
+          </p>
+        )}
       </div>
     </ScrollReveal>
   );
@@ -85,6 +97,46 @@ function DecisionRow({ label, decision, why, imgSide = 'left', media }) {
         </>
       )}
     </div>
+  );
+}
+
+// Two real workshop photos, staggered like pinned prints, filling the space
+// beside the workshops paragraph. Percentage widths + a negative top margin do
+// the overlap so it reflows safely; on mobile it just stacks under the text.
+// Zoomable — the sticky-note detail is legible on click, not at collage size.
+function WorkshopCollage() {
+  return (
+    <ScrollReveal>
+      <div className="mx-auto max-w-[380px] md:max-w-none">
+        <figure className="w-[82%] rounded-xl overflow-hidden border border-white/[0.1] shadow-2xl -rotate-2">
+          <Zoom>
+            <Image
+              src="/assets/luca/workshop-board.jpg"
+              alt="A START / IMPROVE / CONTINUE board of sticky notes answering “how can we make students feel more welcome?” — a scenario that was never about careers"
+              width={1080}
+              height={1350}
+              sizes="(max-width: 768px) 82vw, 340px"
+              className="w-full h-auto"
+            />
+          </Zoom>
+        </figure>
+        <figure className="w-[72%] ml-auto -mt-[26%] relative z-10 rounded-xl overflow-hidden border border-white/[0.16] shadow-2xl rotate-[2.5deg]">
+          <Zoom>
+            <Image
+              src="/assets/luca/workshop-wall.jpg"
+              alt="Students standing at a whiteboard covered in affinity-mapped sticky notes during a scenario workshop"
+              width={1280}
+              height={1600}
+              sizes="(max-width: 768px) 72vw, 300px"
+              className="w-full h-auto"
+            />
+          </Zoom>
+        </figure>
+      </div>
+      <p className="mt-5 font-hand text-xl text-fog/80 -rotate-1">
+        Scenario workshops with students and staff.
+      </p>
+    </ScrollReveal>
   );
 }
 
@@ -184,16 +236,21 @@ export default function LucaPage() {
 
         {/* 4. Three-way tension */}
         <Section title="The careers problem surfaced in workshops that were never about careers">
-          <Prose>
-            We ran hypothetical-scenario workshops with students and staff covering everyday
-            situations, from exam prep to campus navigation. The careers pain surfaced loudest,
-            and it exposed three voices pulling in different directions.
-          </Prose>
-          <SubList items={[
-            'Students: “We don’t want to completely rely on them, but we don’t have any other means.”',
-            'Careers staff: wanted help with overflow demand, not a replacement.',
-            'The institution: feared shipping “just another AI” would look hypocritical next to its anti-AI academic policies.',
-          ]} />
+          <div className="grid md:grid-cols-[1.1fr_0.9fr] gap-10 md:gap-14 items-start">
+            <div className="space-y-6">
+              <Prose>
+                We ran hypothetical-scenario workshops with students and staff covering everyday
+                situations, from exam prep to campus navigation. The careers pain surfaced loudest,
+                and it exposed three voices pulling in different directions.
+              </Prose>
+              <SubList items={[
+                'Students: “We don’t want to completely rely on them, but we don’t have any other means.”',
+                'Careers staff: wanted help with overflow demand, not a replacement.',
+                'The institution: feared shipping “just another AI” would look hypocritical next to its anti-AI academic policies.',
+              ]} />
+            </div>
+            <WorkshopCollage />
+          </div>
         </Section>
 
         {/* 5. The bet */}
@@ -214,13 +271,11 @@ export default function LucaPage() {
 
         {/* 6. Constraints as the brief */}
         <Section title="UK GDPR and safeguarding became the brief, not the blockers">
-          <Prose>
-            No-training mode, 30-day auto-purge, and quarterly bias audits shaped almost every
-            major decision, and treating them as the brief is what made LUCA defensible to a
-            wary institution. The most contested feature, AI interview simulation, was won with
-            arithmetic. Five or six interviews per student across thousands of students can
-            never fit through a human booking system.
-          </Prose>
+          <SubList items={[
+            'No-training mode, a 30-day auto-purge and quarterly bias audits shaped almost every major decision.',
+            'Treating them as the brief, not the blockers, is what made LUCA defensible to a wary institution.',
+            'The most contested feature, AI interview simulation, was won with arithmetic: five or six interviews per student across thousands of students can never fit through a human booking system.',
+          ]} />
           <div className="mx-auto max-w-3xl mt-8">
             <BrowserShot
               src="/assets/luca/interview-feedback.png"
@@ -242,8 +297,12 @@ export default function LucaPage() {
           <div className="mt-6">
             <DecisionRow
               label="The uploaded job description became the spine"
-              decision="The moment a student pastes a role, LUCA parses it into a plain-language summary and the specific skills that role rewards. Every downstream tool — CV optimiser, cover letter coach, interview modes — then works against that one parsed role."
-              why="Students skipped the job upload and got generic feedback, so the upload became a mandatory first step with tools disabled until it is provided. Parsing the role once is what lets everything after it stay specific."
+              points={[
+                'Paste a role and LUCA parses it into a plain-language summary plus the skills that role rewards.',
+                'Every downstream tool — CV optimiser, cover letter coach, interview modes — works against that one parsed role.',
+                'The upload is a mandatory first step; tools stay disabled until it is provided.',
+              ]}
+              why="Students who skipped the upload got generic feedback. Parsing the role once keeps everything after it specific."
               imgSide="left"
               media={
                 <div className="mx-auto w-full max-w-[360px]">
@@ -257,8 +316,12 @@ export default function LucaPage() {
             />
             <DecisionRow
               label="A checklist instead of a wall of feedback"
-              decision="The checklist breaks paralysing open-ended tasks into completable steps, tracked as a percentage and a task count rather than a page of AI prose."
-              why="Students treated AI output as final, so we introduced coach-not-writer framing plus version control that shows learning over time."
+              points={[
+                'Open-ended tasks broken into small, completable steps.',
+                'Progress shown as a percentage and a task count, not a page of AI prose.',
+                'Coach-not-writer framing, with version control that shows learning over time.',
+              ]}
+              why="Students treated AI output as final. A checklist makes the work theirs to complete."
               imgSide="right"
               media={
                 <div className="mx-auto w-full max-w-[420px]">
@@ -272,8 +335,11 @@ export default function LucaPage() {
             />
             <DecisionRow
               label="Interview modes named for what students actually do"
-              decision="Abstract mode labels were renamed to concrete use cases, each with a description: Real, Training, and graduate video submission practice."
-              why="Interview mode labels confused people, and a student picking a practice mode should not have to decode product vocabulary first."
+              points={[
+                'Abstract labels renamed to concrete use cases: Real, Training, graduate video practice.',
+                'Each mode carries a one-line description of when to use it.',
+              ]}
+              why="The old labels confused people. Picking a practice mode should not need decoding first."
               imgSide="left"
               media={
                 <BrowserShot
@@ -285,8 +351,11 @@ export default function LucaPage() {
             />
             <DecisionRow
               label="Employer intelligence fires after the interview lands"
-              decision="We front-loaded deep employer research during the application stage, and students pushed back. We re-sequenced the feature to fire after an interview lands, and the pattern became depth on demand."
-              why="When you are applying to many jobs at once, going deep on every employer is too much. As one student put it, “Once I land an interview, it is important for me to understand how they take interviews.”"
+              points={[
+                'Deep employer research was front-loaded at the application stage — students pushed back.',
+                'Re-sequenced to fire only after an interview lands: depth on demand.',
+              ]}
+              why="“Once I land an interview, it is important for me to understand how they take interviews.” — student"
               imgSide="right"
               media={
                 <BrowserShot
