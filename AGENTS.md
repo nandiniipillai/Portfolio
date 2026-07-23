@@ -1,6 +1,15 @@
 # AGENTS.md
 
-Working guide for AI coding agents on this codebase. Read before editing.
+Full reference for AI coding agents on this codebase.
+
+**`CLAUDE.md` is loaded automatically every session; this file is not.**
+CLAUDE.md carries the rules that apply to every task (hard rules, palette,
+verification loop, the gotchas that actually cause bugs). This file is the
+deep reference — read the section you need when you need it, rather than
+the whole file. CLAUDE.md's map says which section covers what.
+
+When a convention changes, update **both**: the one-liner in CLAUDE.md and
+the detail here.
 
 ## What this is
 
@@ -94,6 +103,14 @@ Unknown routes redirect to `/` via `next.config.mjs`.
   flags fastest.
 - **Card hover**: the cover scales `1.02` over 500ms (on the spread container
   and the flat image); the accent glow is the colour accent, not the motion.
+  On `cover-spread` the scale is layered with a **stagger**: the centre
+  window lifts 6px immediately, the sides follow at 100ms / 150ms, lifting
+  3px, sliding 8px outward and fanning 2° wider. The static fan transform
+  lives on an outer wrapper (inline `style`, so utilities can't override it)
+  and the hover transform on an inner wrapper — nested transforms compose.
+  Delays are static utilities, not `group-hover:` ones, so the stagger plays
+  on exit too. These wrappers carry `motion-reduce:` guards; this is CSS
+  motion, which `MotionProvider` does **not** cover.
 - **Card status line**: each study has a `status` string in `case-studies.js`
   (`Live · getbaari.in`, `Adopted by students & staff`, etc.), rendered
   under the oneLiner with an accent dot. It proves the "shipped" claim the
@@ -122,8 +139,9 @@ on Nandini's machine — copy from there, don't invent). Key rules:
 
 ## Case study structure — what works
 
-SmartUp, iLancaster and Baari are the reference for a production case study
-on this site:
+All four featured case studies now follow this structure — Baari, LUCA,
+iLancaster and SmartUp have each had the full pass, so any of them is a
+valid reference for a new one:
 
 1. Hero — full-bleed image, fanned cover PNG, or a browser-framed live
    product shot (Baari opens on the real getbaari.in dashboard).
@@ -205,6 +223,26 @@ three placeholder boxes for a while — caught in audit, removed.)
 
 ## Common gotchas
 
+- **HTML entities do not decode inside JS strings.** `&apos;` / `&amp;` are
+  decoded by JSX in *text* and in *attribute string literals*, but NOT in a
+  JavaScript string inside an expression container. So
+  `<SubList items={['don&apos;t']} />` renders a literal `don&apos;t` on the
+  page. Three of these shipped on LUCA before being caught. Use typographic
+  characters (`’` `“` `”`) in `SubList` / `MetricCard` arrays and in
+  `lib/case-studies.js` — never entities.
+- **Asset filenames lie. Open the image before you caption it.** The LUCA
+  folder is the worst offender: `jd-upload.png` is actually a duplicate of
+  the CV-optimiser checklist, and `dashboard-existing.png` /
+  `landing-existing-user.png` are swapped relative to what they show. Two
+  wrong captions shipped because the filename was trusted. Read the PNG,
+  then write the caption. A caption that claims something the screenshot
+  does not show is the same class of error as an `AssetPlaceholder`.
+- **Match the frame's `aspect` to the source image ratio.** These frames
+  use `object-cover`, so a 0.88-ratio capture in a `16/10` box loses ~40%
+  of its height. Measure first (PowerShell + `System.Drawing`), then set
+  `aspect` per shot, or `ffmpeg -vf "crop=W:H:X:Y"` the panel you actually
+  want (that is how `luca/cv-checklist.png` was made). Constrain portrait
+  shots with a `max-w-*` wrapper so rows do not become towers.
 - **`PhoneFrame` needs a sized parent.** It uses `w-full` with a
   `max-width` cap; if you put it in a flex/grid context without a defined
   width on the parent, it collapses to zero.
