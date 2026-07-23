@@ -9,8 +9,140 @@ import { Section, Prose, SubList, PullQuote, MetricCard, MetricGrid } from '@/co
 import SplitRow from '@/components/SplitRow';
 import PhoneFrame from '@/components/PhoneFrame';
 import ScrollReveal from '@/components/ScrollReveal';
+import CaseStudyNav from '@/components/CaseStudyNav';
 
 const ACCENT = '#7C5CFC';
+
+// One design decision: phone screen on one side, scannable pointers on the other.
+function DecisionRow({ label, points, why, src, alt, imgSide = 'left' }) {
+  const media = (
+    <ScrollReveal>
+      <div className="mx-auto w-full max-w-[215px]">
+        <Zoom>
+          <Image
+            src={src}
+            alt={alt}
+            width={468}
+            height={1013}
+            sizes="240px"
+            className="w-full h-auto rounded-2xl border border-white/[0.08]"
+          />
+        </Zoom>
+      </div>
+    </ScrollReveal>
+  );
+  const text = (
+    <ScrollReveal>
+      <div className="space-y-3">
+        <div className="text-[11px] tracking-[0.24em] uppercase text-ash">Design decision</div>
+        <h3 className="font-heading tracking-tightest text-silver text-xl md:text-2xl leading-tight">
+          {label}
+        </h3>
+        <ul className="space-y-2 mt-1">
+          {points.map((p, i) => (
+            <li key={i} className="pl-5 relative text-fog text-sm md:text-base leading-relaxed">
+              <span
+                className="absolute left-0 top-2 w-1.5 h-1.5 rounded-full"
+                style={{ background: ACCENT }}
+                aria-hidden="true"
+              />
+              {p}
+            </li>
+          ))}
+        </ul>
+        {why && (
+          <p className="text-fog text-sm leading-relaxed pt-1">
+            <span className="text-[11px] tracking-[0.24em] uppercase mr-2" style={{ color: ACCENT }}>Why</span>
+            {why}
+          </p>
+        )}
+      </div>
+    </ScrollReveal>
+  );
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-center py-6 md:py-8 border-t border-white/[0.06] first:border-t-0">
+      {imgSide === 'left' ? <>{media}{text}</> : <>{text}{media}</>}
+    </div>
+  );
+}
+
+// Front-loaded summary. The role line is precise about the freelance reality:
+// sole designer, end-to-end, but working from a supplied research document with
+// no direct user access and the PM holding the final call.
+const GLANCE = [
+  ['My role', 'Sole designer on a four-person squad, brought in as an outsourced freelancer. I owned discovery, journey mapping, IA, wireframes and the final prototype.'],
+  ['Scope', 'An information-heavy desktop retail platform compressed onto a phone — inventory, sales, staff, reports and point of sale in one role-aware app.'],
+  ['Outcome', 'A validated prototype that test users asked to keep. Detosphere used it to raise funding, and engineers built it out after handoff.'],
+];
+
+function AtAGlance() {
+  return (
+    <section className="px-5 md:px-10">
+      <div className="mx-auto max-w-5xl grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10 border-y border-white/[0.08] py-8 md:py-10">
+        {GLANCE.map(([label, body]) => (
+          <ScrollReveal key={label}>
+            <div className="text-[11px] tracking-[0.24em] uppercase mb-2" style={{ color: ACCENT }}>
+              {label}
+            </div>
+            <p className="text-fog text-sm md:text-base leading-relaxed">{body}</p>
+          </ScrollReveal>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+// The merge drawn, not just told: two scoped products collapsing into one app
+// that changes what it shows by role.
+const MERGED = [
+  ['Control Panel', 'For managers — oversight, staff, reports.'],
+  ['POS Lite', 'For floor staff — take a sale, close it.'],
+];
+
+function MergeDiagram() {
+  return (
+    <ScrollReveal>
+      <div className="rounded-2xl border border-white/[0.08] bg-white/[0.02] p-5 md:p-8">
+        <div className="grid md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] gap-6 md:gap-0 items-center">
+          <div className="space-y-3">
+            <div className="text-[11px] tracking-[0.24em] uppercase text-ash">Originally scoped as two</div>
+            {MERGED.map(([who, what]) => (
+              <div
+                key={who}
+                className="rounded-lg border border-white/[0.08] bg-white/[0.03] px-4 py-3 border-l-2"
+                style={{ borderLeftColor: ACCENT }}
+              >
+                <div className="text-silver text-sm md:text-base font-medium">{who}</div>
+                <div className="text-fog text-xs md:text-sm mt-0.5 leading-relaxed">{what}</div>
+              </div>
+            ))}
+          </div>
+          <div className="hidden md:flex items-center justify-center px-6" aria-hidden="true">
+            <span className="text-3xl leading-none" style={{ color: ACCENT }}>→</span>
+          </div>
+          <div className="md:hidden flex justify-center" aria-hidden="true">
+            <span className="text-2xl leading-none" style={{ color: ACCENT }}>↓</span>
+          </div>
+          <div
+            className="rounded-xl border p-5"
+            style={{ borderColor: `${ACCENT}55`, background: `${ACCENT}0f` }}
+          >
+            <div className="text-[11px] tracking-[0.24em] uppercase" style={{ color: ACCENT }}>
+              Shipped as one
+            </div>
+            <div className="font-heading tracking-tightest text-silver text-xl md:text-2xl mt-1">
+              One role-aware app
+            </div>
+            <p className="text-fog text-sm mt-2 leading-relaxed">
+              Same install, same nav — what it surfaces changes by who signed in. Cheaper to
+              build, one thing to learn, no compromise on either audience.
+            </p>
+          </div>
+        </div>
+      </div>
+    </ScrollReveal>
+  );
+}
 
 function Showcase({ src, alt, aspect = '16/9', tone = 'default' }) {
   const bg = tone === 'sunken' ? 'bg-graphite' : '';
@@ -96,11 +228,15 @@ function VideoTile({ video, poster, label }) {
 
 export default function SmartUpPage() {
   return (
-    <motion.div
-      initial={{ opacity: 0, filter: 'blur(10px)' }}
-      animate={{ opacity: 1, filter: 'blur(0px)' }}
-      transition={{ duration: 0.5 }}
-    >
+    <>
+      {/* Outside the motion.div: its `filter` animation would become the
+          containing block for the rail's position:fixed. */}
+      <CaseStudyNav accent={ACCENT} />
+      <motion.div
+        initial={{ opacity: 0, filter: 'blur(10px)' }}
+        animate={{ opacity: 1, filter: 'blur(0px)' }}
+        transition={{ duration: 0.5 }}
+      >
       <CaseStudyShell
         slug="smartup"
         index="04"
@@ -120,6 +256,9 @@ export default function SmartUpPage() {
           alt="SmartUp mobile screens flatlay"
           aspect="16/9"
         />
+
+        {/* At a glance — role, scope, outcome, up front */}
+        <AtAGlance />
 
         {/* 2. About */}
         <Section>
@@ -213,6 +352,58 @@ export default function SmartUpPage() {
           to build, one thing to learn, no compromise on either audience.
         </SplitRow>
 
+        <section className="py-6 md:py-10 px-5 md:px-10">
+          <div className="mx-auto max-w-5xl">
+            <MergeDiagram />
+          </div>
+        </section>
+
+        {/* 7b. Key design decisions */}
+        <Section title="Key design decisions">
+          <Prose>
+            Every screen had to answer the same question before it earned a place:
+            if someone is standing in the store, what do they need right now?
+          </Prose>
+          <div className="mt-6">
+            <DecisionRow
+              label="Home opens on today, not on everything"
+              points={[
+                'Today’s numbers first — purchases made, customers served, net sales processed.',
+                'Then only what needs a response: recent sales, and open stock requests from other branches.',
+                'One button starts a sale, so the most common action never needs a menu.',
+              ]}
+              why="The desktop platform’s completeness was the problem, not the goal. A shop floor doesn’t need the company’s spend breakdown."
+              src="/assets/smartup/screen-home.png"
+              alt="SmartUp home — today's totals, recent sales, stock requests and a New Sale button"
+              imgSide="right"
+            />
+            <DecisionRow
+              label="Point of sale, designed to be closed"
+              points={[
+                'Charging a walk-in is one sheet: payment method, amount tendered, and the change owed calculated as you type.',
+                'Discounts and sale notes stay collapsed until someone asks for them.',
+                '“Record as old sale” covers the transaction that happened on paper and gets entered later.',
+              ]}
+              why="This is a transaction under time pressure with a customer waiting, not an admin session."
+              src="/assets/smartup/screen-sale.png"
+              alt="Charge Walk-In Customer — payment option, amount tendered, remainder, and Record Sale"
+              imgSide="left"
+            />
+            <DecisionRow
+              label="Stock that says who changed it, and why"
+              points={[
+                'Inventory splits into warehouse stock, transfers, requests and adjustments.',
+                'Every adjustment carries the person, the timestamp, the branch, the quantity and the reason — breakages, theft.',
+                'Items carry a plain stock state — safe, warning, unknown — instead of asking anyone to read a number.',
+              ]}
+              why="Stock disputes are questions of accountability. The record has to answer them without a phone call."
+              src="/assets/smartup/screen-inventory.png"
+              alt="Inventory stock adjustments — each entry showing who adjusted it, when, quantity and reason"
+              imgSide="right"
+            />
+          </div>
+        </Section>
+
         {/* 8. What was deliberately cut — the interesting design decisions */}
         <Section title="What was deliberately cut" tone="sunken">
           <SubList
@@ -229,18 +420,18 @@ export default function SmartUpPage() {
         <Section title="Prototype walkthrough">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-end">
             <VideoTile
-              video="/assets/smartup/v2-onboarding-and-hompage.mp4"
+              video="/assets/smartup/onboarding.mp4"
               poster="/assets/smartup/onboarding-poster.jpg"
               label="Onboarding & home"
             />
             <VideoTile
-              video="/assets/smartup/v2-recording-sales.mp4"
+              video="/assets/smartup/recording-sales.mp4"
               poster="/assets/smartup/recording-sales-poster.jpg"
               label="Recording a sale"
             />
             <VideoTile
-              video="/assets/smartup/v2-mangaging-inventory.mp4"
-              poster="/assets/smartup/updating-stock-poster.jpg"
+              video="/assets/smartup/managing-inventory.mp4"
+              poster="/assets/smartup/managing-inventory-poster.jpg"
               label="Managing inventory"
             />
           </div>
@@ -311,6 +502,7 @@ export default function SmartUpPage() {
           />
         </Section>
       </CaseStudyShell>
-    </motion.div>
+      </motion.div>
+    </>
   );
 }
