@@ -11,19 +11,24 @@ import ScrollReveal from '@/components/ScrollReveal';
 
 const ACCENT = '#F0576B';
 
-// Light browser chrome — LUCA is a light UI, so the frame matches the product.
-// aspect is set per shot so tall captures are not cropped to a generic 16:10.
-function BrowserShot({ src, alt, url, aspect = '16/10', pos = 'top', priority = false }) {
+// Dark browser chrome for every LUCA product shot. LUCA is a light UI, but on a
+// black editorial page light chrome turns each screenshot into a glaring white
+// slab, and it clashed with the walkthrough (which is forced dark by its
+// pillarbox). One dark frame unifies the stills with the video and reads as
+// "the product in a dark browser". `aspect` is the shot's EXACT ratio so
+// object-cover shows the whole crop uncut — feed feature-focused crops, never
+// whole shrunk pages.
+function BrowserShot({ src, alt, url, aspect = '16/10', pos = 'center', priority = false }) {
   return (
-    <div className="w-full rounded-xl md:rounded-2xl overflow-hidden border border-white/[0.1] bg-white shadow-2xl">
-      <div className="flex items-center gap-1 px-2.5 py-2 bg-gray-100 border-b border-gray-200">
+    <div className="w-full rounded-xl md:rounded-2xl overflow-hidden border border-white/[0.14] bg-[#0f0f12] shadow-2xl">
+      <div className="flex items-center gap-1 px-2.5 py-2 bg-[#1a1a1e] border-b border-white/[0.06]">
         <span className="flex gap-1" aria-hidden="true">
           <span className="w-1.5 h-1.5 rounded-full bg-[#FF5F57]" />
           <span className="w-1.5 h-1.5 rounded-full bg-[#FEBC2E]" />
           <span className="w-1.5 h-1.5 rounded-full bg-[#28C840]" />
         </span>
         {url && (
-          <span className="mx-auto text-[10px] text-gray-500 bg-white/60 rounded-full px-2 py-0.5">
+          <span className="mx-auto text-[10px] text-fog bg-white/[0.06] rounded-full px-2 py-0.5">
             {url}
           </span>
         )}
@@ -128,9 +133,9 @@ export default function LucaPage() {
             <div className="mx-auto max-w-6xl">
               <BrowserShot
                 src="/assets/luca/landing-existing-user.png"
-                alt="LUCA application dashboard — CV optimiser, cover letter coach and interview practice for one uploaded role"
+                alt="LUCA application dashboard — the job-description gate, and Continue-where-you-left-off cards for saved applications"
                 url="luca.lancaster.ac.uk"
-                aspect="10/7"
+                aspect="1920/1353"
                 priority
               />
               <p className="mt-3 text-[11px] tracking-[0.24em] uppercase text-ash text-center">
@@ -165,13 +170,13 @@ export default function LucaPage() {
             <SlideFigure
               src="/assets/luca/smart-statement-1.png"
               alt="Smart Statement, the old Lancaster careers tool"
-              aspect="14/9"
+              aspect="1512/982"
               caption="Smart Statement — the tool students abandoned for ChatGPT."
             />
             <SlideFigure
               src="/assets/luca/smart-statement-2.png"
               alt="Smart Statement output generation screen"
-              aspect="14/9"
+              aspect="1512/982"
               caption="Template-based output — no coaching, no skills built."
             />
           </div>
@@ -216,12 +221,16 @@ export default function LucaPage() {
             arithmetic. Five or six interviews per student across thousands of students can
             never fit through a human booking system.
           </Prose>
-          <SlideFigure
-            src="/assets/luca/interview-populated.png"
-            alt="Interview simulation with safeguards visible"
-            aspect="16/9"
-            caption="Interview simulation — the feature the arithmetic won."
-          />
+          <div className="mx-auto max-w-3xl mt-8">
+            <BrowserShot
+              src="/assets/luca/interview-feedback.png"
+              alt="Interview feedback — overview panel with company and role, and a summary scoring strengths and areas for improvement"
+              aspect="970/590"
+            />
+            <p className="mt-3 text-fog/70 text-sm">
+              The coaching output a simulated interview produces — the payoff the arithmetic was arguing for.
+            </p>
+          </div>
         </Section>
 
         {/* 7. Key design decisions */}
@@ -233,15 +242,17 @@ export default function LucaPage() {
           <div className="mt-6">
             <DecisionRow
               label="The uploaded job description became the spine"
-              decision="Every feature draws from the same uploaded role. The CV optimiser and cover letter coach analyse what is working against that specific job, and four interview modes scale to the student’s confidence level with live tips."
-              why="Students skipped the job upload and got generic feedback, so the upload became a mandatory first step with tools disabled until it is provided. State persistence means students come back."
+              decision="The moment a student pastes a role, LUCA parses it into a plain-language summary and the specific skills that role rewards. Every downstream tool — CV optimiser, cover letter coach, interview modes — then works against that one parsed role."
+              why="Students skipped the job upload and got generic feedback, so the upload became a mandatory first step with tools disabled until it is provided. Parsing the role once is what lets everything after it stay specific."
               imgSide="left"
               media={
-                <BrowserShot
-                  src="/assets/luca/dashboard-existing.png"
-                  alt="LUCA home — job description paste gate with Continue disabled, and Continue where you left off cards"
-                  aspect="10/7"
-                />
+                <div className="mx-auto w-full max-w-[360px]">
+                  <BrowserShot
+                    src="/assets/luca/cv-rolesummary.png"
+                    alt="AI role summary parsed from the job description, with the specific skills the role rewards listed as chips"
+                    aspect="520/850"
+                  />
+                </div>
               }
             />
             <DecisionRow
@@ -254,7 +265,7 @@ export default function LucaPage() {
                   <BrowserShot
                     src="/assets/luca/cv-checklist.png"
                     alt="CV optimiser checklist — 40% complete, 5 of 27 tasks, with a skill expanded"
-                    aspect="41/50"
+                    aspect="981/1196"
                   />
                 </div>
               }
@@ -268,7 +279,7 @@ export default function LucaPage() {
                 <BrowserShot
                   src="/assets/luca/interview-setup.png"
                   alt="Interview type selection — Real, Training, and graduate video submission practice"
-                  aspect="16/9"
+                  aspect="1924/1090"
                 />
               }
             />
@@ -279,9 +290,9 @@ export default function LucaPage() {
               imgSide="right"
               media={
                 <BrowserShot
-                  src="/assets/luca/employer-insights-v2.png"
-                  alt="Employer insights — company profile, role-specific advice, salary benchmarks and location"
-                  aspect="9/8"
+                  src="/assets/luca/employer-salary.png"
+                  alt="Employer insights — average salary benchmarks for the role across comparable employers"
+                  aspect="760/555"
                 />
               }
             />

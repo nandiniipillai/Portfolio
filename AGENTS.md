@@ -293,10 +293,38 @@ three placeholder boxes for a while — caught in audit, removed.)
   `checkin-card`, `signal-analytics`, `customer-app`) and `og.png` images
   were made. Crop to EXACTLY 16:10 for `BrowserWindow`/`CoverShot` so
   nothing refits inside the aspect box.
-- **`BrowserWindow` theme**: pass `theme="dark"` for dark-UI screenshots
-  (Baari) so the browser chrome matches; default light chrome for light
-  UIs (LUCA). `pos` overrides the crop focus for tall screenshots (e.g.
-  `'center 22%'` on LUCA's CV page so the checklist is in frame).
+- **Frame screenshots in DARK browser chrome, even for light-UI products.**
+  The instinct is to match chrome to the product (dark for Baari, light for
+  LUCA), and the `PortfolioCard` `BrowserWindow` still supports both for the
+  card covers. But on a full case-study page, light chrome around a
+  light-UI capture turns every screenshot into a glaring white slab against
+  the black editorial body, and it clashes with any walkthrough video
+  (which is forced dark by its pillarbox — see the video notes above). LUCA
+  shipped that way and Nandini flagged the whole gallery as not reading as
+  a portfolio. The fix was one dark frame (`bg-[#0f0f12]`, `#1a1a1e`
+  toolbar) for every product shot on the page, so the stills and the video
+  form one system; a light UI in a dark browser just reads as dark mode.
+  See `LucaPage`'s `BrowserShot`.
+- **Feed browser frames feature-focused CROPS, not whole shrunk pages.** A
+  full app screen (sidebar + header + dense body + footer) at ~490px reads
+  as a screenshot dump — the single fastest way a case study stops looking
+  like design work. Crop each decision-row shot to the one feature the row
+  is about (`ffmpeg -vf crop`), then set the frame's `aspect` to the crop's
+  EXACT ratio (e.g. `aspect="520/850"`) so `object-cover` shows it uncut.
+  Cap portrait crops with a `max-w-[360px]` wrapper so a row doesn't become
+  a tower. cv-checklist / cv-rolesummary / employer-salary / interview-
+  feedback on LUCA are all crops, not raw captures.
+- **Open every asset before captioning it — the filename is not the
+  content.** On LUCA, `interview-populated.png` is the mock-interview LIST
+  (placeholder avatars, empty "start" pane), not a simulation, yet it was
+  captioned "Interview simulation". `dashboard-existing` / `landing-
+  existing-user` are the same home screen under two names. The interview-
+  feedback still now used in the safeguarding section was pulled from the
+  walkthrough (`ffmpeg -ss 10`), which is often the cleanest source for a
+  screen no standalone capture exists for.
+- **`pos`** overrides the crop focus for tall screenshots (e.g.
+  `'center 22%'`). With exact-ratio crops it rarely matters, but it is
+  there for shots framed to a generic aspect.
 - **PhoneFrame's max-width is a Tailwind class** (`max-w-[320px]`) not an
   inline style. This means wrapper `<div>` elements can constrain it with
   their own `max-w-*` class. The `fit` prop controls `object-cover` vs
