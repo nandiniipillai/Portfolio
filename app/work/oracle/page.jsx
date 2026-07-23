@@ -163,10 +163,6 @@ export default function OraclePage() {
             military and law enforcement into healthcare, education, and space
             industries over 15 years.
           </p>
-          <p className="text-silver text-sm font-medium mt-4">
-            This is the same muscle that builds a pricing strategy for a product
-            with no precedent — design the business model, not just the artifact.
-          </p>
         </div>
       </ScrollReveal>
 
@@ -182,10 +178,6 @@ export default function OraclePage() {
             principles. The question was not just &ldquo;can we transfer
             skills?&rdquo; but &ldquo;who owns a neural recording?&rdquo; and
             &ldquo;who gets access?&rdquo;
-          </p>
-          <p className="text-silver text-sm font-medium mt-4">
-            This is the same thinking that shapes AI trust design — defining
-            what a product refuses to do before shipping what it does.
           </p>
         </div>
       </ScrollReveal>
@@ -246,7 +238,7 @@ export default function OraclePage() {
           <div className="space-y-3">
             {[
               'Speculative design is not about certainty — it is about exploring future scenarios and starting discussions about what would be the case.',
-              'Making an idea simple doesn&apos;t weaken it. In most cases, it becomes more impactful and digestible.',
+              'Making an idea simple doesn’t weaken it. In most cases, it becomes more impactful and digestible.',
               'A product is not just about visual appeal and functionalities — it is about commercial viability and value to users.',
               'Next time: set measurable success criteria at kickoff and communicate openly when feeling overwhelmed or underutilised.',
             ].map((item) => (
