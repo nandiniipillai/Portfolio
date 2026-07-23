@@ -68,13 +68,13 @@ export default function OraclePage() {
         </>
       }
     >
-      {/* Hero — concept render, shown in full */}
+      {/* Hero — the device itself */}
       <ScrollReveal>
         <ZoomFig
-          src="/assets/oracle/oracle-concept.jpeg"
-          alt="Oracle concept — headgear with quantum sensors for neural pathway recording"
-          aspect="9/16"
-          fit="contain"
+          src="/assets/oracle/oracle-device.png"
+          alt="Oracle — the headgear worn on a head, with illuminated traces tracking the brain's neural pathways"
+          caption="Oracle — headgear that reads the brain&rsquo;s neural pathways while a skill is performed."
+          aspect="1200/1062"
         />
       </ScrollReveal>
 
@@ -113,24 +113,14 @@ export default function OraclePage() {
         </div>
       </ScrollReveal>
 
-      {/* Product render */}
       <ScrollReveal>
         <div className="mt-6">
           <ZoomFig
-            src="/assets/oracle/oracle-render.png"
-            alt="Oracle product render — the headgear in its 2071 context"
-            caption="Oracle — the product render in its 2071 context."
+            src="/assets/oracle/oracle-application.png"
+            alt="Slide reading: it is not just about law enforcement but also about giving humanity the tools to rebuild and adapt to their new world"
+            caption="The application we argued for — rebuilding, not just enforcement."
           />
         </div>
-      </ScrollReveal>
-
-      {/* Concept board */}
-      <ScrollReveal>
-        <ZoomFig
-          src="/assets/oracle/oracle-group.jpg"
-          alt="Genesis concept board — Oracle world-building and product context"
-          caption="Concept board — world-building and product context for Oracle."
-        />
       </ScrollReveal>
 
       {/* Synopsis: the process */}
@@ -146,6 +136,18 @@ export default function OraclePage() {
             narrowing until Oracle was born: skill transfer, not memory.
             Not identity. Skills that help communities rebuild.
           </p>
+        </div>
+      </ScrollReveal>
+
+      <ScrollReveal>
+        <div className="mt-6">
+          <ZoomFig
+            src="/assets/oracle/oracle-concept.jpeg"
+            alt="Hand-drawn comic storyboard of the 2071 scenario — ecological collapse, some leaving for the Moon and Mars, others staying to rebuild Earth"
+            caption="World-building storyboard — the 2071 scenario, drawn while the concept was still chip implants and memory."
+            aspect="9/16"
+            fit="contain"
+          />
         </div>
       </ScrollReveal>
 
@@ -186,7 +188,7 @@ export default function OraclePage() {
       <ScrollReveal>
         <div className="mt-8">
           <p className="text-silver font-heading tracking-tightest text-lg md:text-xl leading-snug mb-3">
-            The concept in motion.
+            The device, turned over.
           </p>
         </div>
       </ScrollReveal>
