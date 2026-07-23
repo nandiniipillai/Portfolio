@@ -8,6 +8,7 @@ import CaseStudyShell from '@/components/CaseStudyShell';
 import { Section, Prose, SubList, PullQuote } from '@/components/CaseBits';
 import SlideFigure from '@/components/SlideFigure';
 import ScrollReveal from '@/components/ScrollReveal';
+import CaseStudyNav from '@/components/CaseStudyNav';
 
 const ACCENT = '#F0576B';
 
@@ -140,6 +141,119 @@ function WorkshopCollage() {
   );
 }
 
+// Front-loaded summary: role (who did what), scope (the honest numbers), and the
+// outcome — so a scanner gets all three before reading 2,000 words.
+const GLANCE = [
+  ['My role', 'Sole product designer. I ran the student and staff research, synthesised it, and owned the design end to end.'],
+  ['Scope', '6 functional areas and 19 features, cut to a focused v1 across 5–6 research and usability rounds.'],
+  ['Outcome', 'Shipped as a proof-of-value pilot — adopted by students shut out of the careers service, with staff reporting real benefit.'],
+];
+
+function AtAGlance() {
+  return (
+    <section className="px-5 md:px-10">
+      <div className="mx-auto max-w-5xl grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10 border-y border-white/[0.08] py-8 md:py-10">
+        {GLANCE.map(([label, body]) => (
+          <ScrollReveal key={label}>
+            <div className="text-[11px] tracking-[0.24em] uppercase mb-2" style={{ color: ACCENT }}>
+              {label}
+            </div>
+            <p className="text-fog text-sm md:text-base leading-relaxed">{body}</p>
+          </ScrollReveal>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+// The IA insight drawn, not just told: one uploaded role feeds every tool. The
+// middle arrow is desktop-only; on mobile the grid collapses so the spine sits
+// on top of the four nodes it feeds.
+const SPINE_NODES = [
+  ['CV optimiser', 'Rewrites against the role’s exact keywords.'],
+  ['Cover letter optimiser', 'Argues for this job, not a generic one.'],
+  ['Interview modes', 'Practice scaled to the role and the student’s confidence.'],
+  ['Employer insight', 'How this employer runs interviews — surfaced once one lands.'],
+];
+
+function JdSpineDiagram() {
+  return (
+    <ScrollReveal>
+      <div className="rounded-2xl border border-white/[0.08] bg-white/[0.02] p-5 md:p-8">
+        <div className="grid md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1.15fr)] gap-6 md:gap-0 items-center">
+          <div
+            className="rounded-xl border p-5"
+            style={{ borderColor: `${ACCENT}55`, background: `${ACCENT}0f` }}
+          >
+            <div className="text-[11px] tracking-[0.24em] uppercase" style={{ color: ACCENT }}>
+              The spine
+            </div>
+            <div className="font-heading tracking-tightest text-silver text-xl md:text-2xl mt-1">
+              Job description
+            </div>
+            <p className="text-fog text-sm mt-2 leading-relaxed">
+              Uploaded first, and mandatory. Parsed once into a role summary and the skills
+              the role rewards.
+            </p>
+          </div>
+          <div className="hidden md:flex items-center justify-center px-6" aria-hidden="true">
+            <span className="text-3xl leading-none" style={{ color: ACCENT }}>→</span>
+          </div>
+          <div className="md:hidden flex justify-center" aria-hidden="true">
+            <span className="text-2xl leading-none" style={{ color: ACCENT }}>↓</span>
+          </div>
+          <div className="space-y-3">
+            {SPINE_NODES.map(([n, d]) => (
+              <div
+                key={n}
+                className="rounded-lg border border-white/[0.08] bg-white/[0.03] px-4 py-3 border-l-2"
+                style={{ borderLeftColor: ACCENT }}
+              >
+                <div className="text-silver text-sm md:text-base font-medium">{n}</div>
+                <div className="text-fog text-xs md:text-sm mt-0.5 leading-relaxed">{d}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </ScrollReveal>
+  );
+}
+
+// Illustrative legend for the transparency pillar — a real product capture of the
+// RAG ratings was not available, so this shows the rating system rather than
+// claiming a screenshot proves it.
+const RAG = [
+  ['#F0576B', 'Red', 'Needs work'],
+  ['#F5B14C', 'Amber', 'Could be stronger'],
+  ['#34D399', 'Green', 'Strong'],
+];
+
+function RagLegend() {
+  return (
+    <ScrollReveal>
+      <div className="mt-6 rounded-2xl border border-white/[0.08] bg-white/[0.02] p-5 md:p-6">
+        <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-4">
+          The rating system
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          {RAG.map(([c, name, meaning]) => (
+            <div key={name} className="flex items-center gap-3 rounded-lg bg-white/[0.03] px-4 py-3">
+              <span className="w-3 h-3 rounded-full shrink-0" style={{ background: c }} aria-hidden="true" />
+              <span className="text-silver text-sm font-medium">{name}</span>
+              <span className="text-fog text-xs md:text-sm ml-auto">{meaning}</span>
+            </div>
+          ))}
+        </div>
+        <p className="text-fog/70 text-sm mt-4 leading-relaxed">
+          Colour-coded ratings replaced walls of AI prose — students see what needs attention,
+          and why, before they engage.
+        </p>
+      </div>
+    </ScrollReveal>
+  );
+}
+
 const RESULTS = [
   {
     num: '01',
@@ -165,7 +279,11 @@ const RESULTS = [
 
 export default function LucaPage() {
   return (
-    <motion.div initial={{ opacity: 0, filter: 'blur(10px)' }} animate={{ opacity: 1, filter: 'blur(0px)' }} transition={{ duration: 0.5 }}>
+    <>
+      {/* Outside the motion.div on purpose: its `filter` animation makes it the
+          containing block for position:fixed, which would break the fixed rail. */}
+      <CaseStudyNav accent={ACCENT} />
+      <motion.div initial={{ opacity: 0, filter: 'blur(10px)' }} animate={{ opacity: 1, filter: 'blur(0px)' }} transition={{ duration: 0.5 }}>
       <CaseStudyShell
         slug="luca"
         index="02"
@@ -174,8 +292,9 @@ export default function LucaPage() {
         oneLiner="An AI careers coach for Lancaster University students."
         meta={[
           ['Role', 'Sole Product Designer'],
-          ['Team', ['Product Manager', 'Front-end developer', 'Back-end developer']],
-          ['Industry', ['EdTech', 'SAAS', 'AI']],
+          ['Timeline', '2025 · ~4 months'],
+          ['Team', ['Product Manager', 'Front-end + back-end', 'Design engineers']],
+          ['Industry', ['EdTech', 'SaaS']],
           ['Company', ['ISS Innovation Hub', 'Lancaster University']],
         ]}
       >
@@ -197,13 +316,15 @@ export default function LucaPage() {
           </ScrollReveal>
         </section>
 
+        {/* At a glance — role, scope, outcome, up front */}
+        <AtAGlance />
+
         {/* 2. Problem */}
         <Section title="Lancaster’s careers service was drowning, and ChatGPT was catching the overflow">
           <Prose>
             The human careers service was chronically oversubscribed, and the university’s
-            existing tool, Smart Statement, only tailored CVs and cover letters. Students had
-            quietly abandoned it because ChatGPT did more, and many were outsourcing entire
-            applications to it.
+            existing tool, Smart Statement, had quietly been abandoned — ChatGPT did more, and
+            many students were outsourcing entire applications to it.
           </Prose>
           <PullQuote>
             How might we design an AI careers tool that serves students without
@@ -239,15 +360,29 @@ export default function LucaPage() {
           <div className="grid md:grid-cols-[1.1fr_0.9fr] gap-10 md:gap-14 items-center">
             <div className="space-y-6">
               <Prose>
-                We ran hypothetical-scenario workshops with students and staff covering everyday
-                situations, from exam prep to campus navigation. The careers pain surfaced loudest,
-                and it exposed three voices pulling in different directions.
+                I ran hypothetical-scenario workshops with students and staff covering everyday
+                situations, from exam prep to campus navigation, then synthesised what surfaced.
+                The careers pain surfaced loudest, and it exposed three voices pulling in
+                different directions.
               </Prose>
-              <SubList items={[
-                'Students: “We don’t want to completely rely on them, but we don’t have any other means.”',
-                'Careers staff: wanted help with overflow demand, not a replacement.',
-                'The institution: feared shipping “just another AI” would look hypocritical next to its anti-AI academic policies.',
-              ]} />
+              <div className="space-y-3">
+                {[
+                  ['Students', '“We don’t want to completely rely on them, but we don’t have any other means.”'],
+                  ['Careers staff', 'Wanted help with overflow demand — explicitly not a replacement.'],
+                  ['The institution', 'Feared shipping “just another AI” would look hypocritical next to its anti-AI academic policies.'],
+                ].map(([who, quote]) => (
+                  <div
+                    key={who}
+                    className="rounded-lg border border-white/[0.08] bg-white/[0.03] px-4 py-3 border-l-2"
+                    style={{ borderLeftColor: ACCENT }}
+                  >
+                    <div className="text-[11px] tracking-[0.24em] uppercase mb-1" style={{ color: ACCENT }}>
+                      {who}
+                    </div>
+                    <p className="text-fog text-sm md:text-base leading-relaxed">{quote}</p>
+                  </div>
+                ))}
+              </div>
             </div>
             <WorkshopCollage />
           </div>
@@ -267,6 +402,7 @@ export default function LucaPage() {
             'Transparency by design — red, amber and green ratings make AI feedback legible and contestable.',
             'Institutional integration — post-interview human coaching, quarterly audits, no AI training mode.',
           ]} />
+          <RagLegend />
         </Section>
 
         {/* 6. Constraints as the brief */}
@@ -292,14 +428,18 @@ export default function LucaPage() {
         <Section title="Key design decisions" tone="sunken">
           <Prose>
             Every decision below answers the same question: how does the product help a student
-            build the skill, rather than hand them the output?
+            build the skill, rather than hand them the output? They all hang off one information
+            architecture call — the uploaded job description is the spine.
           </Prose>
+          <div className="mt-8">
+            <JdSpineDiagram />
+          </div>
           <div className="mt-6">
             <DecisionRow
               label="The uploaded job description became the spine"
               points={[
                 'Paste a role and LUCA parses it into a plain-language summary plus the skills that role rewards.',
-                'Every downstream tool — CV optimiser, cover letter coach, interview modes — works against that one parsed role.',
+                'Every downstream tool — CV optimiser, cover letter optimiser, interview modes — works against that one parsed role.',
                 'The upload is a mandatory first step; tools stay disabled until it is provided.',
               ]}
               why="Students who skipped the upload got generic feedback. Parsing the role once keeps everything after it specific."
@@ -404,8 +544,8 @@ export default function LucaPage() {
               See LUCA in motion
             </ScrollReveal>
             <Prose>
-              The full flow, from job description upload through CV optimisation, cover letter
-              coaching, and interview practice.
+              The full flow, from job description upload through the CV and cover letter
+              optimisers to interview practice.
             </Prose>
           </div>
           <ScrollReveal>
@@ -427,7 +567,7 @@ export default function LucaPage() {
                 <video
                   src="/assets/luca/walkthrough.mp4"
                   poster="/assets/luca/walkthrough-poster.jpg"
-                  aria-label="Walkthrough of LUCA, from job description upload through CV optimisation, cover letter coaching and interview feedback"
+                  aria-label="Walkthrough of LUCA, from job description upload through the CV and cover letter optimisers to interview feedback"
                   autoPlay
                   muted
                   loop
@@ -486,6 +626,7 @@ export default function LucaPage() {
           ]} />
         </Section>
       </CaseStudyShell>
-    </motion.div>
+      </motion.div>
+    </>
   );
 }
