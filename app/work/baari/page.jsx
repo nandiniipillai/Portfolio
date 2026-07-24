@@ -272,24 +272,21 @@ export default function BaariPage() {
             think.
           </Prose>
           <div className="mt-6">
-            <FeatureRow
+            <WideFeature
               label="The queue board refuses navigation"
               points={[
-                'The whole day on one screen: waiting and in-consult side by side, under a stats bar reading Today, Waiting, In consult, Running late and Next free.',
-                'The three actions a front desk needs — walk in, new booking, close day — never move.',
+                'The whole day on one screen: waiting and in-consult side by side, under a stats bar reading Today, Waiting, In consult and Late.',
+                'Each row carries what the desk needs to triage at a glance — token, time, reason for visit, and a returning-customer visit count.',
                 'The consult card carries a live timer, so “how long has this been running?” is answered without asking.',
                 'Labels adapt to the business: “in chair” for a dental desk, “in consult” for a clinic, “in session” for a spa.',
               ]}
               why="A receptionist mid-rush cannot tab-hunt, and should not have to translate generic software vocabulary."
-              imgSide="left"
               media={
-                <div className="mx-auto w-full max-w-[420px]">
-                  <BrowserShot
-                    src="/assets/baari/live-inconsult.png"
-                    alt="Now in consult — token T6, a live timer reading 2 min in, and a single Mark done button"
-                    aspect="600/410"
-                  />
-                </div>
+                <BrowserShot
+                  src="/assets/baari/demo-queue-full.png"
+                  alt="The queue board — waiting list on the left with tokens, reasons and late flags, the patient in consult on the right with a live timer"
+                  aspect="1340/610"
+                />
               }
             />
             <FeatureRow
@@ -321,11 +318,11 @@ export default function BaariPage() {
               why="The paper register survived because it was fast. Baari had to be faster, and turn the same gesture into data the notebook never gave back."
               imgSide="left"
               media={
-                <div className="mx-auto w-full max-w-[330px]">
+                <div className="mx-auto w-full max-w-[440px]">
                   <BrowserShot
-                    src="/assets/baari/live-collection.png"
-                    alt="Every check-in is a data point — one tap in, one tap done, and each event lands in the day's record"
-                    aspect="430/530"
+                    src="/assets/baari/demo-queue-rows.png"
+                    alt="Queue rows — a patient automatically flagged LATE eight minutes past their slot, and returning customers carrying a visit count"
+                    aspect="712/330"
                   />
                 </div>
               }
@@ -349,16 +346,32 @@ export default function BaariPage() {
             <WideFeature
               label="The register that reads itself"
               points={[
-                'Reports the owner acts on: silent churn, category revenue, no-show rate, busiest days, hourly distribution and top services.',
-                'Every booking is listed with its source — app, front desk or walk-in — so demand is attributable rather than guessed.',
-                'Every number is a byproduct of taps the receptionist already makes, so nothing needs separate bookkeeping.',
+                'Silent churn names the regulars who stopped coming, with how many visits they used to make and how long it has been.',
+                'Category revenue shows what actually pays — consultation against pharmacy against procedure, in rupees and share.',
+                'Cohort retention tracks whether each month’s new customers came back, which is the number a paper register could never produce.',
               ]}
               why="This is the picture the paper register never showed — and it is what the owner, who signs up and pays, is buying."
               media={
                 <BrowserShot
-                  src="/assets/baari/live-reports.png"
-                  alt="Reports — hourly distribution peaking at 09:00 and busiest days peaking on Thursday"
-                  aspect="1432/300"
+                  src="/assets/baari/demo-signal-reports.png"
+                  alt="Signal reports — silent churn listing lapsed regulars, category revenue split across consultation, pharmacy and procedure, and a cohort retention matrix"
+                  aspect="1340/330"
+                />
+              }
+            />
+            <WideFeature
+              label="Every booking carries where it came from"
+              points={[
+                'The month resolves into one line: bookings, completed, no-show rate, cancellations, average wait and average session.',
+                'Revenue is reported with its own coverage figure, so the owner knows how much of the total is actually tracked rather than assumed.',
+                'Bookings split by source — app, front desk, walk-in — which turns “are we busy?” into a question with an answer.',
+              ]}
+              why="Every one of these is a byproduct of taps the receptionist already makes. Nothing here asks anyone to do bookkeeping."
+              media={
+                <BrowserShot
+                  src="/assets/baari/demo-signal-stats.png"
+                  alt="Signal overview — total bookings, completed, no-show rate, cancellations, average wait and session, with revenue coverage and bookings split by app, front desk and walk-in"
+                  aspect="1340/420"
                 />
               }
             />
