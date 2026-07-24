@@ -146,7 +146,7 @@ function WorkshopCollage() {
 const GLANCE = [
   ['My role', 'Sole product designer. I ran the student and staff research, synthesised it, and owned the design end to end.'],
   ['Scope', '6 functional areas and 19 features, cut to a focused v1 across 5–6 research and usability rounds.'],
-  ['Outcome', 'Shipped as a proof-of-value pilot — adopted by students shut out of the careers service, with staff reporting real benefit.'],
+  ['Outcome', 'Shipped to a student body of 16,000+, and adopted by the students shut out of the careers service it was built to relieve.'],
 ];
 
 function AtAGlance() {
