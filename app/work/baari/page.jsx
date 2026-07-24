@@ -262,6 +262,22 @@ export default function BaariPage() {
           <div className="mt-8">
             <ThreeRolesDiagram />
           </div>
+          <Prose>
+            Three roles meant three sets of needs competing for the same product, so
+            I made the priority explicit and held every decision to it:
+            <strong className="text-silver font-medium"> receptionist first, owner second, customer third.</strong>
+          </Prose>
+          <Prose>
+            That order is deliberately not the money order. The owner is the one who
+            signs up and pays, so most software in this market is built for them. But
+            the receptionist is the person the whole day actually runs through — she is
+            absorbing the walk-ins, the phone calls and the “how long will it take?”
+            while the owner is with a customer. If the product makes her slower, the
+            paper register comes back and nothing else matters.
+          </Prose>
+          <PullQuote>
+            The owner buys it. The receptionist decides whether it survives.
+          </PullQuote>
         </Section>
 
         {/* 4. Key design decisions — real product shots */}
@@ -285,7 +301,7 @@ export default function BaariPage() {
                 <BrowserShot
                   src="/assets/baari/demo-queue-full.png"
                   alt="The queue board — waiting list on the left with tokens, reasons and late flags, the patient in consult on the right with a live timer"
-                  aspect="1340/610"
+                  aspect="1340/500"
                 />
               }
             />
@@ -318,11 +334,11 @@ export default function BaariPage() {
               why="The paper register survived because it was fast. Baari had to be faster, and turn the same gesture into data the notebook never gave back."
               imgSide="left"
               media={
-                <div className="mx-auto w-full max-w-[440px]">
+                <div className="mx-auto w-full max-w-[380px]">
                   <BrowserShot
-                    src="/assets/baari/demo-queue-rows.png"
-                    alt="Queue rows — a patient automatically flagged LATE eight minutes past their slot, and returning customers carrying a visit count"
-                    aspect="712/330"
+                    src="/assets/baari/demo-inconsult.png"
+                    alt="The in-consult card — token, patient, a live timer reading 2 minutes in, and a single Mark done button"
+                    aspect="600/600"
                   />
                 </div>
               }
@@ -339,7 +355,7 @@ export default function BaariPage() {
                 <BrowserShot
                   src="/assets/baari/live-search.png"
                   alt="Search — find a patient by name or 10-digit mobile, with a list of recent patients below"
-                  aspect="1432/470"
+                  aspect="1340/500"
                 />
               }
             />
@@ -355,7 +371,7 @@ export default function BaariPage() {
                 <BrowserShot
                   src="/assets/baari/demo-signal-reports.png"
                   alt="Signal reports — silent churn listing lapsed regulars, category revenue split across consultation, pharmacy and procedure, and a cohort retention matrix"
-                  aspect="1340/330"
+                  aspect="1340/500"
                 />
               }
             />
@@ -371,7 +387,7 @@ export default function BaariPage() {
                 <BrowserShot
                   src="/assets/baari/demo-signal-stats.png"
                   alt="Signal overview — total bookings, completed, no-show rate, cancellations, average wait and session, with revenue coverage and bookings split by app, front desk and walk-in"
-                  aspect="1340/420"
+                  aspect="1340/500"
                 />
               }
             />
@@ -387,7 +403,7 @@ export default function BaariPage() {
                 <BrowserShot
                   src="/assets/baari/live-empty-states.png"
                   alt="Three report cards with instructional empty states for silent churn, category revenue and cohort retention"
-                  aspect="1432/530"
+                  aspect="1340/500"
                 />
               }
             />
@@ -481,6 +497,27 @@ export default function BaariPage() {
           </ScrollReveal>
         </section>
 
+        {/* 4c. Access — designing for the actual context of use */}
+        <Section title="Access, for an Indian front desk rather than a Western one" tone="sunken">
+          <Prose>
+            Most software in this market is English-first, always-online and assumes one
+            phone belongs to one person. None of that is true at the desks Baari is for,
+            so the constraints below were treated as requirements, not edge cases.
+          </Prose>
+          <SubList items={[
+            'Bilingual English and Hindi throughout, with Devanagari names rendered properly rather than transliterated into something the customer does not recognise as their own.',
+            'Built for the low-end Android devices these desks actually run, not the flagship the design was drawn on.',
+            'Offline and patchy-connection states specified as P0, because clinic wifi drops and power cuts are normal — a queue that lies when the connection goes is worse than no queue.',
+            'Identity handled for shared family phones, dual SIMs and recycled numbers, so a naive match can never hand one person another person’s visit history.',
+            'Business-type-aware vocabulary — “in chair”, “in consult”, “in session” — so nobody has to translate software language into their own.',
+          ]} />
+          <Prose>
+            I have not run a formal WCAG audit on this product yet, and I am not going to
+            claim one. What is here is the access work the context demanded: language,
+            devices, connectivity and identity.
+          </Prose>
+        </Section>
+
         {/* 5. How two people shipped it */}
         <Section title="Two people, spec-driven, shipped in months">
           <Prose>
@@ -489,6 +526,19 @@ export default function BaariPage() {
           <PullQuote>
             The spec is the design. My highest-leverage artifact was the written specification, not the mockup.
           </PullQuote>
+          <p className="text-silver font-medium mt-6">What that looked like in practice</p>
+          <SubList items={[
+            'Screens written as numbered specs — A1 through A11 — each carrying exact layout order, the verbatim UI copy, the state gates and the acceptance criteria that decided when it was done.',
+            'Findings triaged P0 to P3 against one written question: can this make a booking wrong, lost, or dishonest? That rule, not my taste, set the order of work.',
+            'Every cut recorded with its reasoning, so scope stayed decided instead of being relitigated later.',
+            'Diagnoses written to root cause, not symptom: four separate bug reports about wrong times turned out to be one timezone conversion, and collapsed into a single fix.',
+            'Decisions captured in versioned handoff documents, so anyone picking the work up — including me, months later — starts with the full context rather than an inbox.',
+          ]} />
+          <Prose>
+            None of this was documentation written after the fact. It was how the
+            product got specified in the first place, which is the only reason two
+            people could hold two codebases in one shared vocabulary.
+          </Prose>
         </Section>
 
         {/* 6. Rigour — the audits */}

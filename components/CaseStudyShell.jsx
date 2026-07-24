@@ -113,7 +113,7 @@ export default function CaseStudyShell({ slug, index, title, oneLiner, meta = []
                   </div>
                   <div className="flex items-baseline gap-4">
                     <span
-                      className="text-[11px] tracking-[0.24em] uppercase"
+                      className="text-xl font-bold tracking-tight tabular-nums"
                       style={{ color: next.accent }}
                     >
                       {next.index}

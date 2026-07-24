@@ -27,12 +27,12 @@ export default function PortfolioPage() {
               Selected case studies
             </span>
           </div>
-          <p
+          <h1
             className="font-heading tracking-tightest text-silver max-w-3xl"
             style={{ fontSize: 'clamp(28px, 4vw, 48px)', lineHeight: 1.1 }}
           >
             Four products shipped to real users. Built from problem to production.
-          </p>
+          </h1>
         </BlurReveal>
 
         <div className="mt-14 md:mt-20 grid grid-cols-1 gap-5">
