@@ -263,17 +263,12 @@ export default function BaariPage() {
             <ThreeRolesDiagram />
           </div>
           <Prose>
-            Three roles meant three sets of needs competing for the same product, so
-            I made the priority explicit and held every decision to it:
-            <strong className="text-silver font-medium"> receptionist first, owner second, customer third.</strong>
-          </Prose>
-          <Prose>
-            That order is deliberately not the money order. The owner is the one who
-            signs up and pays, so most software in this market is built for them. But
-            the receptionist is the person the whole day actually runs through — she is
-            absorbing the walk-ins, the phone calls and the “how long will it take?”
-            while the owner is with a customer. If the product makes her slower, the
-            paper register comes back and nothing else matters.
+            Three sets of needs competed for one product, so I fixed the priority and
+            held every decision to it:
+            <strong className="text-silver font-medium"> receptionist first, owner second, customer third</strong> —
+            deliberately not the money order. Most software here is built for the owner
+            who pays, but the day runs through the receptionist. Make her slower and the
+            paper register comes back.
           </Prose>
           <PullQuote>
             The owner buys it. The receptionist decides whether it survives.
@@ -289,14 +284,12 @@ export default function BaariPage() {
           </Prose>
           <div className="mt-6">
             <WideFeature
-              label="The queue board refuses navigation"
+              label="The queue board is the whole day"
               points={[
-                'The whole day on one screen: waiting and in-consult side by side, under a stats bar reading Today, Waiting, In consult and Late.',
-                'Each row carries what the desk needs to triage at a glance — token, time, reason for visit, and a returning-customer visit count.',
-                'The consult card carries a live timer, so “how long has this been running?” is answered without asking.',
-                'Labels adapt to the business: “in chair” for a dental desk, “in consult” for a clinic, “in session” for a spa.',
+                'Waiting and in-consult side by side, under a live stats bar — each row triage-ready with token, reason, late flag and a returning-customer visit count.',
+                'The consult card runs a live timer, and labels adapt to the trade: “in chair”, “in consult”, “in session”.',
               ]}
-              why="A receptionist mid-rush cannot tab-hunt, and should not have to translate generic software vocabulary."
+              why="A receptionist mid-rush cannot tab-hunt, or translate generic software vocabulary."
               media={
                 <BrowserShot
                   src="/assets/baari/demo-queue-full.png"
@@ -306,13 +299,12 @@ export default function BaariPage() {
               }
             />
             <FeatureRow
-              label="The whole booking is one panel"
+              label="Booking and check-in are single gestures"
               points={[
-                'Name, mobile with country code, reason, party size and a first-visit flag in a single side panel — never a multi-step wizard.',
-                'The slot grid carries the day’s real availability inline — “13 of 20 slots free today” — with taken slots struck through rather than hidden.',
-                '“Save & add another” keeps the desk moving when a family books back to back.',
+                'The whole booking is one side panel — never a wizard — with the day’s real availability inline, “13 of 20 slots free today”.',
+                'Check in, mark done and no-show are one tap each and land in the record automatically; anyone past their slot is flagged without being asked.',
               ]}
-              why="The desk is taking the booking while the customer stands there. Every extra screen is a queue forming behind them."
+              why="The customer is standing at the desk. Every extra screen is a queue forming behind them."
               imgSide="right"
               media={
                 <div className="mx-auto w-full max-w-[380px]">
@@ -324,33 +316,13 @@ export default function BaariPage() {
                 </div>
               }
             />
-            <FeatureRow
-              label="Every action is one tap, and the tap is the record"
-              points={[
-                'Check in, mark done, walk in and no-show are the only gestures the desk needs all day.',
-                'Each one lands in the day’s record automatically, so the receptionist never does data entry.',
-                'Anyone past their slot is flagged automatically; one tap marks a no-show and the next customer moves up.',
-              ]}
-              why="The paper register survived because it was fast. Baari had to be faster, and turn the same gesture into data the notebook never gave back."
-              imgSide="left"
-              media={
-                <div className="mx-auto w-full max-w-[380px]">
-                  <BrowserShot
-                    src="/assets/baari/demo-inconsult.png"
-                    alt="The in-consult card — token, patient, a live timer reading 2 minutes in, and a single Mark done button"
-                    aspect="600/600"
-                  />
-                </div>
-              }
-            />
             <WideFeature
-              label="Search is a first-class surface, not a filter"
+              label="Search is its own surface, not a filter"
               points={[
-                'Find anyone by name or 10-digit mobile, with recent patients already listed before a single key is pressed.',
-                'A walk-in with no record can be added as a guest on the spot, so an unknown face never blocks the queue.',
-                'Every result opens a profile with that person’s history behind it.',
+                'Find anyone by name or 10-digit mobile, recent patients already listed before a key is pressed, every result opening a full profile.',
+                'A walk-in with no record joins as a guest on the spot, so an unknown face never blocks the queue.',
               ]}
-              why="After the queue, looking someone up is the thing a front desk does most — so it earns its own tab, not a filter buried in a table."
+              why="After the queue, looking someone up is the thing a front desk does most."
               media={
                 <BrowserShot
                   src="/assets/baari/live-search.png"
@@ -362,11 +334,10 @@ export default function BaariPage() {
             <WideFeature
               label="The register that reads itself"
               points={[
-                'Silent churn names the regulars who stopped coming, with how many visits they used to make and how long it has been.',
-                'Category revenue shows what actually pays — consultation against pharmacy against procedure, in rupees and share.',
-                'Cohort retention tracks whether each month’s new customers came back, which is the number a paper register could never produce.',
+                'Silent churn, category revenue and cohort retention — the picture a paper register never showed, every number a byproduct of taps the desk already makes.',
+                'Where a chart has no data yet, the empty state names the next action instead of reading as broken.',
               ]}
-              why="This is the picture the paper register never showed — and it is what the owner, who signs up and pays, is buying."
+              why="This is what the owner, who signs up and pays, is actually buying."
               media={
                 <BrowserShot
                   src="/assets/baari/demo-signal-reports.png"
@@ -375,43 +346,10 @@ export default function BaariPage() {
                 />
               }
             />
-            <WideFeature
-              label="Every booking carries where it came from"
-              points={[
-                'The month resolves into one line: bookings, completed, no-show rate, cancellations, average wait and average session.',
-                'Revenue is reported with its own coverage figure, so the owner knows how much of the total is actually tracked rather than assumed.',
-                'Bookings split by source — app, front desk, walk-in — which turns “are we busy?” into a question with an answer.',
-              ]}
-              why="Every one of these is a byproduct of taps the receptionist already makes. Nothing here asks anyone to do bookkeeping."
-              media={
-                <BrowserShot
-                  src="/assets/baari/demo-signal-stats.png"
-                  alt="Signal overview — total bookings, completed, no-show rate, cancellations, average wait and session, with revenue coverage and bookings split by app, front desk and walk-in"
-                  aspect="1342/536"
-                />
-              }
-            />
-            <WideFeature
-              label="Empty states that name the next action"
-              points={[
-                'A report with no data yet explains itself: “Not enough history yet — this chart fills in after a couple of months of visits.”',
-                'Where the owner has to do something to fill it, the empty state says exactly what: “tag categories when you tap Mark done to see the split here.”',
-                'A genuinely good result reads as good news, not as missing data: “No silent churn — every returning patient has been in recently.”',
-              ]}
-              why="A blank chart reads as broken software. An empty state that names the next action turns a gap into an instruction."
-              media={
-                <BrowserShot
-                  src="/assets/baari/live-empty-states.png"
-                  alt="Three report cards with instructional empty states for silent churn, category revenue and cohort retention"
-                  aspect="1444/578"
-                />
-              }
-            />
             <FeatureRow
               label="The promises are part of the product"
               points={[
-                'No paid ranking, ever — app listings rank by distance, rating and response time, and changing that policy carries 30 days’ notice.',
-                'No lock-in: the patient list, booking history and revenue reports export at any time.',
+                'No paid ranking, ever, and no lock-in — the patient list, booking history and revenue reports export at any time.',
                 'A 30-day billing notice, and nothing gets paywalled retroactively once a plan is picked.',
               ]}
               why="The incumbents sell placement and take a cut per consultation. Writing the opposite down, inside the product, is the positioning."
@@ -429,9 +367,8 @@ export default function BaariPage() {
             <FeatureRow
               label="The customer app answers one question"
               points={[
-                '“When is my turn?” — the token is the biggest text on every screen.',
-                'Live status is gated into four states: a calm “tomorrow”, position and rough wait today, the loudest treatment only when three tokens remain, a quiet close after.',
-                'An active booking pins to the opening screen, so the answer costs zero taps.',
+                '“When is my turn?” — the token is the biggest text on every screen, and an active booking pins to the opening screen so the answer costs zero taps.',
+                'Live status is gated into four honest states — a calm “tomorrow”, position today, the loudest treatment only when three tokens remain, a quiet close after.',
               ]}
               why="The gates exist so the app never lies — it will not show a live position for a booking that is not today."
               imgSide="left"
@@ -505,16 +442,13 @@ export default function BaariPage() {
             so the constraints below were treated as requirements, not edge cases.
           </Prose>
           <SubList items={[
-            'Bilingual English and Hindi throughout, with Devanagari names rendered properly rather than transliterated into something the customer does not recognise as their own.',
-            'Built for the low-end Android devices these desks actually run, not the flagship the design was drawn on.',
-            'Offline and patchy-connection states specified as P0, because clinic wifi drops and power cuts are normal — a queue that lies when the connection goes is worse than no queue.',
-            'Identity handled for shared family phones, dual SIMs and recycled numbers, so a naive match can never hand one person another person’s visit history.',
-            'Business-type-aware vocabulary — “in chair”, “in consult”, “in session” — so nobody has to translate software language into their own.',
+            'Bilingual English and Hindi throughout, with Devanagari names rendered properly rather than transliterated.',
+            'Built for low-end Android and for dropouts — offline and patchy-connection states are P0, because clinic wifi and power are not givens.',
+            'Identity handled for shared family phones, dual SIMs and recycled numbers, so a match can never leak one person’s history to another.',
           ]} />
           <Prose>
-            I have not run a formal WCAG audit on this product yet, and I am not going to
-            claim one. What is here is the access work the context demanded: language,
-            devices, connectivity and identity.
+            No formal WCAG audit yet, and I won’t claim one — this is the access the
+            context demanded: language, devices, connectivity, identity.
           </Prose>
         </Section>
 
@@ -526,18 +460,14 @@ export default function BaariPage() {
           <PullQuote>
             The spec is the design. My highest-leverage artifact was the written specification, not the mockup.
           </PullQuote>
-          <p className="text-silver font-medium mt-6">What that looked like in practice</p>
+          <p className="text-silver font-medium mt-6">How the work was written down</p>
           <SubList items={[
-            'Screens written as numbered specs — A1 through A11 — each carrying exact layout order, the verbatim UI copy, the state gates and the acceptance criteria that decided when it was done.',
-            'Findings triaged P0 to P3 against one written question: can this make a booking wrong, lost, or dishonest? That rule, not my taste, set the order of work.',
-            'Every cut recorded with its reasoning, so scope stayed decided instead of being relitigated later.',
-            'Diagnoses written to root cause, not symptom: four separate bug reports about wrong times turned out to be one timezone conversion, and collapsed into a single fix.',
-            'Decisions captured in versioned handoff documents, so anyone picking the work up — including me, months later — starts with the full context rather than an inbox.',
+            'Screens as numbered specs, A1 through A11 — exact layout order, verbatim UI copy, state gates and the acceptance criteria that decided when each was done.',
+            'Every cut recorded with its reasoning, and every decision in versioned handoff docs, so anyone — including me, months later — resumes with full context, not an inbox.',
           ]} />
           <Prose>
-            None of this was documentation written after the fact. It was how the
-            product got specified in the first place, which is the only reason two
-            people could hold two codebases in one shared vocabulary.
+            This was not documentation written after the fact. It was how the product got
+            built at all — the only way two people held two codebases in one vocabulary.
           </Prose>
         </Section>
 
