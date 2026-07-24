@@ -57,16 +57,35 @@ npm run build
 | Case studies | `app/work/{baari,luca,ilancaster,smartup}/page.jsx` |
 | "Other work" briefs | `app/work/{wobble,oracle}/page.jsx` |
 
-All four featured case studies follow one structure: hero → problem → failure
-story → Key Design Decisions gallery (`Decision.`/`Why.` rows, each anchored by
-a real screenshot) → build story → cuts → 01/02/03 result timeline → learnings.
-Copy any of them for a new one.
+All four featured case studies now share one structure: hero → **At-a-glance
+band** (role / scope / outcome) → problem → failure story → **Key design
+decisions** → build story → cuts → 01/02/03 result timeline → learnings, with a
+`CaseStudyNav` section rail and at least one diagram for whatever the copy
+*tells* but doesn't *draw*. Copy any of them for a new one.
+
+Decision rows are **scannable pointers** — a headline, 2–3 bullets, then a
+one-line `Why` — not `Decision.`/`Why.` prose paragraphs. Nandini asked for this
+explicitly: a scroller has to be able to skim them.
+
+**Wobble and Oracle are "Other work" briefs — keep them short.** Wobble had
+grown to 997 words and 11 images, longer than a full case study; it was cut to
+~650 and 5. Show design judgment, not the blow-by-blow.
 
 ## Gotchas that actually cause bugs
 
 - **HTML entities don't decode in JS strings.** `<SubList items={['don&apos;t']} />`
   renders a literal `don&apos;t`. JSX decodes entities in text and attribute
   literals, not inside `{}`. Use `’` `“` `”` in arrays and `lib/case-studies.js`.
+  **This is the single most recurrent bug in this repo** — it has shipped live on
+  LUCA, iLancaster, Wobble and Oracle. Grep `&apos;` before every commit.
+- **A `filter` on an ancestor breaks `position: fixed` in its subtree.** Every
+  case-study page wraps content in a `motion.div` that animates
+  `filter: blur()`, which makes it the containing block for fixed children.
+  `CaseStudyNav` therefore sits **outside** that wrapper, as a sibling. Put it
+  inside and the rail silently positions ~6,000px down the page.
+- **Lenis owns the scroll.** `window.scrollTo`, `scrollIntoView` and
+  `scrollTop` are all no-ops. Scroll programmatically via `useLenis()` →
+  `lenis.scrollTo(el, { offset: -72, immediate })`.
 - **`oneLiner` and `status` are NOT synced** between `lib/case-studies.js` and
   the case-study page. Change both.
 - **Inline grid styles don't respond to breakpoints.** Two mobile breakages came
@@ -84,20 +103,45 @@ Copy any of them for a new one.
 
 ## Verification loop
 
-1. Dev server usually already on :3000 — `curl -sf` to check.
-2. **Screenshots time out in the Browser pane.** Verify via `javascript_tool`
-   DOM inspection (`getBoundingClientRect`, `getComputedStyle`), not the renderer.
-3. After any layout/CSS change, check **1280×800, 768×1024, 375×812** with an
-   overflow probe (`documentElement.scrollWidth - innerWidth`). Only the marquees
-   and decorative glows should exceed width. Reset the pane to a real size after
-   — "native" reports 0×0 and makes everything measure as 2px.
+1. Dev server usually already on :3000 — `curl -sf` to check. **If a route 500s
+   or serves an empty page, it's the OneDrive/`.next` race, not your code**:
+   stop the preview, `rm -rf .next`, restart. Happens several times a session.
+2. **Screenshots time out in the Browser pane, and it doesn't composite** — so
+   `requestAnimationFrame` is frozen there. Anything RAF-driven (Lenis scroll,
+   framer-motion) **cannot be behaviour-tested in the pane**; verify it by
+   reading the DOM and the API, and say plainly that motion went unverified.
+3. After any layout/CSS change, check **375 / 768 / 1280** minimum with an
+   overflow probe (`documentElement.scrollWidth - innerWidth`). Only the
+   marquees and decorative glows should exceed width. For a full sweep, inject a
+   hidden `<iframe>` and resize it — media queries honour iframe width, so all
+   routes × all widths can be checked in a few calls without resizing the pane.
 4. `read_console_messages onlyErrors=true` must be silent before committing.
-5. **CRLF-normalize** any file you write (repo is `core.autocrlf=true`).
-6. Commit locally. Never `--amend` unless asked.
+   Note it accumulates across a long session — a stale error may reference a
+   file you already fixed. Trust `npm run build` over the pane's console.
+5. **`innerText` returns CSS-transformed text.** Eyebrow labels are
+   `uppercase`, so `includes('My role')` fails while `includes('MY ROLE')`
+   passes. Check against the rendered casing or use a case-insensitive match.
+6. **CRLF-normalize** any file you write (repo is `core.autocrlf=true`).
+7. Commit locally. Never `--amend` unless asked.
+
+## Locked decisions — don't undo without asking
+
+- **No more glassmorphism.** Evaluated across the whole site and deliberately
+  declined. Blur only does visible work over high-frequency backdrops; this site
+  is flat `#000`, the home wordmark clears the bento cards by 14px, and the
+  case-study header glow is already `blur-3xl` (blurring it again is a no-op).
+  The only two justified surfaces already have it: the nav, and the
+  `CaseStudyNav` tooltip. Adding more costs GPU, threatens the AA floor, and
+  dates a deliberately restrained editorial identity.
+- **Any translucent surface carrying text must be contrast-checked against its
+  worst-case backdrop**, not the usual one. The rail tooltip sits at 75% black
+  because that holds 5.0:1 over a white screenshot; going lighter fails AA.
 
 ## Read AGENTS.md for
 
 Card cover systems (`cover-spread` vs `flat`) and hover stagger · FOLIO
-framework rules · full case-study section spec · PhoneFrame / BrowserWindow
-proportions · capturing live product shots with headless Chrome + ffmpeg ·
-where each project's source assets live · Lenis / zoom / texture gotchas.
+framework rules · full case-study section spec · `CaseStudyNav` spec · the video
+pipeline (re-encode numbers, cropping, posters) · asset-hygiene incidents ·
+PhoneFrame / BrowserWindow proportions · capturing live product shots with
+headless Chrome + ffmpeg · where each project's source assets live · Lenis /
+zoom / texture gotchas.

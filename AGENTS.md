@@ -60,6 +60,7 @@ Unknown routes redirect to `/` via `next.config.mjs`.
 | `lib/site.js` | `SITE` object, `EDUCATION`, `EXPERIENCE`, `MARQUEE`, `TOOLS` |
 | `lib/case-studies.js` | `CASE_STUDIES` (the four featured) + `OTHER_PROJECTS` (Wobble, Oracle). Card frame types, accents, glow positions, status lines, spread images/positions, meta all live here. |
 | `components/CaseStudyShell.jsx` | Header (title, oneLiner, whyHere caption, meta strip), scroll progress bar, next-case-study mini-card |
+| `components/CaseStudyNav.jsx` | Desktop-only section rail on the four full case studies. Must render **outside** the page's `motion.div` — see its own section below. |
 | `components/PortfolioCard.jsx` | The grid card. Frames: `cover-spread` (3 browser-framed screens fanned — Baari, LUCA), `flat` (composed cover image — iLancaster, SmartUp), plus legacy `browser`/`ilancaster`/`phones`. `BrowserWindow` is the shared framed-screenshot primitive (theme light/dark, `pos` crop focus, `priority`). |
 | `components/PhoneFrame.jsx` | Shared iPhone chrome — Dynamic Island + home indicator, percentage-sized so it scales |
 | `components/BriefPage.jsx` | Lightweight "Other work" page layout — for Wobble / Oracle |
@@ -145,23 +146,120 @@ valid reference for a new one:
 
 1. Hero — full-bleed image, fanned cover PNG, or a browser-framed live
    product shot (Baari opens on the real getbaari.in dashboard).
-2. About / Problem context — short prose (2 sentences max), not a wall of text
-3. Failure or constraint story — before Key Design Decisions
-4. Key Design Decisions gallery — one section, several rows, each row =
-   screen + `Decision.` + `Why.` paragraphs. Each page has its own
-   `DecisionRow`/`FeatureRow` (see `app/work/ilancaster/page.jsx` and
-   `app/work/baari/page.jsx`) — they're small, per-page, and alternate
-   `imgSide`. **Anchor every row with a real product screenshot**, not a
-   placeholder.
-5. Design system / brand constraints / build story — kept short
-6. What was traded away — bullet list of deliberate cuts
-7. The result — 01/02/03 timeline rows (phase / headline / support), not
-   three parallel MetricCards (see all three reference pages)
-8. What I learned — 4 bullets max
+2. **At-a-glance band** — three columns: `My role`, `Scope`, `Outcome`,
+   under a `border-y` rule. Front-loads what a scanner needs before the
+   2,000 words. The role line is where contribution gets stated precisely:
+   iLancaster names her as one of two designers who *tested with* users
+   rather than running discovery; SmartUp names the freelance reality and
+   the PM holding final say. Be exact here — it reads as maturity, and
+   overstating is the fastest way to lose a reader who checks.
+3. About / Problem context — short prose (2 sentences max), not a wall of text
+4. Failure or constraint story — before Key Design Decisions
+5. Key design decisions — one section, several rows, each row = a real
+   screen plus **scannable pointers**: a headline, 2–3 bullets, then a
+   one-line `Why` with an accent eyebrow. **Not** `Decision.`/`Why.`
+   prose paragraphs — that was the old pattern and Nandini asked for
+   pointers explicitly so a scroller can skim. Each page owns a small
+   local `DecisionRow`/`FeatureRow` that alternates `imgSide`.
+   Baari also has `WideFeature` for decisions whose evidence is a wide
+   product screen: pointers first, then the shot full-width, because a
+   1,400px screenshot squeezed into a half column is illegible.
+   **Anchor every row with a real product screenshot**, not a placeholder.
+6. **A diagram for whatever the copy tells but doesn't draw.** Every case
+   study has one now: LUCA's job-description spine feeding four tools,
+   Baari's three roles converging on one booking record, iLancaster's
+   above-the-fold trio vs everything one tap behind it, SmartUp's Control
+   Panel + POS Lite merging into one role-aware app. They're plain
+   flex/grid — a `→` on desktop, `↓` on mobile — and they give the page
+   its only non-screenshot visual.
+7. Design system / brand constraints / build story — kept short
+8. What was traded away — bullet list of deliberate cuts
+9. The result — 01/02/03 timeline rows (phase / headline / support), not
+   three parallel MetricCards (see all four reference pages)
+10. What I learned — 4 bullets max
+
+Also standard: a **`CaseStudyNav` rail** (see below) and a **"See it in
+motion"** walkthrough where a recording exists.
+
+**Wobble and Oracle are briefs, not case studies.** They use `BriefPage`
+and must stay materially shorter. Wobble had drifted to 997 words / 8,450px
+/ 11 images — longer than Baari — and was cut to ~650 words and 5 images.
+Both also stated each transferable-skill claim twice: once inline after the
+section and again verbatim in the closing "What this proves in digital
+product design" grid. Keep the grid, drop the inline repeats.
 
 **Never ship an `AssetPlaceholder` on a live case study.** They're a
 drafting aid only; a production page uses real captures. (Baari shipped
 three placeholder boxes for a while — caught in audit, removed.)
+
+## CaseStudyNav — the section rail
+
+`components/CaseStudyNav.jsx`. A desktop-only dot rail on the four full
+case studies (not the briefs). It finds the page's own `article h2`
+headings at mount, tracks the one in view with an `IntersectionObserver`,
+and scrolls to a section on click. Three things it depends on:
+
+- **It must render OUTSIDE the page's `motion.div`.** That wrapper
+  animates `filter: blur()`, and *any* non-`none` filter makes an element
+  the containing block for `position: fixed` descendants — so inside it,
+  the rail positions against the 12,000px page instead of the viewport
+  and lands ~6,000px down. Every case-study page therefore returns a
+  fragment: `<><CaseStudyNav /><motion.div>…</motion.div></>`. This cost
+  a debugging session; don't "tidy" it back inside.
+- **Scrolling must go through Lenis.** Lenis owns the scroll position, so
+  `scrollIntoView`, `window.scrollTo` and `scrollTop` are all silently
+  no-ops. Use `useLenis()` from `LenisProvider` and call
+  `lenis.scrollTo(el, { offset: -72, immediate: reducedMotion })`. The
+  API is Lenis 1.3.x: `scrollTo(number | string | HTMLElement, opts)`.
+- **Hidden below `xl`** (`hidden xl:block`) and pinned in the right
+  margin at `right-5`, clear of the `max-w-5xl` content column. Its hover
+  tooltip is the one deliberate glassmorphism surface on the site.
+
+## Video pipeline
+
+Every walkthrough on this site arrived far too heavy and was re-encoded.
+Treat an unprocessed recording as a draft asset:
+
+| Case study | Before | After |
+| --- | --- | --- |
+| LUCA | 22.6 MB | 1.1 MB |
+| Baari | 186 MB source | 320 KB |
+| iLancaster | 57 MB (3 files, 2 byte-identical) | 2 MB |
+| SmartUp | 36 MB (3 files) | 3.4 MB |
+| Oracle | 3.2 MB + 8.7 MB unused | 483 KB |
+
+The recipe: trim to the segment that carries the story, `crop` off
+recording chrome and pillarbox, scale so the rendered width never
+upscales, `-an` (these tracks are silent or irrelevant), `libx264` at
+CRF 22–26, `-movflags +faststart`. Always generate a **poster from the
+actual video** — and always cap the container at the encode's native
+width. Check `videoWidth` against `getBoundingClientRect().width`.
+
+**Watch the content, not just the file size.** LUCA's walkthrough had
+lorem ipsum in two tabs (Per Answer Analysis and Question Bank); the fix
+was cutting that 17–21s window and letting Overall Feedback jump to the
+dashboard. Sample frames across a recording before shipping it.
+
+## Asset hygiene — filenames lie here
+
+This has now caused real, shipped defects on four separate case studies.
+Open every file before you use or caption it:
+
+- **Oracle**: *all three* page images were wrong. The hero was a comic
+  whose final panel showed the concept the copy says was abandoned; the
+  "product render" was a bullet slide titled Benefits; the "concept
+  board" was a class photo of ~25 people. The actual 3D render sat unused
+  in `slide-use-case.png`.
+- **SmartUp**: one 12,213-byte QR-confirmation screen was serving as five
+  different assets — all three video posters, `annotated-ui.jpg` and
+  `smartup-card.jpg`.
+- **LUCA**: `jd-upload.png` is a duplicate of the CV-optimiser checklist;
+  `dashboard-existing` / `landing-existing-user` are the same screen.
+- **Cross-project**: `wobble/wobble-card.jpg` ≡ `smartup/iteration-collage.jpg`,
+  `wobble/wobble-tile.jpg` ≡ `smartup/closing.jpg`.
+
+`md5sum` is the fast check for duplicates; identical file sizes across
+projects are the tell.
 
 ## Content voice — what Nandini prefers
 
@@ -219,6 +317,32 @@ recurs often, pause OneDrive sync while developing.
 - Bash (Git Bash) and PowerShell are both available. Prefer PowerShell
   for CRLF work and file inspection; Bash for git and ffmpeg.
 
+## Glassmorphism — evaluated and declined (2026-07)
+
+Nandini asked whether the site should adopt it. Answer, after measuring:
+**no, beyond the two surfaces that already have it.** Recorded so it
+isn't relitigated:
+
+- Backdrop blur only does visible work over **high-frequency** backdrops
+  — text, edges, imagery, video. This site's canvas is flat `#000`.
+  Blurring black returns black, at GPU cost.
+- The home wordmark band spans y60–210 while the first bento card starts
+  at y196: **14px of overlap**. There is nothing behind those cards.
+- The case-study header glow is already `blur-3xl`, so frosting over it
+  is close to a no-op — you'd get the fill-plus-hairline look the site
+  already uses everywhere.
+- Text on glass sits over a *variable* backdrop, which makes contrast
+  non-deterministic and threatens the `ash` AA floor.
+- Strategically it's a recognisable 2020-era OS idiom; the restraint here
+  is the statement.
+
+The two justified surfaces: **`Nav.jsx`** (`backdrop-blur-md bg-black/70`
+— content scrolls under a fixed bar) and the **`CaseStudyNav` tooltip**
+(floats over live copy and screenshots). The tooltip is applied behind
+`supports-[backdrop-filter]` with the solid `bg-black/85` as fallback,
+and held at 75% fill because that measures 5.0:1 for the 11px label over
+a white screenshot — under the 4.5:1 AA floor if pushed lighter.
+
 ## Verification workflow
 
 1. **Dev server**: usually already running from the previous session —
@@ -226,8 +350,28 @@ recurs often, pause OneDrive sync while developing.
    a new one if it's down.
 2. **Structural / CSS changes**: verify via `read_page` or `javascript_tool`
    (query the DOM directly). Screenshots time out.
-3. **After edits**: check `read_console_messages` with `onlyErrors=true`
-   before committing. Silence means no runtime errors.
+3. **The pane does not composite**, so `requestAnimationFrame` is frozen
+   in it. Anything RAF-driven — Lenis scrolling, framer-motion — cannot
+   be behaviour-tested there; even `window.scrollTo` appears to do
+   nothing. Verify such code by reading the DOM and confirming the API
+   against `node_modules`, then say plainly that the motion itself went
+   unverified. Don't chase it as a bug.
+4. **Full-site responsive sweeps**: inject a hidden `<iframe>`, set its
+   width, and load each route into it. Media queries evaluate against
+   iframe width, so all routes × all widths can be swept in a few calls
+   without resizing the pane. Keep each call under ~10 loads or the
+   30s tool timeout bites. Probe
+   `documentElement.scrollWidth - innerWidth`, and filter offenders by
+   skipping `pointer-events: none` (decorative glows) and anything inside
+   an `overflow-x` clip.
+5. **`innerText` returns CSS-transformed text.** Eyebrow labels are
+   `uppercase`, so a `includes('My role')` check fails while the element
+   renders fine. Match the rendered casing or lowercase both sides.
+6. **After edits**: check `read_console_messages` with `onlyErrors=true`
+   before committing. Silence means no runtime errors — but it
+   accumulates across a session and can surface stale errors for files
+   already fixed, and `nextjs-portal` exists on every dev page (its
+   presence is not an error). `npm run build` is the arbiter.
 4. **Commit**: create a NEW commit (never `--amend` unless asked). Use a
    HEREDOC for the message. Sign off with the co-author trailer.
 
