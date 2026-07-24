@@ -301,7 +301,7 @@ export default function BaariPage() {
                 <BrowserShot
                   src="/assets/baari/demo-queue-full.png"
                   alt="The queue board — waiting list on the left with tokens, reasons and late flags, the patient in consult on the right with a live timer"
-                  aspect="1340/500"
+                  aspect="1342/536"
                 />
               }
             />
@@ -355,7 +355,7 @@ export default function BaariPage() {
                 <BrowserShot
                   src="/assets/baari/live-search.png"
                   alt="Search — find a patient by name or 10-digit mobile, with a list of recent patients below"
-                  aspect="1340/500"
+                  aspect="1444/578"
                 />
               }
             />
@@ -371,7 +371,7 @@ export default function BaariPage() {
                 <BrowserShot
                   src="/assets/baari/demo-signal-reports.png"
                   alt="Signal reports — silent churn listing lapsed regulars, category revenue split across consultation, pharmacy and procedure, and a cohort retention matrix"
-                  aspect="1340/500"
+                  aspect="1342/536"
                 />
               }
             />
@@ -387,7 +387,7 @@ export default function BaariPage() {
                 <BrowserShot
                   src="/assets/baari/demo-signal-stats.png"
                   alt="Signal overview — total bookings, completed, no-show rate, cancellations, average wait and session, with revenue coverage and bookings split by app, front desk and walk-in"
-                  aspect="1340/500"
+                  aspect="1342/536"
                 />
               }
             />
@@ -403,7 +403,7 @@ export default function BaariPage() {
                 <BrowserShot
                   src="/assets/baari/live-empty-states.png"
                   alt="Three report cards with instructional empty states for silent churn, category revenue and cohort retention"
-                  aspect="1340/500"
+                  aspect="1444/578"
                 />
               }
             />
