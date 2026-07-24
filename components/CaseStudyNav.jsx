@@ -53,8 +53,11 @@ export default function CaseStudyNav({ accent = '#F4F4F2' }) {
       <ul className="flex flex-col gap-3 items-end">
         {items.map((item, i) => (
           <li key={i} className="relative flex items-center">
+            {/* Frosted only where backdrop-filter is supported; elsewhere the
+                solid bg-black/85 stands. 75% keeps the 11px label above 4.5:1
+                even in the worst case, floating over a white screenshot. */}
             <span
-              className="absolute right-6 top-1/2 -translate-y-1/2 w-max max-w-[240px] whitespace-normal text-right leading-snug text-[11px] text-fog bg-black/85 border border-white/10 rounded-md px-2.5 py-1.5 opacity-0 pointer-events-none transition-opacity duration-200 peer-hover:opacity-100"
+              className="absolute right-6 top-1/2 -translate-y-1/2 w-max max-w-[240px] whitespace-normal text-right leading-snug text-[11px] text-fog bg-black/85 border border-white/10 rounded-md px-2.5 py-1.5 opacity-0 pointer-events-none transition-opacity duration-200 peer-hover:opacity-100 supports-[backdrop-filter]:bg-black/75 supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150"
             >
               {item.label}
             </span>
