@@ -165,6 +165,16 @@ valid reference for a new one:
    product screen: pointers first, then the shot full-width, because a
    1,400px screenshot squeezed into a half column is illegible.
    **Anchor every row with a real product screenshot**, not a placeholder.
+   **Aim for ~6 decisions, and cap each at 2 bullets + one Why.** Baari
+   drifted to 10 rows / 50 bullets and read as a spec, not a showcase;
+   Nandini flagged it as "too text heavy, not enough visual craft" and it
+   was merged back to 6 (bullets halved). Fewer, bigger, image-led beats
+   comprehensive. When two features are one story (booking + check-in;
+   the several Signal screens), make them one decision. Visual craft on
+   this site = fewer words per screen and more room for the shot, not
+   bespoke motion — say so plainly; the polish ceiling is the source
+   material, and inventing interaction detail or a design-system artefact
+   is fabrication.
 6. **A diagram for whatever the copy tells but doesn't draw.** Every case
    study has one now: LUCA's job-description spine feeding four tools,
    Baari's three roles converging on one booking record, iLancaster's
@@ -240,6 +250,35 @@ lorem ipsum in two tabs (Per Answer Analysis and Question Bank); the fix
 was cutting that 17–21s window and letting Overall Feedback jump to the
 dashboard. Sample frames across a recording before shipping it.
 
+## Cropping wide product shots — cohesion + no clipping
+
+`BrowserShot` renders `object-cover`, so the frame's `aspect` **must equal
+the image's exact pixel ratio** or it silently crops. This bit Baari
+twice. First fault: mixed ratios (0.56 to 4.06) with some shots including
+the app nav ("Pratiksha") and others not, so adjacent frames showed
+different business names at different heights — "here and there". Second
+fault, fixing the first: every wide shot was forced to one crop *width*
+(1340px), but the app screens carry ~1445px of content while the demo
+screens carry ~1342px, so `object-cover` sliced both edges off the app
+screens ("Search" → "arch", "Add guest" → "Add gu").
+
+The rule: crop each shot to **its own full content width** (measure it —
+they differ), pick one shared *display ratio* (Baari uses 2.50), and set
+each `BrowserShot aspect` to that shot's **exact output dimensions**
+(`1444/578`, `1342/536`). Same displayed ratio → cohesive; exact aspect →
+nothing clipped. Charts shorter than the ratio get bottom padding, which
+reads as breathing room on black; that's fine, horizontal clipping of
+words is not. Verify by reading the cropped PNG, not just the dimensions.
+
+**Two Baari workspaces exist in the recording.** The marketing-site demo
+(workspace "Pratiksha") has rich seeded data — full queues, populated
+Signal charts, revenue numbers. The logged-in pilot ("Smile Dental
+Clinic") is sparser. The hero uses the **pilot**, because its caption
+claims a real clinic's queue and that must stay literally true. Decision
+rows use the **demo**, because they need to show features the pilot's data
+doesn't yet exercise. Seeded numbers (₹1,42,600, 248 bookings) may
+illustrate a feature but must **never** be framed as a business outcome.
+
 ## Asset hygiene — filenames lie here
 
 This has now caused real, shipped defects on four separate case studies.
@@ -260,6 +299,62 @@ Open every file before you use or caption it:
 
 `md5sum` is the fast check for duplicates; identical file sizes across
 projects are the tell.
+
+## Metrics and claims — what exists, and what doesn't
+
+Nandini has asked for outcome numbers that **are not in any source
+document**. Do not invent them, and don't quietly let a cited figure
+through without checking it:
+
+- **"15% cost reduction" does not exist** anywhere in the interview
+  reports, FOLIO docs, or CV. SmartUp's report explicitly says *no hard
+  numbers were available* and flags the error-rate claim as unverified
+  ("the error rates decreased, I guess"). If she cites it again, ask for
+  the source before writing it.
+- **SmartUp has no quantified outcome** in any form. Its result stays
+  qualitative (test users asked to keep the prototype; it raised funding;
+  built out post-handoff).
+- **LUCA "16,000+ students" is real** — it's in the Baari V2 report's bio
+  line, and now leads LUCA's outcome. Worded as **deployment scale, not
+  adoption**: the LUCA report is explicit that conversion numbers stayed
+  with the university.
+- **Baari is pre-first-customer.** Its honest status is "live, in pilot,
+  no sales yet." The signature pilot metric is *days the paper register
+  comes back out* (target zero) — defined, not yet measured. Don't imply
+  revenue or adoption.
+
+The six portfolio gaps Nandini is closing (accessibility, product/business
+metrics, top-tier visual craft, design-system depth, multi-user
+complexity, async communication) live in
+`assets/Baari/Baari_Case_Study_Raw_Report_V2.md` and the other interview
+reports. Multi-user, async and access were closed on Baari **from that
+report, nothing invented** — but closing "async communication" means
+*showing writing*, which adds text and pulls against "less text, more
+visual". That tension is real; when both are asked for, confirm which way
+to lean rather than guessing.
+
+## Accessibility
+
+Audited the whole site (2026-07). Structural WCAG was clean across all ten
+routes: every `img` has `alt`, no unlabelled controls or inputs, one `h1`
+per page, no heading-order jumps, `lang` set. Two genuine failures, fixed:
+
+- **`/portfolio` had no `h1`** (2.4.6 / 1.3.1) — its main statement was a
+  `<p>`. Promoted to `h1`, zero visual change.
+- **The `CaseStudyNav` next-case index** rendered iLancaster's `#E4002B`
+  at 11px = **4.33:1**, under the 4.5 AA floor for small text (1.4.3).
+  Bumped to 20px bold so it qualifies as large text (3:1 threshold);
+  every accent now clears it and the colour cue is kept.
+
+**Contrast-probe gotcha.** A naive walk up `backgroundColor` returns
+`rgba(0,0,0,0)` for transparent ancestors and, if you treat that as black,
+every pair scores ~1:1 — a whole page of false failures. Composite the
+text colour over the **real** solid backdrop: walk ancestors for the first
+`backgroundColor` with alpha > 0.4, fall back to the body's `#000`, then
+apply alpha compositing before computing the ratio. Baari-accent work has
+a matching rule: any translucent surface carrying text is contrast-checked
+against its **worst-case** backdrop (the rail tooltip sits at 75% black
+because that holds 5.0:1 over a white screenshot).
 
 ## Content voice — what Nandini prefers
 

@@ -136,12 +136,19 @@ grown to 997 words and 11 images, longer than a full case study; it was cut to
 - **Any translucent surface carrying text must be contrast-checked against its
   worst-case backdrop**, not the usual one. The rail tooltip sits at 75% black
   because that holds 5.0:1 over a white screenshot; going lighter fails AA.
+- **~6 decisions per case study, 2 bullets + one Why each.** Baari sprawled to
+  10 / 50 bullets and read as a spec; it was cut back. Fewer, bigger, image-led.
+- **Don't invent metrics.** "15% cost reduction" is in no source; SmartUp has no
+  hard numbers. LUCA's "16,000+ students" is real (deployment scale, not
+  adoption). Baari is pre-sale — never imply revenue/adoption.
 
 ## Read AGENTS.md for
 
 Card cover systems (`cover-spread` vs `flat`) and hover stagger · FOLIO
-framework rules · full case-study section spec · `CaseStudyNav` spec · the video
-pipeline (re-encode numbers, cropping, posters) · asset-hygiene incidents ·
-PhoneFrame / BrowserWindow proportions · capturing live product shots with
-headless Chrome + ffmpeg · where each project's source assets live · Lenis /
-zoom / texture gotchas.
+framework rules · full case-study section spec (decision count, diagrams) ·
+`CaseStudyNav` spec · the video pipeline (re-encode numbers, cropping, posters) ·
+cropping wide shots for cohesion without clipping + the two Baari workspaces ·
+metrics/claims that do and don't exist · the accessibility audit + contrast
+probe · asset-hygiene incidents · PhoneFrame / BrowserWindow proportions ·
+capturing live product shots with headless Chrome + ffmpeg · where each
+project's source assets live · Lenis / zoom / texture gotchas.
