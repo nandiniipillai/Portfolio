@@ -7,6 +7,27 @@ Lenis smooth scroll. Vercel, no backend, no env vars.
 This file is loaded every session. `AGENTS.md` is the full reference — read the
 section you need, not the whole file. Map at the bottom.
 
+## Memory files — read these before scanning the repo
+
+Four files carry state across sessions so context stays alive:
+
+- **CLAUDE.md** (this file) — standing rules for every turn. Tune it when a
+  preference or convention changes.
+- **SNAPSHOT.md** — current architecture blueprint (routes, components, data,
+  per-study status). Read it instead of scanning the tree; trust it, verify only
+  what you touch.
+- **BACKLOG.md** — known bugs, cleanup, blocked-on-Nandini items, deferred
+  decisions, and a `>RESUME HERE` block for multi-session work.
+- **AGENTS.md** — the deep reference (see map at bottom).
+
+**When a task completes, update whichever of these changed:**
+- new/changed convention or preference → **CLAUDE.md** (and the detail in AGENTS.md)
+- structural change — new route, component, data shape, case-study status → **SNAPSHOT.md**
+- bug found or fixed, idea parked, work left half-done, item unblocked → **BACKLOG.md** (and refresh `>RESUME HERE`)
+
+Keep them terse. They are context, not prose. Don't duplicate AGENTS.md detail
+into CLAUDE.md — one-line it and point.
+
 ## Hard rules
 
 - **Never `git push` or `npm run deploy`.** Commit locally on `main`, tell
