@@ -5,10 +5,11 @@ add what you found, tick what you closed, refresh `>RESUME HERE`.
 
 ## >RESUME HERE
 
-Nothing in flight. Working tree clean, `origin/main` caught up (all case studies
-crafted to standard, docs current). Next work is whatever Nandini picks — the
-highest-value open threads are **Needs Nandini** below (design-system artefact is
-the biggest remaining portfolio gap).
+Nothing in flight. Tech-debt section cleared 2026-08-04 (stray `themeColor`, two
+dead mock components, four duplicate assets — all deleted, build clean). Every
+remaining item needs a decision from Nandini: **Needs Nandini** is blocked on
+source material, **Deferred decisions** on her call. The design-system artefact
+is still the biggest portfolio gap.
 
 ## Needs Nandini (blocked — don't invent)
 
@@ -26,16 +27,17 @@ the biggest remaining portfolio gap).
   engineering, never "no engineering team"). The site currently follows the
   locked rule. Confirm which is canonical before writing more from that report.
 
-## Tech debt / cleanup (safe, do anytime)
+## Tech debt / cleanup
 
-- **`app/layout.jsx` line 15**: `themeColor` is in the `metadata` export — it
-  belongs only in `viewport` (already present at line 31). The stray line causes
-  a build warning on every route. Delete `themeColor` from `metadata`.
-- **Dead components**: `components/BaariMocks.jsx` and
-  `components/ILancasterMocks.jsx` are unused. Safe to delete.
-- **Unused duplicate assets** (byte-identical placeholders, `md5sum`-confirmed):
-  `smartup/annotated-ui.jpg`, `smartup/smartup-card.jpg`, `wobble/wobble-card.jpg`,
-  `wobble/wobble-tile.jpg`. Remove.
+- **`metadataBase` is not set** in `app/layout.jsx` — surfaced by the build once
+  the `themeColor` warning was cleared. Next falls back to
+  `http://localhost:3000` when resolving the `openGraph`/`twitter` image, so
+  **live link previews can point at localhost**. One-line fix
+  (`metadataBase: new URL('https://<domain>')`) but the production domain is
+  recorded nowhere in the repo — **needs the real URL from Nandini**, don't guess.
+
+Earlier items (stray `themeColor`, dead mock components, duplicate assets)
+cleared 2026-08-04.
 
 ## Deferred decisions (offered, awaiting her call)
 

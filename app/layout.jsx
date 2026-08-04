@@ -12,7 +12,6 @@ const caveat = Caveat({ subsets: ['latin'], variable: '--font-caveat', display: 
 export const metadata = {
   title: 'Nandini Pillai — Product & Experience Designer',
   description: SITE.positioning,
-  themeColor: '#000000',
   openGraph: {
     title: 'Nandini Pillai — Product & Experience Designer',
     description: SITE.positioning,

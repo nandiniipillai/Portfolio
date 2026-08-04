@@ -58,8 +58,6 @@ Unknown routes redirect to `/` (`next.config.mjs`).
   (`AtAGlance`, `DecisionRow`/`FeatureRow`, `WideFeature`, a diagram).
 - **Brief:** `BriefPage` (wobble/oracle).
 - **About/contact:** `ExperienceTimeline` · `ContactForm`.
-- **Dead code:** `BaariMocks.jsx`, `ILancasterMocks.jsx` — unused, safe to delete
-  (see BACKLOG).
 
 ## Case-study status
 

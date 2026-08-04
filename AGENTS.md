@@ -72,7 +72,7 @@ Unknown routes redirect to `/` via `next.config.mjs`.
 | `public/og.png` | 1200×630 social share image (capture of the home page). Referenced by layout metadata. |
 | `app/globals.css` | Palette variables, bento `.card-tex` texture, roll animations, marquee keyframes, pulse dot |
 
-**Dead code**: `components/BaariMocks.jsx` (DashboardQueue, TokenCard, LiveStatus, Analytics) is no longer imported anywhere — the Baari case study switched to real product screenshots. Left in place; safe to delete if asked.
+**Deleted 2026-08-04**: `components/BaariMocks.jsx` and `components/ILancasterMocks.jsx` — hand-built mock UIs, dropped once both case studies switched to real product screenshots. Recover from git history if a mock is ever wanted again.
 
 ## Design conventions — do not break
 
@@ -299,6 +299,10 @@ Open every file before you use or caption it:
 
 `md5sum` is the fast check for duplicates; identical file sizes across
 projects are the tell.
+
+**Deleted 2026-08-04** (unreferenced duplicates, not the incidents themselves):
+`smartup/annotated-ui.jpg`, `smartup/smartup-card.jpg`, `wobble/wobble-card.jpg`,
+`wobble/wobble-tile.jpg`. The originals they duplicated are still in place.
 
 ## Metrics and claims — what exists, and what doesn't
 
