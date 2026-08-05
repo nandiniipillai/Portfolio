@@ -1,15 +1,36 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
 import { EDUCATION, EXPERIENCE } from '@/lib/site';
 import ScrollReveal from './ScrollReveal';
 
+// Flip is driven by state, not `group-hover`, so it works for every input type.
+// Hover alone stranded the highlights on touch devices and for keyboard users —
+// and the old label told a phone user to do something a phone cannot do.
 function EducationFlipCard({ e }) {
+  const [flipped, setFlipped] = useState(false);
+
+  // Each face carries its own transparent overlay button: keyboard-reachable,
+  // tappable, and — unlike wrapping the whole card — it keeps the highlights list
+  // outside any button, which is both valid HTML and correctly announced.
+  const overlay =
+    'absolute inset-0 z-10 rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/80 focus-visible:outline-offset-2';
+
   return (
-    <div className="group h-full min-h-[340px] [perspective:1200px]">
-      <div className="relative h-full w-full transition-transform duration-700 ease-out [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+    <div
+      className="h-full min-h-[340px] [perspective:1200px]"
+      onMouseEnter={() => setFlipped(true)}
+      onMouseLeave={() => setFlipped(false)}
+    >
+      <div
+        className="relative h-full w-full transition-transform duration-700 ease-out motion-reduce:transition-none [transform-style:preserve-3d]"
+        style={flipped ? { transform: 'rotateY(180deg)' } : undefined}
+      >
         {/* Front */}
-        <div className="absolute inset-0 rounded-2xl bg-carbon border border-white/[0.05] p-6 md:p-8 [backface-visibility:hidden] [-webkit-backface-visibility:hidden] flex flex-col justify-between">
+        <div
+          className={`absolute inset-0 rounded-2xl bg-carbon border border-white/[0.05] p-6 md:p-8 [backface-visibility:hidden] [-webkit-backface-visibility:hidden] flex flex-col justify-between ${flipped ? 'pointer-events-none' : ''}`}
+        >
           <span className="text-4xl text-fog/40 font-serif leading-none" aria-hidden="true">
             ❛❛
           </span>
@@ -20,12 +41,24 @@ function EducationFlipCard({ e }) {
             </div>
             <div className="text-fog mt-1 text-sm md:text-base">{e.school}</div>
           </div>
-          <div className="text-ash text-[10px] tracking-[0.24em] uppercase">
-            Hover to see more
+          <div className="text-ash text-[10px] tracking-[0.24em] uppercase" aria-hidden="true">
+            See highlights
           </div>
+          <button
+            type="button"
+            aria-expanded={flipped}
+            onClick={() => setFlipped(true)}
+            onFocus={() => setFlipped(true)}
+            className={overlay}
+          >
+            <span className="sr-only">See highlights for {e.degree}</span>
+          </button>
         </div>
+
         {/* Back */}
-        <div className="absolute inset-0 rounded-2xl bg-carbon border border-white/[0.05] p-6 md:p-8 [transform:rotateY(180deg)] [backface-visibility:hidden] [-webkit-backface-visibility:hidden] flex flex-col justify-center">
+        <div
+          className={`absolute inset-0 rounded-2xl bg-carbon border border-white/[0.05] p-6 md:p-8 [transform:rotateY(180deg)] [backface-visibility:hidden] [-webkit-backface-visibility:hidden] flex flex-col justify-center ${flipped ? '' : 'pointer-events-none'}`}
+        >
           <div className="text-ash text-[10px] tracking-[0.24em] uppercase mb-4">Highlights</div>
           <ul className="space-y-3 list-disc list-outside pl-5 marker:text-fog/60">
             {(e.highlights || []).map((h, j) => (
@@ -34,6 +67,16 @@ function EducationFlipCard({ e }) {
               </li>
             ))}
           </ul>
+          <button
+            type="button"
+            aria-expanded={flipped}
+            onClick={() => setFlipped(false)}
+            onFocus={() => setFlipped(true)}
+            onBlur={() => setFlipped(false)}
+            className={overlay}
+          >
+            <span className="sr-only">Hide highlights for {e.degree}</span>
+          </button>
         </div>
       </div>
     </div>

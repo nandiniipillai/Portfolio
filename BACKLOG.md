@@ -5,11 +5,59 @@ add what you found, tick what you closed, refresh `>RESUME HERE`.
 
 ## >RESUME HERE
 
-Nothing in flight. Tech-debt section cleared 2026-08-04 (stray `themeColor`, two
-dead mock components, four duplicate assets — all deleted, build clean). Every
-remaining item needs a decision from Nandini: **Needs Nandini** is blocked on
-source material, **Deferred decisions** on her call. The design-system artefact
-is still the biggest portfolio gap.
+**Design audit for Digital Product Design roles, 2026-08-05.** Working the fix
+list below one item at a time. Done: title → "Product Designer" everywhere,
+flip card accessible, contact page reframed for hiring, availability +
+right-to-work in `lib/site.js`. Next: render `rightToWork` on the contact page,
+swap `/assets/resume.pdf` for the newer `Downloads\NandiniPillai_CV.pdf`
+(approved), then the rest of the list. Bio rewrite was drafted and **declined
+for now** — leave the About prose alone.
+
+**Incident, 2026-08-05:** OneDrive deleted 7 files from disk between my edits
+and `git add -A`, so commit `767d069` recorded deletions instead of changes; it
+then re-deleted them once after `git checkout` (tombstone replay) before going
+quiet. Restored in `7f8c823` from the index, edits re-applied on top. **Lesson:
+verify `git status` shows `M` not `D` before committing here, and re-check
+Test-Path after any bulk file write.** The manual CRLF-normalize pass sat in the
+destructive window — skip it; `core.autocrlf=true` already normalizes on commit.
+
+## Design audit — fix list (2026-08-05)
+
+Audit covered IA, content, positioning, interaction and code. **Not** visual
+craft: the Browser pane doesn't composite, so nothing visual was verifiable.
+
+- [x] **Site title → "Product Designer"** across nav, page titles, OG/twitter.
+  `app/layout.jsx` composes from `SITE.title`; three copies had drifted.
+- [x] **Education flip card was hover-only** — unreachable on touch/keyboard,
+  "Hover to see more" on phones. Now state-driven, overlay button per face,
+  `aria-expanded`, `motion-reduce`. List stays outside the button (a `<ul>`
+  inside `<button>` is invalid and flattens for screen readers).
+- [x] **Contact page reframed for hiring** — was "project inquiries, design
+  consultations"; availability now "Open to product design roles".
+- [x] **`SITE.rightToWork` renders on the contact page** under Availability —
+  wording from the CV, exact visa fact.
+- [x] **`/assets/resume.pdf` swapped** for the newer `NandiniPillai_CV.pdf`
+  (188,486 bytes, CV dated 29 Jul 2026).
+- [ ] **`whyHere` never renders on the portfolio cards** — only inside the case
+  study, after the click it was meant to earn.
+- [ ] **`tags` in `lib/case-studies.js` is dead data** — use or delete.
+- [ ] **"~90% of small Indian clinics" needs a source or removal** — same
+  category as the unsourced "15% cost reduction".
+- [ ] **At-a-glance meta band inconsistent**: Baari has STATUS, LUCA/iLancaster
+  have COMPANY, SmartUp has COMPANY but no STATUS.
+- [ ] **Skills marquee is generic** (Design Thinking / UX Research / Prototyping
+  / Strategy & Innovation) next to far sharper case studies.
+
+**Declined by Nandini, do not re-raise:** homepage restructure (bento stays a
+single non-scrolling viewport, `<h1>` stays sr-only, no work on `/`); About bio
+rewrite ("dont change bio for now"); adding CV research evidence (5 pilot
+businesses / 40+ workshop participants) to the case studies; fixing the CV↔
+portfolio attribution mismatch (CV's ISS entry carries iLancaster's "3 steps" +
+"80+ screens" numbers under LUCA — she'll handle it live in interviews if
+asked).
+
+**Verified healthy, leave alone:** zero horizontal overflow at 375px across all
+ten routes, clean console, green build, 14/14 static.
 
 ## Needs Nandini (blocked — don't invent)
 

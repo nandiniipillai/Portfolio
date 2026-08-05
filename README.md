@@ -1,6 +1,6 @@
 # Nandini Pillai — Portfolio
 
-Product & experience designer portfolio, built with Next.js 15 (App Router, JavaScript) and Tailwind CSS.
+Product designer portfolio, built with Next.js 15 (App Router, JavaScript) and Tailwind CSS.
 
 ## Local dev
 

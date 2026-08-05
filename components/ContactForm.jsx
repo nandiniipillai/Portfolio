@@ -33,6 +33,9 @@ export default function ContactForm() {
             <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-2">Availability</div>
             <div className="text-silver">{SITE.availability}</div>
             <div className="text-fog text-sm mt-1">Based in {SITE.location}</div>
+            {SITE.rightToWork && (
+              <div className="text-fog text-sm mt-1">{SITE.rightToWork}</div>
+            )}
           </div>
           <div>
             <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-2">Email</div>

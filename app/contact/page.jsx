@@ -20,7 +20,8 @@ export default function ContactPage() {
             className="mt-8 md:mt-10 font-heading tracking-tightest text-silver max-w-4xl"
             style={{ fontSize: 'clamp(24px, 3.2vw, 40px)', lineHeight: 1.15 }}
           >
-            Reach out for project inquiries, design consultations, or just to say hello.
+            Open to product design roles. Happy to talk through the work, a role, or anything
+            else in the portfolio.
           </p>
         </BlurReveal>
         <ContactForm />

@@ -9,18 +9,21 @@ import { SITE } from '@/lib/site';
 const geist = Geist({ subsets: ['latin'], variable: '--font-geist', display: 'swap' });
 const caveat = Caveat({ subsets: ['latin'], variable: '--font-caveat', display: 'swap' });
 
+// One source of truth — three hardcoded copies had already drifted from SITE.title.
+const pageTitle = `${SITE.name} — ${SITE.title}`;
+
 export const metadata = {
-  title: 'Nandini Pillai — Product & Experience Designer',
+  title: pageTitle,
   description: SITE.positioning,
   openGraph: {
-    title: 'Nandini Pillai — Product & Experience Designer',
+    title: pageTitle,
     description: SITE.positioning,
     type: 'website',
     images: [{ url: '/og.png', width: 1200, height: 630, alt: 'Nandini Pillai — portfolio home' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Nandini Pillai — Product & Experience Designer',
+    title: pageTitle,
     description: SITE.positioning,
     images: ['/og.png'],
   },

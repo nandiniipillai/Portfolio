@@ -17,7 +17,7 @@ Nandini Pillai's product-design portfolio. Deployed on Vercel at a personal
 domain. Single Next.js app, no backend, no auth. Content is authored directly
 in JSX + a single data file.
 
-Nandini is a UK-based product & experience designer. She is the sole reviewer
+Nandini is a UK-based product designer. She is the sole reviewer
 and pushes to `main` / promotes deploys herself.
 
 ## Stack
