@@ -7,6 +7,7 @@ import { SITE } from '@/lib/site';
 import DisplayTitle from './DisplayTitle';
 import ScrollReveal from './ScrollReveal';
 import ScrollProgress from './ScrollProgress';
+import CopyEmail from './CopyEmail';
 
 export default function CaseStudyShell({ slug, index, title, oneLiner, meta = [], accent, readTime, children }) {
   const next = nextCaseStudy(slug);
@@ -85,11 +86,15 @@ export default function CaseStudyShell({ slug, index, title, oneLiner, meta = []
               </p>
               <a
                 href={`mailto:${SITE.email}?subject=${encodeURIComponent(`About ${title}`)}`}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-transform hover:-translate-y-0.5"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-transform hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:transform-none"
                 style={{ background: accent, color: '#0b0b0a' }}
               >
                 Get in touch <span aria-hidden="true">↗</span>
               </a>
+              {/* mailto: fails silently without a mail client — keep a path that always works */}
+              <p className="mt-4 text-fog text-sm">
+                or copy the address: <CopyEmail />
+              </p>
             </ScrollReveal>
           </div>
         </section>

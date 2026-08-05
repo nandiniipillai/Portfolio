@@ -8,9 +8,13 @@ export default function ContactForm() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [details, setDetails] = useState('');
+  // 'mailto:' silently does nothing on machines with no default mail client —
+  // common on work laptops — so the form is honest about what the button does,
+  // offers a clipboard path that always works, and hints at it after an attempt.
+  const [attempted, setAttempted] = useState(false);
+  const [copied, setCopied] = useState(false);
 
-  const onSubmit = (e) => {
-    e.preventDefault();
+  const compose = () => {
     const subject = `Portfolio enquiry — ${name || 'friend'}`;
     const bodyLines = [
       name && `Name: ${name}`,
@@ -18,8 +22,25 @@ export default function ContactForm() {
       details && '',
       details,
     ].filter(Boolean);
-    const body = bodyLines.join('\n');
+    return { subject, body: bodyLines.join('\n') };
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const { subject, body } = compose();
+    setAttempted(true);
     window.location.href = `mailto:${SITE.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  };
+
+  const onCopy = async () => {
+    const { subject, body } = compose();
+    try {
+      await navigator.clipboard.writeText(`To: ${SITE.email}\nSubject: ${subject}\n\n${body}`);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // Clipboard blocked — the address is visible in the rail alongside the form.
+    }
   };
 
   const inputBase =
@@ -119,13 +140,29 @@ export default function ContactForm() {
             />
           </div>
 
-          <button
-            type="submit"
-            className="inline-flex items-center justify-center rounded-full bg-white/[0.08] hover:bg-white/[0.14] border border-white/10 hover:border-white/20 px-7 py-3.5 text-silver hover:-translate-y-0.5 transition-all duration-300 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/80 focus-visible:outline-offset-2"
-            style={{ boxShadow: 'inset 0 1px 0 0 rgba(255,255,255,0.12)' }}
-          >
-            <span className="text-[17px] font-medium tracking-tight leading-none">Send message</span>
-          </button>
+          <div className="flex flex-wrap items-center gap-3">
+            <button
+              type="submit"
+              className="inline-flex items-center justify-center rounded-full bg-white/[0.08] hover:bg-white/[0.14] border border-white/10 hover:border-white/20 px-7 py-3.5 text-silver hover:-translate-y-0.5 transition-all duration-300 ease-out motion-reduce:transition-none motion-reduce:transform-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/80 focus-visible:outline-offset-2"
+              style={{ boxShadow: 'inset 0 1px 0 0 rgba(255,255,255,0.12)' }}
+            >
+              <span className="text-[17px] font-medium tracking-tight leading-none">Open in your email app</span>
+            </button>
+            <button
+              type="button"
+              onClick={onCopy}
+              className="inline-flex items-center justify-center rounded-full border border-white/10 hover:border-white/20 hover:bg-white/[0.06] px-6 py-3.5 text-fog hover:text-silver transition-all duration-300 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/80 focus-visible:outline-offset-2"
+            >
+              <span className="text-[15px] font-medium tracking-tight leading-none">
+                {copied ? 'Copied ✓' : 'Copy message'}
+              </span>
+            </button>
+          </div>
+          <p className="!mt-4 text-ash text-sm" aria-live="polite">
+            {attempted
+              ? 'If your email app didn’t open, use Copy message and paste it into any email.'
+              : 'No email app set up? Copy message puts the whole thing on your clipboard.'}
+          </p>
         </form>
       </ScrollReveal>
     </div>

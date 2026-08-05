@@ -6,12 +6,14 @@ add what you found, tick what you closed, refresh `>RESUME HERE`.
 ## >RESUME HERE
 
 **Design audit for Digital Product Design roles, 2026-08-05.** Working the fix
-list below one item at a time. Done: title → "Product Designer" everywhere,
-flip card accessible, contact page reframed for hiring, availability +
-right-to-work in `lib/site.js`. Next: render `rightToWork` on the contact page,
-swap `/assets/resume.pdf` for the newer `Downloads\NandiniPillai_CV.pdf`
-(approved), then the rest of the list. Bio rewrite was drafted and **declined
-for now** — leave the About prose alone.
+list below one item at a time. Done so far: title → "Product Designer"
+everywhere, flip card accessible, contact page reframed for hiring,
+right-to-work rendered on contact, resume swapped, ~90% stat replaced with the
+sourced SMERGERS figure, mailto silent-failure fixed (honest labels + clipboard
+fallback, `components/CopyEmail.jsx`). Open: `whyHere` on cards, dead `tags`,
+meta-band consistency, skills marquee, Lenis reduced-motion guard, and
+`metadataBase` (blocked on the production domain). Bio rewrite **declined for
+now** — leave the About prose alone.
 
 **Incident, 2026-08-05:** OneDrive deleted 7 files from disk between my edits
 and `git add -A`, so commit `767d069` recorded deletions instead of changes; it
@@ -38,6 +40,14 @@ craft: the Browser pane doesn't composite, so nothing visual was verifiable.
   wording from the CV, exact visa fact.
 - [x] **`/assets/resume.pdf` swapped** for the newer `NandiniPillai_CV.pdf`
   (188,486 bytes, CV dated 29 Jul 2026).
+- [x] **The contact `mailto:` failed silently without a mail client** — "Send
+  message" set `location.href` to a `mailto:` and did nothing on machines with
+  no default mail app. Now: button says "Open in your email app", a second
+  "Copy message" button puts To/Subject/body on the clipboard, an `aria-live`
+  hint explains the fallback, and every case-study CTA carries a copyable
+  address (`components/CopyEmail.jsx`). Clipboard behaviour unverifiable in the
+  Browser pane (no user-activation → NotAllowedError); verify once on a real
+  browser.
 - [ ] **`whyHere` never renders on the portfolio cards** — only inside the case
   study, after the click it was meant to earn.
 - [ ] **`tags` in `lib/case-studies.js` is dead data** — use or delete.

@@ -142,8 +142,14 @@ grown to 997 words and 11 images, longer than a full case study; it was cut to
 5. **`innerText` returns CSS-transformed text.** Eyebrow labels are
    `uppercase`, so `includes('My role')` fails while `includes('MY ROLE')`
    passes. Check against the rendered casing or use a case-insensitive match.
-6. **CRLF-normalize** any file you write (repo is `core.autocrlf=true`).
-7. Commit locally. Never `--amend` unless asked.
+6. **Do NOT bulk-normalize line endings before committing.** `core.autocrlf=true`
+   already converts on add. A pre-commit ReadAllText/WriteAllText sweep read
+   OneDrive-dehydrated files as empty and emptied seven files into commit
+   767d069 (restored in 7f8c823). If a file must be rewritten, refuse to write
+   when the read came back empty.
+7. **Before every commit, check `git status --short` for staged deletions you
+   didn't intend** — OneDrive dehydration can present tracked files as missing.
+8. Commit locally. Never `--amend` unless asked.
 
 ## Locked decisions — don't undo without asking
 
