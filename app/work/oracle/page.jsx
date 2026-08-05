@@ -8,9 +8,12 @@ import ScrollReveal from '@/components/ScrollReveal';
 
 const ACCENT = '#D946EF';
 
-function ZoomFig({ src, alt, caption, aspect = '16/9', fit = 'cover' }) {
+// aspect must match the source image's real ratio (CLAUDE.md rule) — a
+// mismatched box either crops (cover) or letterboxes (contain). maxW keeps
+// portrait and near-square images from towering at full content width.
+function ZoomFig({ src, alt, caption, aspect = '16/9', fit = 'cover', maxW = '' }) {
   return (
-    <figure className="flex flex-col">
+    <figure className={`flex flex-col ${maxW ? `${maxW} mx-auto w-full` : ''}`}>
       <div
         className="relative rounded-2xl overflow-hidden bg-carbon border border-white/[0.05]"
         style={{ aspectRatio: aspect }}
@@ -75,6 +78,7 @@ export default function OraclePage() {
           alt="Oracle — the headgear worn on a head, with illuminated traces tracking the brain's neural pathways"
           caption="Oracle — headgear that reads the brain&rsquo;s neural pathways while a skill is performed."
           aspect="1200/1062"
+          maxW="max-w-2xl"
         />
       </ScrollReveal>
 
@@ -119,6 +123,7 @@ export default function OraclePage() {
             src="/assets/oracle/oracle-application.png"
             alt="Slide reading: it is not just about law enforcement but also about giving humanity the tools to rebuild and adapt to their new world"
             caption="The application we argued for — rebuilding, not just enforcement."
+            maxW="max-w-3xl"
           />
         </div>
       </ScrollReveal>
@@ -145,8 +150,8 @@ export default function OraclePage() {
             src="/assets/oracle/oracle-concept.jpeg"
             alt="Hand-drawn comic storyboard of the 2071 scenario — ecological collapse, some leaving for the Moon and Mars, others staying to rebuild Earth"
             caption="World-building storyboard — the 2071 scenario, drawn while the concept was still chip implants and memory."
-            aspect="9/16"
-            fit="contain"
+            aspect="1118/1600"
+            maxW="max-w-md"
           />
         </div>
       </ScrollReveal>
