@@ -3,43 +3,51 @@
 import { useState } from 'react';
 import { SITE } from '@/lib/site';
 import ScrollReveal from './ScrollReveal';
+import CopyEmail from './CopyEmail';
 
 export default function ContactForm() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [details, setDetails] = useState('');
-  // 'mailto:' silently does nothing on machines with no default mail client —
-  // common on work laptops — so the form is honest about what the button does,
-  // offers a clipboard path that always works, and hints at it after an attempt.
-  const [attempted, setAttempted] = useState(false);
-  const [copied, setCopied] = useState(false);
+  const [honey, setHoney] = useState('');
+  // idle | sending | sent | error — the form really sends, via FormSubmit's
+  // AJAX endpoint (no backend, no key; the address is already public on this
+  // page). The mailto link is the secondary path for people who prefer their
+  // own mail app.
+  const [status, setStatus] = useState('idle');
 
-  const compose = () => {
-    const subject = `Portfolio enquiry — ${name || 'friend'}`;
-    const bodyLines = [
-      name && `Name: ${name}`,
-      email && `Email: ${email}`,
-      details && '',
-      details,
-    ].filter(Boolean);
-    return { subject, body: bodyLines.join('\n') };
+  const mailtoHref = () => {
+    const subject = `Portfolio enquiry — ${name || 'hello'}`;
+    return `mailto:${SITE.email}?subject=${encodeURIComponent(subject)}${
+      details ? `&body=${encodeURIComponent(details)}` : ''
+    }`;
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    const { subject, body } = compose();
-    setAttempted(true);
-    window.location.href = `mailto:${SITE.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  };
-
-  const onCopy = async () => {
-    const { subject, body } = compose();
+    if (status === 'sending') return;
+    setStatus('sending');
     try {
-      await navigator.clipboard.writeText(`To: ${SITE.email}\nSubject: ${subject}\n\n${body}`);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      const res = await fetch(`https://formsubmit.co/ajax/${SITE.email}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          name,
+          email,
+          message: details,
+          _subject: `Portfolio enquiry — ${name}`,
+          _template: 'table',
+          _captcha: 'false',
+          _honey: honey,
+        }),
+      });
+      if (!res.ok) throw new Error(String(res.status));
+      setStatus('sent');
+      setName('');
+      setEmail('');
+      setDetails('');
     } catch {
-      // Clipboard blocked — the address is visible in the rail alongside the form.
+      setStatus('error');
     }
   };
 
@@ -137,31 +145,52 @@ export default function ContactForm() {
               rows={5}
               placeholder="A few lines about the project or the idea…"
               className="w-full bg-transparent border border-white/[0.1] rounded-2xl p-3 text-silver placeholder:text-ash/70 focus:outline-none focus:border-white/40 resize-none transition-colors"
+              required
             />
           </div>
+
+          {/* Honeypot — humans never see it; bots that fill it get dropped by FormSubmit */}
+          <input
+            type="text"
+            name="_honey"
+            value={honey}
+            onChange={(e) => setHoney(e.target.value)}
+            className="hidden"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+          />
 
           <div className="flex flex-wrap items-center gap-3">
             <button
               type="submit"
-              className="inline-flex items-center justify-center rounded-full bg-white/[0.08] hover:bg-white/[0.14] border border-white/10 hover:border-white/20 px-7 py-3.5 text-silver hover:-translate-y-0.5 transition-all duration-300 ease-out motion-reduce:transition-none motion-reduce:transform-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/80 focus-visible:outline-offset-2"
+              disabled={status === 'sending'}
+              className="inline-flex items-center justify-center rounded-full bg-white/[0.08] hover:bg-white/[0.14] border border-white/10 hover:border-white/20 px-7 py-3.5 text-silver hover:-translate-y-0.5 transition-all duration-300 ease-out motion-reduce:transition-none motion-reduce:transform-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/80 focus-visible:outline-offset-2 disabled:opacity-60 disabled:hover:translate-y-0"
               style={{ boxShadow: 'inset 0 1px 0 0 rgba(255,255,255,0.12)' }}
             >
-              <span className="text-[17px] font-medium tracking-tight leading-none">Open in your email app</span>
-            </button>
-            <button
-              type="button"
-              onClick={onCopy}
-              className="inline-flex items-center justify-center rounded-full border border-white/10 hover:border-white/20 hover:bg-white/[0.06] px-6 py-3.5 text-fog hover:text-silver transition-all duration-300 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/80 focus-visible:outline-offset-2"
-            >
-              <span className="text-[15px] font-medium tracking-tight leading-none">
-                {copied ? 'Copied ✓' : 'Copy message'}
+              <span className="text-[17px] font-medium tracking-tight leading-none">
+                {status === 'sending' ? 'Sending…' : status === 'sent' ? 'Sent ✓' : 'Send message'}
               </span>
             </button>
+            <a
+              href={mailtoHref()}
+              className="inline-flex items-center justify-center rounded-full border border-white/10 hover:border-white/20 hover:bg-white/[0.06] px-6 py-3.5 text-fog hover:text-silver transition-all duration-300 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/80 focus-visible:outline-offset-2"
+            >
+              <span className="text-[15px] font-medium tracking-tight leading-none">Or email me directly</span>
+            </a>
           </div>
           <p className="!mt-4 text-ash text-sm" aria-live="polite">
-            {attempted
-              ? 'If your email app didn’t open, use Copy message and paste it into any email.'
-              : 'No email app set up? Copy message puts the whole thing on your clipboard.'}
+            {status === 'sent' ? (
+              'Sent. I’ll get back to you soon.'
+            ) : status === 'error' ? (
+              <>
+                Something broke and the message didn’t send. Email me directly instead — <CopyEmail />
+              </>
+            ) : status === 'sending' ? (
+              'Sending your message…'
+            ) : (
+              'Goes straight to my inbox, and I reply to the address you leave.'
+            )}
           </p>
         </form>
       </ScrollReveal>

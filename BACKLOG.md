@@ -40,14 +40,20 @@ craft: the Browser pane doesn't composite, so nothing visual was verifiable.
   wording from the CV, exact visa fact.
 - [x] **`/assets/resume.pdf` swapped** for the newer `NandiniPillai_CV.pdf`
   (188,486 bytes, CV dated 29 Jul 2026).
-- [x] **The contact `mailto:` failed silently without a mail client** — "Send
-  message" set `location.href` to a `mailto:` and did nothing on machines with
-  no default mail app. Now: button says "Open in your email app", a second
-  "Copy message" button puts To/Subject/body on the clipboard, an `aria-live`
-  hint explains the fallback, and every case-study CTA carries a copyable
-  address (`components/CopyEmail.jsx`). Clipboard behaviour unverifiable in the
-  Browser pane (no user-activation → NotAllowedError); verify once on a real
-  browser.
+- [x] **The contact form now actually sends** (2026-08-05, second pass —
+  Nandini rejected the draft-email/copy pairing as confusing). Submit POSTs to
+  FormSubmit's AJAX endpoint (`formsubmit.co/ajax/<email>`, no backend, no
+  key), with states idle → Sending… → Sent ✓ / error, `aria-live` hint,
+  hidden `_honey` honeypot, `_captcha` off, form cleared on success. Secondary
+  action "Or email me directly" is a plain `mailto:`. Case-study CTAs keep the
+  copyable address (`CopyEmail.jsx`).
+  **⚠ ACTIVATION NEEDED: the first real submission emails Nandini a one-time
+  FormSubmit confirm link — until she clicks it, submissions bounce.** Send one
+  test message from the live site, click the link, then optionally swap the
+  email in the endpoint URL for the random alias FormSubmit issues (the
+  address is already public on the page, so no new exposure either way).
+  Verified with a stubbed fetch in the pane (all four states); the real
+  network path needs that one live test.
 - [ ] **`whyHere` never renders on the portfolio cards** — only inside the case
   study, after the click it was meant to earn.
 - [ ] **`tags` in `lib/case-studies.js` is dead data** — use or delete.
