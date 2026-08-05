@@ -326,6 +326,14 @@ through without checking it:
   no sales yet." The signature pilot metric is *days the paper register
   comes back out* (target zero) — defined, not yet measured. Don't imply
   revenue or adoption.
+- **"~90% of small Indian clinics track nothing" was cut 2026-08-05** — a
+  web search found no published source for it in any form. Replaced on the
+  Baari page with the verifiable figure: ~72% of India's salon industry is
+  unorganised (SMERGERS quotes 28% organised of a ₹36,000cr market),
+  linked inline to smergers.com/industry-watch/indian-salon-industry. The
+  clinics half of the sentence is now qualitative ("most small clinics
+  still run on paper"). Don't reintroduce a precise clinics number — none
+  is citable (hospital EMR figures exist only in vendor blogs).
 
 The six portfolio gaps Nandini is closing (accessibility, product/business
 metrics, top-tier visual craft, design-system depth, multi-user

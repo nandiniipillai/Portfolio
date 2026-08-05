@@ -41,8 +41,10 @@ craft: the Browser pane doesn't composite, so nothing visual was verifiable.
 - [ ] **`whyHere` never renders on the portfolio cards** — only inside the case
   study, after the click it was meant to earn.
 - [ ] **`tags` in `lib/case-studies.js` is dead data** — use or delete.
-- [ ] **"~90% of small Indian clinics" needs a source or removal** — same
-  category as the unsourced "15% cost reduction".
+- [x] **"~90% of small Indian clinics" cut** — no published source exists
+  (searched 2026-08-05). Replaced with SMERGERS' ~72%-unorganised salon
+  figure, linked inline; clinics claim now qualitative. Detail in AGENTS
+  metrics section.
 - [ ] **At-a-glance meta band inconsistent**: Baari has STATUS, LUCA/iLancaster
   have COMPANY, SmartUp has COMPANY but no STATUS.
 - [ ] **Skills marquee is generic** (Design Thinking / UX Research / Prototyping

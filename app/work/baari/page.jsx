@@ -250,7 +250,16 @@ export default function BaariPage() {
         {/* 2. The problem */}
         <Section title="Clinics and salons still run their day on paper, a landline and WhatsApp screenshots" tone="sunken">
           <Prose>
-            Baari began as a simple observation — customers routinely lose hours waiting for sequential services because the front desk has no system beyond a notebook. Around 90% of small Indian clinics, salons, spas and vets track nothing: no-shows go uncounted, quiet regulars are forgotten, and yesterday’s revenue is a guess. The alternatives are Practo-style suites that push paid listings and take per-consultation cuts, or tools like Calendly built for solo consultants rather than walk-in-heavy desks.
+            Baari began as a simple observation — customers routinely lose hours waiting for sequential services because the front desk has no system beyond a notebook. Nearly{' '}
+            <a
+              href="https://www.smergers.com/industry-watch/indian-salon-industry/"
+              target="_blank"
+              rel="noreferrer noopener"
+              className="underline decoration-ash/60 underline-offset-2 hover:decoration-fog transition-colors"
+            >
+              three-quarters of India’s salon industry is unorganised
+            </a>
+            , and most small clinics still run on paper: no-shows go uncounted, quiet regulars are forgotten, and yesterday’s revenue is a guess. The alternatives are Practo-style suites that push paid listings and take per-consultation cuts, or tools like Calendly built for solo consultants rather than walk-in-heavy desks.
           </Prose>
         </Section>
 
