@@ -171,8 +171,9 @@ export default function PortfolioCard({ study, featured = false, priority = fals
             <p className="mt-3 text-fog text-sm md:text-base max-w-xs">{oneLiner}</p>
             {status && (
               <p className="mt-4 text-[13px] text-silver flex items-center gap-2">
+                {/* The dot breathes only when the status really is live */}
                 <span
-                  className="inline-block w-1.5 h-1.5 rounded-full shrink-0"
+                  className={`inline-block w-1.5 h-1.5 rounded-full shrink-0 ${/^Live\b/.test(status) ? 'pulse-dot' : ''}`}
                   style={{ background: accent }}
                   aria-hidden="true"
                 />

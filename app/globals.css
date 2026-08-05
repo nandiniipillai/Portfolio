@@ -148,6 +148,22 @@
   }
 }
 
+/* Text selection in silver — the inverse of the site, so it reads as intent */
+::selection {
+  background: #f4f4f2;
+  color: #0a0a0a;
+}
+
+/* Marquees yield to the pointer — pausable motion, and hoverable logos */
+.slide-track:hover {
+  animation-play-state: paused;
+}
+
+/* Zoomable figures say so before they're clicked (react-medium-image-zoom wrapper) */
+[data-rmiz] img {
+  cursor: zoom-in;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .card-tex,
   .card-tex:hover,

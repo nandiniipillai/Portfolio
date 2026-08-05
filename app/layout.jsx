@@ -12,7 +12,13 @@ const caveat = Caveat({ subsets: ['latin'], variable: '--font-caveat', display: 
 // One source of truth — three hardcoded copies had already drifted from SITE.title.
 const pageTitle = `${SITE.name} — ${SITE.title}`;
 
+// Vercel injects the production domain at build time, so OG/twitter images
+// resolve against the real site instead of localhost — no hardcoded domain,
+// no env vars to manage. Locally this is undefined and Next falls back.
+const prodUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL;
+
 export const metadata = {
+  metadataBase: prodUrl ? new URL(`https://${prodUrl}`) : undefined,
   title: pageTitle,
   description: SITE.positioning,
   openGraph: {

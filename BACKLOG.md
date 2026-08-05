@@ -56,11 +56,26 @@ craft: the Browser pane doesn't composite, so nothing visual was verifiable.
   network path needs that one live test.
 - [ ] **`whyHere` never renders on the portfolio cards** — only inside the case
   study, after the click it was meant to earn.
-- [ ] **`tags` in `lib/case-studies.js` is dead data** — use or delete.
+- [x] **`tags` dead data deleted** from all four studies (2026-08-05).
 - [x] **"~90% of small Indian clinics" cut** — no published source exists
   (searched 2026-08-05). Replaced with SMERGERS' ~72%-unorganised salon
   figure, linked inline; clinics claim now qualitative. Detail in AGENTS
   metrics section.
+- [x] **Lenis now respects `prefers-reduced-motion`** (2026-08-05) — init is
+  skipped for those users; a native scroll listener keeps `ScrollProgress`
+  fed, route changes fall back to `window.scrollTo`, and `CaseStudyNav`
+  already had its own fallback. Reduced-motion path is code-reviewed, not
+  behaviour-tested (pane can't emulate the media query) — worth one OS-level
+  check.
+- [x] **Quick micro-interaction batch** (2026-08-05): Baari's Live status dot
+  pulses (only where status starts "Live"); `::selection` is silver-inverse;
+  marquees pause on hover; zoomable figures show `cursor: zoom-in` via the
+  `[data-rmiz]` wrapper.
+- [x] **`metadataBase` unblocked without the domain** — uses Vercel's
+  build-time `VERCEL_PROJECT_PRODUCTION_URL`, so OG/twitter images resolve
+  against the real production domain on deploy; locally undefined (warning
+  stays in dev, harmless). **Verify the OG image URL once after the next
+  deploy.**
 - [ ] **At-a-glance meta band inconsistent**: Baari has STATUS, LUCA/iLancaster
   have COMPANY, SmartUp has COMPANY but no STATUS.
 - [ ] **Skills marquee is generic** (Design Thinking / UX Research / Prototyping
