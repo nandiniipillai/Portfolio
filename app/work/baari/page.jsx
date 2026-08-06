@@ -222,7 +222,7 @@ export default function BaariPage() {
         meta={[
           ['Role', 'Founding Product Designer'],
           ['Team', ['Product Designer', 'Software Developer']],
-          ['Industry', 'B2C SaaS'],
+          ['Company', ['Baari', 'Two-person startup']],
           ['Status', ['Pilot stage', <a key="url" href="https://getbaari.in" target="_blank" rel="noreferrer noopener" style={{ color: ACCENT, textDecoration: 'underline' }}>getbaari.in ↗</a>]],
         ]}
       >

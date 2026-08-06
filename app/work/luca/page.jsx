@@ -293,8 +293,8 @@ export default function LucaPage() {
         meta={[
           ['Role', 'Sole Product Designer'],
           ['Team', ['Product Manager', 'Front-end + back-end', 'Design engineers']],
-          ['Industry', ['EdTech', 'SaaS']],
           ['Company', ['ISS Innovation Hub', 'Lancaster University']],
+          ['Status', 'Adopted by students & staff'],
         ]}
       >
         {/* 1. Hero — the live product */}

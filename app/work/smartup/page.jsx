@@ -246,8 +246,8 @@ export default function SmartUpPage() {
         meta={[
           ['Role', 'UX & Product Designer'],
           ['Team', ['Product Manager', 'Front-end developer', 'Back-end developer']],
-          ['Industry', 'Retail / SaaS'],
           ['Company', ['Detosphere Ltd.', 'ISS Innovation Hub']],
+          ['Status', 'Built & adopted post-handoff'],
         ]}
       >
         {/* 1. Hero */}

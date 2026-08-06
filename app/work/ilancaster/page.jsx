@@ -162,8 +162,8 @@ export default function ILancasterPage() {
         meta={[
           ['Role', 'Product Designer'],
           ['Team', ['Designers', 'Product Manager', 'Team of BE & FE Engineers']],
-          ['Industry', ['EdTech', 'Mobile App Redesign']],
           ['Company', ['ISS Innovation Hub', 'Lancaster University']],
+          ['Status', 'Shipped · 80+ screens'],
         ]}
       >
         {/* At a glance — role, scope, outcome, up front */}
