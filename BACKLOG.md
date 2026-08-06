@@ -76,10 +76,15 @@ craft: the Browser pane doesn't composite, so nothing visual was verifiable.
   against the real production domain on deploy; locally undefined (warning
   stays in dev, harmless). **Verify the OG image URL once after the next
   deploy.**
-- [ ] **At-a-glance meta band inconsistent**: Baari has STATUS, LUCA/iLancaster
-  have COMPANY, SmartUp has COMPANY but no STATUS.
-- [ ] **Skills marquee is generic** (Design Thinking / UX Research / Prototyping
-  / Strategy & Innovation) next to far sharper case studies.
+- [x] **Meta bands aligned** (2026-08-05): all four studies render
+  Role/Team/Company/Status in order; Industry slot dropped; statuses are the
+  card status lines verbatim.
+- [x] **Skills marquee** now uses the CV's skills vocabulary (AI Product
+  Design, Design Systems, Design-to-Code, Product Strategy, IA, Usability
+  Testing).
+- **Declined 2026-08-05, don't re-raise:** placing the AI positioning
+  sentence on /portfolio ("not right now"), and reordering case studies to
+  lead with iLancaster.
 
 **Declined by Nandini, do not re-raise:** homepage restructure (bento stays a
 single non-scrolling viewport, `<h1>` stays sr-only, no work on `/`); About bio
