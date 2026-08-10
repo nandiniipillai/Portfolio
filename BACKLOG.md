@@ -23,19 +23,22 @@ verify `git status` shows `M` not `D` before committing here, and re-check
 Test-Path after any bulk file write.** The manual CRLF-normalize pass sat in the
 destructive window — skip it; `core.autocrlf=true` already normalizes on commit.
 
-## Baari walkthrough v3 (2026-08-10)
+## Baari walkthrough v4 (2026-08-10)
 
-The walkthrough is a 44s calm product tour (Remotion, real 2x captures via
-promo-stage routes in a scratch Baari clone): live queue → booking with
-visible 12:20 slot selection → T18 lands live with counts update → Mark done
-with ₹450 + category (revenue capture) → Signal daily-analysis pan → end
-card. Nandini rejected v2 (21s shot-card cut) as "too fast and dramatic —
-adfilm"; standing rule: walkthroughs are calm tours with feature breadth,
-never trailer grammar. Source + re-render/capture instructions:
-`E:\baari-video-src` (Remotion project, SPEC.md, promo-stage patch — now
-incl. staged Signal/reports page and Mark-done popover). Independent review
-×2 passed (data coherence: one clock, one slot grid, all Signal sums
-verify). Same treatment planned for LUCA / SmartUp / iLancaster.
+47s calm product tour of ONE staged morning (Remotion, real 2x captures,
+five coherent board states): live queue → desk booking with 12:20 slot
+selection → T18 lands live → Mark done ₹450 (T12 → Done strip, T13 called
+in — the lifecycle completes) → T19 arrives cursor-free from the app →
+walk-in T20 via the real dialog → Signal pan ending on cohort retention
+(generic charts/table deliberately out of frame) → end card, clean loop.
+Standing rule from v2: walkthroughs are calm tours with feature breadth,
+never trailer grammar. The whole day is one ledger — counts, tokens,
+slots and every Signal sum reconcile (214 bookings = sources = hourly =
+weekdays; ₹1,43,050 = category sum incl. T12's ₹450). Source +
+re-render/capture instructions: `E:\baari-video-src`. Independent review
+×3; v4 fixes: pan overshoot, count-flip lag, arrival-over-strip seams,
+dip-to-black, cohort/new-count skew, weekday-of-today. Same treatment
+planned for LUCA / SmartUp / iLancaster.
 
 ## Design audit — fix list (2026-08-05)
 

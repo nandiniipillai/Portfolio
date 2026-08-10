@@ -431,7 +431,7 @@ export default function BaariPage() {
                 <video
                   src="/assets/baari/baari-walkthrough.mp4"
                   poster="/assets/baari/baari-walkthrough-poster.jpg"
-                  aria-label="Guided tour of Baari: the live queue at 11:14, a booking made in one screen with the 12:20 slot selected, the new row landing live as token T18 while the counts update, Mark done capturing a 450 rupee consultation, and the Signal report with revenue, retention and daily analysis"
+                  aria-label="Guided tour of one Baari morning: the live queue, a desk booking with the 12:20 slot selected landing live as token T18, Mark done capturing a 450 rupee consultation while the queue advances to the next patient, a booking arriving on its own from the customer app, a walk-in added at the desk taking the next open slot, and the Signal report with revenue, category split and cohort retention"
                   autoPlay
                   muted
                   loop
