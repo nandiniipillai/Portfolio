@@ -399,9 +399,11 @@ export default function BaariPage() {
           </div>
         </Section>
 
-        {/* 4b. Walkthrough — the core loop, live. Capped at the recording's native
-             1440px so it never upscales; dark chrome on a black stage matches the
-             product's own dark UI. */}
+        {/* 4b. Walkthrough — the core loop as a produced shot sequence (Remotion,
+             video-shotcraft cards, real 2x promo-stage captures; source at
+             E:\baari-video-src). Capped at the recording's native 1440px so it
+             never upscales; dark chrome on a black stage matches the product's
+             own dark UI. */}
         <section className="py-6 md:py-10 px-5 md:px-10">
           <div className="mx-auto max-w-5xl">
             <ScrollReveal as="h2" className="font-heading tracking-tightest text-silver text-3xl md:text-5xl mb-8 md:mb-12">
@@ -429,7 +431,7 @@ export default function BaariPage() {
                 <video
                   src="/assets/baari/baari-walkthrough.mp4"
                   poster="/assets/baari/baari-walkthrough-poster.jpg"
-                  aria-label="Walkthrough of the Baari queue: a receptionist creates a booking at the desk and it appears live in the waiting list as a new token"
+                  aria-label="Produced walkthrough of the Baari queue: the token panel is spotlighted, the day's bookings deal into the waiting list, a receptionist books Ravi Menon in the New booking panel, and the booking lands live in the queue as token T18 while the day's counts update"
                   autoPlay
                   muted
                   loop

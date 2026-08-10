@@ -23,6 +23,18 @@ verify `git status` shows `M` not `D` before committing here, and re-check
 Test-Path after any bulk file write.** The manual CRLF-normalize pass sat in the
 destructive window — skip it; `core.autocrlf=true` already normalizes on commit.
 
+## Baari walkthrough v2 (2026-08-10)
+
+The queue-loop walkthrough is now a produced 21.5s Remotion piece (spotlight →
+deck-deal → booking → row-embed → glow → T18 odometer outro), built with the
+video-shotcraft skill (`E:\video-shotcraft`) from 2x captures of the real
+product via a local `promo-stage` route in a scratch Baari clone. Source +
+re-render/capture instructions: `E:\baari-video-src` (Remotion project,
+SPEC.md, promo-stage patch). Independent review passed after fixing staged-data
+arithmetic (slot grid, Late badge, selected slot = landed slot). Same idea is
+planned for LUCA / SmartUp / iLancaster walkthroughs — shot-card mapping
+already sketched in session notes.
+
 ## Design audit — fix list (2026-08-05)
 
 Audit covered IA, content, positioning, interaction and code. **Not** visual
