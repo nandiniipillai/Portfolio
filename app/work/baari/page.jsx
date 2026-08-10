@@ -431,7 +431,7 @@ export default function BaariPage() {
                 <video
                   src="/assets/baari/baari-walkthrough.mp4"
                   poster="/assets/baari/baari-walkthrough-poster.jpg"
-                  aria-label="Produced walkthrough of the Baari queue: the token panel is spotlighted, the day's bookings deal into the waiting list, a receptionist books Ravi Menon in the New booking panel, and the booking lands live in the queue as token T18 while the day's counts update"
+                  aria-label="Guided tour of Baari: the live queue at 11:14, a booking made in one screen with the 12:20 slot selected, the new row landing live as token T18 while the counts update, Mark done capturing a 450 rupee consultation, and the Signal report with revenue, retention and daily analysis"
                   autoPlay
                   muted
                   loop

@@ -23,17 +23,19 @@ verify `git status` shows `M` not `D` before committing here, and re-check
 Test-Path after any bulk file write.** The manual CRLF-normalize pass sat in the
 destructive window — skip it; `core.autocrlf=true` already normalizes on commit.
 
-## Baari walkthrough v2 (2026-08-10)
+## Baari walkthrough v3 (2026-08-10)
 
-The queue-loop walkthrough is now a produced 21.5s Remotion piece (spotlight →
-deck-deal → booking → row-embed → glow → T18 odometer outro), built with the
-video-shotcraft skill (`E:\video-shotcraft`) from 2x captures of the real
-product via a local `promo-stage` route in a scratch Baari clone. Source +
-re-render/capture instructions: `E:\baari-video-src` (Remotion project,
-SPEC.md, promo-stage patch). Independent review passed after fixing staged-data
-arithmetic (slot grid, Late badge, selected slot = landed slot). Same idea is
-planned for LUCA / SmartUp / iLancaster walkthroughs — shot-card mapping
-already sketched in session notes.
+The walkthrough is a 44s calm product tour (Remotion, real 2x captures via
+promo-stage routes in a scratch Baari clone): live queue → booking with
+visible 12:20 slot selection → T18 lands live with counts update → Mark done
+with ₹450 + category (revenue capture) → Signal daily-analysis pan → end
+card. Nandini rejected v2 (21s shot-card cut) as "too fast and dramatic —
+adfilm"; standing rule: walkthroughs are calm tours with feature breadth,
+never trailer grammar. Source + re-render/capture instructions:
+`E:\baari-video-src` (Remotion project, SPEC.md, promo-stage patch — now
+incl. staged Signal/reports page and Mark-done popover). Independent review
+×2 passed (data coherence: one clock, one slot grid, all Signal sums
+verify). Same treatment planned for LUCA / SmartUp / iLancaster.
 
 ## Design audit — fix list (2026-08-05)
 
