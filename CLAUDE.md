@@ -41,9 +41,11 @@ into CLAUDE.md — one-line it and point.
   it 1:1 rather than interpreting.
 - **Copy preservation**: case-study prose is Nandini's, from her FOLIO copy or
   raw report. Restructure it, never paraphrase it to "improve" it.
-- **Professional AI framing.** Baari is a two-person company: Nandini owns
-  design + product, her co-founder owns engineering, implementation was
-  AI-accelerated under his ownership. Never "no engineering team", "AI as
+- **Baari is an independent early-stage SaaS project, NOT a company she
+  founded or owns** (Nandini, 2026-10-05). Never "founder", "co-founder",
+  "founding designer", "company", "startup I own". Her role: sole product
+  designer; a developer owns engineering; implementation was AI-accelerated
+  under the developer's ownership. Never "no engineering team", "AI as
   labour", or "AI agents built it".
 
 ## Voice

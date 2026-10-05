@@ -131,7 +131,7 @@ function WideFeature({ label, points, why, media }) {
 
 // Front-loaded summary: role (who owns what), scope (the honest numbers), outcome.
 const GLANCE = [
-  ['My role', 'Founding product designer. I own design and product; my co-founder owns engineering. I designed the system as written specifications.'],
+  ['My role', 'Sole product designer. I own design and product; a developer owns engineering. I designed the system as written specifications.'],
   ['Scope', 'A web dashboard, an Android customer app and end-to-end billing — three surfaces on one backend, shipped in months.'],
   ['Outcome', 'Live at getbaari.in. A real clinic runs its day on the queue; the Android app is in internal testing.'],
 ];
@@ -220,9 +220,9 @@ export default function BaariPage() {
         title="Baari"
         oneLiner="A live queue for India’s clinics and salons, shipped to production."
         meta={[
-          ['Role', 'Founding Product Designer'],
+          ['Role', 'Sole Product Designer'],
           ['Team', ['Product Designer', 'Software Developer']],
-          ['Company', ['Baari', 'Two-person startup']],
+          ['Type', ['Independent project', 'Early-stage SaaS']],
           ['Status', ['Pilot stage', <a key="url" href="https://getbaari.in" target="_blank" rel="noreferrer noopener" style={{ color: ACCENT, textDecoration: 'underline' }}>getbaari.in ↗</a>]],
         ]}
       >
@@ -466,7 +466,7 @@ export default function BaariPage() {
         {/* 5. How two people shipped it */}
         <Section title="Two people, spec-driven, shipped in months">
           <Prose>
-            Baari is a two-person company — I own design and product, my co-founder owns engineering. I designed in specifications: every screen defined as a numbered spec with exact layout order, verbatim UI copy, state gates and acceptance criteria. Implementation was AI-accelerated under my co-founder’s engineering ownership, which is how two people shipped a web dashboard, a mobile app and end-to-end billing. The UI was built against theme tokens — one primary color, one radius, one type scale — so the eventual rebrand is a token swap, not a repaint.
+            Baari is built by two people — I own design and product, a developer owns engineering. I designed in specifications: every screen defined as a numbered spec with exact layout order, verbatim UI copy, state gates and acceptance criteria. Implementation was AI-accelerated under the developer’s engineering ownership, which is how two people shipped a web dashboard, a mobile app and end-to-end billing. The UI was built against theme tokens — one primary color, one radius, one type scale — so the eventual rebrand is a token swap, not a repaint.
           </Prose>
           <PullQuote>
             The spec is the design. My highest-leverage artifact was the written specification, not the mockup.

@@ -126,9 +126,11 @@ ten routes, clean console, green build, 14/14 static.
   from her, or it stays qualitative.
 - **AI-framing conflict on Baari** — the raw report (`Baari_Case_Study_Raw_
   Report_V2.md`) says "no engineering team… AI WAS the engineering team". The
-  locked rule in CLAUDE.md/AGENTS.md says the opposite (co-founder owns
+  locked rule in CLAUDE.md/AGENTS.md says the opposite (a developer owns
   engineering, never "no engineering team"). The site currently follows the
   locked rule. Confirm which is canonical before writing more from that report.
+  **Founder framing removed site-wide 2026-10-05** — Baari is presented as an
+  independent early-stage SaaS project, not a company she owns.
 
 ## Tech debt / cleanup
 

@@ -377,9 +377,12 @@ because that holds 5.0:1 over a white screenshot).
 - **Terse and direct**. Cut narrative connective tissue. Say what you
   did, why, what happened.
 - **Professional framing on AI and team size.** Don't write "AI as labour",
-  "no engineering team", or "AI agents built it". Baari is a two-person
-  company: Nandini owns design + product, her co-founder owns engineering;
-  implementation was *AI-accelerated under his engineering ownership*.
+  "no engineering team", or "AI agents built it". Baari is an independent
+  early-stage SaaS project built by two people — **not a company she
+  founded; never use founder/co-founder/company/startup-ownership language**
+  (Nandini, 2026-10-05). She owns design + product, a developer owns
+  engineering; implementation was *AI-accelerated under the developer's
+  engineering ownership*.
   Frame AI as a tool she directed via specs ("the spec is the design"),
   never as a replacement for people or a gimmick.
 - **Read `MEMORY.md` in `C:\Users\Admin\.claude\projects\C--Users-Admin\memory\`**
