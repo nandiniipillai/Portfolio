@@ -6,7 +6,7 @@ import CaseStudyShell from '@/components/CaseStudyShell';
 import { Section, Prose, SubList, PullQuote } from '@/components/CaseBits';
 import ScrollReveal from '@/components/ScrollReveal';
 import CaseStudyNav from '@/components/CaseStudyNav';
-import { ISSStats, ISSColour, ISSType, ISSButtons, ISSNavigation, ISSSpacing } from '@/components/ISSDesignSystem';
+import { ISSSystemBoard } from '@/components/ISSDesignSystem';
 
 const ACCENT = '#E4002B';
 
@@ -370,16 +370,7 @@ export default function ILancasterPage() {
             designers. It then became the shared foundation for every ISS
             Innovation Hub product.
           </Prose>
-          <ISSStats />
-          <ISSColour />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
-            <ISSType />
-            <ISSButtons />
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
-            <ISSNavigation />
-            <ISSSpacing />
-          </div>
+          <ISSSystemBoard />
           <ScrollReveal>
             <div className="text-[11px] tracking-[0.24em] uppercase text-ash pt-4">The system in use</div>
           </ScrollReveal>

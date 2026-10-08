@@ -9,7 +9,7 @@ import { Section, Prose, SubList, PullQuote } from '@/components/CaseBits';
 import SlideFigure from '@/components/SlideFigure';
 import ScrollReveal from '@/components/ScrollReveal';
 import CaseStudyNav from '@/components/CaseStudyNav';
-import { ISSCoreStrip } from '@/components/ISSDesignSystem';
+import { ISSSystemBoard, ISSCoreStrip } from '@/components/ISSDesignSystem';
 
 const ACCENT = '#F0576B';
 
@@ -528,14 +528,17 @@ export default function LucaPage() {
         <Section title="One shared system, adapted for the web" tone="sunken">
           <Prose>
             LUCA didn&apos;t start from a blank file. It was built on the design system
-            from iLancaster, by then the shared foundation for every ISS Innovation Hub
-            product: Lancaster red for every primary action, the same greyscale, the same
-            type. But iLancaster is a mobile app, and LUCA was a web platform built from
+            from iLancaster, the university&apos;s student app, which by then was the shared
+            foundation for every ISS Innovation Hub product. This is that system.
+          </Prose>
+          <ISSSystemBoard />
+          <Prose>
+            But iLancaster is a mobile app, and LUCA was a web platform built from
             scratch, so the system had to be adapted rather than copied.
           </Prose>
           <ScrollReveal>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="rounded-2xl border border-white/[0.08] bg-white/[0.02] p-5 md:p-7">
+              <div className="rounded-2xl border border-white/[0.08] bg-white/[0.02] p-5 md:p-7 flex flex-col">
                 <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-4">Inherited</div>
                 <ISSCoreStrip />
                 <ul className="mt-4 space-y-2 text-fog text-sm md:text-base leading-relaxed">
@@ -543,6 +546,9 @@ export default function LucaPage() {
                   <li>The primary palette and greyscale</li>
                   <li>The Effra type scale</li>
                 </ul>
+                <p className="mt-auto pt-6 text-ash text-xs leading-relaxed">
+                  The shared ISS system above, as LUCA&apos;s starting point.
+                </p>
               </div>
               <div
                 className="rounded-2xl border border-white/[0.08] bg-white/[0.02] p-5 md:p-7 border-l-2"

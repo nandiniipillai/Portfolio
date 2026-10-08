@@ -123,7 +123,7 @@ ten routes, clean console, green build, 14/14 static.
   iLancaster Figma library pages (Navigation, Icons, Buttons, Colours,
   Typography, spacing). `components/ISSDesignSystem.jsx` rebuilds it live on
   iLancaster (colour, type, button anatomy, navigation components, spacing);
-  LUCA gets a short "inherited / adapted" section. Facts from her: the 80+
+  LUCA shows the same full board (`ISSSystemBoard`), then an "inherited / adapted" pair. Board has a Day/Night switch driving buttons, navigation and icons; tab bar, toggle and chips are live. Night + pressed values sampled from the library and shipped screens. Facts from her: the 80+
   screens and the system are iLancaster's; it was shared across all ISS
   products and adapted for LUCA; iLancaster had 3–4 designers over its life,
   two at a time during her stint. Still open:
