@@ -9,6 +9,7 @@ import { Section, Prose, SubList, PullQuote } from '@/components/CaseBits';
 import SlideFigure from '@/components/SlideFigure';
 import ScrollReveal from '@/components/ScrollReveal';
 import CaseStudyNav from '@/components/CaseStudyNav';
+import { ISSCoreStrip } from '@/components/ISSDesignSystem';
 
 const ACCENT = '#F0576B';
 
@@ -522,8 +523,47 @@ export default function LucaPage() {
           </PullQuote>
         </Section>
 
+        {/* 8b. Design system — inherited from iLancaster, adapted for the web.
+            "Added" items are only patterns visible in the shipped LUCA screens. */}
+        <Section title="One shared system, adapted for the web" tone="sunken">
+          <Prose>
+            LUCA didn&apos;t start from a blank file. It was built on the design system
+            from iLancaster, by then the shared foundation for every ISS Innovation Hub
+            product: Lancaster red for every primary action, the same greyscale, the same
+            type. But iLancaster is a mobile app, and LUCA was a web platform built from
+            scratch, so the system had to be adapted rather than copied.
+          </Prose>
+          <ScrollReveal>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="rounded-2xl border border-white/[0.08] bg-white/[0.02] p-5 md:p-7">
+                <div className="text-[11px] tracking-[0.24em] uppercase text-ash mb-4">Inherited</div>
+                <ISSCoreStrip />
+                <ul className="mt-4 space-y-2 text-fog text-sm md:text-base leading-relaxed">
+                  <li>Lancaster red for every primary action</li>
+                  <li>The primary palette and greyscale</li>
+                  <li>The Effra type scale</li>
+                </ul>
+              </div>
+              <div
+                className="rounded-2xl border border-white/[0.08] bg-white/[0.02] p-5 md:p-7 border-l-2"
+                style={{ borderLeftColor: ACCENT }}
+              >
+                <div className="text-[11px] tracking-[0.24em] uppercase mb-4" style={{ color: ACCENT }}>
+                  Adapted for LUCA
+                </div>
+                <ul className="space-y-2 text-fog text-sm md:text-base leading-relaxed">
+                  <li>A desktop layout — a wide dashboard in place of the mobile tab bar</li>
+                  <li>Progress cards tracking CV, cover letter and mock interview per application</li>
+                  <li>Task checklists with completion states and a percent-complete header</li>
+                  <li>The red, amber and green rating that makes AI feedback legible</li>
+                </ul>
+              </div>
+            </div>
+          </ScrollReveal>
+        </Section>
+
         {/* 9. Deliberate cuts */}
-        <Section title="What I traded away, on purpose" tone="sunken">
+        <Section title="What I traded away, on purpose">
           <SubList items={[
             'Output generation, the one feature students said they wanted',
             'Nineteen features down to the shipped v1, pruned across five to six iteration rounds',

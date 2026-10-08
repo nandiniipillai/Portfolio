@@ -6,6 +6,7 @@ import CaseStudyShell from '@/components/CaseStudyShell';
 import { Section, Prose, SubList, PullQuote } from '@/components/CaseBits';
 import ScrollReveal from '@/components/ScrollReveal';
 import CaseStudyNav from '@/components/CaseStudyNav';
+import { ISSStats, ISSColour, ISSType, ISSButtons, ISSNavigation, ISSSpacing } from '@/components/ISSDesignSystem';
 
 const ACCENT = '#E4002B';
 
@@ -357,16 +358,32 @@ export default function ILancasterPage() {
           </div>
         </Section>
 
-        {/* 5. Design system — feature lineup as raw screens */}
+        {/* 5. Design system — the library itself (rebuilt live from the Figma
+            source, see ISSDesignSystem.jsx), then the feature lineup it produced */}
         <Section title="One design system, held across 80+ screens" tone="sunken">
           <Prose>
             Lancaster&apos;s existing colour and style guidelines were a fixed
             constraint, so the transformation came from structure — not a
             rebrand. Typography, colour, spacing and component rules were
-            defined upfront so the system stayed consistent across 80+ screens
-            and two designers.
+            defined upfront, with colours as Figma variables, so the system
+            stayed consistent across 80+ screens and a team of three to four
+            designers. It then became the shared foundation for every ISS
+            Innovation Hub product.
           </Prose>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mt-6">
+          <ISSStats />
+          <ISSColour />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+            <ISSType />
+            <ISSButtons />
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+            <ISSNavigation />
+            <ISSSpacing />
+          </div>
+          <ScrollReveal>
+            <div className="text-[11px] tracking-[0.24em] uppercase text-ash pt-4">The system in use</div>
+          </ScrollReveal>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
             {[
               { src: '/assets/ilancaster/feature-news.png', label: 'News' },
               { src: '/assets/ilancaster/feature-events.png', label: 'Events' },
@@ -458,7 +475,7 @@ export default function ILancasterPage() {
                 phase: 'System',
                 headline: 'One design system across 80+ screens, day and night.',
                 support:
-                  'Two designers, one shared system, both modes designed in parallel. Shipped live to Lancaster students.',
+                  'One shared system across a team of three to four designers, both modes designed in parallel. Shipped live to Lancaster students, then reused across ISS products.',
               },
             ].map((row) => (
               <ScrollReveal key={row.num}>

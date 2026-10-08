@@ -54,7 +54,9 @@ Unknown routes redirect to `/` (`next.config.mjs`).
   `CaseStudyNav` (desktop section rail, **renders outside the page `motion.div`**)
   · `CaseBits` (`Section`, `Prose`, `SubList`, `PullQuote`, `MetricCard`,
   `MetricGrid`, `HandNote`, `AssetPlaceholder`) · `SplitRow` · `SlideFigure` ·
-  `OutcomeSpine`. Each case-study page also defines small **local** components
+  `OutcomeSpine` · `ISSDesignSystem` (the shared ISS/iLancaster design system
+  rebuilt live from her Figma library — used on iLancaster, `ISSCoreStrip` on
+  LUCA). Each case-study page also defines small **local** components
   (`AtAGlance`, `DecisionRow`/`FeatureRow`, `WideFeature`, a diagram).
 - **Brief:** `BriefPage` (wobble/oracle).
 - **About/contact:** `ExperienceTimeline` · `ContactForm`.

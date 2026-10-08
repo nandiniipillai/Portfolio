@@ -119,9 +119,23 @@ ten routes, clean console, green build, 14/14 static.
 - **"15% cost reduction" metric** — she cited it, but it is in **no source
   document** (interview reports, FOLIO, CV). SmartUp's report says no hard
   numbers exist. Get the source before writing it anywhere.
-- **Design-system artefact** — the one unclosed portfolio gap. Needs real token
-  values or a Figma export (tokens / components / before-after of a governed
-  screen). Do not fabricate a token sheet.
+- **Design-system artefact — CLOSED 2026-10-08.** Nandini supplied the
+  iLancaster Figma library pages (Navigation, Icons, Buttons, Colours,
+  Typography, spacing). `components/ISSDesignSystem.jsx` rebuilds it live on
+  iLancaster (colour, type, button anatomy, navigation components, spacing);
+  LUCA gets a short "inherited / adapted" section. Facts from her: the 80+
+  screens and the system are iLancaster's; it was shared across all ISS
+  products and adapted for LUCA; iLancaster had 3–4 designers over its life,
+  two at a time during her stint. Still open:
+  - **Confirm LUCA's "Adapted for LUCA" list** — drawn from shipped LUCA
+    screens, not from her. She should confirm or correct it.
+  - **Her ownership of the system** — not stated. Copy says "the system", never
+    "I built". CV claims "established and governed"; confirm before upgrading.
+  - **A second type spec** she sent (LUTitle Lexia 30, LUH1 Effra Bold 20, LUURL
+    style) is NOT iLancaster's scale and LUCA's screens show no Lexia. Origin
+    unknown (Lancaster web brand guide?) — ask before using.
+  - Dark-grey primary's hex and the light-grey text button are deliberately
+    omitted: their Figma labels contradict their fills.
 - **SmartUp quantified outcome** — none exists in any form. Needs a real number
   from her, or it stays qualitative.
 - **AI-framing conflict on Baari** — the raw report (`Baari_Case_Study_Raw_
