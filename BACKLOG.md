@@ -168,17 +168,25 @@ cleared 2026-08-04.
 - **Baari re-shot in the current design, 2026-10-19** — all stills and the
   video now come from a seeded demo workspace (see AGENTS "Every Baari shot is
   demo data"). Open with Nandini:
-  - **Copy facts not changed, need her call:** At-a-glance says "end-to-end
-    billing" and the Result card lists billing tiers, but the live pricing page
-    says "There's no billing yet" (Dodo payments are built but off). "Payment
-    integration" is also still listed as traded away. And "the Android app is in
-    internal testing" predates the owner side moving into the app.
-  - **Real customer-app status screen**: the decision uses the getbaari.in phone
-    illustration (captioned). Capturing the real Expo app needs a dev sign-in
-    the permission check blocked.
+  - [x] **Copy facts fixed 2026-10-19** (full pass after the app screens
+    arrived): no "end-to-end billing" anywhere — scope now names the dashboard,
+    the Android app's owner and customer sides and the public booking page;
+    "three plans" not "billing tiers"; payments "built, but switched off";
+    WhatsApp/SMS listed as traded away (push is the only channel); the rebrand
+    line is past tense ("when the rebrand came, it was a token swap").
+    **Still her call:** whether the app is still "in internal testing ahead of
+    its Play Store release".
+  - [x] **Real app screens in** (from her own captures, see AGENTS): each
+    role's screen under "Three roles", doctors + salon boards under the queue
+    decision, the Booked sheet beside the web booking sheet, the live token +
+    Discover for the customer app, and the language picker + Hindi queue in
+    Access. The getbaari.in illustration is gone.
+  - [x] **Design system section added** (`components/BaariDesignSystem.jsx`,
+    commit 94ffc6f). Its intro paragraph is new copy — Nandini to review.
   - **Two product bugs seen while capturing** (for Mayank): after Booked → Done,
     the new row vanishes from the queue until the next 15 s poll; and struck-out
-    slot times wrap ("12:10 / pm") in the booking sheet's slot grid.
+    slot times wrap ("12:10 / pm") in the booking sheet's slot grid. Plus a
+    sample-data slip in the app capture `69-customer-booked`: "12:40 am".
 
 ## Ideas / future build-out
 

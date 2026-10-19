@@ -46,6 +46,29 @@ function BrowserShot({ src, alt, url, aspect = '16/10', priority = false }) {
   );
 }
 
+// A real Android app screen (720×1520 captures from the app build, sample data).
+function Phone({ src, alt, caption, width = 200 }) {
+  return (
+    <figure className="mx-auto w-full" style={{ maxWidth: width }}>
+      <Zoom>
+        <Image
+          src={src}
+          alt={alt}
+          width={720}
+          height={1520}
+          sizes={`${width}px`}
+          className="w-full h-auto rounded-[20px] border border-white/[0.12]"
+        />
+      </Zoom>
+      {caption && (
+        <figcaption className="mt-2.5 text-[10px] tracking-[0.2em] uppercase text-ash text-center leading-relaxed">
+          {caption}
+        </figcaption>
+      )}
+    </figure>
+  );
+}
+
 // One design decision: product shot on one side, scannable pointers on the other.
 // `points` are the decision as short bullets; `why` is a single one-line rationale.
 function FeatureRow({ label, points, why, imgSide = 'left', media }) {
@@ -135,7 +158,7 @@ function WideFeature({ label, points, why, media }) {
 // Front-loaded summary: role (who owns what), scope (the honest numbers), outcome.
 const GLANCE = [
   ['My role', 'Sole product designer. I own design and product; a developer owns engineering. I designed the system as written specifications.'],
-  ['Scope', 'A web dashboard, an Android customer app and end-to-end billing — three surfaces on one backend, shipped in months.'],
+  ['Scope', 'A web dashboard, an Android app with owner and customer sides, and a public booking page — one backend, shipped in months.'],
   ['Outcome', 'Live at getbaari.in. A real clinic runs its day on the queue; the Android app is in internal testing.'],
 ];
 
@@ -274,6 +297,25 @@ export default function BaariPage() {
           <div className="mt-8">
             <ThreeRolesDiagram />
           </div>
+          <ScrollReveal>
+            <div className="grid grid-cols-3 gap-3 md:gap-8 max-w-3xl mx-auto pt-2">
+              <Phone
+                src="/assets/baari/app/owner-queue.png"
+                alt="Receptionist's Queue in the app — the teal band with Waiting 6, In consult 1, Done 2, Late 0; T4 in consult with Mark done; the waiting list with T5 marked Next"
+                caption="Receptionist · the queue"
+              />
+              <Phone
+                src="/assets/baari/app/owner-overview.png"
+                alt="Owner's Overview — the same band, a Next up card for T5, ₹1,400 earned today against a typical Monday, and the next three people coming up"
+                caption="Owner · the overview"
+              />
+              <Phone
+                src="/assets/baari/app/customer-live-status.png"
+                alt="Customer's live token — T7, 2 ahead of you, about 1 hour, with a notice that the doctor is running 30 minutes late"
+                caption="Customer · their token"
+              />
+            </div>
+          </ScrollReveal>
           <Prose>
             Three sets of needs competed for one product, so I fixed the priority and
             held every decision to it:
@@ -299,15 +341,31 @@ export default function BaariPage() {
               label="The queue board is the whole day"
               points={[
                 'Waiting and in-consult side by side, under live count tiles — each row triage-ready with token, time and reason, a clock for anyone late and a haldi dot for whoever is next.',
-                'The consult card runs a live timer, and labels adapt to the trade: “in chair”, “in consult”, “in session”.',
+                'The consult card runs a live timer and labels adapt to the trade (“in chair”, “in consult”); the board only grows when the business does: a card per doctor once a clinic has two, chairs for a salon that seats several at once.',
               ]}
               why="A receptionist mid-rush cannot tab-hunt, or translate generic software vocabulary."
               media={
-                <BrowserShot
-                  src="/assets/baari/v2-queue-board.png"
-                  alt="The queue board — waiting list with tokens, times and reasons, a late clock on T6 and the haldi Next dot on T8; the person in the chair on the right with a live timer, a visit count and Mark done"
-                  aspect="2280/1170"
-                />
+                <div className="space-y-6">
+                  <BrowserShot
+                    src="/assets/baari/v2-queue-board.png"
+                    alt="The queue board — waiting list with tokens, times and reasons, a late clock on T6 and the haldi Next dot on T8; the person in the chair on the right with a live timer, a visit count and Mark done"
+                    aspect="2280/1170"
+                  />
+                  <div className="grid grid-cols-2 gap-4 md:gap-10 max-w-md mx-auto">
+                    <Phone
+                      src="/assets/baari/app/owner-doctors-board.png"
+                      alt="The app's queue at a two-doctor clinic — filter chips for All, Dr Rao and Dr Mehta, and one in-consult card per doctor, each with Mark done, Running late and Pause"
+                      caption="Two doctors, a card each"
+                      width={190}
+                    />
+                    <Phone
+                      src="/assets/baari/app/owner-salon-board.png"
+                      alt="The app's queue at a salon — the band shows 5/6 chairs busy, and each person in the chair has their service, who they asked for and who did their last visit"
+                      caption="A salon, by chair"
+                      width={190}
+                    />
+                  </div>
+                </div>
               }
             />
             <FeatureRow
@@ -319,11 +377,17 @@ export default function BaariPage() {
               why="The customer is standing at the desk. Every extra screen is a queue forming behind them."
               imgSide="right"
               media={
-                <div className="mx-auto w-full max-w-[340px]">
+                <div className="grid grid-cols-2 gap-4 items-end max-w-[440px] mx-auto">
                   <BrowserShot
                     src="/assets/baari/v2-book-dialog.png"
-                    alt="New booking sheet — mobile and name under Who, service chips under What, and a day strip with a slot grid under When showing 6 of 24 slots free today"
+                    alt="New booking sheet on web — mobile and name under Who, service chips under What, and a day strip with a slot grid under When showing 6 of 24 slots free today"
                     aspect="1120/2096"
+                  />
+                  <Phone
+                    src="/assets/baari/app/owner-booked-sheet.png"
+                    alt="The app's Booked sheet — a green tick, token T11, the name, date, time and service, Notified in the Baari app, and buttons for Show in हिन्दी and Done"
+                    caption="Booked, in the app"
+                    width={210}
                   />
                 </div>
               }
@@ -383,21 +447,20 @@ export default function BaariPage() {
               why="The gates exist so the app never lies — it will not show a live position for a booking that is not today."
               imgSide="left"
               media={
-                <figure className="mx-auto w-full max-w-[380px]">
-                  <Zoom>
-                    <Image
-                      src="/assets/baari/v2-app-status.png"
-                      alt="Two customer app screens — T7 in large type with 2 ahead of you, about 25 minutes, and a token track; then the full-haldi your-turn screen reading आपकी बारी"
-                      width={1145}
-                      height={1205}
-                      sizes="380px"
-                      className="w-full h-auto rounded-2xl"
-                    />
-                  </Zoom>
-                  <figcaption className="mt-3 text-[11px] tracking-[0.24em] uppercase text-ash text-center">
-                    Waiting, then your turn — as shown on getbaari.in
-                  </figcaption>
-                </figure>
+                <div className="grid grid-cols-2 gap-4 max-w-[440px] mx-auto">
+                  <Phone
+                    src="/assets/baari/app/customer-live-status.png"
+                    alt="The customer's live token — T7 as the largest text, 2 ahead of you about 1 hour, with Dr Asha Rao, a notice that the doctor is running 30 minutes late, and Directions, Call and Calendar"
+                    caption="The live token"
+                    width={210}
+                  />
+                  <Phone
+                    src="/assets/baari/app/customer-discover.png"
+                    alt="Discover — the customer's places with an Open dot and the next free slot, Add a place by code, and businesses near you"
+                    caption="Discover"
+                    width={210}
+                  />
+                </div>
               }
             />
           </div>
@@ -456,28 +519,27 @@ export default function BaariPage() {
             phone belongs to one person. None of that is true at the desks Baari is for,
             so the constraints below were treated as requirements, not edge cases.
           </Prose>
-          <div className="grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_260px] gap-8 md:gap-12 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_400px] gap-8 md:gap-12 items-center">
             <SubList items={[
               'Bilingual English and Hindi throughout, with Devanagari names rendered properly rather than transliterated.',
               'Built for low-end Android and for dropouts — offline and patchy-connection states are P0, because clinic wifi and power are not givens.',
               'Identity handled for shared family phones, dual SIMs and recycled numbers, so a match can never leak one person’s history to another.',
             ]} />
             <ScrollReveal>
-              <figure className="mx-auto w-full max-w-[260px]">
-                <Zoom>
-                  <Image
-                    src="/assets/baari/v2-app-language.png"
-                    alt="The app's first screen — Choose your language, with English and हिन्दी cards, each showing a sample line, Your turn is next · T7, in its own script"
-                    width={1170}
-                    height={1080}
-                    sizes="260px"
-                    className="w-full h-auto rounded-2xl border border-white/[0.1]"
-                  />
-                </Zoom>
-                <figcaption className="mt-3 text-[11px] tracking-[0.24em] uppercase text-ash text-center leading-relaxed">
-                  The app opens on a language choice
-                </figcaption>
-              </figure>
+              <div className="grid grid-cols-2 gap-4 max-w-[400px] mx-auto">
+                <Phone
+                  src="/assets/baari/app/first-run-language.png"
+                  alt="The app's first screen — Choose your language, with English and हिन्दी cards, each showing a sample line, Your turn is next · T7, in its own script"
+                  caption="First run: pick a language"
+                  width={190}
+                />
+                <Phone
+                  src="/assets/baari/app/owner-queue-hindi.png"
+                  alt="The receptionist's queue in हिन्दी — the band reads लाइन में 6, डॉक्टर के पास 1, हो गए 2, लेट 0; Mark done reads हो गया; customers' names stay as they were typed"
+                  caption="The same queue, in हिन्दी"
+                  width={190}
+                />
+              </div>
             </ScrollReveal>
           </div>
           <Prose>
@@ -505,7 +567,7 @@ export default function BaariPage() {
         {/* 5. How two people shipped it */}
         <Section title="Two people, spec-driven, shipped in months">
           <Prose>
-            Baari is built by two people — I own design and product, a developer owns engineering. I designed in specifications: every screen defined as a numbered spec with exact layout order, verbatim UI copy, state gates and acceptance criteria. Implementation was AI-accelerated under the developer’s engineering ownership, which is how two people shipped a web dashboard, a mobile app and end-to-end billing. The UI was built against theme tokens — one primary color, one radius, one type scale — so the eventual rebrand is a token swap, not a repaint.
+            Baari is built by two people — I own design and product, a developer owns engineering. I designed in specifications: every screen defined as a numbered spec with exact layout order, verbatim UI copy, state gates and acceptance criteria. Implementation was AI-accelerated under the developer’s engineering ownership, which is how two people shipped a web dashboard, an Android app with owner and customer sides, and a public booking page. The UI was built against theme tokens — one primary color, one radius, one type scale — so when the rebrand came, it was a token swap, not a repaint.
           </Prose>
           <PullQuote>
             The spec is the design. My highest-leverage artifact was the written specification, not the mockup.
@@ -531,8 +593,8 @@ export default function BaariPage() {
         {/* 7. Deliberate cuts */}
         <Section title="What I traded away, on purpose">
           <SubList items={[
-            'Payment integration, until real signups show which market converts',
-            'WhatsApp reminders and broadcasts, pending a Meta BSP contract',
+            'Taking payments — built, but switched off until real signups show which market converts',
+            'WhatsApp and SMS — push notifications in the customer app are the only channel, and anyone without the app gets their token at the desk',
             'Multi-location support, deferred until chains ask',
             'Reviews, loyalty and granular notification settings',
           ]} />
@@ -550,21 +612,21 @@ export default function BaariPage() {
                 phase: 'Live',
                 headline: 'Shipped publicly at getbaari.in.',
                 support:
-                  'Dashboard, marketing site and three billing tiers with a 60-day Pro trial and automatic INR/USD regional pricing — running end-to-end on infrastructure under $50/month, with Cloudflare serving 90% of anonymous traffic from the edge.',
+                  'Dashboard, marketing site and three plans with a 60-day Pro trial and automatic INR/USD regional pricing — running end-to-end on infrastructure under $50/month, with Cloudflare serving 90% of anonymous traffic from the edge.',
               },
               {
                 num: '02',
                 phase: 'In real use',
                 headline: 'A real clinic runs its day on the queue.',
                 support:
-                  'One live pilot workspace serving real bookings. The Android customer app is in internal testing ahead of its Play Store release.',
+                  'One live pilot workspace serving real bookings. The Android app, owner and customer sides, is in internal testing ahead of its Play Store release.',
               },
               {
                 num: '03',
                 phase: 'Next',
                 headline: 'Traffic decides the roadmap.',
                 support:
-                  'Outreach to 20–30 clinics and salons, 30–50 trial workspaces, and payments built for whichever market shows real intent.',
+                  'Outreach to 20–30 clinics and salons, 30–50 trial workspaces, and payments switched on for whichever market shows real intent.',
               },
             ].map((row) => (
               <ScrollReveal key={row.num}>

@@ -278,17 +278,23 @@ caption may claim a real clinic: the hero says "shown with demo data".
 Seeded numbers (₹7,63,300, 464 bookings, 13 lapsed regulars) illustrate a
 feature and must **never** be framed as a business outcome.
 
-**Recapture recipe** (scratch only, never pushed): `E:aari-capture`
-(clone of Baari staging, ssl off for localhost:5433, devIndicators off),
-`E:aari-capture-db` (embedded Postgres on 5433: `node pg.mjs`;
-`node seed.mjs` picks a fixed-offset timezone where it's ~11:30 am now;
+**Recapture recipe** (scratch only, never pushed; moved under
+`E:\Projects\Baari\` on 2026-10-19): `baari-capture` (clone of Baari
+staging, ssl off for localhost:5433, devIndicators off) and
+`baari-capture-db` (embedded Postgres on 5433: `node pg.mjs`; `node
+seed.mjs` picks a fixed-offset timezone where it's ~11:30 am now;
 `shoot.mjs` for 2x stills, `record.mjs` for the booking loop; the demo
-login is in DEMO-CREDENTIALS.txt there). Dev server: `npx next dev -p
-4890` in the clone. Run node from PowerShell — Git Bash rewrites `/queue`
-into a Windows path. The customer/owner app (Expo web, scratch clone
-`E:aari-app-capture`) needs a sign-in step that the session's
-permission check blocked; the app-status image is the getbaari.in
-illustration, captioned as such.
+login is in DEMO-CREDENTIALS.txt there; some scripts still hard-code the
+old `E:\baari-capture-db` path). Dev server: `npx next dev -p 4890` in the
+clone. Run node from PowerShell — Git Bash rewrites `/queue` into a
+Windows path.
+
+**App screens come from Nandini's own captures**, not from us:
+`E:\Projects\Baari\Final App Screens\{English,Hindi}` — 191 English and
+193 Hindi PNGs at 720×1520, current design, sample data ("Sharma Clinic",
+"Glow Salon"). The ones used are copied to `public/assets/baari/app/`
+with plain names. Avoid `69-customer-booked` (it reads "12:40 am", a
+sample-data slip).
 
 ## Asset hygiene — filenames lie here
 
