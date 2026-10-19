@@ -58,7 +58,7 @@ rehash. Card `oneLiner`s are natural sentences, no em-dash tails.
 
 Pure black bg. Text silver `#F4F4F2`, secondary fog `#B4B4B0`, tertiary ash
 `#7A7A76` — **ash is a WCAG-AA floor, don't darken it**.
-Accents: Baari `#34D399`, LUCA `#F0576B`, iLancaster `#E4002B`, SmartUp `#7C5CFC`.
+Accents: Baari `#7ccfd7` (its brand "teal on dark"), LUCA `#F0576B`, iLancaster `#E4002B`, SmartUp `#7C5CFC`.
 
 ## Commands
 

@@ -81,7 +81,7 @@ Unknown routes redirect to `/` via `next.config.mjs`.
   secondary fog `#B4B4B0`, tertiary ash `#7A7A76`. **ash is a WCAG-AA
   floor** — it was lightened from `#6E6E6A` (4.06:1, failed AA) to
   `#7A7A76` (4.86:1). Don't darken it back; small labels use it.
-- **Accents**: Baari `#34D399` (green), LUCA `#F0576B` (red), iLancaster
+- **Accents**: Baari `#7ccfd7` (Baari's own brandInverse teal — the brand teal `#0d7a86` fails contrast as text on black), LUCA `#F0576B` (red), iLancaster
   `#E4002B` (dark red), SmartUp `#7C5CFC` (purple). Each case study wears
   its own accent throughout the shell.
 - **Nav**: fixed 56px, `bg-black/70` + `backdrop-blur-md`. On `/work/*` the
@@ -270,14 +270,25 @@ nothing clipped. Charts shorter than the ratio get bottom padding, which
 reads as breathing room on black; that's fine, horizontal clipping of
 words is not. Verify by reading the cropped PNG, not just the dimensions.
 
-**Two Baari workspaces exist in the recording.** The marketing-site demo
-(workspace "Pratiksha") has rich seeded data — full queues, populated
-Signal charts, revenue numbers. The logged-in pilot ("Smile Dental
-Clinic") is sparser. The hero uses the **pilot**, because its caption
-claims a real clinic's queue and that must stay literally true. Decision
-rows use the **demo**, because they need to show features the pilot's data
-doesn't yet exercise. Seeded numbers (₹1,42,600, 248 bookings) may
-illustrate a feature but must **never** be framed as a business outcome.
+**Every Baari shot is demo data (since 2026-10-19).** The case study was
+re-shot in the current "Mor and Haldi" design from a local copy of the
+staging build seeded with a fictional "Pratiksha Dental Clinic" — no
+pilot-clinic screenshots remain (they were removed from public/). So no
+caption may claim a real clinic: the hero says "shown with demo data".
+Seeded numbers (₹7,63,300, 464 bookings, 13 lapsed regulars) illustrate a
+feature and must **never** be framed as a business outcome.
+
+**Recapture recipe** (scratch only, never pushed): `E:aari-capture`
+(clone of Baari staging, ssl off for localhost:5433, devIndicators off),
+`E:aari-capture-db` (embedded Postgres on 5433: `node pg.mjs`;
+`node seed.mjs` picks a fixed-offset timezone where it's ~11:30 am now;
+`shoot.mjs` for 2x stills, `record.mjs` for the booking loop; the demo
+login is in DEMO-CREDENTIALS.txt there). Dev server: `npx next dev -p
+4890` in the clone. Run node from PowerShell — Git Bash rewrites `/queue`
+into a Windows path. The customer/owner app (Expo web, scratch clone
+`E:aari-app-capture`) needs a sign-in step that the session's
+permission check blocked; the app-status image is the getbaari.in
+illustration, captioned as such.
 
 ## Asset hygiene — filenames lie here
 

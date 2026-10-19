@@ -165,9 +165,20 @@ cleared 2026-08-04.
 - **SmartUp walkthrough** — uses 3 phone-tile videos instead of a single "See it
   in motion" section like the others. Left as-is; could consolidate for
   consistency.
-- **Baari hero vs demo** — hero uses the real pilot workspace, decision rows use
-  the seeded demo workspace. If she wants everything from the pilot, the trade is
-  losing the late-flag / retention / revenue evidence.
+- **Baari re-shot in the current design, 2026-10-19** — all stills and the
+  video now come from a seeded demo workspace (see AGENTS "Every Baari shot is
+  demo data"). Open with Nandini:
+  - **Copy facts not changed, need her call:** At-a-glance says "end-to-end
+    billing" and the Result card lists billing tiers, but the live pricing page
+    says "There's no billing yet" (Dodo payments are built but off). "Payment
+    integration" is also still listed as traded away. And "the Android app is in
+    internal testing" predates the owner side moving into the app.
+  - **Real customer-app status screen**: the decision uses the getbaari.in phone
+    illustration (captioned). Capturing the real Expo app needs a dev sign-in
+    the permission check blocked.
+  - **Two product bugs seen while capturing** (for Mayank): after Booked → Done,
+    the new row vanishes from the queue until the next 15 s poll; and struck-out
+    slot times wrap ("12:10 / pm") in the booking sheet's slot grid.
 
 ## Ideas / future build-out
 

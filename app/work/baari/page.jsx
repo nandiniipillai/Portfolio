@@ -9,7 +9,9 @@ import { Section, Prose, SubList, PullQuote } from '@/components/CaseBits';
 import ScrollReveal from '@/components/ScrollReveal';
 import CaseStudyNav from '@/components/CaseStudyNav';
 
-const ACCENT = '#34D399';
+// Baari's own "teal on dark" token (brandInverse #7ccfd7) — the brand teal
+// #0d7a86 is too dark to carry text on this black page.
+const ACCENT = '#7ccfd7';
 
 // Dark browser-framed product shot — matches the live product's own chrome.
 function BrowserShot({ src, alt, url, aspect = '16/10', priority = false }) {
@@ -231,14 +233,14 @@ export default function BaariPage() {
           <ScrollReveal>
             <div className="mx-auto max-w-6xl">
               <BrowserShot
-                src="/assets/baari/live-queue.png"
-                alt="Baari queue board at a live dental clinic — waiting list of tokens on the left, the patient currently in consult on the right"
+                src="/assets/baari/v2-queue-hero.png"
+                alt="Baari's queue board in the current design — count tiles for waiting, in chair, done and late; the waiting list with tokens, a late clock and the haldi Next dot; the person in the chair on the right"
                 url="getbaari.in"
-                aspect="1660/760"
+                aspect="1440/900"
                 priority
               />
               <p className="mt-3 text-[11px] tracking-[0.24em] uppercase text-ash text-center">
-                The live product — a real clinic&apos;s queue running on Baari
+                The queue board in the current design, shown with demo data
               </p>
             </div>
           </ScrollReveal>
@@ -295,32 +297,32 @@ export default function BaariPage() {
             <WideFeature
               label="The queue board is the whole day"
               points={[
-                'Waiting and in-consult side by side, under a live stats bar — each row triage-ready with token, reason, late flag and a returning-customer visit count.',
+                'Waiting and in-consult side by side, under live count tiles — each row triage-ready with token, time and reason, a clock for anyone late and a haldi dot for whoever is next.',
                 'The consult card runs a live timer, and labels adapt to the trade: “in chair”, “in consult”, “in session”.',
               ]}
               why="A receptionist mid-rush cannot tab-hunt, or translate generic software vocabulary."
               media={
                 <BrowserShot
-                  src="/assets/baari/demo-queue-full.png"
-                  alt="The queue board — waiting list on the left with tokens, reasons and late flags, the patient in consult on the right with a live timer"
-                  aspect="1342/536"
+                  src="/assets/baari/v2-queue-board.png"
+                  alt="The queue board — waiting list with tokens, times and reasons, a late clock on T6 and the haldi Next dot on T8; the person in the chair on the right with a live timer, a visit count and Mark done"
+                  aspect="2280/1170"
                 />
               }
             />
             <FeatureRow
               label="Booking and check-in are single gestures"
               points={[
-                'The whole booking is one side panel — never a wizard — with the day’s real availability inline, “13 of 20 slots free today”.',
+                'The whole booking is one sheet — never a wizard — with the day’s real availability inline, “6 of 24 slots free today”.',
                 'Check in, mark done and no-show are one tap each and land in the record automatically; anyone past their slot is flagged without being asked.',
               ]}
               why="The customer is standing at the desk. Every extra screen is a queue forming behind them."
               imgSide="right"
               media={
-                <div className="mx-auto w-full max-w-[380px]">
+                <div className="mx-auto w-full max-w-[340px]">
                   <BrowserShot
-                    src="/assets/baari/live-booking-panel.png"
-                    alt="New booking panel — patient name, mobile, reason, party size, first visit, and a slot grid showing 13 of 20 slots free today"
-                    aspect="580/744"
+                    src="/assets/baari/v2-book-dialog.png"
+                    alt="New booking sheet — mobile and name under Who, service chips under What, and a day strip with a slot grid under When showing 6 of 24 slots free today"
+                    aspect="1120/2096"
                   />
                 </div>
               }
@@ -328,49 +330,47 @@ export default function BaariPage() {
             <WideFeature
               label="Search is its own surface, not a filter"
               points={[
-                'Find anyone by name or 10-digit mobile, recent patients already listed before a key is pressed, every result opening a full profile.',
+                'Find anyone by name or mobile number, recent customers listed before a key is pressed, with one-tap views for who stopped coming and who no-showed.',
                 'A walk-in with no record joins as a guest on the spot, so an unknown face never blocks the queue.',
               ]}
               why="After the queue, looking someone up is the thing a front desk does most."
               media={
                 <BrowserShot
-                  src="/assets/baari/live-search.png"
-                  alt="Search — find a patient by name or 10-digit mobile, with a list of recent patients below"
-                  aspect="1444/578"
+                  src="/assets/baari/v2-customers.png"
+                  alt="Customers — a search field for name or mobile number, views for Recent, New this month, Stopped coming and No-shows, and a table of customers with visits, last visit and amount spent"
+                  aspect="2280/1130"
                 />
               }
             />
             <WideFeature
               label="The register that reads itself"
               points={[
-                'Silent churn, category revenue and cohort retention — the picture a paper register never showed, every number a byproduct of taps the desk already makes.',
+                'Earnings, who came back and which regulars stopped coming — the picture a paper register never showed, every number a byproduct of taps the desk already makes.',
                 'Where a chart has no data yet, the empty state names the next action instead of reading as broken.',
               ]}
               why="This is what the owner, who signs up and pays, is actually buying."
               media={
                 <BrowserShot
-                  src="/assets/baari/demo-signal-reports.png"
-                  alt="Signal reports — silent churn listing lapsed regulars, category revenue split across consultation, pharmacy and procedure, and a cohort retention matrix"
-                  aspect="1342/536"
+                  src="/assets/baari/v2-reports.png"
+                  alt="Reports — earned this month, the share of new customers who came back, and regulars who stopped coming; a bookings-by-hour chart and a Stopped coming list with a Call action on each regular"
+                  aspect="2400/1280"
                 />
               }
             />
-            <FeatureRow
+            <WideFeature
               label="The promises are part of the product"
               points={[
-                'No paid ranking, ever, and no lock-in — the patient list, booking history and revenue reports export at any time.',
-                'A 30-day billing notice, and nothing gets paywalled retroactively once a plan is picked.',
+                'No paid placement on the Baari app, and the data stays the owner’s — export on Pro, sent on request on any plan, and deleted for good when a workspace is.',
+                'No surprise charges: after the 60-day trial a workspace moves to Free on its own, with nothing to cancel.',
               ]}
               why="The incumbents sell placement and take a cut per consultation. Writing the opposite down, inside the product, is the positioning."
-              imgSide="right"
               media={
-                <div className="mx-auto w-full max-w-[400px]">
-                  <BrowserShot
-                    src="/assets/baari/live-promises.png"
-                    alt="Written promises — no paid ranking ever, and a 30-day billing notice"
-                    aspect="480/494"
-                  />
-                </div>
+                <BrowserShot
+                  src="/assets/baari/v2-promises.png"
+                  alt="What we promise, in writing — three cards: No paid placement, Your data is yours, and No surprise charges"
+                  url="getbaari.in/pricing"
+                  aspect="1655/620"
+                />
               }
             />
             <FeatureRow
@@ -382,26 +382,29 @@ export default function BaariPage() {
               why="The gates exist so the app never lies — it will not show a live position for a booking that is not today."
               imgSide="left"
               media={
-                <div className="mx-auto w-full max-w-[240px]">
+                <figure className="mx-auto w-full max-w-[380px]">
                   <Zoom>
                     <Image
-                      src="/assets/baari/customer-app.png"
-                      alt="Customer app — Discover nearby businesses with live next-slot times"
-                      width={300}
-                      height={534}
-                      sizes="240px"
-                      className="w-full h-auto rounded-2xl border border-white/[0.1]"
+                      src="/assets/baari/v2-app-status.png"
+                      alt="Two customer app screens — T7 in large type with 2 ahead of you, about 25 minutes, and a token track; then the full-haldi your-turn screen reading आपकी बारी"
+                      width={1145}
+                      height={1205}
+                      sizes="380px"
+                      className="w-full h-auto rounded-2xl"
                     />
                   </Zoom>
-                </div>
+                  <figcaption className="mt-3 text-[11px] tracking-[0.24em] uppercase text-ash text-center">
+                    Waiting, then your turn — as shown on getbaari.in
+                  </figcaption>
+                </figure>
               }
             />
           </div>
         </Section>
 
-        {/* 4b. Walkthrough — the core loop as a produced shot sequence (Remotion,
-             video-shotcraft cards, real 2x promo-stage captures; source at
-             E:\baari-video-src). Capped at the recording's native 1440px so it
+        {/* 4b. Walkthrough — the core loop, screen-recorded on a local copy of the
+             current build with a seeded demo workspace (recipe: AGENTS.md).
+             Capped at the recording's native 1440px so it
              never upscales; dark chrome on a black stage matches the product's
              own dark UI. */}
         <section className="py-6 md:py-10 px-5 md:px-10">
@@ -429,9 +432,9 @@ export default function BaariPage() {
                   </span>
                 </div>
                 <video
-                  src="/assets/baari/baari-walkthrough.mp4"
-                  poster="/assets/baari/baari-walkthrough-poster.jpg"
-                  aria-label="Guided tour of one Baari morning: the live queue, a desk booking with the 12:20 slot selected landing live as token T18, Mark done capturing a 450 rupee consultation while the queue advances to the next patient, a booking arriving on its own from the customer app, a walk-in added at the desk taking the next open slot, and the Signal report with revenue, category split and cohort retention"
+                  src="/assets/baari/baari-walkthrough-v2.mp4"
+                  poster="/assets/baari/baari-walkthrough-v2-poster.jpg"
+                  aria-label="A desk booking in the current design: the receptionist opens New booking, types a mobile number and a name, picks Cleaning and the 1:10 pm slot, books, and the Booked sheet confirms token T13 while the new row appears in the queue behind it"
                   autoPlay
                   muted
                   loop
@@ -452,11 +455,30 @@ export default function BaariPage() {
             phone belongs to one person. None of that is true at the desks Baari is for,
             so the constraints below were treated as requirements, not edge cases.
           </Prose>
-          <SubList items={[
-            'Bilingual English and Hindi throughout, with Devanagari names rendered properly rather than transliterated.',
-            'Built for low-end Android and for dropouts — offline and patchy-connection states are P0, because clinic wifi and power are not givens.',
-            'Identity handled for shared family phones, dual SIMs and recycled numbers, so a match can never leak one person’s history to another.',
-          ]} />
+          <div className="grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_260px] gap-8 md:gap-12 items-center">
+            <SubList items={[
+              'Bilingual English and Hindi throughout, with Devanagari names rendered properly rather than transliterated.',
+              'Built for low-end Android and for dropouts — offline and patchy-connection states are P0, because clinic wifi and power are not givens.',
+              'Identity handled for shared family phones, dual SIMs and recycled numbers, so a match can never leak one person’s history to another.',
+            ]} />
+            <ScrollReveal>
+              <figure className="mx-auto w-full max-w-[260px]">
+                <Zoom>
+                  <Image
+                    src="/assets/baari/v2-app-language.png"
+                    alt="The app's first screen — Choose your language, with English and हिन्दी cards, each showing a sample line, Your turn is next · T7, in its own script"
+                    width={1170}
+                    height={1080}
+                    sizes="260px"
+                    className="w-full h-auto rounded-2xl border border-white/[0.1]"
+                  />
+                </Zoom>
+                <figcaption className="mt-3 text-[11px] tracking-[0.24em] uppercase text-ash text-center leading-relaxed">
+                  The app opens on a language choice
+                </figcaption>
+              </figure>
+            </ScrollReveal>
+          </div>
           <Prose>
             No formal WCAG audit yet, and I won’t claim one — this is the access the
             context demanded: language, devices, connectivity, identity.

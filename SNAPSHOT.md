@@ -69,7 +69,7 @@ learnings, with a `CaseStudyNav` rail and a walkthrough where a recording exists
 
 | Study | Accent | Walkthrough | Notes |
 | --- | --- | --- | --- |
-| Baari | `#34D399` | yes (queue loop) | 6 decisions; hero = pilot workspace, rows = demo workspace; multi-user/async/access gaps closed |
+| Baari | `#7ccfd7` | yes (desk booking → Booked sheet) | 6 decisions; current "Mor and Haldi" design (2026-10-19); every shot is the seeded demo workspace, none from the pilot |
 | LUCA | `#F0576B` | yes | outcome leads with "16,000+ students" (deployment scale) |
 | iLancaster | `#E4002B` | yes | insider arc; 5 decisions incl. Search |
 | SmartUp | `#7C5CFC` | 3 phone tiles (no single walkthrough) | no quantified outcome exists |
