@@ -8,6 +8,7 @@ import CaseStudyShell from '@/components/CaseStudyShell';
 import { Section, Prose, SubList, PullQuote } from '@/components/CaseBits';
 import ScrollReveal from '@/components/ScrollReveal';
 import CaseStudyNav from '@/components/CaseStudyNav';
+import BaariDesignSystem from '@/components/BaariDesignSystem';
 
 // Baari's own "teal on dark" token (brandInverse #7ccfd7) — the brand teal
 // #0d7a86 is too dark to carry text on this black page.
@@ -483,6 +484,22 @@ export default function BaariPage() {
             No formal WCAG audit yet, and I won’t claim one — this is the access the
             context demanded: language, devices, connectivity, identity.
           </Prose>
+        </Section>
+
+        {/* 4d. Design system — Baari's own "Mor and Haldi" system, rebuilt live
+             from its tokens and decision record (components/BaariDesignSystem) */}
+        <Section title="A design system where every value has a reason">
+          <Prose>
+            Baari&apos;s first look was borrowed from another product, and it had no
+            character. I rebuilt the system over six rounds and settled each one with
+            a rendered side-by-side comparison or a measurement rather than taste: four
+            teals on the booking screen, four type scales on the queue, contrast
+            computed for every pair. Every value now records what it beat and why, so a
+            developer can always ask &ldquo;why is it like this?&rdquo; and get an
+            honest answer.
+          </Prose>
+          <PullQuote>Every colour has one job, and every state says its word.</PullQuote>
+          <BaariDesignSystem />
         </Section>
 
         {/* 5. How two people shipped it */}
