@@ -5,6 +5,15 @@ add what you found, tick what you closed, refresh `>RESUME HERE`.
 
 ## >RESUME HERE
 
+**LUCA 2026 rebuild sections, 2026-11-02 — needs a build check.** Added two
+sections to `app/work/luca/page.jsx` after the results (coded-prototype rebuild:
+3 `DecisionRow`s + a `MetricGrid`) and two learnings, with crops
+`public/assets/luca/prototype-{report,answers,live}.png`. Written on a machine
+with no Node, so **`npm run lint` and `npm run build` have not run** — run both
+and eyeball 375/768/1280 before pushing. New copy comes from the updated FOLIO
+file (`E:\Portfolio 2026\…\assets\LUCA\LUCA-case-study.md`); Nandini to approve
+the wording. Decision count is now 7 (4 + 3), one over the ~6 guideline.
+
 **Design audit for Digital Product Design roles, 2026-08-05.** Working the fix
 list below one item at a time. Done so far: title → "Product Designer"
 everywhere, flip card accessible, contact page reframed for hiring,

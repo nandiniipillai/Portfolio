@@ -5,7 +5,7 @@ import Zoom from 'react-medium-image-zoom';
 import 'react-medium-image-zoom/dist/styles.css';
 import { motion } from 'framer-motion';
 import CaseStudyShell from '@/components/CaseStudyShell';
-import { Section, Prose, SubList, PullQuote } from '@/components/CaseBits';
+import { Section, Prose, SubList, PullQuote, MetricCard, MetricGrid } from '@/components/CaseBits';
 import SlideFigure from '@/components/SlideFigure';
 import ScrollReveal from '@/components/ScrollReveal';
 import CaseStudyNav from '@/components/CaseStudyNav';
@@ -661,12 +661,101 @@ export default function LucaPage() {
           </PullQuote>
         </Section>
 
+        {/* 11b. The 2026 rebuild — a coded prototype of the shipped design. Shots are
+            feature crops from the prototype (light UI in the page's dark chrome); no
+            `url` on purpose, so the prototype never poses as luca.lancaster.ac.uk. */}
+        <Section title="Rebuilding LUCA as a coded prototype exposed what the Figma files hid">
+          <Prose>
+            After v1, I rebuilt LUCA&apos;s eleven dev-ready Figma exports as a working,
+            clickable prototype and refined the UI as I went. Auditing all thirty-odd frames
+            first showed how far the files had drifted: three product names, a progress label
+            reading &ldquo;40% complete&rdquo; beside &ldquo;5/27 tasks&rdquo;, around twelve
+            type sizes per screen, and six teals doing the same job.
+          </Prose>
+          <Prose>
+            Instead of inventing a palette, I took the design tokens straight from iLancaster
+            and kept them verbatim as the first layer of a three-layer token system. My first
+            heading typeface was rejected twice, and the root cause was a font stack that
+            quietly picked up an unrelated font installed on my machine. The fix mirrors
+            lancaster.ac.uk: Lexia Bold once per page for the title, Effra Bold for structure,
+            and Arial for everything students read.
+          </Prose>
+          <div className="mt-6">
+            <DecisionRow
+              label="Scores that coach rather than judge"
+              points={[
+                'Where v1 used red, amber and green, the prototype shows a figure and a band word: “68 /100 · Good”.',
+                'Red never appears on a score, so a weak answer reads as something to work on.',
+                'Competency bars carry labelled band marks, so the number has context.',
+              ]}
+              why="Students either over-trusted the AI or dismissed it. A score has to inform without passing judgement."
+              imgSide="left"
+              media={
+                <BrowserShot
+                  src="/assets/luca/prototype-report.png"
+                  alt="Prototype interview report: an overall score of 68 out of 100 marked Good, up 4 since the last interview, beside five competency bars with labelled band marks"
+                  aspect="1176/640"
+                />
+              }
+            />
+            <DecisionRow
+              label="Feedback that shows its working"
+              points={[
+                'Every generated block carries a source line.',
+                'Phrases in the student’s own answer link to the feedback point they support.',
+                'Typed answers get an honest estimate, labelled “Estimated by LUCA”.',
+              ]}
+              why="v1 taught me the hardest problem was calibrating trust, so the AI shows its sources."
+              imgSide="right"
+              media={
+                <BrowserShot
+                  src="/assets/luca/prototype-answers.png"
+                  alt="Prototype answers view: five questions with their scores and saved markers, and the first answer’s 7.5 Good verdict with a Save to retake action"
+                  aspect="1176/670"
+                />
+              }
+            />
+            <DecisionRow
+              label="Nothing lost mid-interview"
+              points={[
+                'Drafts save as students type, and leaving a live interview always asks first.',
+                'STAR coverage and the word count update beside the answer, and Submit stays in view.',
+              ]}
+              why="Practice only works if it feels safe to try."
+              imgSide="left"
+              media={
+                <BrowserShot
+                  src="/assets/luca/prototype-live.png"
+                  alt="Prototype live interview in Training mode: question 3 of 5 with a progress bar and timer, the student’s answer, a STAR coverage panel showing two of four parts covered, and the Submit answer button"
+                  aspect="1176/800"
+                />
+              }
+            />
+          </div>
+        </Section>
+
+        {/* 11c. Verification — real numbers from the prototype's own checks, not usage. */}
+        <Section title="The prototype is verified end to end, not just screenshotted" tone="sunken">
+          <MetricGrid>
+            <MetricCard value="51" label="Routes checked at desktop and tablet widths, with 0 errors" />
+            <MetricCard value="19/19" label="Contrast pairs passing WCAG AA in light and dark" />
+            <MetricCard value="6.0 → 7.5" label="The weakest answer’s score after a retake" />
+          </MetricGrid>
+          <Prose>
+            A final review found the same fact repeated two or three times on a screen. We kept
+            the section spacing and removed the duplicate lines instead, which lifted returning
+            students&apos; applications about 400px on Home.
+          </Prose>
+        </Section>
+
         {/* 12. What I learned */}
         <Section title="What I learned">
           <SubList items={[
             'Designing AI products means designing for appropriate trust. Copy, framing, feedback and feature boundaries all calibrate it.',
             'Institutional constraints are not blockers, they are the brief. GDPR and safeguarding shaped LUCA’s most defensible decisions.',
             'What a product refuses to do matters as much as what it does. LUCA coaches, it never generates, and it hands students back to humans at the moments that matter.',
+            'Build on the institution’s own design language. Taking iLancaster’s tokens verbatim made the prototype feel like the University’s product from the first screen.',
+            'When feedback says “not right”, look for the cause before changing the taste. The “childish” heading was a local font, not a style problem.',
             'Next time: set team-level must-haves up front with the PM and engineers, instead of negotiating scope round by round.',
           ]} />
         </Section>
