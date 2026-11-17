@@ -72,7 +72,7 @@ function DecisionRow({ label, points, why, src, alt, imgSide = 'left' }) {
 const GLANCE = [
   ['My role', 'Sole designer on a four-person squad, brought in as an outsourced freelancer. I owned discovery, journey mapping, IA, wireframes and the final prototype.'],
   ['Scope', 'An information-heavy desktop retail platform compressed onto a phone — inventory, sales, staff, reports and point of sale in one role-aware app.'],
-  ['Outcome', 'A validated prototype that test users asked to keep. Detosphere used it to raise funding, and engineers built it out after handoff.'],
+  ['Outcome', 'A validated prototype that test users asked to keep. The client used it to raise funding, and engineers built it out after handoff.'],
 ];
 
 function AtAGlance() {
@@ -246,7 +246,7 @@ export default function SmartUpPage() {
         meta={[
           ['Role', 'UX & Product Designer'],
           ['Team', ['Product Manager', 'Front-end developer', 'Back-end developer']],
-          ['Company', ['Detosphere Ltd.', 'ISS Innovation Hub']],
+          ['Type', ['Freelance', 'B2B retail SaaS']],
           ['Status', 'Built & adopted post-handoff'],
         ]}
       >
@@ -453,7 +453,7 @@ export default function SmartUpPage() {
                 phase: 'With stakeholders',
                 headline: 'The prototype outlived the design phase.',
                 support:
-                  'Detosphere used it internally in partnership and funding conversations.',
+                  'The client used it internally in partnership and funding conversations.',
               },
               {
                 num: '03',
