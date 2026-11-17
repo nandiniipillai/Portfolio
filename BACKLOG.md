@@ -5,6 +5,8 @@ add what you found, tick what you closed, refresh `>RESUME HERE`.
 
 ## >RESUME HERE
 
+**SmartUp v3 rebuilt, 2026-11-18.** Page follows the council plan (artifact BAgPa4SJBeqTtpukXxtHvN): shared header, hero swapped to `smartup-hero.png`, research by her own 3 interviews, roles, triage board, tab-bar diagram, 3 decisions with videos, cuts with costs, 01/02/03 result, 2025 design system + audit, learnings. Removed the AI-garbled `challenge-desktop/mobile.png` (scrambled text) and the untrimmed onboarding video; `onboarding-home.mp4` starts at the onboarding slides (5s) and ends on Home. `desktop-dashboard.png` is a real but low-res crop (481px) from her 2025 context slide; a sharper desktop capture would help. Build passes, no console errors, no overflow at 375/768/1280; **the visual look was never screenshotted** (pane hidden). `v2-2.jpg` and `mid-fi-exploration.jpg` are now unreferenced.
+
 **SmartUp client names removed, 2026-11-17 (615f992).** Company meta row is now
 `Type: Freelance / B2B retail SaaS`; Outcome and result 02 say "the client". Nandini:
 never name the client or the country; the product name SmartUp stays. Still wrong on
