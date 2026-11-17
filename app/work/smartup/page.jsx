@@ -336,7 +336,7 @@ const AUDIT = [
   ['Green text on the green change tiles', '#00A16B', '#C7F4CE', '2.7'],
   ['White text on the stat card, light end', '#FFFFFF', '#A178F7', '3.2'],
   ['White text on the stat card, dark end', '#FFFFFF', '#4C60DD', '5.2'],
-  ['Secondary text on white', '#505480', '#FFFFFF', '7.2'],
+  ['Secondary colour on white', '#505480', '#FFFFFF', '7.2'],
 ];
 
 function Chip({ fg, bg, children }) {
