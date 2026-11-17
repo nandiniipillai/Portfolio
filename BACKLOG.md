@@ -8,7 +8,7 @@ add what you found, tick what you closed, refresh `>RESUME HERE`.
 **SmartUp client names removed, 2026-11-17 (615f992).** Company meta row is now
 `Type: Freelance / B2B retail SaaS`; Outcome and result 02 say "the client". Nandini:
 never name the client or the country; the product name SmartUp stays. Still wrong on
-the page, pending the v3 copy (`E:\Portfolio 2026\…ssets\SmartUp\SmartUp-case-study-copy-v3.md`):
+the page, pending the v3 copy (`E:\Portfolio 2026\…\portfolio-developer\portfolio-developer\assets\SmartUp\SmartUp-case-study-copy-v3.md`):
 "no direct access to SmartUp’s retail users" (she did interview 3 users; the client
 ran the usability tests), "role-aware" (it is a mode the user switches), and the 2023
 dates visible in the screen captures (designed in 2025).
