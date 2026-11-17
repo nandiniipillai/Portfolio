@@ -5,6 +5,18 @@ add what you found, tick what you closed, refresh `>RESUME HERE`.
 
 ## >RESUME HERE
 
+**SmartUp client names removed, 2026-11-17 (615f992).** Company meta row is now
+`Type: Freelance / B2B retail SaaS`; Outcome and result 02 say "the client". Nandini:
+never name the client or the country; the product name SmartUp stays. Still wrong on
+the page, pending the v3 copy (`E:\Portfolio 2026\…ssets\SmartUp\SmartUp-case-study-copy-v3.md`):
+"no direct access to SmartUp’s retail users" (she did interview 3 users; the client
+ran the usability tests), "role-aware" (it is a mode the user switches), and the 2023
+dates visible in the screen captures (designed in 2025).
+
+**LUCA build check, 2026-11-17:** `next build` passes with the LUCA rebuild sections
+(all 14 routes prerender). `next lint` reported the files as ignored, so lint is
+effectively unrun; 375/768/1280 still not eyeballed.
+
 **LUCA 2026 rebuild sections, 2026-11-02 — needs a build check.** Added two
 sections to `app/work/luca/page.jsx` after the results (coded-prototype rebuild:
 3 `DecisionRow`s + a `MetricGrid`) and two learnings, with crops
