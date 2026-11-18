@@ -40,6 +40,18 @@ function DecisionVideo({ video, poster, caption }) {
   );
 }
 
+// A still screen in the same phone frame, for a decision about one screen.
+function DecisionStill({ src, alt, caption }) {
+  return (
+    <ScrollReveal>
+      <figure className="flex flex-col items-center">
+        <PhoneFrame src={src} alt={alt} className="!max-w-[260px]" />
+        <figcaption className={`mt-4 ${EYEBROW} text-ash text-center`}>{caption}</figcaption>
+      </figure>
+    </ScrollReveal>
+  );
+}
+
 // One design decision: a recording on one side, scannable pointers on the other.
 function DecisionRow({ label, points, why, media, imgSide = 'left' }) {
   const text = (
@@ -403,13 +415,13 @@ function SystemBoard() {
               <Chip fg="#6E5FE0" bg="#ECEAFE">Fully paid</Chip>
             </div>
             <div className="flex items-center gap-4">
-              <span className="inline-grid place-items-center h-11 px-6 rounded-xl text-white font-bold text-sm" style={{ background: '#8778F7' }}>Record Sale</span>
+              <span className="inline-grid place-items-center h-11 px-6 rounded-xl text-white font-bold text-sm whitespace-nowrap shrink-0" style={{ background: '#8778F7' }}>Record Sale</span>
               <span
-                className="w-14 h-14 grid place-items-center text-white text-3xl leading-none"
+                className="w-14 h-14 shrink-0 grid place-items-center text-white text-3xl leading-none"
                 style={{ background: '#7C6BF5', clipPath: 'polygon(50% 0, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%)' }}
                 aria-label="The hexagon New Sale button"
               >+</span>
-              <span className="text-xs" style={{ color: '#5F6183' }}>The hexagon sale button, centre of the tab bar</span>
+              <span className="text-xs min-w-0" style={{ color: '#5F6183' }}>The hexagon sale button, centre of the tab bar</span>
             </div>
           </div>
         </ScrollReveal>
@@ -489,9 +501,9 @@ export default function SmartUpPage() {
           <Prose>
             SmartUp Retail ran stock, sales, staff and spend, but only on a
             computer. Anyone on the shop floor had to walk back to a screen to
-            check stock or see the day’s sales. The client’s research tied that
-            gap to customers leaving. I joined as the sole designer to put the
-            product on a phone.
+            check stock or see the day’s sales. The client’s research showed
+            customers leaving, and teams on the move were stuck at a desk. I
+            joined as the sole designer to put the product on a phone.
           </Prose>
           <div className="pt-6">
             <DeskVsPhone />
@@ -549,7 +561,7 @@ export default function SmartUpPage() {
             <figure className="pt-4">
               <div className="rounded-2xl overflow-hidden border border-white/[0.08] bg-white">
                 <Zoom>
-                  <Image src="/assets/smartup/v2-6.jpg" alt="Wireframes of both concepts: five Control Panel screens, then two POS Lite screens with a centre sale button" width={1920} height={1080} sizes="(max-width: 1024px) 100vw, 1024px" className="w-full h-auto" />
+                  <Image src="/assets/smartup/wireframes-concepts.jpg" alt="Wireframes of both concepts: five Control Panel screens, then two POS Lite screens with a centre sale button" width={1816} height={522} sizes="(max-width: 1024px) 100vw, 1024px" className="w-full h-auto" />
                 </Zoom>
               </div>
               <figcaption className={`mt-3 ${EYEBROW} text-ash`}>Both concepts in wireframe. POS Lite is the two outlined screens on the right.</figcaption>
@@ -567,7 +579,7 @@ export default function SmartUpPage() {
                 'The sale button sits in the centre of the navigation, never inside a menu.',
               ]}
               why="A shop floor doesn’t need the company’s spend breakdown."
-              media={<DecisionVideo video="/assets/smartup/onboarding-home.mp4" poster="/assets/smartup/onboarding-home-poster.jpg" caption="First run, then Home" />}
+              media={<DecisionStill src="/assets/smartup/screen-home.png" alt="SmartUp Home: three numbers for today, recent sales, a stock request, and the hexagon sale button in the centre of the tab bar" caption="Home" />}
               imgSide="right"
             />
             <DecisionRow
@@ -630,8 +642,9 @@ export default function SmartUpPage() {
         {/* Design system, as shipped */}
         <Section title="One small system ran every screen." tone="sunken">
           <Prose>
-            The handoff was a style tile: a palette, two gradients, one icon set
-            and Albert Sans. I documented the system the screens actually used,
+            The visual system lived on one style tile: a palette, two gradients,
+            one icon set and Albert Sans. I documented the system the screens
+            actually used,
             then audited it a year later. Four of the six text pairings fail
             contrast, starting with the main button, which is the first thing I
             would fix.
