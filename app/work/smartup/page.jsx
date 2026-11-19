@@ -12,67 +12,81 @@ import CaseStudyNav from '@/components/CaseStudyNav';
 
 const ACCENT = '#7C5CFC';
 const EYEBROW = 'text-[11px] tracking-[0.24em] uppercase';
-const V4 = '/assets/smartup/v4';
 
-// A real screen in a phone frame, with an optional caption underneath.
-function Screen({ src, alt, caption, className = '' }) {
-  return (
-    <figure className={`flex flex-col items-center ${className}`}>
-      <PhoneFrame src={src} alt={alt} className="!max-w-none" />
-      {caption && <figcaption className="mt-3 text-ash text-xs md:text-sm text-center leading-snug max-w-[220px]">{caption}</figcaption>}
-    </figure>
-  );
-}
-
-// A recording in a phone frame. Muted loop, or a still with controls for reduced motion.
-function Recording({ video, poster, label }) {
+// A recording inside a phone frame. Autoplays muted and loops, except for
+// people with reduced motion on: they get a still poster and controls.
+function DecisionVideo({ video, poster, caption }) {
   const reduce = useReducedMotion();
   return (
-    <figure className="flex flex-col items-center">
-      <PhoneFrame className="!max-w-[300px]">
-        <video
-          className="absolute inset-0 w-full h-full object-cover"
-          src={video}
-          poster={poster}
-          autoPlay={!reduce}
-          controls={!!reduce}
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          aria-label={`Screen recording: ${label}`}
-        />
-      </PhoneFrame>
-      <figcaption className={`mt-4 ${EYEBROW} text-ash`}>{label}</figcaption>
-    </figure>
+    <ScrollReveal>
+      <figure className="flex flex-col items-center">
+        <PhoneFrame className="!max-w-[260px]">
+          <video
+            className="absolute inset-0 w-full h-full object-cover"
+            src={video}
+            poster={poster}
+            autoPlay={!reduce}
+            controls={!!reduce}
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            aria-label={caption}
+          />
+        </PhoneFrame>
+        <figcaption className={`mt-4 ${EYEBROW} text-ash text-center`}>{caption}</figcaption>
+      </figure>
+    </ScrollReveal>
   );
 }
 
-// Hero: three real, flat screens at full width, the way the other studies open on their product.
-function Hero() {
+// A still screen in the same phone frame, for a decision about one screen.
+function DecisionStill({ src, alt, caption }) {
   return (
-    <section className="py-10 md:py-14 px-5 md:px-10">
-      <ScrollReveal>
-        <div
-          className="mx-auto max-w-7xl rounded-2xl border border-white/[0.05] px-6 md:px-16 pt-10 md:pt-14 pb-0 overflow-hidden"
-          style={{ background: `radial-gradient(70% 80% at 50% 30%, ${ACCENT}40, #0b0b0c 75%)` }}
-        >
-          {/* One screen on phones, three from tablet up, so nothing shrinks to a thumbnail. */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-10 max-w-4xl mx-auto items-end">
-            <div className="hidden sm:block translate-y-6 md:translate-y-10"><PhoneFrame src={`${V4}/pos-list.jpg`} alt="SmartUp Point of Sale: products with prices and stock, two items selected" className="!max-w-none" /></div>
-            <div className="w-full max-w-[240px] sm:max-w-none mx-auto"><PhoneFrame src={`${V4}/charge.jpg`} alt="SmartUp charge sheet: payment method, amount tendered and the change tiles" className="!max-w-none" /></div>
-            <div className="hidden sm:block translate-y-6 md:translate-y-10"><PhoneFrame src={`${V4}/stock-list.jpg`} alt="SmartUp Inventory: warehouse stock with Safe, Warning and Unknown labels" className="!max-w-none" /></div>
-          </div>
-        </div>
-      </ScrollReveal>
-    </section>
+    <ScrollReveal>
+      <figure className="flex flex-col items-center">
+        <PhoneFrame src={src} alt={alt} className="!max-w-[260px]" />
+        <figcaption className={`mt-4 ${EYEBROW} text-ash text-center`}>{caption}</figcaption>
+      </figure>
+    </ScrollReveal>
+  );
+}
+
+// One design decision: a recording on one side, scannable pointers on the other.
+function DecisionRow({ label, points, why, media, imgSide = 'left' }) {
+  const text = (
+    <ScrollReveal>
+      <div className="space-y-3">
+        <div className={`${EYEBROW} text-ash`}>Design decision</div>
+        <h3 className="font-heading tracking-tightest text-silver text-xl md:text-2xl leading-tight">{label}</h3>
+        <ul className="space-y-2 mt-1">
+          {points.map((p, i) => (
+            <li key={i} className="pl-5 relative text-fog text-sm md:text-base leading-relaxed">
+              <span className="absolute left-0 top-2 w-1.5 h-1.5 rounded-full" style={{ background: ACCENT }} aria-hidden="true" />
+              {p}
+            </li>
+          ))}
+        </ul>
+        {why && (
+          <p className="text-fog text-sm leading-relaxed pt-1">
+            <span className={`${EYEBROW} mr-2`} style={{ color: ACCENT }}>Why</span>
+            {why}
+          </p>
+        )}
+      </div>
+    </ScrollReveal>
+  );
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center py-8 md:py-10 border-t border-white/[0.06] first:border-t-0">
+      {imgSide === 'left' ? <>{media}{text}</> : <><div className="order-2 md:order-1">{text}</div><div className="order-1 md:order-2">{media}</div></>}
+    </div>
   );
 }
 
 // Front-loaded summary: freelance reality, own interviews, PM holding the call.
 const GLANCE = [
   ['My role', 'Sole designer on a four-person team, brought in as a freelancer. I ran the user interviews and owned journey mapping, IA, wireframes and the final prototype.'],
-  ['Scope', 'Inventory, sales, staff, reports and point of sale, moved from a desktop platform onto one phone app for managers and floor staff.'],
+  ['Scope', 'Inventory, sales, staff, reports and point of sale, moved from a desktop platform onto one phone app with a switch between modes.'],
   ['Outcome', 'A validated prototype that test users asked to keep. The client used it in funding talks, and engineers built it out after handoff.'],
 ];
 
@@ -91,63 +105,47 @@ function AtAGlance() {
   );
 }
 
-// The 2025 desktop home, redrawn as a schematic of its real layout.
-const DESK_COUNTERS = ['Open branches', 'Closed branches', 'Active staff', 'Inactive staff'];
-// Three columns, each as on the real 2025 desktop: [panel, tall?]
-const DESK_COLUMNS = [
-  [['Payment modes by sales', true], ['Transfers', false]],
-  [['Last 30 days', false], ['Transfer requests', false]],
-  [['Your business at a glance', true], ['Top products by sales', false]],
-];
-
-function DeskSchematic() {
+function Showcase({ src, alt, aspect = '16/9' }) {
   return (
-    <div className="rounded-xl border border-white/[0.12] bg-white/[0.03] p-3 md:p-4">
-      <div className="flex gap-3">
-        <div className="hidden sm:flex flex-col gap-2 w-8 shrink-0 pt-1" aria-hidden="true">
-          {Array.from({ length: 8 }).map((_, i) => <span key={i} className="h-5 rounded bg-white/[0.07]" />)}
-        </div>
-        <div className="flex-1 min-w-0 space-y-3">
-          <div className="text-center text-fog text-xs">Good morning</div>
-          <div className="flex flex-wrap justify-center gap-1.5">
-            {DESK_COUNTERS.map((c) => <span key={c} className="text-[10px] md:text-[11px] text-fog rounded-full border border-white/[0.14] px-2 py-0.5">{c}</span>)}
-          </div>
-          <div className="grid grid-cols-3 gap-2">
-            {DESK_COLUMNS.map((col, c) => (
-              <div key={c} className="flex flex-col gap-2">
-                {col.map(([name, tall]) => (
-                  <div key={name} className={`rounded-lg border border-white/[0.12] bg-white/[0.04] p-2 ${tall ? 'h-[96px] md:h-[124px]' : 'h-[52px] md:h-[64px]'}`}>
-                    <div className="text-[10px] md:text-xs text-silver leading-tight">{name}</div>
-                    <div className="mt-1.5 space-y-1" aria-hidden="true">
-                      <span className="block h-1 rounded bg-white/[0.1] w-4/5" />
-                      <span className="block h-1 rounded bg-white/[0.1] w-3/5" />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ))}
+    <section className="py-10 md:py-14 px-5 md:px-10">
+      <ScrollReveal>
+        <div className="mx-auto max-w-7xl">
+          <div
+            className="relative rounded-2xl overflow-hidden border border-white/[0.05]"
+            style={{ aspectRatio: aspect, background: `radial-gradient(60% 70% at 50% 45%, ${ACCENT}38, #0b0b0c 72%)` }}
+          >
+            <Image src={src} alt={alt} fill priority sizes="(max-width: 768px) 100vw, 90vw" className="object-contain p-6 md:p-10" />
           </div>
         </div>
-      </div>
-    </div>
+      </ScrollReveal>
+    </section>
   );
 }
 
+// The desktop home against the mobile home, with the counts that make the cut visible.
 function DeskVsPhone() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-[1.6fr_1fr] gap-8 md:gap-12 items-end">
       <ScrollReveal>
         <figure>
-          <DeskSchematic />
+          <div className="relative w-full max-w-[481px] mx-auto md:mx-0" style={{ aspectRatio: '481/279' }}>
+            <Zoom>
+              <Image src="/assets/smartup/desktop-dashboard.png" alt="The SmartUp desktop home: six panels of payments, customers, transfers, purchases, sales and top products" fill sizes="481px" className="object-contain" />
+            </Zoom>
+          </div>
           <figcaption className="mt-5 border-t border-white/[0.12] pt-3">
             <div className="font-heading text-silver text-2xl md:text-3xl tracking-tightest">6 panels, 4 counters</div>
-            <div className="text-ash text-sm mt-1">The desktop home, redrawn from the 2025 product</div>
+            <div className="text-ash text-sm mt-1">Desktop home, more than 30 figures</div>
           </figcaption>
         </figure>
       </ScrollReveal>
       <ScrollReveal>
-        <figure className="max-w-[220px] mx-auto md:mx-0 w-full">
-          <PhoneFrame src={`${V4}/home.jpg`} alt="The SmartUp mobile Home: three numbers for today, recent sales, a stock request and a New Sale card" className="!max-w-none" />
+        <figure className="max-w-[220px] mx-auto md:mx-0">
+          <div className="relative w-full rounded-[28px] overflow-hidden border border-white/[0.12]" style={{ aspectRatio: '468/1013' }}>
+            <Zoom>
+              <Image src="/assets/smartup/screen-home.png" alt="The SmartUp mobile Home: three numbers for today, recent sales, a stock request and a New Sale card" fill sizes="220px" className="object-cover" />
+            </Zoom>
+          </div>
           <figcaption className="mt-5 border-t border-white/[0.12] pt-3">
             <div className="font-heading text-2xl md:text-3xl tracking-tightest" style={{ color: ACCENT }}>3 numbers</div>
             <div className="text-ash text-sm mt-1">Then 2 lists and 1 action</div>
@@ -158,42 +156,78 @@ function DeskVsPhone() {
   );
 }
 
-// The 2025 journey map, rebuilt from its own stages, feelings and opportunities.
-const JOURNEY = [
-  ['Onboarding', 'Excited and curious', 'Brief information to get started, and a simple log-in.'],
-  ['Home', 'Expectant and eager to explore', 'Show the key navigation well, with quick ways to explore.'],
-  ['Track inventory', 'Productive and in control', 'Simple ways to show data without overwhelming anyone.'],
-  ['Track sales', 'Anxious but open-minded', 'Clear tips and help in context, through the process.'],
-  ['Point of sale', 'Confused but…', 'Keep the flow simple, straightforward and informative…'],
+// How research worked when testing belonged to the client.
+const LOOP = [
+  ['Three user interviews', 'plus the client’s research document'],
+  ['Needs, split by role', 'what each person must do in the moment'],
+  ['Prototype round', 'both concepts first, then one app'],
+  ['Client test, with my question list', 'answers came back through the product manager'],
 ];
 
-function JourneyMap() {
+function ResearchLoop() {
   return (
     <ScrollReveal>
-      <figure className="rounded-2xl border border-white/[0.08] bg-white/[0.02] p-5 md:p-7">
-        <div className="flex items-center gap-3 mb-5">
-          <span className="w-10 h-10 rounded-full grid place-items-center font-medium" style={{ background: `${ACCENT}24`, color: '#A48BFF' }}>SO</span>
-          <div>
-            <div className="text-silver font-medium">Store owner</div>
-            <div className="text-ash text-sm">The persona on my 2025 journey map</div>
-          </div>
-        </div>
-        <ol className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
-          {JOURNEY.map(([stage, feeling, opportunity], i) => {
-            const low = i === JOURNEY.length - 1;
+      <div className="rounded-2xl border border-white/[0.08] bg-white/[0.02] p-5 md:p-8">
+        <ol className="grid grid-cols-1 md:grid-cols-4 gap-3">
+          {LOOP.map(([title, sub], i) => {
+            const hot = i === LOOP.length - 1;
             return (
-              <li key={stage} className="rounded-xl border p-4 flex flex-col gap-3" style={low ? { borderColor: `${ACCENT}8c`, background: `${ACCENT}1a` } : { borderColor: 'rgba(255,255,255,0.08)' }}>
-                <div className={`${EYEBROW} text-ash`}>{String(i + 1).padStart(2, '0')}</div>
-                <div className="text-silver font-medium leading-tight">{stage}</div>
-                <div className="text-sm leading-snug" style={{ color: low ? '#C9B8FF' : '#A48BFF' }}>{feeling}</div>
-                <div className="mt-auto rounded-lg bg-white/[0.04] p-3 text-fog text-sm leading-snug">{opportunity}</div>
+              <li
+                key={title}
+                className="rounded-xl border p-4 flex md:flex-col gap-3"
+                style={hot ? { borderColor: `${ACCENT}8c`, background: `${ACCENT}1f` } : { borderColor: 'rgba(255,255,255,0.08)', background: 'rgba(255,255,255,0.02)' }}
+              >
+                <span
+                  className="shrink-0 w-8 h-8 rounded-full grid place-items-center text-xs font-medium"
+                  style={hot ? { background: ACCENT, color: '#fff' } : { background: 'rgba(255,255,255,0.06)', color: '#B4B4B0' }}
+                >
+                  {i + 1}
+                </span>
+                <span>
+                  <span className="block text-silver text-sm md:text-base font-medium leading-snug">{title}</span>
+                  <span className="block text-ash text-sm mt-1 leading-snug">{sub}</span>
+                </span>
               </li>
             );
           })}
         </ol>
-        <figcaption className="mt-4 text-ash text-sm">Rebuilt from my 2025 journey map: its stages, the feeling at each, and the opportunity I wrote for it. The last column runs off the edge of the original slide, so it is shown as far as it is legible.</figcaption>
-      </figure>
+        <div className="mt-4 text-right text-xs tracking-[0.12em] uppercase" style={{ color: ACCENT }}>↺ into the next round</div>
+      </div>
     </ScrollReveal>
+  );
+}
+
+const ROLES = [
+  ['O', 'Owner', 'Pays for SmartUp · away from the shop', 'Is today on track?', 'The full spend breakdown'],
+  ['M', 'Manager', 'Runs a branch · on the floor', 'Stock, staff and requests waiting', 'Logistics reports'],
+  ['S', 'Floor staff', 'Mid-sale · customer waiting', 'Find it, charge it, give change', 'Everything else'],
+];
+
+function RoleCards() {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      {ROLES.map(([initial, who, where, need, never]) => (
+        <ScrollReveal key={who}>
+          <div className="h-full rounded-2xl border border-white/[0.08] bg-white/[0.02] p-5 md:p-6 space-y-4">
+            <div className="flex items-center gap-3">
+              <span className="w-11 h-11 rounded-full grid place-items-center font-medium" style={{ background: `${ACCENT}24`, color: '#A48BFF' }}>{initial}</span>
+              <div>
+                <div className="font-heading text-silver text-lg tracking-tight">{who}</div>
+                <div className="text-ash text-sm">{where}</div>
+              </div>
+            </div>
+            <div className="rounded-xl bg-white/[0.04] p-4">
+              <div className={`${EYEBROW} text-ash mb-1`}>Needs in 10 seconds</div>
+              <p className="text-silver text-base">{need}</p>
+            </div>
+            <div className="px-1">
+              <div className={`${EYEBROW} text-ash mb-1`}>Never on a phone</div>
+              <p className="text-ash text-base line-through decoration-white/30">{never}</p>
+            </div>
+          </div>
+        </ScrollReveal>
+      ))}
+    </div>
   );
 }
 
@@ -227,7 +261,9 @@ function TriageBoard() {
               style={desk ? { background: 'repeating-linear-gradient(135deg, transparent 0 10px, rgba(255,255,255,0.03) 10px 11px)' } : undefined}
             >
               <div>
-                <div className="font-heading text-5xl tracking-tightest leading-none" style={{ color: phone ? '#A48BFF' : desk ? '#7A7A76' : '#F4F4F2' }}>{col.items.length}</div>
+                <div className="font-heading text-5xl tracking-tightest leading-none" style={{ color: phone ? '#A48BFF' : desk ? '#7A7A76' : '#F4F4F2' }}>
+                  {col.items.length}
+                </div>
                 <div className="font-heading text-silver text-lg mt-2">{col.title}</div>
                 <div className="text-ash text-sm">{col.note}</div>
               </div>
@@ -278,7 +314,7 @@ function NavEvolution() {
             <text x="0" y="96" fill="#7A7A76" fontSize="13.5">for managers</text>
             {tab(227, 52, 'Home')}{tab(387, 52, 'Inventory')}{tab(547, 52, 'Sales')}{tab(707, 52, 'Staff', true)}{tab(867, 52, 'Reports', true)}
             <text x="0" y="246" fill="#F4F4F2" fontSize="19" fontWeight="600">Shipped app</text>
-            <text x="0" y="268" fill="#7A7A76" fontSize="13.5">one app, both roles</text>
+            <text x="0" y="268" fill="#7A7A76" fontSize="13.5">one app, a mode switch</text>
             <rect x="213" y="206" width="794" height="88" rx="22" fill="none" stroke={ACCENT} strokeWidth="1.5" />
             {tab(227, 222, 'Home')}{tab(387, 222, 'Inventory')}{plus(222)}{tab(707, 222, 'Sales')}{tab(867, 222, 'More', true)}
             <text x="1004" y="320" textAnchor="end" fill="#A48BFF" fontSize="13.5">holds Staff and Reports</text>
@@ -296,102 +332,16 @@ function NavEvolution() {
   );
 }
 
-// The 2025 IA map, rebuilt from its own labels.
-const IA = [
-  ['Home', ['Search', 'Summary report', 'Recent sales', 'Requests', 'New sale']],
-  ['Inventory', ['Warehouse stock', 'Stock transfer', 'Stock requests', 'Stock adjustments', 'Filter']],
-  ['Sales', ['Sales summary', 'Sales transactions', 'Individual sale items']],
-  ['More', ['Staff', 'Reports', 'Notifications', 'Display settings', 'Sync data', 'Help centre', 'Feedback', 'Log out']],
+// The 2025 system as it shipped, documented from the screens, with an honest audit.
+const PALETTE = [
+  ['Primary purple', '#8778F7'],
+  ['Primary green', '#00A16B'],
+  ['Light purple', '#C8C8F8'],
+  ['Light green', '#C7F4CE'],
+  ['Secondary', '#505480'],
+  ['Neutral', '#E7E7E7'],
 ];
-
-function IAMap() {
-  return (
-    <ScrollReveal>
-      <figure className="rounded-2xl border border-white/[0.08] bg-white/[0.02] p-5 md:p-7">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          {IA.map(([tab, items]) => (
-            <div key={tab} className="rounded-xl border border-white/[0.08] overflow-hidden">
-              <div className="px-4 py-3 text-silver font-medium border-b border-white/[0.08]" style={tab === 'More' ? { background: `${ACCENT}24`, color: '#C9B8FF' } : undefined}>{tab}</div>
-              <ul className="p-4 space-y-1.5">
-                {items.map((it) => (
-                  <li key={it} className="text-sm" style={tab === 'More' && (it === 'Staff' || it === 'Reports') ? { color: '#A48BFF' } : { color: '#B4B4B0' }}>{it}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-        <figcaption className="mt-4 text-ash text-sm">Rebuilt from my 2025 IA map. Staff and Reports, two whole tabs in the Control Panel, became two rows under More.</figcaption>
-      </figure>
-    </ScrollReveal>
-  );
-}
-
-// The hardest flow, five real screens in order.
-const SALE_FLOW = [
-  ['pos-list', 'Pick items', 'Tap + to add. A bar counts what is selected.'],
-  ['process-sale', 'Process the sale', 'Quantity and discount per item, then the customer type.'],
-  ['charge', 'Charge the customer', 'Payment method and amount; the tiles work out the change.'],
-  ['recorded', 'Sale recorded', 'A clear confirmation before anything else.'],
-  ['receipt', 'Receipt', 'Print or email it, then straight into a new sale.'],
-];
-
-function SaleFlow() {
-  return (
-    <ol className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-4 md:gap-x-5 gap-y-10">
-      {SALE_FLOW.map(([file, step, line], i) => (
-        <li key={file} className="min-w-0">
-          <ScrollReveal>
-            <div className={`${EYEBROW} mb-3`} style={{ color: ACCENT }}>{String(i + 1).padStart(2, '0')} · {step}</div>
-            <PhoneFrame src={`${V4}/${file}.jpg`} alt={`Point of sale, step ${i + 1}: ${step}`} className="!max-w-none" />
-            <p className="mt-3 text-fog text-sm leading-snug">{line}</p>
-          </ScrollReveal>
-        </li>
-      ))}
-    </ol>
-  );
-}
-
-// One design decision: real screens on one side, scannable pointers on the other.
-function DecisionRow({ label, points, why, media, imgSide = 'left', wide = false }) {
-  const text = (
-    <ScrollReveal>
-      <div className="space-y-3">
-        <div className={`${EYEBROW} text-ash`}>Design decision</div>
-        <h3 className="font-heading tracking-tightest text-silver text-xl md:text-2xl leading-tight">{label}</h3>
-        <ul className="space-y-2 mt-1">
-          {points.map((p, i) => (
-            <li key={i} className="pl-5 relative text-fog text-sm md:text-base leading-relaxed">
-              <span className="absolute left-0 top-2 w-1.5 h-1.5 rounded-full" style={{ background: ACCENT }} aria-hidden="true" />
-              {p}
-            </li>
-          ))}
-        </ul>
-        {why && (
-          <p className="text-fog text-sm leading-relaxed pt-1">
-            <span className={`${EYEBROW} mr-2`} style={{ color: ACCENT }}>Why</span>
-            {why}
-          </p>
-        )}
-      </div>
-    </ScrollReveal>
-  );
-  if (wide) {
-    // Pointers first, then the screens across the full width, so three phones stay readable.
-    return (
-      <div className="py-10 md:py-12 border-t border-white/[0.06] first:border-t-0 space-y-8">
-        <div className="max-w-2xl">{text}</div>
-        {media}
-      </div>
-    );
-  }
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)] gap-8 md:gap-12 items-center py-10 md:py-12 border-t border-white/[0.06] first:border-t-0">
-      {imgSide === 'left' ? <>{media}{text}</> : <><div className="order-2 md:order-1">{text}</div><div className="order-1 md:order-2">{media}</div></>}
-    </div>
-  );
-}
-
-// The 2025 system as it shipped: the tile, four real crops, and an honest audit.
+const GRADIENTS = [['Stat card', '#A178F7', '#4C60DD'], ['Splash', '#59519A', '#7268C4']];
 const AUDIT = [
   ['White text on the primary button', '#FFFFFF', '#8778F7', '3.5'],
   ['Purple prices and links on white', '#8778F7', '#FFFFFF', '3.5'],
@@ -400,12 +350,15 @@ const AUDIT = [
   ['White text on the stat card, dark end', '#FFFFFF', '#4C60DD', '5.2'],
   ['Secondary colour on white', '#505480', '#FFFFFF', '7.2'],
 ];
-const CROPS = [
-  ['ds-stat-card.png', 600, 174, 'Stat card', 'Three numbers for today. The only gradient in the app.'],
-  ['ds-tab-bar.png', 620, 136, 'Tab bar', 'The hexagon lifts the sale above the bar.'],
-  ['ds-stock-rows.png', 600, 509, 'Status labels', 'Safe, Warning, Unknown: a word instead of a count.'],
-  ['ds-button-pair.png', 556, 90, 'Button pair', 'Two equal buttons. White on this purple is 3.5 to 1.'],
-];
+
+function Chip({ fg, bg, children }) {
+  return (
+    <span className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold" style={{ color: fg, background: bg }}>
+      <span className="w-1.5 h-1.5 rounded-full" style={{ background: fg }} aria-hidden="true" />
+      {children}
+    </span>
+  );
+}
 
 function SystemBoard() {
   return (
@@ -417,21 +370,63 @@ function SystemBoard() {
           </Zoom>
         </div>
       </ScrollReveal>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {CROPS.map(([file, w, h, name, note]) => (
-          <ScrollReveal key={file}>
-            <figure className="h-full rounded-2xl border border-white/[0.08] overflow-hidden flex flex-col">
-              <div className="flex-1 grid place-items-center p-5" style={{ background: '#F6F5F8' }}>
-                <Image src={`${V4}/${file}`} alt={`${name}, cropped from the 2025 screens`} width={w} height={h} sizes="(max-width: 768px) 90vw, 440px" className="w-full h-auto max-w-[440px] rounded-md" />
-              </div>
-              <figcaption className="px-5 py-4 border-t border-white/[0.08]">
-                <div className="text-silver font-medium">{name}</div>
-                <div className="text-fog text-sm mt-0.5">{note}</div>
-              </figcaption>
-            </figure>
-          </ScrollReveal>
-        ))}
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <ScrollReveal>
+          <div className="h-full rounded-2xl border border-white/[0.08] bg-white/[0.02] p-5 md:p-6 space-y-5">
+            <div className={`${EYEBROW} text-ash`}>Colour, named and checked</div>
+            <div className="grid grid-cols-3 gap-3">
+              {PALETTE.map(([name, hex]) => (
+                <div key={hex}>
+                  <div className="h-12 rounded-lg border border-white/[0.08]" style={{ background: hex }} />
+                  <div className="text-silver text-xs mt-2">{name}</div>
+                  <div className="text-ash text-xs font-mono">{hex}</div>
+                </div>
+              ))}
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              {GRADIENTS.map(([name, a, b]) => (
+                <div key={name}>
+                  <div className="h-10 rounded-lg" style={{ background: `linear-gradient(120deg, ${a}, ${b})` }} />
+                  <div className="text-silver text-xs mt-2">{name} gradient</div>
+                  <div className="text-ash text-xs font-mono">{a} → {b}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </ScrollReveal>
+
+        <ScrollReveal>
+          <div className="h-full rounded-2xl border border-white/[0.08] p-5 md:p-6 space-y-5" style={{ background: '#F6F5F8', color: '#1B1A3A' }}>
+            <div className={`${EYEBROW}`} style={{ color: '#5F6183' }}>Components, rebuilt from the screens</div>
+            <div className="rounded-2xl p-4 text-white grid grid-cols-3 gap-2" style={{ background: 'linear-gradient(120deg, #8062EC, #5D58D4)' }}>
+              {[['Purchases', '6,150.00'], ['Customers', '102'], ['Sales', '16']].map(([k, v], i) => (
+                <div key={k} className={i ? 'border-l border-white/25 pl-2' : ''}>
+                  <div className="text-[11px] opacity-90">{k}</div>
+                  <div className="text-lg font-bold leading-tight">{v}</div>
+                </div>
+              ))}
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <Chip fg="#00845A" bg="#C7F4CE">Safe</Chip>
+              <Chip fg="#C4373B" bg="#FBDADA">Warning</Chip>
+              <Chip fg="#6B6E80" bg="#E7E7E7">Unknown</Chip>
+              <Chip fg="#00845A" bg="#C7F4CE">Active</Chip>
+              <Chip fg="#6E5FE0" bg="#ECEAFE">Fully paid</Chip>
+            </div>
+            <div className="flex items-center gap-4">
+              <span className="inline-grid place-items-center h-11 px-6 rounded-xl text-white font-bold text-sm whitespace-nowrap shrink-0" style={{ background: '#8778F7' }}>Record Sale</span>
+              <span
+                className="w-14 h-14 shrink-0 grid place-items-center text-white text-3xl leading-none"
+                style={{ background: '#7C6BF5', clipPath: 'polygon(50% 0, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%)' }}
+                aria-label="The hexagon New Sale button"
+              >+</span>
+              <span className="text-xs min-w-0" style={{ color: '#5F6183' }}>The hexagon sale button, centre of the tab bar</span>
+            </div>
+          </div>
+        </ScrollReveal>
       </div>
+
       <ScrollReveal>
         <div className="rounded-2xl border border-white/[0.08] bg-white/[0.02] overflow-x-auto">
           <table className="w-full min-w-[560px] text-sm">
@@ -492,7 +487,12 @@ export default function SmartUpPage() {
           ['Status', 'Built & adopted post-handoff'],
         ]}
       >
-        <Hero />
+        {/* Hero */}
+        <Showcase
+          src="/assets/smartup/smartup-hero.png"
+          alt="Three SmartUp phone screens: Home with today’s numbers, the splash screen, and the Sales list"
+          aspect="16/9"
+        />
 
         <AtAGlance />
 
@@ -510,22 +510,28 @@ export default function SmartUpPage() {
           </div>
         </Section>
 
-        {/* Research */}
+        {/* Constraint story */}
         <Section title="I interviewed three active users, and the client ran the usability tests.">
           <Prose>
             The interviews gave one clear finding: people couldn’t run their
-            shop once they left it. I mapped a store owner’s journey through the
-            app, stage by stage. Testing ran through the client, so I sent my
-            questions into every round, and the product manager made the final
-            calls.
+            shop once they left it. Testing ran through the client, so I sent
+            my questions into every round. The product manager made the final
+            calls, and two engineers on a tight budget made build cost a design
+            input.
           </Prose>
           <div className="pt-4">
-            <JourneyMap />
+            <ResearchLoop />
           </div>
         </Section>
 
+        {/* Roles */}
+        <Section title="Owners, managers and floor staff each needed a different minute of the app." tone="sunken">
+          <RoleCards />
+          <p className="text-ash text-sm">One phone had to serve all three.</p>
+        </Section>
+
         {/* The guiding rule */}
-        <Section title="One question decided what made it to the phone." tone="sunken">
+        <Section title="One question decided what made it to the phone.">
           <PullQuote>
             If someone is standing in the store, what do they need right now?
           </PullQuote>
@@ -540,16 +546,16 @@ export default function SmartUpPage() {
         </Section>
 
         {/* The merge */}
-        <Section title="Two planned apps became one.">
+        <Section title="Two planned apps became one." tone="sunken">
           <Prose>
             The brief planned a Control Panel for managers and a POS Lite for
             floor staff. I took both far enough to compare. The product manager
             chose to merge them: one install, one thing to learn, one codebase
-            for two engineers. My job became one navigation that worked for both.
+            for two engineers. My job became one navigation for both, with a
+            switch between modes.
           </Prose>
-          <div className="pt-4 space-y-4">
+          <div className="pt-4">
             <NavEvolution />
-            <IAMap />
           </div>
           <ScrollReveal>
             <figure className="pt-4">
@@ -563,80 +569,44 @@ export default function SmartUpPage() {
           </ScrollReveal>
         </Section>
 
-        {/* The hardest flow */}
-        <Section title="The hardest flow was the sale." tone="sunken">
-          <Prose>
-            Point of sale started life as a desktop form. On the phone it had to
-            work with a customer waiting at the counter. I broke it into five
-            screens, each with one job.
-          </Prose>
-          <div className="pt-6">
-            <SaleFlow />
-          </div>
-          <SubList
-            items={[
-              'Change is worked out on the charge sheet, so nobody counts it in their head.',
-              'Discounts and notes stay folded away until someone needs them.',
-              '“Record as old sale” covers a sale first written on paper.',
-            ]}
-          />
-        </Section>
-
-        {/* Decisions */}
-        <Section title="Home opens on today. Stock changes carry a name.">
+        {/* Key design decisions */}
+        <Section title="Home opens on today, a sale closes in one sheet, and every stock change has a name on it.">
           <div>
             <DecisionRow
               label="Home opens on today"
               points={[
                 'Today’s numbers first, then only what needs a reply: recent sales and stock requests from other branches.',
-                'From mid-fi to final, the dark stat card took the brand gradient, a stock promo became the New sale card, and the round sale button became the hexagon.',
+                'The sale button sits in the centre of the navigation, never inside a menu.',
               ]}
               why="A shop floor doesn’t need the company’s spend breakdown."
-              media={
-                <ScrollReveal>
-                  <div className="grid grid-cols-2 gap-4 md:gap-6 max-w-[520px] mx-auto">
-                    <Screen src={`${V4}/midfi-home.jpg`} alt="Mid-fidelity Home in greyscale, with a dark stat card, a stock promo and a round sale button" caption="Mid-fi" />
-                    <Screen src={`${V4}/home.jpg`} alt="Final Home with the gradient stat card, the New sale card and the hexagon sale button" caption="Final" />
-                  </div>
-                </ScrollReveal>
-              }
+              media={<DecisionStill src="/assets/smartup/screen-home.png" alt="SmartUp Home: three numbers for today, recent sales, a stock request, and the hexagon sale button in the centre of the tab bar" caption="Home" />}
+              imgSide="right"
+            />
+            <DecisionRow
+              label="A sale closes with a customer waiting"
+              points={[
+                'One sheet takes the payment and works out the change as the cashier types.',
+                'Discounts and notes stay folded away until needed.',
+              ]}
+              why="This is a transaction under time pressure, not an admin session."
+              media={<DecisionVideo video="/assets/smartup/recording-sales.mp4" poster="/assets/smartup/recording-sales-poster.jpg" caption="Recording a sale" />}
               imgSide="left"
             />
             <DecisionRow
               label="Stock records answer “who changed this?”"
               points={[
+                'Each adjustment carries who, when, where, how many and why.',
                 'Items show Safe, Warning or Unknown instead of a number to read.',
-                'Requests from other branches are accepted or declined in place, and every adjustment carries who, when, where, how many and why.',
               ]}
               why="A stock dispute gets settled from the record, not a phone call."
-              wide
-              media={
-                <ScrollReveal>
-                  {/* A swipe row on phones, three columns from tablet up. */}
-                  <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2 -mx-5 px-5 sm:mx-auto sm:px-0 sm:grid sm:grid-cols-3 sm:gap-8 sm:overflow-visible sm:pb-0 max-w-[820px]">
-                    <Screen className="shrink-0 w-[220px] snap-center sm:w-auto" src={`${V4}/stock-list.jpg`} alt="Warehouse stock with Safe, Warning and Unknown labels" caption="Stock" />
-                    <Screen className="shrink-0 w-[220px] snap-center sm:w-auto" src={`${V4}/stock-requests.jpg`} alt="A stock request from East Legon branch with Accept and Decline" caption="Requests" />
-                    <Screen className="shrink-0 w-[220px] snap-center sm:w-auto" src={`${V4}/stock-adjustments.jpg`} alt="Stock adjustments, each with who, timestamp, location, quantity and reason" caption="Adjustments" />
-                  </div>
-                  <p className="sm:hidden mt-2 text-ash text-xs">Swipe for requests and adjustments.</p>
-                </ScrollReveal>
-              }
+              media={<DecisionVideo video="/assets/smartup/managing-inventory.mp4" poster="/assets/smartup/managing-inventory-poster.jpg" caption="Managing inventory" />}
               imgSide="right"
             />
           </div>
         </Section>
 
-        {/* Motion */}
-        <Section title="See it in motion" tone="sunken">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 sm:gap-6 md:gap-10 items-start">
-            <ScrollReveal><Recording video="/assets/smartup/onboarding.mp4" poster="/assets/smartup/onboarding-poster.jpg" label="Onboarding and Home" /></ScrollReveal>
-            <ScrollReveal><Recording video="/assets/smartup/recording-sales.mp4" poster="/assets/smartup/recording-sales-poster.jpg" label="Recording a sale" /></ScrollReveal>
-            <ScrollReveal><Recording video="/assets/smartup/managing-inventory.mp4" poster="/assets/smartup/managing-inventory-poster.jpg" label="Managing inventory" /></ScrollReveal>
-          </div>
-        </Section>
-
         {/* Cuts */}
-        <Section title="What was deliberately cut">
+        <Section title="What was deliberately cut" tone="sunken">
           <SubList
             items={[
               'Financial and logistics dashboards. The cost: owners can’t review spend on the go.',
@@ -648,13 +618,15 @@ export default function SmartUpPage() {
         </Section>
 
         {/* Result */}
-        <Section title="Test users asked when they could start using it." tone="sunken">
+        <Section title="Test users asked when they could start using it.">
           <div className="space-y-0 divide-y divide-white/[0.06]">
             {RESULTS.map((row) => (
               <ScrollReveal key={row.num}>
                 <div className="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-4 md:gap-10 py-8 md:py-10">
                   <div>
-                    <span className="font-heading tracking-tightest leading-none" style={{ color: ACCENT, fontSize: 'clamp(36px, 4vw, 56px)', letterSpacing: '-0.04em' }}>{row.num}</span>
+                    <span className="font-heading tracking-tightest leading-none" style={{ color: ACCENT, fontSize: 'clamp(36px, 4vw, 56px)', letterSpacing: '-0.04em' }}>
+                      {row.num}
+                    </span>
                     <div className={`${EYEBROW} text-ash mt-2`}>{row.phase}</div>
                   </div>
                   <div>
@@ -668,13 +640,14 @@ export default function SmartUpPage() {
         </Section>
 
         {/* Design system, as shipped */}
-        <Section title="One small system ran every screen.">
+        <Section title="One small system ran every screen." tone="sunken">
           <Prose>
             The visual system lived on one style tile: a palette, two gradients,
             one icon set and Albert Sans. I documented the system the screens
-            actually used, then audited it a year later. Four of the six text
-            pairings fail contrast, starting with the main button, which is the
-            first thing I would fix.
+            actually used,
+            then audited it a year later. Four of the six text pairings fail
+            contrast, starting with the main button, which is the first thing I
+            would fix.
           </Prose>
           <div className="pt-4">
             <SystemBoard />
@@ -682,7 +655,7 @@ export default function SmartUpPage() {
         </Section>
 
         {/* Reflection */}
-        <Section title="What I learned" tone="sunken">
+        <Section title="What I learned">
           <SubList
             items={[
               'When the decision isn’t mine, my job is to make every option strong enough to choose between.',
