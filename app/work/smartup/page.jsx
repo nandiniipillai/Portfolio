@@ -57,10 +57,11 @@ function Hero() {
           className="mx-auto max-w-7xl rounded-2xl border border-white/[0.05] px-6 md:px-16 pt-10 md:pt-14 pb-0 overflow-hidden"
           style={{ background: `radial-gradient(70% 80% at 50% 30%, ${ACCENT}40, #0b0b0c 75%)` }}
         >
-          <div className="grid grid-cols-3 gap-3 md:gap-10 max-w-4xl mx-auto items-end">
-            <div className="translate-y-6 md:translate-y-10"><PhoneFrame src={`${V4}/home.jpg`} alt="SmartUp Home: today’s numbers, recent sales and a stock request" className="!max-w-none" /></div>
-            <div><PhoneFrame src={`${V4}/process-sale.jpg`} alt="SmartUp Point of Sale: the Process Sale sheet" className="!max-w-none" /></div>
-            <div className="translate-y-6 md:translate-y-10"><PhoneFrame src={`${V4}/stock-list.jpg`} alt="SmartUp Inventory: warehouse stock with Safe, Warning and Unknown labels" className="!max-w-none" /></div>
+          {/* One screen on phones, three from tablet up, so nothing shrinks to a thumbnail. */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-10 max-w-4xl mx-auto items-end">
+            <div className="hidden sm:block translate-y-6 md:translate-y-10"><PhoneFrame src={`${V4}/pos-list.jpg`} alt="SmartUp Point of Sale: products with prices and stock, two items selected" className="!max-w-none" /></div>
+            <div className="w-full max-w-[240px] sm:max-w-none mx-auto"><PhoneFrame src={`${V4}/charge.jpg`} alt="SmartUp charge sheet: payment method, amount tendered and the change tiles" className="!max-w-none" /></div>
+            <div className="hidden sm:block translate-y-6 md:translate-y-10"><PhoneFrame src={`${V4}/stock-list.jpg`} alt="SmartUp Inventory: warehouse stock with Safe, Warning and Unknown labels" className="!max-w-none" /></div>
           </div>
         </div>
       </ScrollReveal>
@@ -92,13 +93,11 @@ function AtAGlance() {
 
 // The 2025 desktop home, redrawn as a schematic of its real layout.
 const DESK_COUNTERS = ['Open branches', 'Closed branches', 'Active staff', 'Inactive staff'];
-const DESK_PANELS = [
-  ['Payment modes by sales', 'row-span-2'],
-  ['Last 30 days', ''],
-  ['Your business at a glance', 'row-span-2'],
-  ['Transfer requests', ''],
-  ['Transfers', ''],
-  ['Top products by sales', ''],
+// Three columns, each as on the real 2025 desktop: [panel, tall?]
+const DESK_COLUMNS = [
+  [['Payment modes by sales', true], ['Transfers', false]],
+  [['Last 30 days', false], ['Transfer requests', false]],
+  [['Your business at a glance', true], ['Top products by sales', false]],
 ];
 
 function DeskSchematic() {
@@ -113,14 +112,18 @@ function DeskSchematic() {
           <div className="flex flex-wrap justify-center gap-1.5">
             {DESK_COUNTERS.map((c) => <span key={c} className="text-[10px] md:text-[11px] text-fog rounded-full border border-white/[0.14] px-2 py-0.5">{c}</span>)}
           </div>
-          <div className="grid grid-cols-3 auto-rows-[52px] md:auto-rows-[64px] gap-2">
-            {DESK_PANELS.map(([name, span]) => (
-              <div key={name} className={`rounded-lg border border-white/[0.12] bg-white/[0.04] p-2 ${span}`}>
-                <div className="text-[10px] md:text-xs text-silver leading-tight">{name}</div>
-                <div className="mt-1.5 space-y-1" aria-hidden="true">
-                  <span className="block h-1 rounded bg-white/[0.1] w-4/5" />
-                  <span className="block h-1 rounded bg-white/[0.1] w-3/5" />
-                </div>
+          <div className="grid grid-cols-3 gap-2">
+            {DESK_COLUMNS.map((col, c) => (
+              <div key={c} className="flex flex-col gap-2">
+                {col.map(([name, tall]) => (
+                  <div key={name} className={`rounded-lg border border-white/[0.12] bg-white/[0.04] p-2 ${tall ? 'h-[96px] md:h-[124px]' : 'h-[52px] md:h-[64px]'}`}>
+                    <div className="text-[10px] md:text-xs text-silver leading-tight">{name}</div>
+                    <div className="mt-1.5 space-y-1" aria-hidden="true">
+                      <span className="block h-1 rounded bg-white/[0.1] w-4/5" />
+                      <span className="block h-1 rounded bg-white/[0.1] w-3/5" />
+                    </div>
+                  </div>
+                ))}
               </div>
             ))}
           </div>
@@ -161,7 +164,7 @@ const JOURNEY = [
   ['Home', 'Expectant and eager to explore', 'Show the key navigation well, with quick ways to explore.'],
   ['Track inventory', 'Productive and in control', 'Simple ways to show data without overwhelming anyone.'],
   ['Track sales', 'Anxious but open-minded', 'Clear tips and help in context, through the process.'],
-  ['Point of sale', 'Confused', 'Keep the flow simple, straightforward and informative.'],
+  ['Point of sale', 'Confused but…', 'Keep the flow simple, straightforward and informative…'],
 ];
 
 function JourneyMap() {
@@ -188,7 +191,7 @@ function JourneyMap() {
             );
           })}
         </ol>
-        <figcaption className="mt-4 text-ash text-sm">Rebuilt from my 2025 journey map: its stages, the feeling at each, and the opportunity I wrote for it.</figcaption>
+        <figcaption className="mt-4 text-ash text-sm">Rebuilt from my 2025 journey map: its stages, the feeling at each, and the opportunity I wrote for it. The last column runs off the edge of the original slide, so it is shown as far as it is legible.</figcaption>
       </figure>
     </ScrollReveal>
   );
@@ -564,9 +567,8 @@ export default function SmartUpPage() {
         <Section title="The hardest flow was the sale." tone="sunken">
           <Prose>
             Point of sale started life as a desktop form. On the phone it had to
-            work with a customer waiting at the counter, and it was the one stage
-            of my journey map marked confused. I broke it into five screens,
-            each with one job.
+            work with a customer waiting at the counter. I broke it into five
+            screens, each with one job.
           </Prose>
           <div className="pt-6">
             <SaleFlow />
@@ -610,11 +612,13 @@ export default function SmartUpPage() {
               wide
               media={
                 <ScrollReveal>
-                  <div className="grid grid-cols-3 gap-3 md:gap-8 max-w-[820px] mx-auto">
-                    <Screen src={`${V4}/stock-list.jpg`} alt="Warehouse stock with Safe, Warning and Unknown labels" caption="Stock" />
-                    <Screen src={`${V4}/stock-requests.jpg`} alt="A stock request from East Legon branch with Accept and Decline" caption="Requests" />
-                    <Screen src={`${V4}/stock-adjustments.jpg`} alt="Stock adjustments, each with who, timestamp, location, quantity and reason" caption="Adjustments" />
+                  {/* A swipe row on phones, three columns from tablet up. */}
+                  <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2 -mx-5 px-5 sm:mx-auto sm:px-0 sm:grid sm:grid-cols-3 sm:gap-8 sm:overflow-visible sm:pb-0 max-w-[820px]">
+                    <Screen className="shrink-0 w-[220px] snap-center sm:w-auto" src={`${V4}/stock-list.jpg`} alt="Warehouse stock with Safe, Warning and Unknown labels" caption="Stock" />
+                    <Screen className="shrink-0 w-[220px] snap-center sm:w-auto" src={`${V4}/stock-requests.jpg`} alt="A stock request from East Legon branch with Accept and Decline" caption="Requests" />
+                    <Screen className="shrink-0 w-[220px] snap-center sm:w-auto" src={`${V4}/stock-adjustments.jpg`} alt="Stock adjustments, each with who, timestamp, location, quantity and reason" caption="Adjustments" />
                   </div>
+                  <p className="sm:hidden mt-2 text-ash text-xs">Swipe for requests and adjustments.</p>
                 </ScrollReveal>
               }
               imgSide="right"
