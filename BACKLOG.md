@@ -5,7 +5,7 @@ add what you found, tick what you closed, refresh `>RESUME HERE`.
 
 ## >RESUME HERE
 
-**SmartUp restored to 02c6b3f, 2026-11-19.** Nandini rejected v4 (4f028e4) and its fixes (ee4fab7): screens cropped, no flow, read like a report rather than a design case study. Page, card and assets are back to the post-audit v3. v4 frames moved to `E:\Portfolio 2026\…ssets\SmartUp4-frames`. Lesson: keep phones whole and uncropped, keep the visual rhythm she approved, and don’t replace her approved layout with diagram-heavy sections without showing her first.
+**SmartUp restored to 02c6b3f, 2026-11-19.** Nandini rejected v4 (4f028e4) and its fixes (ee4fab7): screens cropped, no flow, read like a report rather than a design case study. Page, card and assets are back to the post-audit v3. v4 frames moved to `E:\Portfolio 2026\portfolio-developer\portfolio-developer\assets\SmartUp\v4-frames`. Lesson: keep phones whole and uncropped, keep the visual rhythm she approved, and don’t replace her approved layout with diagram-heavy sections without showing her first.
 
 **SmartUp v4 audit fixes, 2026-11-19.** Hero shows one screen on phones (235px, was 81px) and POS list / Charge / Stock from tablet up. Stock screens become a swipe row on phones (215px, was 97px). Desktop schematic now places each panel in its real column. Journey-map stage 5 shown only as far as legible ("Confused but…"); the "marked confused" line was removed until she checks Figma. Card switched to `smartup-card.png` (composed from v4 frames) on the `flat` frame; the legacy `phones` frame renders empty, don’t use it.
 
