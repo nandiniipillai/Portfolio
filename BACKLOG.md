@@ -32,7 +32,9 @@ effectively unrun; 375/768/1280 still not eyeballed.
 `DecisionRow`s + a `MetricGrid`) and two learnings. Crops
 `public/assets/luca/prototype-{report,answers,live}.png` re-shot after the
 prototype was re-matched to the original exports and given an unslop polish;
-captions, aspect ratios and bullets updated to what the crops show. `npm run
+captions, aspect ratios and bullets updated to what the crops show. A
+before/after pair (original `interview-populated.png` vs
+`prototype-interviews.png`, both 16:9) now opens the rebuild decisions. `npm run
 lint` and `npm run build` pass. Still open: eyeball 375/768/1280 in a browser,
 and Nandini to approve the new wording. Decision count is 7 (4 + 3), one over
 the ~6 guideline.

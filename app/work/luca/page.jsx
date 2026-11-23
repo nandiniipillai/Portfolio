@@ -680,6 +680,26 @@ export default function LucaPage() {
             lancaster.ac.uk: Lexia Bold once per page for the title, Effra Bold for structure,
             and Arial for everything students read.
           </Prose>
+          <Prose>
+            Review rounds tightened every screen, but each one drifted further from the layouts the
+            team had already approved. So I rebuilt each screen to match its original export again,
+            fixing only what was genuinely broken.
+          </Prose>
+          {/* Before/after at the same 16:9 ratio: the shipped Figma export vs the prototype matched to it. */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+            <SlideFigure
+              src="/assets/luca/interview-populated.png"
+              alt="Original dev-ready export of Mock interviews: identical illustrated tiles, times such as 15 Apr 2025, 13:15PM, no scores, and a CareersAI disclaimer"
+              aspect="1920/1080"
+              caption="The original export: identical tiles, “13:15PM” times and no scores."
+            />
+            <SlideFigure
+              src="/assets/luca/prototype-interviews.png"
+              alt="Prototype Mock interviews matched to the export: the same grid and Start a new interview box, with valid dates and a score and band on every finished interview"
+              aspect="1440/810"
+              caption="The prototype, matched to it: the same layout, valid times, and a score and band on every finished interview."
+            />
+          </div>
           <div className="mt-6">
             <DecisionRow
               label="Scores that coach rather than judge"
