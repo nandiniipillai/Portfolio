@@ -27,14 +27,15 @@ dates visible in the screen captures (designed in 2025).
 (all 14 routes prerender). `next lint` reported the files as ignored, so lint is
 effectively unrun; 375/768/1280 still not eyeballed.
 
-**LUCA 2026 rebuild sections, 2026-11-02 — needs a build check.** Added two
-sections to `app/work/luca/page.jsx` after the results (coded-prototype rebuild:
-3 `DecisionRow`s + a `MetricGrid`) and two learnings, with crops
-`public/assets/luca/prototype-{report,answers,live}.png`. Written on a machine
-with no Node, so **`npm run lint` and `npm run build` have not run** — run both
-and eyeball 375/768/1280 before pushing. New copy comes from the updated FOLIO
-file (`E:\Portfolio 2026\…\assets\LUCA\LUCA-case-study.md`); Nandini to approve
-the wording. Decision count is now 7 (4 + 3), one over the ~6 guideline.
+**LUCA 2026 rebuild sections, 2026-11-23.** Two sections in
+`app/work/luca/page.jsx` after the results (coded-prototype rebuild: 3
+`DecisionRow`s + a `MetricGrid`) and two learnings. Crops
+`public/assets/luca/prototype-{report,answers,live}.png` re-shot after the
+prototype was re-matched to the original exports and given an unslop polish;
+captions, aspect ratios and bullets updated to what the crops show. `npm run
+lint` and `npm run build` pass. Still open: eyeball 375/768/1280 in a browser,
+and Nandini to approve the new wording. Decision count is 7 (4 + 3), one over
+the ~6 guideline.
 
 **Design audit for Digital Product Design roles, 2026-08-05.** Working the fix
 list below one item at a time. Done so far: title → "Product Designer"

@@ -686,15 +686,15 @@ export default function LucaPage() {
               points={[
                 'Where v1 used red, amber and green, the prototype shows a figure and a band word: “68 /100 · Good”.',
                 'Red never appears on a score, so a weak answer reads as something to work on.',
-                'Competency bars carry labelled band marks, so the number has context.',
+                'Competency bars stay neutral, and only the biggest gap takes the accent, so the next thing to work on stands out.',
               ]}
               why="Students either over-trusted the AI or dismissed it. A score has to inform without passing judgement."
               imgSide="left"
               media={
                 <BrowserShot
                   src="/assets/luca/prototype-report.png"
-                  alt="Prototype interview report: an overall score of 68 out of 100 marked Good, up 4 since the last interview, beside five competency bars with labelled band marks"
-                  aspect="1176/640"
+                  alt="Prototype interview feedback, Overall Feedback tab: a 68 out of 100 Good score, up 4 since interview 2, beside an interview summary listing strengths and areas for improvement with links to each question"
+                  aspect="1112/900"
                 />
               }
             />
@@ -710,8 +710,8 @@ export default function LucaPage() {
               media={
                 <BrowserShot
                   src="/assets/luca/prototype-answers.png"
-                  alt="Prototype answers view: five questions with their scores and saved markers, and the first answer’s 7.5 Good verdict with a Save to retake action"
-                  aspect="1176/670"
+                  alt="Prototype Per Answer Analysis tab: five questions with their scores and bookmarks, and the first answer’s 7.5 Good verdict with Details and Ways to strengthen tabs"
+                  aspect="1112/780"
                 />
               }
             />
@@ -719,15 +719,15 @@ export default function LucaPage() {
               label="Nothing lost mid-interview"
               points={[
                 'Drafts save as students type, and leaving a live interview always asks first.',
-                'STAR coverage and the word count update beside the answer, and Submit stays in view.',
+                'Students can skip a question or save and exit at any point, and pick up where they left off.',
               ]}
               why="Practice only works if it feels safe to try."
               imgSide="left"
               media={
                 <BrowserShot
                   src="/assets/luca/prototype-live.png"
-                  alt="Prototype live interview in Training mode: question 3 of 5 with a progress bar and timer, the student’s answer, a STAR coverage panel showing two of four parts covered, and the Submit answer button"
-                  aspect="1176/800"
+                  alt="Prototype live interview in Training mode: question 3 of 5 on the left with a hint and read-aloud control, the student’s typed answer on the right with a 119-word count, and Skip question, Save and exit interview and Submit and next buttons"
+                  aspect="1144/600"
                 />
               }
             />
@@ -737,14 +737,15 @@ export default function LucaPage() {
         {/* 11c. Verification — real numbers from the prototype's own checks, not usage. */}
         <Section title="The prototype is verified end to end, not just screenshotted" tone="sunken">
           <MetricGrid>
-            <MetricCard value="51" label="Routes checked at desktop and tablet widths, with 0 errors" />
+            <MetricCard value="0" label="Errors across every screen at desktop and tablet widths" />
             <MetricCard value="19/19" label="Contrast pairs passing WCAG AA in light and dark" />
             <MetricCard value="6.0 → 7.5" label="The weakest answer’s score after a retake" />
           </MetricGrid>
           <Prose>
-            A final review found the same fact repeated two or three times on a screen. We kept
-            the section spacing and removed the duplicate lines instead, which lifted returning
-            students&apos; applications about 400px on Home.
+            Several review rounds tightened the screens, then I brought them back to the original
+            exports, keeping the team&apos;s approved layouts and changing only what was genuinely
+            broken: unreadable text, placeholder copy, contradictory numbers and a live interview
+            with no way out.
           </Prose>
         </Section>
 
