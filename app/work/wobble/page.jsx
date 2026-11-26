@@ -4,6 +4,8 @@ import Image from 'next/image';
 import Zoom from 'react-medium-image-zoom';
 import 'react-medium-image-zoom/dist/styles.css';
 import BriefPage from '@/components/BriefPage';
+import BrowserFrame from '@/components/BrowserFrame';
+import PhoneFrame from '@/components/PhoneFrame';
 import ScrollReveal from '@/components/ScrollReveal';
 
 const ACCENT = '#F6C7A0';
@@ -68,11 +70,11 @@ export default function WobblePage() {
   return (
     <BriefPage
       title="Wobble"
-      oneLiner="An indoor play centre that gives UK children the outdoors back."
-      category="Strategy & Service Design"
+      oneLiner="An indoor play centre that gives UK children the outdoors back, and the booking app that runs it."
+      category="Strategy, Service & Product Design"
       accent={ACCENT}
       meta={[
-        ['Role', ['Strategic Design', 'User research']],
+        ['Role', ['Strategic Design', 'User research', 'Product design & build']],
         ['Team', ['Sage Studio', '5 Multidisciplinary designers']],
         ['Timeline', '8 weeks'],
         ['Status', 'Client adopted the proposal, seeking funding'],
@@ -92,8 +94,8 @@ export default function WobblePage() {
       <ScrollReveal>
         <ZoomFig
           src="/assets/wobble/w-47.jpg"
-          alt="Isometric cutaway of the Wobble floor plan — castle jungle gym, climbing wall, ball pool, pretend-play street"
-          caption="The full Wobble floor plan — castle, climbing wall, ball pool, pretend-play street and café in one view."
+          alt="Isometric cutaway of the Wobble floor plan, annotated with the sustainable materials used for play structures, paint, cladding and flooring"
+          caption="The full floor plan, annotated with the sustainable materials behind each zone."
         />
       </ScrollReveal>
 
@@ -170,22 +172,15 @@ export default function WobblePage() {
         </p>
       </Beat>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-        <ScrollReveal>
+      <ScrollReveal>
+        <div className="mt-6">
           <ZoomFig
             src="/assets/wobble/w-55.jpg"
-            alt="Business Model Canvas"
+            alt="Business model canvas"
             caption="Business model canvas — six revenue streams."
           />
-        </ScrollReveal>
-        <ScrollReveal>
-          <ZoomFig
-            src="/assets/wobble/w-52.jpg"
-            alt="Brand positioning and identity comparison"
-            caption="Brand positioning — against the cluttered competitor set."
-          />
-        </ScrollReveal>
-      </div>
+        </div>
+      </ScrollReveal>
 
       <Beat headline="What we deliberately cut." />
 
@@ -220,24 +215,56 @@ export default function WobblePage() {
         </div>
       </ScrollReveal>
 
+      <Beat headline="Beyond the brief: the booking product the business model called for.">
+        <p>
+          The proposal showed the website as a mockup. It wasn&rsquo;t one of our deliverables, so
+          I designed and built it as a personal extension of the project: a website and booking
+          app, live as a clickable prototype.
+        </p>
+      </Beat>
+
       <ScrollReveal>
-        <div className="mt-12">
-          <p className="text-silver font-heading tracking-tightest text-lg md:text-xl leading-snug mb-4">
-            What this proves in digital product design.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {[
-              ['Research synthesis', '15 interviews, 8 themes, 5 binding constraints — the same flow that turns user research into feature specs.'],
-              ['Competitor mining', 'Review-triaged failure modes, designed out upstream — the same method behind a digital feature audit.'],
-              ['Business model design', 'Six revenue streams across five strategic lenses — the same muscle that builds a SaaS pricing ladder or a retention loop.'],
-              ['Brand positioning', 'Clean identity as differentiation in a cluttered market — the same craft that sharpens a digital product’s voice and trust signals.'],
-            ].map(([label, detail]) => (
-              <div key={label} className="border-l-2 pl-4" style={{ borderColor: ACCENT }}>
-                <div className="text-silver font-medium text-sm">{label}</div>
-                <div className="text-fog text-sm mt-0.5">{detail}</div>
-              </div>
-            ))}
+        <div className="mt-6">
+          <BrowserFrame
+            src="/assets/wobble/product-home.jpg"
+            alt="Wobble homepage: the headline, two actions and a strip of the play zones"
+            url="wobble-zeta.vercel.app"
+          />
+        </div>
+      </ScrollReveal>
+
+      <CardGrid
+        items={[
+          ['Book in under a minute', 'Five steps, one decision each, with the price building as you go'],
+          ['Know how busy it is before leaving home', 'A live Lancaster forecast raises predicted busyness on wet days and points families to the calmest session'],
+          ['Calm by design', 'Quiet sessions at half capacity, carers free, sensory and step-free needs flagged at booking'],
+          ['A reason to come back', 'The Play Passport gives each child a quest per visit across the six kinds of play'],
+        ]}
+      />
+
+      <ScrollReveal>
+        <figure className="mt-10">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8">
+            <PhoneFrame chrome={false} className="max-w-[240px] sm:max-w-[320px]" src="/assets/wobble/product-visit.jpg" alt="Booking step one: choose a drop-in session, a birthday party or a school trip" />
+            <PhoneFrame chrome={false} className="max-w-[240px] sm:max-w-[320px]" src="/assets/wobble/product-who.jpg" alt="Booking step three: the saved family is already selected and the Wobble Pass covers both children" />
+            <PhoneFrame chrome={false} className="max-w-[240px] sm:max-w-[320px]" src="/assets/wobble/product-passport.jpg" alt="The Play Passport: each child’s stamps across the six kinds of play" />
           </div>
+          <figcaption className="mt-4 text-[11px] tracking-[0.24em] uppercase text-ash">Choose a visit, confirm who&rsquo;s coming, collect the stamps.</figcaption>
+        </figure>
+      </ScrollReveal>
+
+      <ScrollReveal>
+        <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+          <a
+            href="https://wobble-zeta.vercel.app"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium text-black transition-opacity hover:opacity-90"
+            style={{ background: ACCENT }}
+          >
+            Try the live prototype <span aria-hidden="true">↗</span>
+          </a>
+          <span className="text-ash text-sm">Next.js · React · TypeScript · Tailwind · live weather from Open-Meteo</span>
         </div>
       </ScrollReveal>
     </BriefPage>

@@ -34,7 +34,7 @@ export default function Nav() {
         </span>
       </div>
       <div className="flex items-center gap-2 text-[15px] text-fog leading-none">
-        <span className="hidden sm:inline">{SITE.location}</span>
+        <LiveClock locationOnly className="hidden sm:inline" />
         <span className="hidden sm:inline text-ash">•</span>
         <LiveClock timeOnly />
       </div>
